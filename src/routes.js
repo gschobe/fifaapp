@@ -18,6 +18,7 @@
 // @material-ui/icons
 import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
+import HomeOutlined from "@material-ui/icons/HomeOutlined";
 // import LibraryBooks from "@material-ui/icons/LibraryBooks";
 // import BubbleChart from "@material-ui/icons/BubbleChart";
 // import LocationOn from "@material-ui/icons/LocationOn";
@@ -29,6 +30,7 @@ import DashboardPage from "views/Dashboard/Dashboard.js";
 import UserProfile from "views/UserProfile/UserProfile.js";
 import TableList from "views/TableList/TableList.js";
 import Overview from "views/Overview/Overview.tsx";
+import RoutingMatchday from "views/Matchday/RoutingMatchday";
 // import Typography from "views/Typography/Typography.js";
 // import Icons from "views/Icons/Icons.js";
 // import Maps from "views/Maps/Maps.js";
@@ -42,9 +44,20 @@ const dashboardRoutes = [
     path: "/overview",
     name: "Übersicht",
     rtlName: "لوحة القيادة",
-    icon: Dashboard,
+    icon: HomeOutlined,
     component: Overview,
     layout: "/admin",
+    showInSidebar: true,
+  },
+  {
+    path: "/matchday",
+    name: "Matchday",
+    rtlName: "لوحة القيادة",
+    icon: HomeOutlined,
+    component: RoutingMatchday,
+    layout: "/admin",
+    showInSidebar: false,
+    hasId: true,
   },
   {
     path: "/dashboard",
@@ -53,6 +66,7 @@ const dashboardRoutes = [
     icon: Dashboard,
     component: DashboardPage,
     layout: "/admin",
+    showInSidebar: true,
   },
   {
     path: "/user",
@@ -61,6 +75,7 @@ const dashboardRoutes = [
     icon: Person,
     component: UserProfile,
     layout: "/admin",
+    showInSidebar: true,
   },
   {
     path: "/table",
@@ -69,6 +84,7 @@ const dashboardRoutes = [
     icon: "content_paste",
     component: TableList,
     layout: "/admin",
+    showInSidebar: true,
   },
   // {
   //   path: "/typography",

@@ -15,7 +15,7 @@ import routes from "routes.js";
 
 import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
-import bgImage from "../assets/img/sidebar-2.jpg";
+import bgImage from "../assets/img/fifa-23-kylian-mbappe.jpg";
 import logo from "../assets/img/EA_Sports.svg.png";
 
 let ps;
@@ -24,6 +24,15 @@ const switchRoutes = (
   <Switch>
     {routes.map((prop, key) => {
       if (prop.layout === "/admin") {
+        if (prop.hasId) {
+          return (
+            <Route
+              path={prop.layout + prop.path + "/:matchdayId"}
+              component={prop.component}
+              key={key}
+            />
+          );
+        }
         return (
           <Route
             path={prop.layout + prop.path}
@@ -34,7 +43,7 @@ const switchRoutes = (
       }
       return null;
     })}
-    <Redirect from="/admin" to="/admin/dashboard" />
+    <Redirect from="/admin" to="/admin/matchday/1" />
   </Switch>
 );
 

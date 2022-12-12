@@ -190,6 +190,7 @@ label {
 
 footer {
   padding: 15px 0;
+  min-height: 35px;
 }
 
 footer ul {
@@ -507,4 +508,19 @@ footer ul li a:hover {
 }
 * {
   letter-spacing: normal !important;
+}
+
+.MuiDataGrid-footerContainer {
+  min-height: 30px !important;
+  height: 30px !important;
+}
+
+.fieldBgImage {
+  background-image: url("../img/Soccer_Field_Transparant.svg.png");
+  background-position: center;
+  background-size: 100%;
+}
+
+.card-content {
+  height: fit-content !important;
 }

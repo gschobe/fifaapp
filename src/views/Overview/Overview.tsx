@@ -1,7 +1,6 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import GridContainer from "components/Grid/GridContainer.js";
-// import Table from "components/Table/Table.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
@@ -28,20 +27,22 @@ import {
 } from "@mui/x-data-grid";
 import * as XSLX from "xlsx";
 import { Team, TeamImport, TeamRating } from "definitions/Definitions";
-import CreateTournamentAction from "./CreateTournamentAction";
+import CreateMatchDayAction from "./CreateMatchDayAction";
+import { matchDayConnector, MatchDayStoreProps } from "store/FifaGamesReducer";
+import { matchDayColumns } from "definitions/TableDefinitions";
 
 const useStyles = makeStyles(styles);
 
-const Overview: React.FC<StoreProps> = ({
+const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
   teams,
   setTeams,
   player,
   addPlayer,
+  matchDays,
 }) => {
   const classes = useStyles();
 
   const [addPlayerOpen, setAddPlayerOpen] = React.useState(false);
-  const [newTournamentOpen, setNewTournamentOpen] = React.useState(false);
   const [name, setName] = React.useState<string>("");
 
   const players = React.useMemo(() => {
@@ -51,13 +52,10 @@ const Overview: React.FC<StoreProps> = ({
     setAddPlayerOpen((addPlayerOpen) => !addPlayerOpen);
   };
 
-  const handleNewTournamenClick: () => void = () => {
-    setNewTournamentOpen((newTournamentOpen) => !newTournamentOpen);
-  };
-
   const handlePlayerAdd: () => void = () => {
     addPlayer(name);
     setAddPlayerOpen(false);
+    setName("");
   };
 
   const [importTeamsOpen, setImportTeamsOpen] = React.useState(false);
@@ -105,16 +103,22 @@ const Overview: React.FC<StoreProps> = ({
 
   const columns: GridColDef[] = [
     { field: "name", headerName: "Name", flex: 1 },
-    { field: "gamesPlayed", headerName: "Games played", flex: 1 },
+    {
+      field: "gamesPlayed",
+      headerName: "Games played",
+      flex: 1,
+      valueGetter: (params: GridValueGetterParams) =>
+        params.row.stats.gamesPlayed,
+    },
     {
       field: "winPercentage",
       headerName: "Win percetage",
       sortable: true,
       flex: 1,
       valueGetter: (params: GridValueGetterParams) =>
-        params.row.gamesPlayed === 0
+        params.row.stats.gamesPlayed === 0
           ? 0
-          : params.row.gamesWon / params.row.gamesPlayed,
+          : params.row.stats.gamesWon / params.row.stats.gamesPlayed,
     },
   ];
 
@@ -126,42 +130,13 @@ const Overview: React.FC<StoreProps> = ({
       field: "rating",
       headerName: "Rating",
       flex: 1,
-      renderCell: (params: GridRenderCellParams<string>) => (
-        <div style={{ color: "#f7e840" }}>
-          {params.value === "5 stars" && (
-            <>
-              <StarRounded color="inherit" /> <StarRounded />
-              <StarRounded /> <StarRounded />
-              <StarRounded />
-            </>
-          )}
-          {params.value === "4.5 stars" && (
-            <>
-              <StarRounded /> <StarRounded />
-              <StarRounded /> <StarRounded />
-              <StarHalfRounded />
-            </>
-          )}
-          {params.value === "4 stars" && (
-            <>
-              <StarRounded /> <StarRounded />
-              <StarRounded /> <StarRounded />
-            </>
-          )}
-        </div>
-      ),
+      renderCell: (params: GridRenderCellParams<string>) =>
+        getStarsRender(params.value),
     },
   ];
 
   return (
     <div>
-      <Dialog
-        fullWidth
-        open={newTournamentOpen}
-        onClose={handleNewTournamenClick}
-      >
-        <DialogTitle>Create new tournament</DialogTitle>
-      </Dialog>
       <Dialog open={addPlayerOpen} onClose={handleClick}>
         <DialogTitle>Add Player</DialogTitle>
         <DialogContent>
@@ -176,7 +151,7 @@ const Overview: React.FC<StoreProps> = ({
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleNewTournamenClick}>Cancel</Button>
+          <Button onClick={handleClick}>Cancel</Button>
           <Button onClick={handlePlayerAdd}>Add</Button>
         </DialogActions>
       </Dialog>
@@ -191,21 +166,26 @@ const Overview: React.FC<StoreProps> = ({
         </DialogActions>
       </Dialog>
       <GridContainer>
-        <GridItem {...{ xs: 14, sm: 12, md: 12 }}>
+        <GridItem {...{ xs: 12, sm: 12, md: 12 }}>
           <Card>
             <CardHeader color="success">
               <div style={{ display: "flex", flexDirection: "row" }}>
-                <h4 className={classes.cardTitleWhite}>Tournaments</h4>
+                <h4 className={classes.cardTitleWhite}>Matchdays</h4>
                 <div style={{ flexGrow: 1 }} />
-                <CreateTournamentAction />
+                <CreateMatchDayAction />
               </div>
             </CardHeader>
             <CardBody>
-              {/* <Table
-                tableHeaderColor="info"
-                tableHead={["Name", "Games Played", "Win Percentage"]}
-                tableData={p}
-              /> */}
+              {players && players.length > 0 && (
+                <DataGrid
+                  disableSelectionOnClick
+                  headerHeight={35}
+                  rowHeight={30}
+                  autoPageSize
+                  rows={Object.values(matchDays)}
+                  columns={matchDayColumns}
+                />
+              )}
             </CardBody>
           </Card>
         </GridItem>
@@ -230,6 +210,7 @@ const Overview: React.FC<StoreProps> = ({
             <CardBody>
               {teams && teams.length > 0 && (
                 <DataGrid
+                  disableSelectionOnClick
                   headerHeight={35}
                   autoPageSize
                   rowHeight={30}
@@ -241,7 +222,7 @@ const Overview: React.FC<StoreProps> = ({
             </CardBody>
           </Card>
         </GridItem>
-        <GridItem {...{ xs: 6, sm: 6, md: 4 }}>
+        <GridItem {...{ xs: 8, sm: 8, md: 4 }}>
           <Card>
             <CardHeader color="info">
               <div style={{ display: "flex", flexDirection: "row" }}>
@@ -260,10 +241,10 @@ const Overview: React.FC<StoreProps> = ({
             <CardBody>
               {players && players.length > 0 && (
                 <DataGrid
-                  headerHeight={45}
-                  rowHeight={40}
-                  hideFooter
-                  autoHeight
+                  disableSelectionOnClick
+                  headerHeight={35}
+                  rowHeight={30}
+                  autoPageSize
                   getRowId={(row) => row.name}
                   rows={players}
                   columns={columns}
@@ -277,7 +258,7 @@ const Overview: React.FC<StoreProps> = ({
   );
 };
 
-export default storeConnector(Overview);
+export default storeConnector(matchDayConnector(Overview));
 
 function convertRating(Rating: any): TeamRating {
   switch (Rating) {
@@ -292,4 +273,43 @@ function convertRating(Rating: any): TeamRating {
     default:
       return "3 stars";
   }
+}
+
+export function getStarsRender(value: string | undefined): ReactNode {
+  return (
+    <div style={{ color: "#f7e840" }}>
+      {value === "5 stars" && (
+        <>
+          <StarRounded color="inherit" /> <StarRounded />
+          <StarRounded /> <StarRounded />
+          <StarRounded />
+        </>
+      )}
+      {value === "4.5 stars" && (
+        <>
+          <StarRounded /> <StarRounded />
+          <StarRounded /> <StarRounded />
+          <StarHalfRounded />
+        </>
+      )}
+      {value === "4 stars" && (
+        <>
+          <StarRounded /> <StarRounded />
+          <StarRounded /> <StarRounded />
+        </>
+      )}
+      {value === "3.5 stars" && (
+        <>
+          <StarRounded /> <StarRounded />
+          <StarRounded /> <StarHalfRounded />
+        </>
+      )}
+      {value === "3 stars" && (
+        <>
+          <StarRounded /> <StarRounded />
+          <StarRounded />
+        </>
+      )}
+    </div>
+  );
 }

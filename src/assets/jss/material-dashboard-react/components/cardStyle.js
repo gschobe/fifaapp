@@ -7,7 +7,7 @@ import {
 const cardStyle = {
   card: {
     border: "0",
-    marginBottom: "30px",
+    marginBottom: "10px",
     marginTop: "30px",
     borderRadius: "6px",
     color: "rgba(" + hexToRgb(blackColor) + ", 0.87)",
@@ -20,7 +20,7 @@ const cardStyle = {
     minWidth: "0",
     wordWrap: "break-word",
     fontSize: ".875rem",
-    height: "40vh",
+    height: "44vh",
   },
   cardPlain: {
     background: "transparent",
