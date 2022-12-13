@@ -13,7 +13,7 @@ export default function determineTeamMatesAndTeams(
   activeTournament: Tournament
 ): Game[] {
   defineTeamMates(matchday, tournamentTeams);
-  chooseTeams(activeTournament, tournamentTeams);
+  chooseTeams(matchday, activeTournament, tournamentTeams);
   return generateGames(activeTournament, tournamentTeams);
 }
 
@@ -23,18 +23,43 @@ export function defineTeamMates(
 ) {
   const players: Player[] = [...matchday.players];
   while (players.length > 0) {
-    const p1 = players.splice(Math.floor(Math.random() * players.length), 1)[0];
-    const p2 = players.splice(Math.floor(Math.random() * players.length), 1)[0];
-    const tTeam: TournamentTeam = { players: [p1, p2] };
+    const teamMates = [];
+    const player1 = players.splice(
+      Math.floor(Math.random() * players.length),
+      1
+    )[0];
+    teamMates.push(player1);
+
+    if (matchday.mode === "2on2") {
+      const usedMates = matchday.tournaments
+        .filter((t) => t.state === "FINISHED")
+        .flatMap((t) => t.tournamentTeams)
+        .filter((tt) => tt.players.map((p) => p.name).includes(player1.name))
+        .flatMap((tt) => tt.players);
+      const usableMates = players.filter(
+        (p) => !usedMates.map((u) => u.name).includes(p.name)
+      );
+      const player2 = usableMates.splice(
+        Math.floor(Math.random() * usableMates.length),
+        1
+      )[0];
+      teamMates.push(player2);
+      players.splice(players.indexOf(player2), 1);
+    }
+    const tTeam: TournamentTeam = { players: [...teamMates] };
     tournamentTeams.push(tTeam);
   }
 }
 
 export function chooseTeams(
+  matchday: MatchDay,
   activeTournament: Tournament,
   tournamentTeams: TournamentTeam[]
 ) {
-  const teams = [...activeTournament?.useableTeams];
+  const teams = [...activeTournament?.useableTeams].filter(
+    (t) => !matchday.usedTeams.includes(t)
+  );
+  console.log(teams);
   tournamentTeams.forEach(
     (tt) =>
       (tt.team = teams.splice(Math.floor(Math.random() * teams.length), 1)[0])
@@ -71,5 +96,6 @@ export function generateGames(
       });
     games.push(...secondRound);
   }
+  games[0].state = "UPCOMING";
   return games;
 }

@@ -523,4 +523,5 @@ footer ul li a:hover {
 
 .card-content {
   height: fit-content !important;
+  min-height: 33vh;
 }

@@ -63,6 +63,8 @@ const sidebarStyle = (theme) => ({
   logo: {
     position: "relative",
     padding: "15px 15px",
+    height: "fit-content",
+    lineHeight: "50px",
     zIndex: "4",
     "&:after": {
       content: '""',

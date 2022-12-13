@@ -1,6 +1,12 @@
 /* eslint-disable prettier/prettier */
 import { createSlice, PayloadAction, Dictionary } from "@reduxjs/toolkit";
-import { Game, MatchDay, TournamentTeam } from "../definitions/Definitions";
+import {
+  Game,
+  MatchDay,
+  Stats,
+  Tournament,
+  TournamentTeam,
+} from "../definitions/Definitions";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "./Store";
 
@@ -19,6 +25,19 @@ export const matchDaySlice = createSlice({
     addMatchDay: (state, action: PayloadAction<MatchDay>) => {
       state.matchDays[action.payload.id] = action.payload;
     },
+    addTournament: (
+      state,
+      action: PayloadAction<{ matchdayId: string; tournament: Tournament }>
+    ) => {
+      const matchday = state.matchDays[action.payload.matchdayId];
+      if (matchday) {
+        matchday.tournaments.forEach((t) => (t.state = "FINISHED"));
+        matchday.tournaments = [
+          ...matchday.tournaments,
+          action.payload.tournament,
+        ];
+      }
+    },
     setTournamentTeams: (
       state,
       action: PayloadAction<{
@@ -28,13 +47,125 @@ export const matchDaySlice = createSlice({
         games: Game[];
       }>
     ) => {
+      const matchday = state.matchDays[action.payload.matchdayId];
+      if (matchday) {
+        const tournament = matchday?.tournaments.find(
+          (t) => t.id === action.payload.tournamentId
+        );
+
+        if (tournament) {
+          tournament.tournamentTeams = action.payload.tTeams;
+          tournament.games = action.payload.games;
+          action.payload.tTeams.forEach((tt) => {
+            if (tt.team) {
+              matchday.usedTeams = matchday.usedTeams.concat(tt.team);
+            }
+          });
+        }
+      }
+    },
+    startGame: (
+      state,
+      action: PayloadAction<{
+        matchdayId: string;
+        tournamentId: string;
+        gameSeq: number | undefined;
+      }>
+    ) => {
       const tournament = state.matchDays[
         action.payload.matchdayId
       ]?.tournaments.find((t) => t.id === action.payload.tournamentId);
 
       if (tournament) {
-        tournament.tournamentTeams = action.payload.tTeams;
-        tournament.games = action.payload.games;
+        const game = tournament.games.find(
+          (g) => g.sequence === action.payload.gameSeq
+        );
+        if (game) {
+          game.state = "RUNNING";
+          game.goalsHome = 0;
+          game.goalsAway = 0;
+        }
+
+        const next = tournament.games.find(
+          (g) => g.sequence === (action.payload.gameSeq || 1) + 1
+        );
+
+        if (next) {
+          next.state = "UPCOMING";
+        }
+      }
+    },
+    finishGame: (
+      state,
+      action: PayloadAction<{
+        matchdayId: string;
+        tournamentId: string;
+        gameSeq: number | undefined;
+      }>
+    ) => {
+      const matchDay = state.matchDays[action.payload.matchdayId];
+      if (matchDay) {
+        const tournament = matchDay.tournaments.find(
+          (t) => t.id === action.payload.tournamentId
+        );
+
+        if (tournament) {
+          const game = tournament.games.find(
+            (g) => g.sequence === action.payload.gameSeq
+          );
+          if (game) {
+            game.state = "FINISHED";
+
+            // update score
+            const player = tournament.players.concat(matchDay.players);
+
+            const home = player.filter((p) =>
+              game.homePlayer.players.map((gp) => gp.name).includes(p.name)
+            );
+            const { homePoints, awayPoints } = calculatePoints(game);
+
+            home.forEach((p) => {
+              const stats = p.stats;
+              updateStats("home", stats, game, homePoints);
+            });
+
+            const away = player.filter((p) =>
+              game.awayPlayer.players.map((gp) => gp.name).includes(p.name)
+            );
+            away.forEach((p) => {
+              const stats = p.stats;
+              updateStats("away", stats, game, awayPoints);
+            });
+          }
+        }
+      }
+    },
+    setScore: (
+      state,
+      action: PayloadAction<{
+        matchdayId: string;
+        tournamentId: string;
+        gameSeq: number | undefined;
+        homeScore?: number | undefined;
+        awayScore?: number | undefined;
+      }>
+    ) => {
+      const tournament = state.matchDays[
+        action.payload.matchdayId
+      ]?.tournaments.find((t) => t.id === action.payload.tournamentId);
+
+      if (tournament) {
+        const game = tournament.games.find(
+          (g) => g.sequence === action.payload.gameSeq
+        );
+        if (game) {
+          if (action.payload.homeScore) {
+            game.goalsHome = action.payload.homeScore;
+          }
+          if (action.payload.awayScore) {
+            game.goalsAway = action.payload.awayScore;
+          }
+        }
       }
     },
   },
@@ -56,3 +187,43 @@ export const matchDayConnector = connect(
 export type MatchDayStoreProps = ConnectedProps<typeof matchDayConnector>;
 
 export default matchDaySlice.reducer;
+function calculatePoints(game: Game) {
+  const homePoints =
+    game.goalsHome !== undefined &&
+    game.goalsAway != undefined &&
+    game.goalsHome > game.goalsAway
+      ? 3
+      : game.goalsHome === game.goalsAway
+      ? 1
+      : 0;
+  const awayPoints = homePoints === 3 ? 0 : homePoints === 1 ? 1 : 3;
+  return { homePoints, awayPoints };
+}
+
+function updateStats(
+  team: "home" | "away",
+  stats: Stats | undefined,
+  game: Game,
+  points: number
+) {
+  if (stats) {
+    stats.goalsScored = Number(
+      (stats.goalsScored || 0) +
+        (team === "home" ? game.goalsHome || 0 : game.goalsAway || 0)
+    );
+    stats.goalsAgainst = Number(
+      (stats.goalsAgainst || 0) +
+        (team === "home" ? game.goalsAway || 0 : game.goalsHome || 0)
+    );
+    stats.gamesPlayed = (stats.gamesPlayed || 0) + 1;
+    stats.gamesWon = points === 3 ? (stats.gamesWon || 0) + 1 : stats.gamesWon;
+    stats.gamesTie = points === 1 ? (stats.gamesTie || 0) + 1 : stats.gamesTie;
+    stats.gamesLost =
+      points === 0 ? (stats.gamesLost || 0) + 1 : stats.gamesLost;
+    stats.points = (stats.points || 0) + points;
+    stats.winPercentage =
+      stats.gamesWon && stats.gamesPlayed
+        ? Number((stats.gamesWon / stats.gamesPlayed).toFixed(3))
+        : 0;
+  }
+}

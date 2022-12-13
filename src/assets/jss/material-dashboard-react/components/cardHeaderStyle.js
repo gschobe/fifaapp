@@ -90,7 +90,6 @@ const cardHeaderStyle = {
     },
   },
   successCardHeader: {
-    height: "30px",
     color: whiteColor,
     "&:not($cardHeaderIcon)": {
       ...successCardHeader,
@@ -103,7 +102,6 @@ const cardHeaderStyle = {
     },
   },
   infoCardHeader: {
-    height: "30px",
     color: whiteColor,
     "&:not($cardHeaderIcon)": {
       ...infoCardHeader,

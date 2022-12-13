@@ -20,11 +20,23 @@ import MatchDaySettings from "./CreateComponents/MatchDaySettings";
 
 const useStyles = makeStyles(styles);
 
-const CreateMatchDayAction: React.FC<StoreProps & MatchDayStoreProps> = ({
+export interface CreatProps {
+  buttonType: "ICON" | "TEXT";
+  createNewMatchday: boolean;
+  activeMatchday?: MatchDay;
+}
+
+const CreateMatchDayAction: React.FC<
+  CreatProps & StoreProps & MatchDayStoreProps
+> = ({
+  buttonType,
+  createNewMatchday,
+  activeMatchday,
   player,
   addMatchDay,
   matchDays,
   teams,
+  addTournament,
 }) => {
   const players = React.useMemo(() => {
     return Object.values(player);
@@ -47,11 +59,9 @@ const CreateMatchDayAction: React.FC<StoreProps & MatchDayStoreProps> = ({
     setIncludeSecondRound(event.target.checked);
   };
 
-  const steps = [
-    "Select matchday settings",
-    "Select Teams",
-    "Create tournament",
-  ];
+  const steps = createNewMatchday
+    ? ["Select matchday settings", "Select Teams", "Create tournament"]
+    : ["Select Teams", "Create tournament"];
 
   const [mode, setMode] = React.useState<TournamentMode>();
   const handleChange = (event: any) => {
@@ -80,44 +90,59 @@ const CreateMatchDayAction: React.FC<StoreProps & MatchDayStoreProps> = ({
 
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
-      const matchdayPlayers = playerName.map((p) => {
-        return {
-          name: p,
-          stats: {
-            gamesPlayed: 0,
-            gamesLost: 0,
-            gamesTie: 0,
-            gamesWon: 0,
-            goalsScored: 0,
-            goalsAgainst: 0,
-            points: 0,
-          },
-        };
-      });
+      const matchdayPlayers = createNewMatchday
+        ? playerName.map((p) => {
+            return {
+              name: p,
+              stats: {
+                gamesPlayed: 0,
+                gamesLost: 0,
+                gamesTie: 0,
+                gamesWon: 0,
+                goalsScored: 0,
+                goalsAgainst: 0,
+                points: 0,
+              },
+            };
+          })
+        : activeMatchday?.players || [];
 
       const usabeleTeams = [
-        ...teams.filter((team) => ratings.includes(team.rating)),
+        ...teams.filter(
+          (team) =>
+            ratings.includes(team.rating) &&
+            !activeMatchday?.usedTeams.includes(team)
+        ),
       ];
       const tournament: Tournament = {
-        id: "1",
+        id: createNewMatchday
+          ? "1"
+          : ((activeMatchday?.tournaments.length || 0) + 1).toString(),
         tournamentTeams: [],
+        players: matchdayPlayers,
         games: [],
         state: "NEW",
         withSecondRound: includeSecondRound,
         useableTeams: usabeleTeams,
       };
-
-      const id = Object.keys(matchDays).length + 1;
-      const matchday: MatchDay = {
-        id: id.toString(),
-        startDate: new Date(),
-        players: matchdayPlayers,
-        mode: mode || "2on2",
-        usedTeams: [],
-        tournaments: [tournament],
-        state: "NEW",
-      };
-      addMatchDay(matchday);
+      if (createNewMatchday) {
+        const id = Object.keys(matchDays).length + 1;
+        const matchday: MatchDay = {
+          id: id.toString(),
+          startDate: new Date(),
+          players: matchdayPlayers,
+          mode: mode || "2on2",
+          usedTeams: [],
+          tournaments: [tournament],
+          state: "NEW",
+        };
+        addMatchDay(matchday);
+      } else if (activeMatchday) {
+        addTournament({
+          matchdayId: activeMatchday?.id,
+          tournament: tournament,
+        });
+      }
       setActiveStep(0);
       setIncludeSecondRound(false);
       setMode(undefined);
@@ -133,6 +158,10 @@ const CreateMatchDayAction: React.FC<StoreProps & MatchDayStoreProps> = ({
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  const showMdSettings = createNewMatchday && activeStep === 0;
+  const showTSettings =
+    (createNewMatchday && activeStep === 1) ||
+    (!createNewMatchday && activeStep === 0);
   return (
     <>
       <Dialog
@@ -140,9 +169,13 @@ const CreateMatchDayAction: React.FC<StoreProps & MatchDayStoreProps> = ({
         open={newTournamentOpen}
         onClose={handleNewTournamenClick}
       >
-        <DialogTitle>Create new matchday</DialogTitle>
+        <DialogTitle>
+          {createNewMatchday ? "Create new matchday" : "Create new tournament"}
+        </DialogTitle>
         <DialogContentText style={{ paddingLeft: "20px" }}>
-          Define your matchday and inital tournament settings.
+          {createNewMatchday
+            ? "Define your matchday and inital tournament settings."
+            : "Define your tournament settings."}
         </DialogContentText>
         <DialogContent>
           <Stepper activeStep={activeStep} alternativeLabel>
@@ -152,7 +185,7 @@ const CreateMatchDayAction: React.FC<StoreProps & MatchDayStoreProps> = ({
               </Step>
             ))}
           </Stepper>
-          {activeStep === 0 && (
+          {showMdSettings && (
             <MatchDaySettings
               playerName={playerName}
               handleSelectionChange={handleSelectionChange}
@@ -161,7 +194,7 @@ const CreateMatchDayAction: React.FC<StoreProps & MatchDayStoreProps> = ({
               players={players}
             />
           )}
-          {activeStep === 1 && (
+          {showTSettings && (
             <TournamentSettings
               ratings={ratings}
               handleRatingSelectionChange={handleRatingSelectionChange}
@@ -187,14 +220,25 @@ const CreateMatchDayAction: React.FC<StoreProps & MatchDayStoreProps> = ({
           </Box>
         </DialogContent>
       </Dialog>
-      <IconButton
-        color="primary"
-        aria-label="add player"
-        className={classes.cardTitleWhite}
-        onClick={handleNewTournamenClick}
-      >
-        <AddBoxOutlined />
-      </IconButton>
+      {buttonType === "ICON" ? (
+        <IconButton
+          color="primary"
+          aria-label="add player"
+          className={classes.cardTitleWhite}
+          onClick={handleNewTournamenClick}
+        >
+          <AddBoxOutlined />
+        </IconButton>
+      ) : (
+        <Button
+          variant="outlined"
+          color="secondary"
+          style={{ margin: "0 5pt" }}
+          onClick={handleNewTournamenClick}
+        >
+          Start New TOURNAMENT
+        </Button>
+      )}
     </>
   );
 };

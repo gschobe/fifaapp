@@ -12,7 +12,7 @@ export interface Stats {
 }
 export interface Player {
   name: string;
-  stats: Stats;
+  stats?: Stats;
 }
 
 export const ALL_TEAM_RATINGS = [
@@ -67,6 +67,7 @@ export interface Tournament {
   id: string;
   tournamentTeams: TournamentTeam[];
   games: Game[];
+  players: Player[];
   state: TournamentState;
   withSecondRound: boolean;
   useableTeams: Team[];

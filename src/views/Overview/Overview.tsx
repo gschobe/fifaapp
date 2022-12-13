@@ -172,7 +172,7 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <h4 className={classes.cardTitleWhite}>Matchdays</h4>
                 <div style={{ flexGrow: 1 }} />
-                <CreateMatchDayAction />
+                <CreateMatchDayAction buttonType="ICON" createNewMatchday />
               </div>
             </CardHeader>
             <CardBody>

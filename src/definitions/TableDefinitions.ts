@@ -69,21 +69,21 @@ export const playerTableColumns: GridColDef[] = [
 
 export const matchDayColumns: GridColDef[] = [
   { field: "id", headerName: "ID", flex: 0.1 },
-  { field: "state", headerName: "State", flex: 0.25 },
-  { field: "mode", headerName: "Modus", flex: 0.25 },
+  { field: "state", headerName: "State", flex: 0.15 },
+  { field: "mode", headerName: "Modus", flex: 0.15 },
+  {
+    field: "tournament",
+    headerName: "# Tournaments",
+    flex: 0.2,
+    renderCell: (params: GridRenderCellParams<MatchDay>) =>
+      params.row.tournaments.length,
+  },
   {
     field: "players",
     headerName: "Players",
     flex: 1,
     renderCell: (params: GridRenderCellParams<MatchDay>) =>
       params.row.players.map((p: Player) => p.name).join(", "),
-  },
-  {
-    field: "tournament",
-    headerName: "# Tournaments",
-    flex: 1,
-    renderCell: (params: GridRenderCellParams<MatchDay>) =>
-      params.row.tournaments.length,
   },
 ];
 
@@ -108,9 +108,11 @@ export const gamesColumns: GridColDef[] = [
     align: "center",
     headerAlign: "center",
     valueGetter: (params: GridValueGetterParams) =>
-      params.row.state !== "FINISHED"
+      ["UPCOMING", "OPEN"].includes(params.row.state)
         ? "-:-"
-        : `${params.row.goalsHome} : ${params.row.goalsAway}`,
+        : `${params.row.goalsHome} : ${params.row.goalsAway}${
+            params.row.state === "RUNNING" ? ` (Live)` : ""
+          }`,
   },
   {
     field: "away",

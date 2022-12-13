@@ -5,11 +5,14 @@ import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import CardHeader from "components/Card/CardHeader";
 import CardBody from "components/Card/CardBody";
-import { Box, Button } from "@material-ui/core";
+import { Box, Button, TextField } from "@material-ui/core";
 import { DataGrid } from "@mui/x-data-grid";
 import { gamesColumns, playerTableColumns } from "definitions/TableDefinitions";
 import { TournamentTeam } from "definitions/Definitions";
 import determineTeamMatesAndTeams from "utils/DrawUtils";
+import { CardActions } from "@mui/material";
+import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
+import CreateMatchDayAction from "views/Overview/CreateMatchDayAction";
 
 interface MatchDayProps {
   id: string;
@@ -19,11 +22,20 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
   id,
   matchDays,
   setTournamentTeams,
+  startGame,
+  finishGame,
+  setScore,
 }) => {
   const matchday = matchDays[id];
   if (!matchday) {
     return <h1>{`Matchday with ID ${id} not found!`}</h1>;
   }
+  const mdPlayers = [...matchday.players].sort((p1, p2) => {
+    if (p1.stats?.points !== undefined && p2.stats?.points !== undefined) {
+      return p2.stats.points - p1.stats.points;
+    }
+    return 0;
+  });
   const activeTournament = matchday.tournaments.find(
     (t) => t.state !== "FINISHED"
   );
@@ -33,52 +45,86 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
   }
   const createTournament = () => {
     // create Teams
-    if (matchday.mode === "1on1") {
-      console.log("NOT YET IMPLEMENTED");
-    }
-    if (matchday.mode === "2on2") {
-      const tournamentTeams: TournamentTeam[] = [];
+    const tournamentTeams: TournamentTeam[] = [];
 
-      const games = determineTeamMatesAndTeams(
-        matchday,
-        tournamentTeams,
-        activeTournament
-      );
+    const games = determineTeamMatesAndTeams(
+      matchday,
+      tournamentTeams,
+      activeTournament
+    );
 
-      setTournamentTeams({
-        matchdayId: id,
-        tournamentId: activeTournament.id,
-        tTeams: tournamentTeams,
-        games: games,
-      });
-    }
+    setTournamentTeams({
+      matchdayId: id,
+      tournamentId: activeTournament.id,
+      tTeams: tournamentTeams,
+      games: games,
+    });
   };
 
+  const upcomingGame = activeTournament.games.find(
+    (game) => game.state === "UPCOMING"
+  );
+
+  const liveGame = activeTournament.games.find(
+    (game) => game.state === "RUNNING"
+  );
+
+  const handleStartUpcoming = () => {
+    startGame({
+      matchdayId: id,
+      tournamentId: activeTournament.id,
+      gameSeq: upcomingGame?.sequence,
+    });
+  };
+
+  const handleConfirmResult = () => {
+    finishGame({
+      matchdayId: id,
+      tournamentId: activeTournament.id,
+      gameSeq: liveGame?.sequence,
+    });
+  };
+
+  const handleHomeScoreChange = (event: any) => {
+    console.log(event);
+    setScore({
+      matchdayId: id,
+      tournamentId: activeTournament.id,
+      gameSeq: liveGame?.sequence,
+      homeScore: Number(event.target.value),
+    });
+  };
+
+  const handleAwayScoreChange = (event: any) => {
+    console.log(event);
+    setScore({
+      matchdayId: id,
+      tournamentId: activeTournament.id,
+      gameSeq: liveGame?.sequence,
+      awayScore: Number(event.target.value),
+    });
+  };
   return (
     <>
-      <div
-        style={{ fontWeight: "bold", fontSize: 24, marginBottom: "5pt" }}
-      >{`Welcome to Matchday ${id}`}</div>
+      <Box display={"flex"} flexDirection="row">
+        <div
+          style={{ fontWeight: "bold", fontSize: 24, margin: "5pt" }}
+        >{`Welcome to Matchday ${id}`}</div>
+        <Box flexGrow={1} />
+        {!liveGame && !upcomingGame && (
+          <>
+            <CreateMatchDayAction
+              buttonType="TEXT"
+              createNewMatchday={false}
+              activeMatchday={matchday}
+            />
+            <Button variant="outlined" color="secondary">
+              FINISH Matchday
+            </Button>
+          </>
+        )}
+      </Box>
       <GridContainer>
-        <GridItem {...{ xs: 8 }}>
-          <Card className="card-content">
-            <CardHeader color="success">
-              <div style={{ fontSize: "1.5em" }}>Table</div>
-            </CardHeader>
-            <CardBody>
-              <DataGrid
-                headerHeight={30}
-                rowHeight={30}
-                pageSize={matchday.players.length}
-                autoHeight
-                hideFooter
-                getRowId={(row) => row.name}
-                rows={matchday.players}
-                columns={playerTableColumns}
-              />
-            </CardBody>
-          </Card>
-        </GridItem>
         <GridItem {...{ xs: 4 }}>
           <Card className="card-content">
             <CardHeader color="info">
@@ -106,33 +152,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                 ) : (
                   <>
                     {activeTournament.tournamentTeams.map((tt, index) => {
-                      return (
-                        <div
-                          key={index}
-                          style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            fontWeight: "bold",
-                            fontSize: 18,
-                            margin: "5pt 0",
-                            // justifyContent: "center",
-                            // alignItems: "center",
-                            width: "100%",
-                            textAlign: "center",
-                          }}
-                        >
-                          <div>{tt.players.map((p) => p.name).join(" & ")}</div>
-                          <div style={{ padding: "0 5pt" }}>{`|`}</div>
-                          <div
-                            style={{
-                              fontStyle: "italic",
-                              color: "grey",
-                            }}
-                          >
-                            {tt.team?.name}
-                          </div>
-                        </div>
-                      );
+                      return tournamenTeamComp(index, tt);
                     })}
                   </>
                 )}
@@ -140,9 +160,138 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
             </CardBody>
           </Card>
         </GridItem>
+        <GridItem {...{ xs: 4 }}>
+          <Card className="card-content">
+            <CardHeader color="primary">
+              <div style={{ fontSize: "1.5em" }}>Live</div>
+            </CardHeader>
+            <CardBody>
+              {liveGame ? (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <div>{tournamenTeamComp(1, liveGame?.homePlayer)}</div>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      margin: "5pt 0",
+                    }}
+                  >
+                    <TextField
+                      key={"homeScore"}
+                      value={liveGame.goalsHome}
+                      variant="outlined"
+                      inputMode="numeric"
+                      onChange={handleHomeScoreChange}
+                      onFocus={(event) => {
+                        event.target.select();
+                      }}
+                      inputProps={{
+                        style: {
+                          width: "40px",
+                          textAlign: "center",
+                          fontSize: 30,
+                          margin: 0,
+                          padding: "4px 4px",
+                        },
+                      }}
+                    />
+                    <div
+                      style={{
+                        fontWeight: "bolder",
+                        fontSize: 20,
+                        margin: "0 10pt",
+                      }}
+                    >
+                      {":"}
+                    </div>
+                    <TextField
+                      key={"awayScore"}
+                      value={liveGame.goalsAway}
+                      variant="outlined"
+                      inputMode="numeric"
+                      onChange={handleAwayScoreChange}
+                      onFocus={(event) => {
+                        event.target.select();
+                      }}
+                      inputProps={{
+                        style: {
+                          width: "40px",
+                          textAlign: "center",
+                          fontSize: 30,
+                          margin: 0,
+                          padding: "4px 4px",
+                        },
+                      }}
+                    />
+                  </div>
+                  <div>{tournamenTeamComp(2, liveGame?.awayPlayer)}</div>
+                </div>
+              ) : (
+                ""
+              )}
+            </CardBody>
+            <CardActions>
+              <Button
+                size="small"
+                variant="outlined"
+                color="secondary"
+                disabled={liveGame === undefined}
+                onClick={handleConfirmResult}
+              >
+                Confirm Result
+              </Button>
+            </CardActions>
+          </Card>
+        </GridItem>
+        <GridItem {...{ xs: 4 }}>
+          <Card className="card-content">
+            <CardHeader color="info">
+              <div style={{ fontSize: "1.5em" }}>Upcoming</div>
+            </CardHeader>
+            <CardBody>
+              {upcomingGame ? (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    marginTop: "10pt",
+                  }}
+                >
+                  <div>{tournamenTeamComp(1, upcomingGame?.homePlayer)}</div>
+                  <div style={{ fontWeight: "bolder", fontSize: 20 }}>
+                    {"vs"}
+                  </div>
+                  <div>{tournamenTeamComp(2, upcomingGame?.awayPlayer)}</div>
+                </div>
+              ) : (
+                ""
+              )}
+            </CardBody>
+            <CardActions>
+              <Button
+                size="small"
+                variant="outlined"
+                color="secondary"
+                disabled={upcomingGame === undefined || liveGame !== undefined}
+                startIcon={<PlayArrowRoundedIcon />}
+                onClick={handleStartUpcoming}
+              >
+                Start Game
+              </Button>
+            </CardActions>
+          </Card>
+        </GridItem>
       </GridContainer>
       <GridContainer>
-        <GridItem {...{ xs: 8 }}>
+        <GridItem {...{ xs: 6 }}>
           <Card>
             <CardHeader color="success">
               <div style={{ fontSize: "1.5em" }}>Games</div>
@@ -159,9 +308,56 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
             </CardBody>
           </Card>
         </GridItem>
+        <GridItem {...{ xs: 6 }}>
+          <Card>
+            <CardHeader color="success">
+              <div style={{ fontSize: "1.5em" }}>Table</div>
+            </CardHeader>
+            <CardBody>
+              <DataGrid
+                headerHeight={30}
+                rowHeight={30}
+                pageSize={mdPlayers.length}
+                autoHeight
+                hideFooter
+                getRowId={(row) => row.name}
+                rows={mdPlayers}
+                columns={playerTableColumns}
+              />
+            </CardBody>
+          </Card>
+        </GridItem>
       </GridContainer>
     </>
   );
 };
 
 export default matchDayConnector(MatchdayView);
+
+const tournamenTeamComp = (index: number, tt: TournamentTeam) => {
+  return (
+    <div
+      key={index}
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        fontWeight: "bold",
+        fontSize: 18,
+        margin: "5pt 0",
+        width: "100%",
+        textAlign: "center",
+      }}
+    >
+      <div>{tt.players.map((p) => p?.name).join(" & ")}</div>
+      <div style={{ padding: "0 5pt" }}>{`|`}</div>
+      <div
+        style={{
+          fontStyle: "italic",
+          color: "grey",
+        }}
+      >
+        {tt.team?.name}
+      </div>
+    </div>
+  );
+};
