@@ -1,11 +1,12 @@
+import { Button } from "@mui/material";
+import React from "react";
 import {
   GridColDef,
   GridRenderCellParams,
-  //   GridRenderCellParams,
   GridValueGetterParams,
 } from "@mui/x-data-grid";
 import { MatchDay, Player } from "./Definitions";
-// import { MatchDay, Player } from "./Definitions";
+import { useNavigate } from "react-router-dom";
 
 export const playerTableColumns: GridColDef[] = [
   { field: "name", headerName: "Name", flex: 1 },
@@ -84,6 +85,20 @@ export const matchDayColumns: GridColDef[] = [
     flex: 1,
     renderCell: (params: GridRenderCellParams<MatchDay>) =>
       params.row.players.map((p: Player) => p.name).join(", "),
+  },
+  {
+    field: "actions",
+    headerName: "",
+    flex: 0.25,
+    align: "right",
+    renderCell: (params: GridRenderCellParams<MatchDay>) => {
+      params.row.id;
+      const navigate = useNavigate();
+      const onClick = () => {
+        navigate(`/matchday/${params.row.id}`);
+      };
+      return <Button onClick={onClick}>OPEN</Button>;
+    },
   },
 ];
 

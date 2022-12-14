@@ -38,6 +38,7 @@ import RoutingMatchday from "views/Matchday/RoutingMatchday";
 // import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.js";
 // core components/views for RTL layout
 // import RTLPage from "views/RTLPage/RTLPage.js";
+import React from "react";
 
 const dashboardRoutes = [
   {
@@ -45,7 +46,7 @@ const dashboardRoutes = [
     name: "Übersicht",
     rtlName: "لوحة القيادة",
     icon: HomeOutlined,
-    component: Overview,
+    component: <Overview />,
     layout: "/admin",
     showInSidebar: true,
   },
@@ -54,7 +55,7 @@ const dashboardRoutes = [
     name: "Matchday",
     rtlName: "لوحة القيادة",
     icon: HomeOutlined,
-    component: RoutingMatchday,
+    component: <RoutingMatchday />,
     layout: "/admin",
     showInSidebar: false,
     hasId: true,

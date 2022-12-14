@@ -17,6 +17,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import { Button } from "@mui/material";
 import TournamentSettings from "./CreateComponents/TournamentSettings";
 import MatchDaySettings from "./CreateComponents/MatchDaySettings";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles(styles);
 
@@ -38,6 +39,7 @@ const CreateMatchDayAction: React.FC<
   teams,
   addTournament,
 }) => {
+  const navigate = useNavigate();
   const players = React.useMemo(() => {
     return Object.values(player);
   }, [player]);
@@ -137,6 +139,7 @@ const CreateMatchDayAction: React.FC<
           state: "NEW",
         };
         addMatchDay(matchday);
+        navigate(`/matchday/${id}`);
       } else if (activeMatchday) {
         addTournament({
           matchdayId: activeMatchday?.id,

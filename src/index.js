@@ -17,7 +17,12 @@
 */
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  // Route,
+  // Routes,
+  // Navigate,
+} from "react-router-dom";
 
 // core components
 import Admin from "./layouts/Admin.js";
@@ -27,13 +32,14 @@ import { Provider } from "react-redux";
 import store from "store/Store.ts";
 
 ReactDOM.render(
-  <BrowserRouter>
+  <Router>
     <Provider store={store}>
-      <Switch>
-        <Route path="/admin" component={Admin} />
-        <Redirect from="/" to="/admin/overview" />
-      </Switch>
+      {/* <Routes>
+        <Route index element={<Admin />} />
+        <Route path="*" element={<Navigate to="/overview" replace />} />
+      </Routes> */}
+      <Admin />
     </Provider>
-  </BrowserRouter>,
+  </Router>,
   document.getElementById("root")
 );

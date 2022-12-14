@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
@@ -17,34 +17,33 @@ import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
 import bgImage from "../assets/img/fifa-23-kylian-mbappe.jpg";
 import logo from "../assets/img/EA_Sports.svg.png";
+import Overview from "views/Overview/Overview";
 
 let ps;
 
 const switchRoutes = (
-  <Switch>
+  <Routes>
+    <Route path="/" element={<Overview />} />
     {routes.map((prop, key) => {
       if (prop.layout === "/admin") {
         if (prop.hasId) {
           return (
             <Route
-              path={prop.layout + prop.path + "/:matchdayId"}
-              component={prop.component}
+              path={prop.path + "/:matchdayId"}
+              element={prop.component}
               key={key}
             />
           );
         }
-        return (
-          <Route
-            path={prop.layout + prop.path}
-            component={prop.component}
-            key={key}
-          />
-        );
+        return <Route path={prop.path} element={prop.component} key={key} />;
       }
       return null;
     })}
-    <Redirect from="/admin" to="/admin/matchday/1" />
-  </Switch>
+    <Route
+      path="/admin"
+      element={<Navigate to="/admin/matchday/1" replace />}
+    />
+  </Routes>
 );
 
 const useStyles = makeStyles(styles);
