@@ -5,13 +5,14 @@ import {
   GridRenderCellParams,
   GridValueGetterParams,
 } from "@mui/x-data-grid";
-import { MatchDay, Player, Tournament } from "./Definitions";
+import { Game, MatchDay, Player, Tournament } from "./Definitions";
 import { useNavigate } from "react-router-dom";
 import StarRounded from "@material-ui/icons/StarRounded";
 import StarHalfRounded from "@material-ui/icons/StarHalfRounded";
 import ArrowUpwardRoundedIcon from "@material-ui/icons/ArrowUpwardRounded";
 import ArrowDownwardRoundedIcon from "@material-ui/icons/ArrowDownwardRounded";
 import Box from "@material-ui/core/Box";
+import CorrectGameDialog from "views/Matchday/CorrectGameDialog";
 
 export const playerTableColumns: GridColDef[] = [
   {
@@ -101,6 +102,13 @@ export const playerTableColumns: GridColDef[] = [
 
 export const matchDayColumns: GridColDef[] = [
   { field: "id", headerName: "ID", flex: 0.1 },
+  {
+    field: "startDate",
+    headerName: "Started at",
+    flex: 0.2,
+    valueGetter: (params: GridValueGetterParams) =>
+      new Date(params.row.startDate).toLocaleDateString("de-DE"),
+  },
   { field: "state", headerName: "State", flex: 0.15 },
   { field: "mode", headerName: "Modus", flex: 0.15 },
   {
@@ -118,12 +126,23 @@ export const matchDayColumns: GridColDef[] = [
       params.row.tournaments.flatMap((t: Tournament) => t.games).length,
   },
   {
+    field: "winner",
+    headerName: "Matchday Winner/Leader",
+    flex: 0.4,
+    valueGetter: (params: GridValueGetterParams<MatchDay>) =>
+      params.row.players.find((p: Player) => p.rank === 1)?.name,
+  },
+  {
     field: "players",
     headerName: "Players",
     flex: 1,
     renderCell: (params: GridRenderCellParams<MatchDay>) =>
-      params.row.players.map((p: Player) => p.name).join(", "),
+      params.row.players
+        .map((p: Player) => p.name)
+        .sort()
+        .join(", "),
   },
+
   {
     field: "actions",
     headerName: "",
@@ -173,6 +192,16 @@ export const gamesColumns: GridColDef[] = [
     flex: 0.5,
     valueGetter: (params: GridValueGetterParams) =>
       params.row.awayPlayer.team.name,
+  },
+  {
+    field: "actions",
+    headerName: "",
+    flex: 0.25,
+    renderCell: (params: GridRenderCellParams<Game>) => {
+      return params.row.state === "FINISHED" ? (
+        <CorrectGameDialog game={params.row} />
+      ) : null;
+    },
   },
 ];
 

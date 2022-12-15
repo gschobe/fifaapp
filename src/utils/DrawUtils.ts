@@ -17,7 +17,7 @@ export default function determineTeamMatesAndTeams(
   }
   defineTeamMates(matchday, tournamentTeams);
   chooseTeams(matchday, activeTournament, tournamentTeams);
-  return generateGames(activeTournament, tournamentTeams);
+  return generateGames(matchday.id, activeTournament, tournamentTeams);
 }
 
 export function defineTeamMates(
@@ -82,6 +82,7 @@ export function generatePossibleDraws(
 }
 
 export function generateGames(
+  matchdayId: string,
   activeTournament: Tournament,
   tournamentTeams: TournamentTeam[]
 ): Game[] {
@@ -91,6 +92,8 @@ export function generateGames(
     .filter((s) => s.player1 !== null && s.player2 !== null)
     .map((s, index) => {
       return {
+        matchdayId: matchdayId,
+        tournamentId: activeTournament.id,
         sequence: index + 1,
         homePlayer: tournamentTeams[Number(s.player1) - 1],
         awayPlayer: tournamentTeams[Number(s.player2) - 1],
@@ -103,6 +106,8 @@ export function generateGames(
       .filter((s) => s.player1 !== null && s.player2 !== null)
       .map((s, index) => {
         return {
+          matchdayId: matchdayId,
+          tournamentId: activeTournament.id,
           sequence: index + 1 + games.length,
           homePlayer: tournamentTeams[Number(s.player2) - 1],
           awayPlayer: tournamentTeams[Number(s.player1) - 1],

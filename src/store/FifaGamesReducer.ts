@@ -104,6 +104,84 @@ export const matchDaySlice = createSlice({
         }
       }
     },
+    correctGame: (
+      state,
+      action: PayloadAction<{
+        matchdayId: string;
+        tournamentId: string;
+        gameSeq: number | undefined;
+        newHomeScore: number;
+        newAwayScore: number;
+      }>
+    ) => {
+      const matchDay = state.matchDays[action.payload.matchdayId];
+      if (matchDay) {
+        const tournament = matchDay.tournaments.find(
+          (t) => t.id === action.payload.tournamentId
+        );
+
+        if (tournament) {
+          const game = tournament.games.find(
+            (g) => g.sequence === action.payload.gameSeq
+          );
+          if (game) {
+            const player = tournament.players.concat(matchDay.players);
+            const home = player.filter((p) =>
+              game.homePlayer.players.map((gp) => gp.name).includes(p.name)
+            );
+            const { homePoints, awayPoints } = calculatePoints(
+              game.goalsHome || 0,
+              game.goalsAway || 0
+            );
+            const newPoints = calculatePoints(
+              action.payload.newHomeScore,
+              action.payload.newAwayScore
+            );
+
+            home.forEach((p) => {
+              const stats = p.stats;
+              correctStats(
+                "home",
+                stats,
+                game,
+                homePoints,
+                newPoints.homePoints,
+                action.payload.newHomeScore,
+                action.payload.newAwayScore
+              );
+            });
+
+            const away = player.filter((p) =>
+              game.awayPlayer.players.map((gp) => gp.name).includes(p.name)
+            );
+            away.forEach((p) => {
+              const stats = p.stats;
+              correctStats(
+                "away",
+                stats,
+                game,
+                awayPoints,
+                newPoints.awayPoints,
+                action.payload.newHomeScore,
+                action.payload.newAwayScore
+              );
+            });
+
+            game.goalsHome = action.payload.newHomeScore;
+            game.goalsAway = action.payload.newAwayScore;
+          }
+          const sorted = getPlayersSortedByPoints(matchDay.players);
+          // set ranks
+          sorted.forEach((p, index) => {
+            const prev = p.rank;
+            console.log(prev);
+            p = { ...p, previousRank: prev, rank: index + 1 };
+            sorted[index] = p;
+          });
+          matchDay.players = sorted;
+        }
+      }
+    },
     finishGame: (
       state,
       action: PayloadAction<{
@@ -131,7 +209,10 @@ export const matchDaySlice = createSlice({
             const home = player.filter((p) =>
               game.homePlayer.players.map((gp) => gp.name).includes(p.name)
             );
-            const { homePoints, awayPoints } = calculatePoints(game);
+            const { homePoints, awayPoints } = calculatePoints(
+              game.goalsHome || 0,
+              game.goalsAway || 0
+            );
 
             home.forEach((p) => {
               const stats = p.stats;
@@ -202,6 +283,13 @@ export const matchDaySlice = createSlice({
         matchDay.players = action.payload.players;
       }
     },
+    finishMatchday: (state, action: PayloadAction<string>) => {
+      const matchDay = state.matchDays[action.payload];
+      if (matchDay) {
+        matchDay.state = "FINISHED";
+        matchDay.tournaments.map((t) => t.state === "FINISHED");
+      }
+    },
   },
 });
 
@@ -221,13 +309,11 @@ export const matchDayConnector = connect(
 export type MatchDayStoreProps = ConnectedProps<typeof matchDayConnector>;
 
 export default matchDaySlice.reducer;
-function calculatePoints(game: Game) {
+function calculatePoints(goalsHome: number, goalsAway: number) {
   const homePoints =
-    game.goalsHome !== undefined &&
-    game.goalsAway != undefined &&
-    game.goalsHome > game.goalsAway
+    goalsHome !== undefined && goalsAway != undefined && goalsHome > goalsAway
       ? 3
-      : game.goalsHome === game.goalsAway
+      : goalsHome === goalsAway
       ? 1
       : 0;
   const awayPoints = homePoints === 3 ? 0 : homePoints === 1 ? 1 : 3;
@@ -255,6 +341,47 @@ function updateStats(
     stats.gamesLost =
       points === 0 ? (stats.gamesLost || 0) + 1 : stats.gamesLost;
     stats.points = (stats.points || 0) + points;
+    stats.winPercentage =
+      stats.gamesWon && stats.gamesPlayed
+        ? Number((stats.gamesWon / stats.gamesPlayed).toFixed(3))
+        : 0;
+  }
+}
+
+function correctStats(
+  team: "home" | "away",
+  stats: Stats | undefined,
+  game: Game,
+  points: number,
+  newPoints: number,
+  goalsHome: number,
+  goalsAway: number
+) {
+  if (stats) {
+    stats.goalsScored = Number(
+      (stats.goalsScored || 0) -
+        (team === "home" ? game.goalsHome || 0 : game.goalsAway || 0) +
+        (team === "home" ? goalsHome : goalsAway)
+    );
+    stats.goalsAgainst = Number(
+      (stats.goalsAgainst || 0) -
+        (team === "home" ? game.goalsAway || 0 : game.goalsHome || 0) +
+        (team === "home" ? goalsAway : goalsHome)
+    );
+
+    stats.gamesWon = points === 3 ? (stats.gamesWon || 0) - 1 : stats.gamesWon;
+    stats.gamesTie = points === 1 ? (stats.gamesTie || 0) - 1 : stats.gamesTie;
+    stats.gamesLost =
+      points === 0 ? (stats.gamesLost || 0) - 1 : stats.gamesLost;
+    stats.gamesWon =
+      newPoints === 3 ? (stats.gamesWon || 0) + 1 : stats.gamesWon;
+    stats.gamesTie =
+      newPoints === 1 ? (stats.gamesTie || 0) + 1 : stats.gamesTie;
+    stats.gamesLost =
+      newPoints === 0 ? (stats.gamesLost || 0) + 1 : stats.gamesLost;
+
+    stats.points = (stats.points || 0) - points + newPoints;
+
     stats.winPercentage =
       stats.gamesWon && stats.gamesPlayed
         ? Number((stats.gamesWon / stats.gamesPlayed).toFixed(3))

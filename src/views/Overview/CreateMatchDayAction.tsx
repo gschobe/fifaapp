@@ -131,7 +131,7 @@ const CreateMatchDayAction: React.FC<
         const id = Object.keys(matchDays).length + 1;
         const matchday: MatchDay = {
           id: id.toString(),
-          startDate: new Date(),
+          startDate: new Date().toISOString(),
           players: matchdayPlayers,
           mode: mode || "2on2",
           usedTeams: [],

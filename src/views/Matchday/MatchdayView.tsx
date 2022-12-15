@@ -5,7 +5,7 @@ import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import CardHeader from "components/Card/CardHeader";
 import CardBody from "components/Card/CardBody";
-import { Box, Button, TextField } from "@material-ui/core";
+import { Box, Button } from "@material-ui/core";
 import { DataGrid } from "@mui/x-data-grid";
 import { gamesColumns, playerTableColumns } from "definitions/TableDefinitions";
 import { TournamentTeam } from "definitions/Definitions";
@@ -14,6 +14,8 @@ import { CardActions } from "@mui/material";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
 import CreateMatchDayAction from "views/Overview/CreateMatchDayAction";
 import { getPlayersSortedByPoints } from "utils/TableUtils";
+import { GameScore, tournamenTeamComp } from "./GameScore";
+import { useNavigate } from "react-router-dom";
 
 interface MatchDayProps {
   id: string;
@@ -26,7 +28,9 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
   startGame,
   finishGame,
   setScore,
+  finishMatchday,
 }) => {
+  const navigate = useNavigate();
   const matchday = matchDays[id];
   if (!matchday) {
     return <h1>{`Matchday with ID ${id} not found!`}</h1>;
@@ -38,9 +42,6 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
 
   const mdPlayers = getPlayersSortedByPoints(matchday.players);
 
-  // if (!activeTournament) {
-  //   return <h1>{`No unfinished tournament found!`}</h1>;
-  // }
   const createTournament = () => {
     // create Teams
     const tournamentTeams: TournamentTeam[] = [];
@@ -118,14 +119,21 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
           activeTournament ? `/ tournament ${activeTournament.id}` : ``
         }`}</div>
         <Box flexGrow={1} />
-        {!liveGame && !upcomingGame && (
+        {matchday.state !== "FINISHED" && !liveGame && !upcomingGame && (
           <>
             <CreateMatchDayAction
               buttonType="TEXT"
               createNewMatchday={false}
               activeMatchday={matchday}
             />
-            <Button variant="outlined" color="secondary">
+            <Button
+              onClick={() => {
+                finishMatchday(matchday.id);
+                navigate("/overview");
+              }}
+              variant="outlined"
+              color="secondary"
+            >
               FINISH Matchday
             </Button>
           </>
@@ -174,72 +182,13 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
             </CardHeader>
             <CardBody>
               {liveGame ? (
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <div>{tournamenTeamComp(1, liveGame?.homePlayer)}</div>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      margin: "5pt 0",
-                    }}
-                  >
-                    <TextField
-                      key={"homeScore"}
-                      value={liveGame.goalsHome}
-                      variant="outlined"
-                      inputMode="numeric"
-                      onChange={handleHomeScoreChange}
-                      onFocus={(event) => {
-                        event.target.select();
-                      }}
-                      inputProps={{
-                        style: {
-                          width: "40px",
-                          textAlign: "center",
-                          fontSize: 30,
-                          margin: 0,
-                          padding: "4px 4px",
-                        },
-                      }}
-                    />
-                    <div
-                      style={{
-                        fontWeight: "bolder",
-                        fontSize: 20,
-                        margin: "0 10pt",
-                      }}
-                    >
-                      {":"}
-                    </div>
-                    <TextField
-                      key={"awayScore"}
-                      value={liveGame.goalsAway}
-                      variant="outlined"
-                      inputMode="numeric"
-                      onChange={handleAwayScoreChange}
-                      onFocus={(event) => {
-                        event.target.select();
-                      }}
-                      inputProps={{
-                        style: {
-                          width: "40px",
-                          textAlign: "center",
-                          fontSize: 30,
-                          margin: 0,
-                          padding: "4px 4px",
-                        },
-                      }}
-                    />
-                  </div>
-                  <div>{tournamenTeamComp(2, liveGame?.awayPlayer)}</div>
-                </div>
+                <GameScore
+                  liveGame={liveGame}
+                  homeScore={liveGame.goalsHome || 0}
+                  awayScore={liveGame.goalsAway || 0}
+                  handleHomeScoreChange={handleHomeScoreChange}
+                  handleAwayScoreChange={handleAwayScoreChange}
+                />
               ) : (
                 ""
               )}
@@ -343,31 +292,3 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
 };
 
 export default matchDayConnector(MatchdayView);
-
-const tournamenTeamComp = (index: number, tt: TournamentTeam) => {
-  return (
-    <div
-      key={index}
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        fontWeight: "bold",
-        fontSize: 18,
-        margin: "5pt 0",
-        width: "100%",
-        textAlign: "center",
-      }}
-    >
-      <div>{tt.players.map((p) => p?.name).join(" & ")}</div>
-      <div style={{ padding: "0 5pt" }}>{`|`}</div>
-      <div
-        style={{
-          fontStyle: "italic",
-          color: "grey",
-        }}
-      >
-        {tt.team?.name}
-      </div>
-    </div>
-  );
-};

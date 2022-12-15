@@ -63,6 +63,8 @@ export interface PossibleDraw {
 }
 
 export interface Game {
+  matchdayId: string;
+  tournamentId: string;
   sequence: number;
   homePlayer: TournamentTeam;
   awayPlayer: TournamentTeam;
@@ -82,7 +84,7 @@ export interface Tournament {
 
 export interface MatchDay {
   id: string;
-  startDate: Date;
+  startDate: string;
   players: Player[];
   mode: TournamentMode;
   // useableTeams: Team[];

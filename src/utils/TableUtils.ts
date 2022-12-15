@@ -51,7 +51,6 @@ export function calulateOverallStats(
     return {};
   }
   const allPlayers = Object.values(matchDays).flatMap((md) => md?.players);
-  console.log(allPlayers);
 
   const playerStats: Dictionary<Player> = {};
   allPlayers.forEach((player) => {
