@@ -1,14 +1,45 @@
 import { Button } from "@mui/material";
-import React from "react";
+import React, { ReactNode } from "react";
 import {
   GridColDef,
   GridRenderCellParams,
   GridValueGetterParams,
 } from "@mui/x-data-grid";
-import { MatchDay, Player } from "./Definitions";
+import { MatchDay, Player, Tournament } from "./Definitions";
 import { useNavigate } from "react-router-dom";
+import StarRounded from "@material-ui/icons/StarRounded";
+import StarHalfRounded from "@material-ui/icons/StarHalfRounded";
+import ArrowUpwardRoundedIcon from "@material-ui/icons/ArrowUpwardRounded";
+import ArrowDownwardRoundedIcon from "@material-ui/icons/ArrowDownwardRounded";
+import Box from "@material-ui/core/Box";
 
 export const playerTableColumns: GridColDef[] = [
+  {
+    field: "rangchange",
+    headerName: "",
+    flex: 0.1,
+    align: "center",
+    renderCell: (params: GridRenderCellParams<MatchDay>) => {
+      const diff = params.row.previousRank - params.row.rank;
+      return (
+        <Box display={"flex"} flexDirection="row">
+          {diff > 0 ? (
+            <Box color="green">
+              <ArrowUpwardRoundedIcon fontSize="small" />
+              {diff}
+            </Box>
+          ) : diff < 0 ? (
+            <Box color="red">
+              <ArrowDownwardRoundedIcon fontSize="small" />
+              {Math.abs(diff)}
+            </Box>
+          ) : (
+            <Box color="blue">-</Box>
+          )}
+        </Box>
+      );
+    },
+  },
   { field: "name", headerName: "Name", flex: 1 },
   {
     field: "points",
@@ -80,6 +111,13 @@ export const matchDayColumns: GridColDef[] = [
       params.row.tournaments.length,
   },
   {
+    field: "matches",
+    headerName: "# Matches",
+    flex: 0.2,
+    renderCell: (params: GridRenderCellParams<MatchDay>) =>
+      params.row.tournaments.flatMap((t: Tournament) => t.games).length,
+  },
+  {
     field: "players",
     headerName: "Players",
     flex: 1,
@@ -97,7 +135,7 @@ export const matchDayColumns: GridColDef[] = [
       const onClick = () => {
         navigate(`/matchday/${params.row.id}`);
       };
-      return <Button onClick={onClick}>OPEN</Button>;
+      return <Button onClick={onClick}>SHOW</Button>;
     },
   },
 ];
@@ -137,3 +175,80 @@ export const gamesColumns: GridColDef[] = [
       params.row.awayPlayer.team.name,
   },
 ];
+
+export const overviewPlayersColumns: GridColDef[] = [
+  { field: "name", headerName: "Name", flex: 1 },
+  {
+    field: "gamesPlayed",
+    headerName: "Games played",
+    flex: 1,
+    valueGetter: (params: GridValueGetterParams) =>
+      params.row.stats.gamesPlayed,
+  },
+  {
+    field: "gamesWon",
+    headerName: "Won",
+    flex: 1,
+    valueGetter: (params: GridValueGetterParams) => params.row.stats.gamesWon,
+  },
+  {
+    field: "winPercentage",
+    headerName: "Win percetage",
+    sortable: true,
+    flex: 1,
+    valueGetter: (params: GridValueGetterParams) =>
+      params.row.stats.gamesPlayed === 0 ? 0 : params.row.stats.winPercentage,
+  },
+];
+
+export const teamsColumns: GridColDef[] = [
+  { field: "name", headerName: "Name", flex: 1 },
+  { field: "country", headerName: "Country", flex: 1 },
+  { field: "league", headerName: "League", flex: 1 },
+  {
+    field: "rating",
+    headerName: "Rating",
+    flex: 1,
+    renderCell: (params: GridRenderCellParams<string>) =>
+      getStarsRender(params.value),
+  },
+];
+
+export function getStarsRender(value: string | undefined): ReactNode {
+  return (
+    <div style={{ color: "#f7e840" }}>
+      {value === "5 stars" && (
+        <>
+          <StarRounded color="inherit" /> <StarRounded />
+          <StarRounded /> <StarRounded />
+          <StarRounded />
+        </>
+      )}
+      {value === "4.5 stars" && (
+        <>
+          <StarRounded /> <StarRounded />
+          <StarRounded /> <StarRounded />
+          <StarHalfRounded />
+        </>
+      )}
+      {value === "4 stars" && (
+        <>
+          <StarRounded /> <StarRounded />
+          <StarRounded /> <StarRounded />
+        </>
+      )}
+      {value === "3.5 stars" && (
+        <>
+          <StarRounded /> <StarRounded />
+          <StarRounded /> <StarHalfRounded />
+        </>
+      )}
+      {value === "3 stars" && (
+        <>
+          <StarRounded /> <StarRounded />
+          <StarRounded />
+        </>
+      )}
+    </div>
+  );
+}

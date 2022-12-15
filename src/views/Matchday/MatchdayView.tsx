@@ -13,6 +13,7 @@ import determineTeamMatesAndTeams from "utils/DrawUtils";
 import { CardActions } from "@mui/material";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
 import CreateMatchDayAction from "views/Overview/CreateMatchDayAction";
+import { getPlayersSortedByPoints } from "utils/TableUtils";
 
 interface MatchDayProps {
   id: string;
@@ -30,86 +31,92 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
   if (!matchday) {
     return <h1>{`Matchday with ID ${id} not found!`}</h1>;
   }
-  const mdPlayers = [...matchday.players].sort((p1, p2) => {
-    if (p1.stats?.points !== undefined && p2.stats?.points !== undefined) {
-      return p2.stats.points - p1.stats.points;
-    }
-    return 0;
-  });
+  console.log("live");
   const activeTournament = matchday.tournaments.find(
     (t) => t.state !== "FINISHED"
   );
 
-  if (!activeTournament) {
-    return <h1>{`No unfinished tournament found!`}</h1>;
-  }
+  const mdPlayers = getPlayersSortedByPoints(matchday.players);
+
+  // if (!activeTournament) {
+  //   return <h1>{`No unfinished tournament found!`}</h1>;
+  // }
   const createTournament = () => {
     // create Teams
     const tournamentTeams: TournamentTeam[] = [];
+    if (activeTournament !== undefined) {
+      const games = determineTeamMatesAndTeams(
+        matchday,
+        tournamentTeams,
+        activeTournament
+      );
 
-    const games = determineTeamMatesAndTeams(
-      matchday,
-      tournamentTeams,
-      activeTournament
-    );
-
-    setTournamentTeams({
-      matchdayId: id,
-      tournamentId: activeTournament.id,
-      tTeams: tournamentTeams,
-      games: games,
-    });
+      setTournamentTeams({
+        matchdayId: id,
+        tournamentId: activeTournament?.id,
+        tTeams: tournamentTeams,
+        games: games,
+      });
+    }
   };
 
-  const upcomingGame = activeTournament.games.find(
+  const upcomingGame = activeTournament?.games.find(
     (game) => game.state === "UPCOMING"
   );
 
-  const liveGame = activeTournament.games.find(
+  const liveGame = activeTournament?.games.find(
     (game) => game.state === "RUNNING"
   );
 
   const handleStartUpcoming = () => {
-    startGame({
-      matchdayId: id,
-      tournamentId: activeTournament.id,
-      gameSeq: upcomingGame?.sequence,
-    });
+    if (activeTournament) {
+      startGame({
+        matchdayId: id,
+        tournamentId: activeTournament.id,
+        gameSeq: upcomingGame?.sequence,
+      });
+    }
   };
 
   const handleConfirmResult = () => {
-    finishGame({
-      matchdayId: id,
-      tournamentId: activeTournament.id,
-      gameSeq: liveGame?.sequence,
-    });
+    if (activeTournament) {
+      finishGame({
+        matchdayId: id,
+        tournamentId: activeTournament.id,
+        gameSeq: liveGame?.sequence,
+      });
+    }
   };
 
   const handleHomeScoreChange = (event: any) => {
-    console.log(event);
-    setScore({
-      matchdayId: id,
-      tournamentId: activeTournament.id,
-      gameSeq: liveGame?.sequence,
-      homeScore: Number(event.target.value),
-    });
+    if (activeTournament) {
+      setScore({
+        matchdayId: id,
+        tournamentId: activeTournament.id,
+        gameSeq: liveGame?.sequence,
+        homeScore: Number(event.target.value),
+      });
+    }
   };
 
   const handleAwayScoreChange = (event: any) => {
-    console.log(event);
-    setScore({
-      matchdayId: id,
-      tournamentId: activeTournament.id,
-      gameSeq: liveGame?.sequence,
-      awayScore: Number(event.target.value),
-    });
+    if (activeTournament) {
+      setScore({
+        matchdayId: id,
+        tournamentId: activeTournament.id,
+        gameSeq: liveGame?.sequence,
+        awayScore: Number(event.target.value),
+      });
+    }
   };
   return (
     <>
       <Box display={"flex"} flexDirection="row">
         <div
           style={{ fontWeight: "bold", fontSize: 24, margin: "5pt" }}
-        >{`Welcome to Matchday ${id}`}</div>
+        >{`Welcome to Matchday ${id} ${
+          activeTournament ? `/ tournament ${activeTournament.id}` : ``
+        }`}</div>
         <Box flexGrow={1} />
         {!liveGame && !upcomingGame && (
           <>
@@ -151,7 +158,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                   </Button>
                 ) : (
                   <>
-                    {activeTournament.tournamentTeams.map((tt, index) => {
+                    {activeTournament?.tournamentTeams.map((tt, index) => {
                       return tournamenTeamComp(index, tt);
                     })}
                   </>
@@ -297,14 +304,17 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
               <div style={{ fontSize: "1.5em" }}>Games</div>
             </CardHeader>
             <CardBody>
-              <DataGrid
-                headerHeight={30}
-                rowHeight={30}
-                autoPageSize
-                getRowId={(row) => row.sequence}
-                rows={activeTournament.games}
-                columns={gamesColumns}
-              />
+              {activeTournament?.games &&
+                activeTournament?.games.length > 0 && (
+                  <DataGrid
+                    headerHeight={30}
+                    rowHeight={30}
+                    autoPageSize
+                    getRowId={(row) => row.sequence}
+                    rows={activeTournament?.games || []}
+                    columns={gamesColumns}
+                  />
+                )}
             </CardBody>
           </Card>
         </GridItem>

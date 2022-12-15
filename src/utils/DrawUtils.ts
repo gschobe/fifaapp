@@ -10,8 +10,11 @@ import { RoundRobin } from "tournament-pairings";
 export default function determineTeamMatesAndTeams(
   matchday: MatchDay,
   tournamentTeams: TournamentTeam[],
-  activeTournament: Tournament
+  activeTournament: Tournament | undefined
 ): Game[] {
+  if (activeTournament === undefined) {
+    return [];
+  }
   defineTeamMates(matchday, tournamentTeams);
   chooseTeams(matchday, activeTournament, tournamentTeams);
   return generateGames(activeTournament, tournamentTeams);
@@ -64,6 +67,18 @@ export function chooseTeams(
     (tt) =>
       (tt.team = teams.splice(Math.floor(Math.random() * teams.length), 1)[0])
   );
+}
+
+export function generatePossibleDraws(
+  teamsize: number,
+  players: (Player | undefined)[]
+) {
+  const draws = RoundRobin(players.length, 1, true);
+  // draws.map((d) => {
+  //   return {team1: {}}
+  // })
+
+  console.log(draws);
 }
 
 export function generateGames(

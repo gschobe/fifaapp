@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import GridContainer from "components/Grid/GridContainer.js";
 import Card from "components/Card/Card.js";
@@ -10,26 +10,29 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 import { IconButton } from "@material-ui/core";
 import PersonAdd from "@material-ui/icons/PersonAdd";
-import StarRounded from "@material-ui/icons/StarRounded";
-import StarHalfRounded from "@material-ui/icons/StarHalfRounded";
+import AutorenewOutlinedIcon from "@material-ui/icons/AutorenewOutlined";
+
 import CloudUploadOutlined from "@material-ui/icons/CloudUploadOutlined";
 import GridItem from "components/Grid/GridItem";
 import { storeConnector, StoreProps } from "store/StoreReducer";
-import {
-  DataGrid,
-  GridColDef,
-  GridRenderCellParams,
-  GridValueGetterParams,
-} from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import * as XSLX from "xlsx";
 import { Team, TeamImport, TeamRating } from "definitions/Definitions";
 import CreateMatchDayAction from "./CreateMatchDayAction";
 import { matchDayConnector, MatchDayStoreProps } from "store/FifaGamesReducer";
-import { matchDayColumns } from "definitions/TableDefinitions";
+import {
+  matchDayColumns,
+  overviewPlayersColumns,
+  teamsColumns,
+} from "definitions/TableDefinitions";
+import {
+  calulateOverallStats,
+  getPlayersSortedByWinPercentage,
+} from "utils/TableUtils";
+import { generatePossibleDraws } from "utils/DrawUtils";
 
 const useStyles = makeStyles(styles);
 
@@ -39,6 +42,7 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
   player,
   addPlayer,
   matchDays,
+  setPlayers,
 }) => {
   const classes = useStyles();
 
@@ -46,10 +50,15 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
   const [name, setName] = React.useState<string>("");
 
   const players = React.useMemo(() => {
-    return Object.values(player);
+    return getPlayersSortedByWinPercentage(Object.values(player));
   }, [player]);
   const handleClick: () => void = () => {
+    generatePossibleDraws(2, players);
     setAddPlayerOpen((addPlayerOpen) => !addPlayerOpen);
+  };
+
+  const handleRecalcStats: () => void = () => {
+    setPlayers(calulateOverallStats(Object.values(matchDays)));
   };
 
   const handlePlayerAdd: () => void = () => {
@@ -101,40 +110,6 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
     setName(event.target.value);
   };
 
-  const columns: GridColDef[] = [
-    { field: "name", headerName: "Name", flex: 1 },
-    {
-      field: "gamesPlayed",
-      headerName: "Games played",
-      flex: 1,
-      valueGetter: (params: GridValueGetterParams) =>
-        params.row.stats.gamesPlayed,
-    },
-    {
-      field: "winPercentage",
-      headerName: "Win percetage",
-      sortable: true,
-      flex: 1,
-      valueGetter: (params: GridValueGetterParams) =>
-        params.row.stats.gamesPlayed === 0
-          ? 0
-          : params.row.stats.gamesWon / params.row.stats.gamesPlayed,
-    },
-  ];
-
-  const teamsColumns: GridColDef[] = [
-    { field: "name", headerName: "Name", flex: 1 },
-    { field: "country", headerName: "Country", flex: 1 },
-    { field: "league", headerName: "League", flex: 1 },
-    {
-      field: "rating",
-      headerName: "Rating",
-      flex: 1,
-      renderCell: (params: GridRenderCellParams<string>) =>
-        getStarsRender(params.value),
-    },
-  ];
-
   return (
     <div>
       <Dialog open={addPlayerOpen} onClose={handleClick}>
@@ -165,43 +140,26 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
           <Button onClick={handleTeamImportSave}>Import</Button>
         </DialogActions>
       </Dialog>
-      <GridContainer>
-        <GridItem {...{ xs: 12, sm: 12, md: 12 }}>
-          <Card>
-            <CardHeader color="success">
-              <div style={{ display: "flex", flexDirection: "row" }}>
-                <h4 className={classes.cardTitleWhite}>Matchdays</h4>
-                <div style={{ flexGrow: 1 }} />
-                <CreateMatchDayAction buttonType="ICON" createNewMatchday />
-              </div>
-            </CardHeader>
-            <CardBody>
-              {players && players.length > 0 && (
-                <DataGrid
-                  disableSelectionOnClick
-                  headerHeight={35}
-                  rowHeight={30}
-                  autoPageSize
-                  rows={Object.values(matchDays)}
-                  columns={matchDayColumns}
-                />
-              )}
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
+
       <GridContainer>
         <GridItem {...{ xs: 12, sm: 10, md: 8 }}>
           <Card {...{ height: "300px !important" }}>
             <CardHeader color="info">
-              <div style={{ display: "flex", flexDirection: "row" }}>
-                <h4 className={classes.cardTitleWhite}>Teams</h4>
+              <div
+                style={{
+                  fontSize: "1.2rem",
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
+                <div className={classes.cardTitleWhite}>Teams</div>
                 <div style={{ flexGrow: 1 }} />
                 <IconButton
                   color="primary"
                   aria-label="import Teams"
                   className={classes.cardTitleWhite}
                   onClick={handleClickImport}
+                  style={{ padding: "0" }}
                 >
                   <CloudUploadOutlined />
                 </IconButton>
@@ -225,16 +183,32 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
         <GridItem {...{ xs: 8, sm: 8, md: 4 }}>
           <Card>
             <CardHeader color="info">
-              <div style={{ display: "flex", flexDirection: "row" }}>
-                <h4 className={classes.cardTitleWhite}>Player Stats</h4>
+              <div
+                style={{
+                  fontSize: "1.2rem",
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
+                <div className={classes.cardTitleWhite}>Player Stats</div>
                 <div style={{ flexGrow: 1 }} />
                 <IconButton
                   color="primary"
                   aria-label="add player"
+                  style={{ padding: "0" }}
                   className={classes.cardTitleWhite}
                   onClick={handleClick}
                 >
                   <PersonAdd />
+                </IconButton>
+                <IconButton
+                  color="primary"
+                  aria-label="add player"
+                  style={{ padding: "0", marginLeft: "10pt" }}
+                  className={classes.cardTitleWhite}
+                  onClick={handleRecalcStats}
+                >
+                  <AutorenewOutlinedIcon />
                 </IconButton>
               </div>
             </CardHeader>
@@ -247,7 +221,38 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
                   autoPageSize
                   getRowId={(row) => row.name}
                   rows={players}
-                  columns={columns}
+                  columns={overviewPlayersColumns}
+                />
+              )}
+            </CardBody>
+          </Card>
+        </GridItem>
+      </GridContainer>
+      <GridContainer>
+        <GridItem {...{ xs: 12, sm: 12, md: 12 }}>
+          <Card>
+            <CardHeader color="success">
+              <div
+                style={{
+                  fontSize: "1.2rem",
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
+                <div className={classes.cardTitleWhite}>Matchdays</div>
+                <div style={{ flexGrow: 1 }} />
+                <CreateMatchDayAction buttonType="ICON" createNewMatchday />
+              </div>
+            </CardHeader>
+            <CardBody>
+              {players && players.length > 0 && (
+                <DataGrid
+                  disableSelectionOnClick
+                  headerHeight={35}
+                  rowHeight={30}
+                  autoPageSize
+                  rows={Object.values(matchDays)}
+                  columns={matchDayColumns}
                 />
               )}
             </CardBody>
@@ -273,43 +278,4 @@ function convertRating(Rating: any): TeamRating {
     default:
       return "3 stars";
   }
-}
-
-export function getStarsRender(value: string | undefined): ReactNode {
-  return (
-    <div style={{ color: "#f7e840" }}>
-      {value === "5 stars" && (
-        <>
-          <StarRounded color="inherit" /> <StarRounded />
-          <StarRounded /> <StarRounded />
-          <StarRounded />
-        </>
-      )}
-      {value === "4.5 stars" && (
-        <>
-          <StarRounded /> <StarRounded />
-          <StarRounded /> <StarRounded />
-          <StarHalfRounded />
-        </>
-      )}
-      {value === "4 stars" && (
-        <>
-          <StarRounded /> <StarRounded />
-          <StarRounded /> <StarRounded />
-        </>
-      )}
-      {value === "3.5 stars" && (
-        <>
-          <StarRounded /> <StarRounded />
-          <StarRounded /> <StarHalfRounded />
-        </>
-      )}
-      {value === "3 stars" && (
-        <>
-          <StarRounded /> <StarRounded />
-          <StarRounded />
-        </>
-      )}
-    </div>
-  );
 }

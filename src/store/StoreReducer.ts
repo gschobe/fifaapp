@@ -34,6 +34,22 @@ export const storeSlice = createSlice({
     setTeams: (state, action: PayloadAction<Team[]>) => {
       state.teams = action.payload;
     },
+    setPlayers: (state, action: PayloadAction<Dictionary<Player>>) => {
+      const newPlayers = action.payload;
+      if (newPlayers) {
+        Object.values(state.players).forEach((p) => {
+          if (p) {
+            const stats = newPlayers[p.name]?.stats;
+            if (stats) {
+              const player = state.players[p.name];
+              if (player) {
+                player.stats = stats;
+              }
+            }
+          }
+        });
+      }
+    },
   },
 });
 

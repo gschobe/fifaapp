@@ -229,6 +229,7 @@ const CreateMatchDayAction: React.FC<
           aria-label="add player"
           className={classes.cardTitleWhite}
           onClick={handleNewTournamenClick}
+          style={{ padding: "0" }}
         >
           <AddBoxOutlined />
         </IconButton>

@@ -8,7 +8,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Box from "@material-ui/core/Box";
 import { ALL_TEAM_RATINGS } from "definitions/Definitions";
-import { getStarsRender } from "../Overview";
+import { getStarsRender } from "definitions/TableDefinitions";
 
 export interface Props {
   handleRatingSelectionChange: (e: any) => void;

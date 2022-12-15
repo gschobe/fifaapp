@@ -12,6 +12,8 @@ export interface Stats {
 }
 export interface Player {
   name: string;
+  rank?: number;
+  previousRank?: number;
   stats?: Stats;
 }
 
@@ -53,6 +55,11 @@ export interface TournamentTeam {
   players: Player[];
   team?: Team;
   stats?: Stats;
+}
+
+export interface PossibleDraw {
+  team1: TournamentTeam;
+  team2: TournamentTeam;
 }
 
 export interface Game {

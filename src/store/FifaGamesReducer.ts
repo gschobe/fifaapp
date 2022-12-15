@@ -3,12 +3,14 @@ import { createSlice, PayloadAction, Dictionary } from "@reduxjs/toolkit";
 import {
   Game,
   MatchDay,
+  Player,
   Stats,
   Tournament,
   TournamentTeam,
 } from "../definitions/Definitions";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "./Store";
+import { getPlayersSortedByPoints } from "utils/TableUtils";
 
 export interface FifaGameState {
   matchDays: Dictionary<MatchDay>;
@@ -72,26 +74,33 @@ export const matchDaySlice = createSlice({
         gameSeq: number | undefined;
       }>
     ) => {
-      const tournament = state.matchDays[
-        action.payload.matchdayId
-      ]?.tournaments.find((t) => t.id === action.payload.tournamentId);
+      const matchday = state.matchDays[action.payload.matchdayId];
+      if (matchday) {
+        matchday.state = "RUNNING";
 
-      if (tournament) {
-        const game = tournament.games.find(
-          (g) => g.sequence === action.payload.gameSeq
-        );
-        if (game) {
-          game.state = "RUNNING";
-          game.goalsHome = 0;
-          game.goalsAway = 0;
-        }
-
-        const next = tournament.games.find(
-          (g) => g.sequence === (action.payload.gameSeq || 1) + 1
+        const tournament = matchday.tournaments.find(
+          (t) => t.id === action.payload.tournamentId
         );
 
-        if (next) {
-          next.state = "UPCOMING";
+        if (tournament) {
+          tournament.state = "RUNNING";
+
+          const game = tournament.games.find(
+            (g) => g.sequence === action.payload.gameSeq
+          );
+          if (game) {
+            game.state = "RUNNING";
+            game.goalsHome = 0;
+            game.goalsAway = 0;
+          }
+
+          const next = tournament.games.find(
+            (g) => g.sequence === (action.payload.gameSeq || 1) + 1
+          );
+
+          if (next) {
+            next.state = "UPCOMING";
+          }
         }
       }
     },
@@ -137,6 +146,22 @@ export const matchDaySlice = createSlice({
               updateStats("away", stats, game, awayPoints);
             });
           }
+
+          const sorted = getPlayersSortedByPoints(matchDay.players);
+          // set ranks
+          sorted.forEach((p, index) => {
+            const prev = p.rank;
+            console.log(prev);
+            p = { ...p, previousRank: prev, rank: index + 1 };
+            sorted[index] = p;
+          });
+          matchDay.players = sorted;
+
+          if (
+            tournament.games.find((g) => g.state !== "FINISHED") === undefined
+          ) {
+            tournament.state = "FINISHED";
+          }
         }
       }
     },
@@ -166,6 +191,15 @@ export const matchDaySlice = createSlice({
             game.goalsAway = action.payload.awayScore;
           }
         }
+      }
+    },
+    setMatchdayPlayers: (
+      state,
+      action: PayloadAction<{ matchdayId: string; players: Player[] }>
+    ) => {
+      const matchDay = state.matchDays[action.payload.matchdayId];
+      if (matchDay) {
+        matchDay.players = action.payload.players;
       }
     },
   },
