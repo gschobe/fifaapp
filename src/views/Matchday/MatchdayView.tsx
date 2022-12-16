@@ -29,6 +29,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
   finishGame,
   setScore,
   finishMatchday,
+  setPossibleDraws,
 }) => {
   const navigate = useNavigate();
   const matchday = matchDays[id];
@@ -46,7 +47,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
     // create Teams
     const tournamentTeams: TournamentTeam[] = [];
     if (activeTournament !== undefined) {
-      const games = determineTeamMatesAndTeams(
+      const { games, possibleDraws, clearUsed } = determineTeamMatesAndTeams(
         matchday,
         tournamentTeams,
         activeTournament
@@ -57,6 +58,12 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
         tournamentId: activeTournament?.id,
         tTeams: tournamentTeams,
         games: games,
+        clearUsed: clearUsed,
+      });
+
+      setPossibleDraws({
+        matchdayId: id,
+        draw: possibleDraws,
       });
     }
   };
@@ -287,6 +294,56 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
           </Card>
         </GridItem>
       </GridContainer>
+      {matchday.tournaments
+        .filter((t) => t.state === "FINISHED")
+        .map((t) => {
+          return (
+            <div key={`tournament-${t.id}`}>
+              <hr />
+              <div>{`Tournament ${t.id} - ${t.state}`}</div>
+              <GridContainer>
+                <GridItem {...{ xs: 6 }}>
+                  <Card>
+                    <CardHeader color="success">
+                      <div style={{ fontSize: "1.5em" }}>Games</div>
+                    </CardHeader>
+                    <CardBody>
+                      <DataGrid
+                        headerHeight={30}
+                        rowHeight={30}
+                        pageSize={t.games.length}
+                        getRowId={(row) => row.sequence}
+                        rows={t.games}
+                        autoHeight
+                        hideFooter
+                        columns={gamesColumns}
+                      />
+                    </CardBody>
+                  </Card>
+                </GridItem>
+                <GridItem {...{ xs: 6 }}>
+                  <Card>
+                    <CardHeader color="success">
+                      <div style={{ fontSize: "1.5em" }}>Table</div>
+                    </CardHeader>
+                    <CardBody>
+                      <DataGrid
+                        headerHeight={30}
+                        rowHeight={30}
+                        pageSize={t.players.length}
+                        autoHeight
+                        hideFooter
+                        getRowId={(row) => row.name}
+                        rows={getPlayersSortedByPoints(t.players)}
+                        columns={playerTableColumns}
+                      />
+                    </CardBody>
+                  </Card>
+                </GridItem>
+              </GridContainer>
+            </div>
+          );
+        })}
     </>
   );
 };

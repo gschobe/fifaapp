@@ -4,6 +4,7 @@ import {
   Game,
   MatchDay,
   Player,
+  PossibleDraw,
   Stats,
   Tournament,
   TournamentTeam,
@@ -47,6 +48,7 @@ export const matchDaySlice = createSlice({
         tournamentId: string;
         tTeams: TournamentTeam[];
         games: Game[];
+        clearUsed: boolean;
       }>
     ) => {
       const matchday = state.matchDays[action.payload.matchdayId];
@@ -58,12 +60,32 @@ export const matchDaySlice = createSlice({
         if (tournament) {
           tournament.tournamentTeams = action.payload.tTeams;
           tournament.games = action.payload.games;
+          if (action.payload.clearUsed) {
+            matchday.usedTeams = [...matchday.usedTeams].filter(
+              (t) =>
+                !tournament.useableTeams
+                  .flatMap((ut) => ut.name)
+                  .includes(t.name)
+            );
+          }
           action.payload.tTeams.forEach((tt) => {
             if (tt.team) {
               matchday.usedTeams = matchday.usedTeams.concat(tt.team);
             }
           });
         }
+      }
+    },
+    setPossibleDraws: (
+      state,
+      action: PayloadAction<{
+        matchdayId: string;
+        draw: PossibleDraw[];
+      }>
+    ) => {
+      const matchday = state.matchDays[action.payload.matchdayId];
+      if (matchday) {
+        matchday.possibleDraws = action.payload.draw;
       }
     },
     startGame: (
@@ -265,10 +287,10 @@ export const matchDaySlice = createSlice({
           (g) => g.sequence === action.payload.gameSeq
         );
         if (game) {
-          if (action.payload.homeScore) {
+          if (action.payload.homeScore !== undefined) {
             game.goalsHome = action.payload.homeScore;
           }
-          if (action.payload.awayScore) {
+          if (action.payload.awayScore !== undefined) {
             game.goalsAway = action.payload.awayScore;
           }
         }

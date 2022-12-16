@@ -58,8 +58,7 @@ export interface TournamentTeam {
 }
 
 export interface PossibleDraw {
-  team1: TournamentTeam;
-  team2: TournamentTeam;
+  teams: TournamentTeam[];
 }
 
 export interface Game {
@@ -91,4 +90,5 @@ export interface MatchDay {
   usedTeams: Team[];
   tournaments: Tournament[];
   state: TournamentState;
+  possibleDraws: PossibleDraw[];
 }

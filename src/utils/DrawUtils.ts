@@ -2,83 +2,95 @@ import {
   Game,
   MatchDay,
   Player,
+  PossibleDraw,
   Tournament,
   TournamentTeam,
 } from "definitions/Definitions";
 import { RoundRobin } from "tournament-pairings";
+import _ from "lodash";
+import { Match } from "tournament-pairings/dist/Match";
 
 export default function determineTeamMatesAndTeams(
   matchday: MatchDay,
   tournamentTeams: TournamentTeam[],
   activeTournament: Tournament | undefined
-): Game[] {
+): { games: Game[]; possibleDraws: PossibleDraw[]; clearUsed: boolean } {
   if (activeTournament === undefined) {
-    return [];
+    return { games: [], possibleDraws: [], clearUsed: false };
   }
-  defineTeamMates(matchday, tournamentTeams);
-  chooseTeams(matchday, activeTournament, tournamentTeams);
-  return generateGames(matchday.id, activeTournament, tournamentTeams);
+  const remaining = defineTeamMates(matchday, tournamentTeams);
+  const clear = chooseTeams(matchday, activeTournament, tournamentTeams);
+  return {
+    games: generateGames(matchday.id, activeTournament, tournamentTeams),
+    possibleDraws: remaining,
+    clearUsed: clear,
+  };
 }
 
 export function defineTeamMates(
   matchday: MatchDay,
   tournamentTeams: TournamentTeam[]
-) {
-  const players: Player[] = [...matchday.players];
-  while (players.length > 0) {
-    const teamMates = [];
-    const player1 = players.splice(
-      Math.floor(Math.random() * players.length),
-      1
-    )[0];
-    teamMates.push(player1);
-
-    if (matchday.mode === "2on2") {
-      const usedMates = matchday.tournaments
-        .filter((t) => t.state === "FINISHED")
-        .flatMap((t) => t.tournamentTeams)
-        .filter((tt) => tt.players.map((p) => p.name).includes(player1.name))
-        .flatMap((tt) => tt.players);
-      const usableMates = players.filter(
-        (p) => !usedMates.map((u) => u.name).includes(p.name)
-      );
-      const player2 = usableMates.splice(
-        Math.floor(Math.random() * usableMates.length),
-        1
-      )[0];
-      teamMates.push(player2);
-      players.splice(players.indexOf(player2), 1);
-    }
-    const tTeam: TournamentTeam = { players: [...teamMates] };
-    tournamentTeams.push(tTeam);
-  }
+): PossibleDraw[] {
+  const possible = [...matchday.possibleDraws];
+  const draw = possible.splice(
+    Math.floor(Math.random() * possible.length),
+    1
+  )[0];
+  draw.teams.forEach((team) => tournamentTeams.push({ ...team }));
+  return possible.length > 0
+    ? possible
+    : generatePossibleDraws(matchday.players);
 }
 
 export function chooseTeams(
   matchday: MatchDay,
   activeTournament: Tournament,
   tournamentTeams: TournamentTeam[]
-) {
+): boolean {
+  let clearUsedTeams = false;
   const teams = [...activeTournament?.useableTeams].filter(
-    (t) => !matchday.usedTeams.includes(t)
+    (t) => !matchday.usedTeams.flatMap((ut) => ut.name).includes(t.name)
   );
+
   console.log(teams);
+  if (teams.length < tournamentTeams.length) {
+    teams.splice(0, teams.length);
+    teams.push(...[...activeTournament.useableTeams]);
+    clearUsedTeams = true;
+  }
+  console.log("after", teams);
   tournamentTeams.forEach(
     (tt) =>
       (tt.team = teams.splice(Math.floor(Math.random() * teams.length), 1)[0])
   );
+
+  return clearUsedTeams;
 }
 
 export function generatePossibleDraws(
-  teamsize: number,
   players: (Player | undefined)[]
-) {
+): PossibleDraw[] {
+  const possible: PossibleDraw[] = [];
   const draws = RoundRobin(players.length, 1, true);
-  // draws.map((d) => {
-  //   return {team1: {}}
-  // })
 
-  console.log(draws);
+  const groups = _(draws)
+    .groupBy((draw) => draw.round)
+    .value();
+
+  Object.values(groups).map((group: any) => {
+    const teams: TournamentTeam[] = [];
+    group.map((team: Match) => {
+      const p1 = players[Number(team.player1) - 1];
+      const p2 = players[Number(team.player2) - 1];
+      if (p1 && p2) {
+        teams.push({ players: [p1, p2] });
+      }
+    });
+    possible.push({ teams: teams });
+  });
+
+  console.log(possible);
+  return possible;
 }
 
 export function generateGames(

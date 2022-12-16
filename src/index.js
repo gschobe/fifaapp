@@ -17,12 +17,7 @@
 */
 import React from "react";
 import ReactDOM from "react-dom";
-import {
-  BrowserRouter as Router,
-  // Route,
-  // Routes,
-  // Navigate,
-} from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 
 // core components
 import Admin from "./layouts/Admin.js";
@@ -34,10 +29,6 @@ import store from "store/Store.ts";
 ReactDOM.render(
   <Router>
     <Provider store={store}>
-      {/* <Routes>
-        <Route index element={<Admin />} />
-        <Route path="*" element={<Navigate to="/overview" replace />} />
-      </Routes> */}
       <Admin />
     </Provider>
   </Router>,

@@ -18,6 +18,7 @@ import { Button } from "@mui/material";
 import TournamentSettings from "./CreateComponents/TournamentSettings";
 import MatchDaySettings from "./CreateComponents/MatchDaySettings";
 import { useNavigate } from "react-router-dom";
+import { generatePossibleDraws } from "utils/DrawUtils";
 
 const useStyles = makeStyles(styles);
 
@@ -93,27 +94,14 @@ const CreateMatchDayAction: React.FC<
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
       const matchdayPlayers = createNewMatchday
-        ? playerName.map((p) => {
-            return {
-              name: p,
-              stats: {
-                gamesPlayed: 0,
-                gamesLost: 0,
-                gamesTie: 0,
-                gamesWon: 0,
-                goalsScored: 0,
-                goalsAgainst: 0,
-                points: 0,
-              },
-            };
-          })
+        ? newPlayers(playerName)
         : activeMatchday?.players || [];
 
       const usabeleTeams = [
         ...teams.filter(
-          (team) =>
-            ratings.includes(team.rating) &&
-            !activeMatchday?.usedTeams.includes(team)
+          (team) => ratings.includes(team.rating)
+          // &&
+          // !activeMatchday?.usedTeams.includes(team)
         ),
       ];
       const tournament: Tournament = {
@@ -121,7 +109,7 @@ const CreateMatchDayAction: React.FC<
           ? "1"
           : ((activeMatchday?.tournaments.length || 0) + 1).toString(),
         tournamentTeams: [],
-        players: matchdayPlayers,
+        players: newPlayers(matchdayPlayers.map((p) => p.name)),
         games: [],
         state: "NEW",
         withSecondRound: includeSecondRound,
@@ -137,6 +125,7 @@ const CreateMatchDayAction: React.FC<
           usedTeams: [],
           tournaments: [tournament],
           state: "NEW",
+          possibleDraws: generatePossibleDraws(matchdayPlayers),
         };
         addMatchDay(matchday);
         navigate(`/matchday/${id}`);
@@ -248,3 +237,19 @@ const CreateMatchDayAction: React.FC<
 };
 
 export default storeConnector(matchDayConnector(CreateMatchDayAction));
+function newPlayers(playerName: string[]) {
+  return playerName.map((p) => {
+    return {
+      name: p,
+      stats: {
+        gamesPlayed: 0,
+        gamesLost: 0,
+        gamesTie: 0,
+        gamesWon: 0,
+        goalsScored: 0,
+        goalsAgainst: 0,
+        points: 0,
+      },
+    };
+  });
+}

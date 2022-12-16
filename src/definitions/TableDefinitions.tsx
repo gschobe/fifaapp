@@ -20,7 +20,7 @@ export const playerTableColumns: GridColDef[] = [
     headerName: "",
     flex: 0.1,
     align: "center",
-    renderCell: (params: GridRenderCellParams<MatchDay>) => {
+    renderCell: (params: GridRenderCellParams) => {
       const diff = params.row.previousRank - params.row.rank;
       return (
         <Box display={"flex"} flexDirection="row">

@@ -24,6 +24,7 @@ let ps;
 const switchRoutes = (
   <Routes>
     <Route path="/" element={<Overview />} />
+    <Route path="/fifaapp" element={<Overview />} />
     {routes.map((prop, key) => {
       if (prop.layout === "/admin") {
         if (prop.hasId) {

@@ -51,7 +51,6 @@ export default function Sidebar(props) {
             <NavLink
               to={prop.path}
               className={activePro + classes.item}
-              activeClassName="active"
               key={key}
             >
               <ListItem button className={classes.itemLink + listItemClasses}>

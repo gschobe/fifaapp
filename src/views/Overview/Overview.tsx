@@ -53,7 +53,7 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
     return getPlayersSortedByWinPercentage(Object.values(player));
   }, [player]);
   const handleClick: () => void = () => {
-    generatePossibleDraws(2, players);
+    generatePossibleDraws(players);
     setAddPlayerOpen((addPlayerOpen) => !addPlayerOpen);
   };
 
