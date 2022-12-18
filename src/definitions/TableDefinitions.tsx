@@ -101,34 +101,38 @@ export const playerTableColumns: GridColDef[] = [
 ];
 
 export const matchDayColumns: GridColDef[] = [
-  { field: "id", headerName: "ID", flex: 0.1 },
+  {
+    field: "id",
+    headerName: "ID",
+    flex: 0.1,
+    valueGetter: (params: GridValueGetterParams) => Number(params.row.id),
+  },
   {
     field: "startDate",
     headerName: "Started at",
-    flex: 0.2,
     valueGetter: (params: GridValueGetterParams) =>
       new Date(params.row.startDate).toLocaleDateString("de-DE"),
   },
-  { field: "state", headerName: "State", flex: 0.15 },
+  { field: "state", headerName: "State", flex: 0.3 },
   { field: "mode", headerName: "Modus", flex: 0.15 },
   {
     field: "tournament",
     headerName: "# Tournaments",
-    flex: 0.2,
+    flex: 0.3,
     renderCell: (params: GridRenderCellParams<MatchDay>) =>
       params.row.tournaments.length,
   },
   {
     field: "matches",
     headerName: "# Matches",
-    flex: 0.2,
+    flex: 0.3,
     renderCell: (params: GridRenderCellParams<MatchDay>) =>
       params.row.tournaments.flatMap((t: Tournament) => t.games).length,
   },
   {
     field: "winner",
     headerName: "Matchday Winner/Leader",
-    flex: 0.4,
+    flex: 0.5,
     valueGetter: (params: GridValueGetterParams<MatchDay>) =>
       params.row.players.find((p: Player) => p.rank === 1)?.name,
   },

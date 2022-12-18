@@ -32,11 +32,18 @@ export function defineTeamMates(
   tournamentTeams: TournamentTeam[]
 ): PossibleDraw[] {
   const possible = [...matchday.possibleDraws];
-  const draw = possible.splice(
-    Math.floor(Math.random() * possible.length),
-    1
-  )[0];
-  draw.teams.forEach((team) => tournamentTeams.push({ ...team }));
+  if (matchday.mode === "2on2") {
+    const draw = possible.splice(
+      Math.floor(Math.random() * possible.length),
+      1
+    )[0];
+    draw.teams.forEach((team) => tournamentTeams.push({ ...team }));
+  } else if (matchday.mode === "1on1") {
+    matchday.players.forEach((player) =>
+      tournamentTeams.push({ players: [{ ...player }] })
+    );
+  }
+
   return possible.length > 0
     ? possible
     : generatePossibleDraws(matchday.players);
@@ -52,13 +59,12 @@ export function chooseTeams(
     (t) => !matchday.usedTeams.flatMap((ut) => ut.name).includes(t.name)
   );
 
-  console.log(teams);
   if (teams.length < tournamentTeams.length) {
     teams.splice(0, teams.length);
     teams.push(...[...activeTournament.useableTeams]);
     clearUsedTeams = true;
   }
-  console.log("after", teams);
+
   tournamentTeams.forEach(
     (tt) =>
       (tt.team = teams.splice(Math.floor(Math.random() * teams.length), 1)[0])

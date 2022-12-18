@@ -331,7 +331,8 @@ export const matchDayConnector = connect(
 export type MatchDayStoreProps = ConnectedProps<typeof matchDayConnector>;
 
 export default matchDaySlice.reducer;
-function calculatePoints(goalsHome: number, goalsAway: number) {
+
+export function calculatePoints(goalsHome: number, goalsAway: number) {
   const homePoints =
     goalsHome !== undefined && goalsAway != undefined && goalsHome > goalsAway
       ? 3
@@ -342,7 +343,7 @@ function calculatePoints(goalsHome: number, goalsAway: number) {
   return { homePoints, awayPoints };
 }
 
-function updateStats(
+export function updateStats(
   team: "home" | "away",
   stats: Stats | undefined,
   game: Game,

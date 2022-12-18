@@ -40,6 +40,10 @@ const MatchDaySettings: React.FC<Props> = ({
             value={playerName}
             onChange={handleSelectionChange}
             renderValue={(selected: any) => selected.join(", ")}
+            error={
+              playerName.length < 2 ||
+              (mode === "2on2" && playerName.length < 4)
+            }
           >
             {players.map((p) => {
               if (p) {
@@ -59,6 +63,7 @@ const MatchDaySettings: React.FC<Props> = ({
         <FormControl style={{ marginTop: "10px", width: "80%" }}>
           <InputLabel id="demo-simple-select-label">Mode</InputLabel>
           <Select
+            error={mode === undefined}
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={mode}

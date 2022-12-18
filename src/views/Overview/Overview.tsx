@@ -32,7 +32,6 @@ import {
   calulateOverallStats,
   getPlayersSortedByWinPercentage,
 } from "utils/TableUtils";
-import { generatePossibleDraws } from "utils/DrawUtils";
 
 const useStyles = makeStyles(styles);
 
@@ -48,12 +47,12 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
 
   const [addPlayerOpen, setAddPlayerOpen] = React.useState(false);
   const [name, setName] = React.useState<string>("");
+  const [playerError, setPlayerError] = React.useState(true);
 
   const players = React.useMemo(() => {
     return getPlayersSortedByWinPercentage(Object.values(player));
   }, [player]);
   const handleClick: () => void = () => {
-    generatePossibleDraws(players);
     setAddPlayerOpen((addPlayerOpen) => !addPlayerOpen);
   };
 
@@ -107,7 +106,9 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
   const onChange: (event: React.ChangeEvent<HTMLInputElement>) => void = (
     event
   ) => {
-    setName(event.target.value);
+    const entered = event.target.value;
+    setName(entered);
+    setPlayerError(!entered || players.map((p) => p?.name).includes(entered));
   };
 
   return (
@@ -117,6 +118,7 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
         <DialogContent>
           <TextField
             autoFocus
+            error={playerError}
             margin="normal"
             id="player"
             label="Player to add:"
@@ -127,7 +129,9 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClick}>Cancel</Button>
-          <Button onClick={handlePlayerAdd}>Add</Button>
+          <Button onClick={handlePlayerAdd} disabled={playerError}>
+            Add
+          </Button>
         </DialogActions>
       </Dialog>
       <Dialog open={importTeamsOpen} onClose={handleClickImport}>
@@ -180,7 +184,7 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
             </CardBody>
           </Card>
         </GridItem>
-        <GridItem {...{ xs: 8, sm: 8, md: 4 }}>
+        <GridItem {...{ xs: 12, sm: 12, md: 4 }}>
           <Card>
             <CardHeader color="info">
               <div
@@ -245,8 +249,13 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
               </div>
             </CardHeader>
             <CardBody>
-              {players && players.length > 0 && (
+              {matchDays && Object.values(matchDays).length > 0 && (
                 <DataGrid
+                  initialState={{
+                    sorting: {
+                      sortModel: [{ field: "id", sort: "desc" }],
+                    },
+                  }}
                   disableSelectionOnClick
                   headerHeight={35}
                   rowHeight={30}

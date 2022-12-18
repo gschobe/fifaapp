@@ -38,6 +38,7 @@ const TournamentSettings: React.FC<Props> = ({
             labelId="demo-multiple-checkbox-label"
             id="demo-multiple-checkbox"
             multiple
+            error={ratings.length === 0}
             value={ratings}
             onChange={handleRatingSelectionChange}
             renderValue={(selected: any) => selected.join(", ")}

@@ -1,8 +1,39 @@
 import { Dictionary } from "@reduxjs/toolkit";
-import { MatchDay, Player } from "definitions/Definitions";
+import { Game, MatchDay, Player } from "definitions/Definitions";
+import { calculatePoints, updateStats } from "store/FifaGamesReducer";
 
-export function getPlayersSortedByPoints(players: Player[]): Player[] {
-  const sorted = [...players].sort((p1, p2) => {
+export function getPlayersSortedByPoints(
+  players: Player[],
+  liveGame?: Game
+): Player[] {
+  const ps = players.map((player) => ({ ...player }));
+  if (liveGame) {
+    console.log("TODO add live results");
+
+    const { homePoints, awayPoints } = calculatePoints(
+      liveGame.goalsHome || 0,
+      liveGame.goalsAway || 0
+    );
+    const homeP = ps.filter((p) =>
+      liveGame.homePlayer.players.flatMap((p) => p.name).includes(p.name)
+    );
+    const awayP = ps.filter((p) =>
+      liveGame.awayPlayer.players.flatMap((p) => p.name).includes(p.name)
+    );
+
+    homeP.forEach((p) => {
+      const stats = { ...p.stats };
+      updateStats("home", stats, liveGame, homePoints);
+      p.stats = stats;
+    });
+
+    awayP.forEach((p) => {
+      const stats = { ...p.stats };
+      updateStats("away", stats, liveGame, awayPoints);
+      p.stats = stats;
+    });
+  }
+  const sorted = ps.sort((p1, p2) => {
     if (p1.stats?.points !== undefined && p2.stats?.points !== undefined) {
       let x = p2.stats.points - p1.stats.points;
       if (x !== 0) {

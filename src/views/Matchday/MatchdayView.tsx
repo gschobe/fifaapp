@@ -5,7 +5,7 @@ import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import CardHeader from "components/Card/CardHeader";
 import CardBody from "components/Card/CardBody";
-import { Box, Button } from "@material-ui/core";
+import { Box, Button, Checkbox } from "@material-ui/core";
 import { DataGrid } from "@mui/x-data-grid";
 import { gamesColumns, playerTableColumns } from "definitions/TableDefinitions";
 import { TournamentTeam } from "definitions/Definitions";
@@ -33,15 +33,31 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
 }) => {
   const navigate = useNavigate();
   const matchday = matchDays[id];
+
+  const [liveTable, setLiveTable] = React.useState(true);
+  const handleLiveTableChange: (event: any) => void = (event) => {
+    setLiveTable(event.target.checked);
+  };
+
   if (!matchday) {
     return <h1>{`Matchday with ID ${id} not found!`}</h1>;
   }
-  console.log("live");
   const activeTournament = matchday.tournaments.find(
     (t) => t.state !== "FINISHED"
   );
 
-  const mdPlayers = getPlayersSortedByPoints(matchday.players);
+  const upcomingGame = activeTournament?.games.find(
+    (game) => game.state === "UPCOMING"
+  );
+
+  const liveGame = activeTournament?.games.find(
+    (game) => game.state === "RUNNING"
+  );
+
+  const mdPlayers = getPlayersSortedByPoints(
+    matchday.players,
+    liveTable ? liveGame : undefined
+  );
 
   const createTournament = () => {
     // create Teams
@@ -67,14 +83,6 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
       });
     }
   };
-
-  const upcomingGame = activeTournament?.games.find(
-    (game) => game.state === "UPCOMING"
-  );
-
-  const liveGame = activeTournament?.games.find(
-    (game) => game.state === "RUNNING"
-  );
 
   const handleStartUpcoming = () => {
     if (activeTournament) {
@@ -117,6 +125,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
       });
     }
   };
+
   return (
     <>
       <Box display={"flex"} flexDirection="row">
@@ -147,7 +156,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
         )}
       </Box>
       <GridContainer>
-        <GridItem {...{ xs: 4 }}>
+        <GridItem {...{ xs: 12, sm: 6, md: 4 }}>
           <Card className="card-content">
             <CardHeader color="info">
               <div style={{ fontSize: "1.5em" }}>Draw</div>
@@ -182,7 +191,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
             </CardBody>
           </Card>
         </GridItem>
-        <GridItem {...{ xs: 4 }}>
+        <GridItem {...{ xs: 12, sm: 6, md: 4 }}>
           <Card className="card-content">
             <CardHeader color="primary">
               <div style={{ fontSize: "1.5em" }}>Live</div>
@@ -213,7 +222,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
             </CardActions>
           </Card>
         </GridItem>
-        <GridItem {...{ xs: 4 }}>
+        <GridItem {...{ xs: 12, sm: 6, md: 4 }}>
           <Card className="card-content">
             <CardHeader color="info">
               <div style={{ fontSize: "1.5em" }}>Upcoming</div>
@@ -254,7 +263,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
         </GridItem>
       </GridContainer>
       <GridContainer>
-        <GridItem {...{ xs: 6 }}>
+        <GridItem {...{ xs: 12, sm: 12, md: 6 }}>
           <Card>
             <CardHeader color="success">
               <div style={{ fontSize: "1.5em" }}>Games</div>
@@ -274,10 +283,23 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
             </CardBody>
           </Card>
         </GridItem>
-        <GridItem {...{ xs: 6 }}>
+        <GridItem {...{ xs: 12, sm: 12, md: 6 }}>
           <Card>
             <CardHeader color="success">
-              <div style={{ fontSize: "1.5em" }}>Table</div>
+              <Box display="flex" flexDirection="row">
+                <div style={{ fontSize: "1.5em" }}>Table</div>
+                <Box flex={1} />
+                <Box fontWeight="bold" paddingRight="5pt">
+                  LIVE TABLE
+                </Box>
+                <Checkbox
+                  checked={liveTable}
+                  onChange={handleLiveTableChange}
+                  size="small"
+                  // color="primary"
+                  style={{ padding: "0", color: "white" }}
+                />
+              </Box>
             </CardHeader>
             <CardBody>
               <DataGrid
@@ -302,7 +324,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
               <hr />
               <div>{`Tournament ${t.id} - ${t.state}`}</div>
               <GridContainer>
-                <GridItem {...{ xs: 6 }}>
+                <GridItem {...{ xs: 12, sm: 12, md: 6 }}>
                   <Card>
                     <CardHeader color="success">
                       <div style={{ fontSize: "1.5em" }}>Games</div>
@@ -321,7 +343,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                     </CardBody>
                   </Card>
                 </GridItem>
-                <GridItem {...{ xs: 6 }}>
+                <GridItem {...{ xs: 12, sm: 12, md: 6 }}>
                   <Card>
                     <CardHeader color="success">
                       <div style={{ fontSize: "1.5em" }}>Table</div>

@@ -18,6 +18,8 @@ import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 import bgImage from "../assets/img/fifa-23-kylian-mbappe.jpg";
 import logo from "../assets/img/EA_Sports.svg.png";
 import Overview from "views/Overview/Overview";
+import { Hidden, IconButton } from "@mui/material";
+import Menu from "@material-ui/icons/Menu";
 
 let ps;
 
@@ -119,6 +121,15 @@ export default function Admin({ ...rest }) {
           handleDrawerToggle={handleDrawerToggle}
           {...rest}
         /> */}
+        <Hidden mdUp>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerToggle}
+          >
+            <Menu />
+          </IconButton>
+        </Hidden>
         {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
         {getRoute() ? (
           <div className={classes.content}>
