@@ -17,13 +17,7 @@ export interface Player {
   stats?: Stats;
 }
 
-export const ALL_TEAM_RATINGS = [
-  "5 stars",
-  "4.5 stars",
-  "4 stars",
-  "3.5 stars",
-  "3 stars",
-];
+export const ALL_TEAM_RATINGS: number[] = [5, 4.5, 4, 3.5, 3];
 type RatingTuple = typeof ALL_TEAM_RATINGS;
 export type TeamRating = RatingTuple[number];
 
@@ -31,7 +25,7 @@ export interface Team {
   name: string;
   country: string;
   league: string;
-  rating: TeamRating;
+  rating: number;
 }
 
 export interface TeamImport {
@@ -78,7 +72,9 @@ export interface Tournament {
   players: Player[];
   state: TournamentState;
   withSecondRound: boolean;
-  useableTeams: Team[];
+  useableTeams: (Team | undefined)[];
+  started?: string;
+  finished?: string;
 }
 
 export interface MatchDay {

@@ -15,13 +15,10 @@ import { IconButton } from "@material-ui/core";
 import PersonAdd from "@material-ui/icons/PersonAdd";
 import AutorenewOutlinedIcon from "@material-ui/icons/AutorenewOutlined";
 
-import CloudUploadOutlined from "@material-ui/icons/CloudUploadOutlined";
 import GridItem from "components/Grid/GridItem";
 import { storeConnector, StoreProps } from "store/StoreReducer";
 import { DataGrid } from "@mui/x-data-grid";
-import * as XSLX from "xlsx";
-import { Team, TeamImport, TeamRating } from "definitions/Definitions";
-import CreateMatchDayAction from "./CreateMatchDayAction";
+import CreateMatchDayAction from "./actions/CreateMatchDayAction";
 import { matchDayConnector, MatchDayStoreProps } from "store/FifaGamesReducer";
 import {
   matchDayColumns,
@@ -32,12 +29,12 @@ import {
   calulateOverallStats,
   getPlayersSortedByWinPercentage,
 } from "utils/TableUtils";
+import ImportTeamsAction from "./actions/ImportTeamsAction";
 
 const useStyles = makeStyles(styles);
 
 const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
   teams,
-  setTeams,
   player,
   addPlayer,
   matchDays,
@@ -57,50 +54,15 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
   };
 
   const handleRecalcStats: () => void = () => {
-    setPlayers(calulateOverallStats(Object.values(matchDays)));
+    setPlayers(
+      calulateOverallStats(Object.values(matchDays), Object.values(player))
+    );
   };
 
   const handlePlayerAdd: () => void = () => {
     addPlayer(name);
     setAddPlayerOpen(false);
     setName("");
-  };
-
-  const [importTeamsOpen, setImportTeamsOpen] = React.useState(false);
-  const handleClickImport: () => void = () => {
-    setImportTeamsOpen((importTeamsOpen) => !importTeamsOpen);
-  };
-
-  const [fileContent, setFileContent] = React.useState<Team[]>([]);
-  const handleFileChange: (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => void = async (e) => {
-    if (e.target.files !== null) {
-      const file = e.target.files[0];
-      console.log(file);
-
-      const data = await file.arrayBuffer();
-      const workbook = XSLX.read(data);
-
-      const workSheet = workbook.Sheets[workbook.SheetNames[0]];
-      const jsonData: TeamImport[] = XSLX.utils.sheet_to_json(workSheet);
-
-      const teams = jsonData.map((team) => {
-        return {
-          name: team.Team,
-          country: team.Country,
-          league: team.League,
-          rating: convertRating(team.Rating),
-        };
-      });
-      setFileContent(teams);
-    }
-  };
-
-  const handleTeamImportSave: () => void = () => {
-    setTeams(fileContent);
-    setFileContent([]);
-    setImportTeamsOpen(false);
   };
 
   const onChange: (event: React.ChangeEvent<HTMLInputElement>) => void = (
@@ -134,17 +96,6 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
           </Button>
         </DialogActions>
       </Dialog>
-      <Dialog open={importTeamsOpen} onClose={handleClickImport}>
-        <DialogTitle>Import Teams</DialogTitle>
-        <DialogContent>
-          <input type={"file"} onChange={handleFileChange} />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClickImport}>Cancel</Button>
-          <Button onClick={handleTeamImportSave}>Import</Button>
-        </DialogActions>
-      </Dialog>
-
       <GridContainer>
         <GridItem {...{ xs: 12, sm: 10, md: 8 }}>
           <Card {...{ height: "300px !important" }}>
@@ -158,27 +109,19 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
               >
                 <div className={classes.cardTitleWhite}>Teams</div>
                 <div style={{ flexGrow: 1 }} />
-                <IconButton
-                  color="primary"
-                  aria-label="import Teams"
-                  className={classes.cardTitleWhite}
-                  onClick={handleClickImport}
-                  style={{ padding: "0" }}
-                >
-                  <CloudUploadOutlined />
-                </IconButton>
+                <ImportTeamsAction />
               </div>
             </CardHeader>
             <CardBody>
-              {teams && teams.length > 0 && (
+              {teams && Object.keys(teams).length > 0 && (
                 <DataGrid
                   disableSelectionOnClick
                   headerHeight={35}
                   autoPageSize
                   rowHeight={30}
                   getRowId={(row) => row.name}
-                  rows={teams}
-                  columns={teamsColumns}
+                  rows={Object.values(teams)}
+                  columns={teamsColumns(false)}
                 />
               )}
             </CardBody>
@@ -273,18 +216,3 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
 };
 
 export default storeConnector(matchDayConnector(Overview));
-
-function convertRating(Rating: any): TeamRating {
-  switch (Rating) {
-    case 5:
-      return "5 stars";
-    case 4.5:
-      return "4.5 stars";
-    case 4:
-      return "4 stars";
-    case 3.5:
-      return "3.5 stars";
-    default:
-      return "3 stars";
-  }
-}

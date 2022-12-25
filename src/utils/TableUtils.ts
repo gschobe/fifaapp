@@ -8,8 +8,6 @@ export function getPlayersSortedByPoints(
 ): Player[] {
   const ps = players.map((player) => ({ ...player }));
   if (liveGame) {
-    console.log("TODO add live results");
-
     const { homePoints, awayPoints } = calculatePoints(
       liveGame.goalsHome || 0,
       liveGame.goalsAway || 0
@@ -34,21 +32,44 @@ export function getPlayersSortedByPoints(
     });
   }
   const sorted = ps.sort((p1, p2) => {
-    if (p1.stats?.points !== undefined && p2.stats?.points !== undefined) {
-      let x = p2.stats.points - p1.stats.points;
-      if (x !== 0) {
-        return x;
-      }
-
-      const p1Diff = p1.stats.goalsScored || 0 - (p1.stats.goalsAgainst || 0);
-      const p2Diff = p2.stats.goalsScored || 0 - (p2.stats.goalsAgainst || 0);
-      x = p2Diff - p1Diff;
-      return x;
-    }
-    return 0;
+    return comparePlayers(p1, p2);
   });
 
+  calculateRanks(sorted);
+
   return sorted;
+}
+
+export function calculateRanks(sorted: Player[]) {
+  let prevPlayer: Player | undefined = undefined;
+  sorted.forEach((p, index) => {
+    const prev = p.rank;
+    p = {
+      ...p,
+      previousRank: prev,
+      rank:
+        prevPlayer && comparePlayers(prevPlayer, p) === 0
+          ? prevPlayer.rank
+          : index + 1,
+    };
+    sorted[index] = p;
+    prevPlayer = p;
+  });
+}
+
+export function comparePlayers(p1: Player, p2: Player): number {
+  if (p1.stats?.points !== undefined && p2.stats?.points !== undefined) {
+    let x = p2.stats.points - p1.stats.points;
+    if (x !== 0) {
+      return x;
+    }
+
+    const p1Diff = p1.stats.goalsScored || 0 - (p1.stats.goalsAgainst || 0);
+    const p2Diff = p2.stats.goalsScored || 0 - (p2.stats.goalsAgainst || 0);
+    x = p2Diff - p1Diff;
+    return x;
+  }
+  return 0;
 }
 
 export function getPlayersSortedByWinPercentage(
@@ -76,10 +97,30 @@ export function getPlayersSortedByWinPercentage(
 }
 
 export function calulateOverallStats(
-  matchDays: (MatchDay | undefined)[]
+  matchDays: (MatchDay | undefined)[],
+  players: (Player | undefined)[]
 ): Dictionary<Player> {
-  if (!matchDays) {
-    return {};
+  if (!matchDays || matchDays.length === 0) {
+    const newplayers: Dictionary<Player> = {};
+    players.forEach((p) => {
+      if (p) {
+        newplayers[p.name] = {
+          ...p,
+          stats: {
+            gamesPlayed: 0,
+            gamesLost: 0,
+            gamesTie: 0,
+            gamesWon: 0,
+            goalsScored: 0,
+            goalsAgainst: 0,
+            points: 0,
+            winPercentage: 0,
+          },
+        };
+      }
+    });
+
+    return newplayers;
   }
   const allPlayers = Object.values(matchDays).flatMap((md) => md?.players);
 

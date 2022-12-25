@@ -20,6 +20,7 @@ import logo from "../assets/img/EA_Sports.svg.png";
 import Overview from "views/Overview/Overview";
 import { Hidden, IconButton } from "@mui/material";
 import Menu from "@material-ui/icons/Menu";
+import Login from "components/Login/Login";
 
 let ps;
 
@@ -57,23 +58,7 @@ export default function Admin({ ...rest }) {
   // ref to help us initialize PerfectScrollbar on windows devices
   const mainPanel = React.createRef();
   // states and functions
-  // const [image, setImage] = React.useState(bgImage);
-  // const [color, setColor] = React.useState("blue");
-  // const [fixedClasses, setFixedClasses] = React.useState("dropdown show");
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  // const handleImageClick = (image) => {
-  //   setImage(image);
-  // };
-  // const handleColorClick = (color) => {
-  //   setColor(color);
-  // };
-  // const handleFixedClick = () => {
-  //   if (fixedClasses === "dropdown") {
-  //     setFixedClasses("dropdown show");
-  //   } else {
-  //     setFixedClasses("dropdown");
-  //   }
-  // };
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -103,43 +88,41 @@ export default function Admin({ ...rest }) {
       window.removeEventListener("resize", resizeFunction);
     };
   }, [mainPanel]);
+
   return (
-    <div className={classes.wrapper}>
-      <Sidebar
-        routes={routes}
-        logoText={"FIFA Manager"}
-        logo={logo}
-        image={bgImage}
-        handleDrawerToggle={handleDrawerToggle}
-        open={mobileOpen}
-        color={"blue"}
-        {...rest}
-      />
-      <div className={classes.mainPanel} ref={mainPanel}>
-        {/* <Navbar
+    <>
+      <div className={classes.wrapper}>
+        <Login />
+        <Sidebar
           routes={routes}
+          logoText={"FIFA Manager"}
+          logo={logo}
+          image={bgImage}
           handleDrawerToggle={handleDrawerToggle}
+          open={mobileOpen}
+          color={"blue"}
           {...rest}
-        /> */}
-        <Hidden mdUp>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerToggle}
-          >
-            <Menu />
-          </IconButton>
-        </Hidden>
-        {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
-        {getRoute() ? (
-          <div className={classes.content}>
-            <div className={classes.container}>{switchRoutes}</div>
-          </div>
-        ) : (
-          <div className={classes.map}>{switchRoutes}</div>
-        )}
-        {/* {getRoute() ? <Footer /> : null} */}
-        {/* <FixedPlugin
+        />
+        <div className={classes.mainPanel} ref={mainPanel}>
+          <Hidden mdUp>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerToggle}
+            >
+              <Menu />
+            </IconButton>
+          </Hidden>
+          {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
+          {getRoute() ? (
+            <div className={classes.content}>
+              <div className={classes.container}>{switchRoutes}</div>
+            </div>
+          ) : (
+            <div className={classes.map}>{switchRoutes}</div>
+          )}
+          {/* {getRoute() ? <Footer /> : null} */}
+          {/* <FixedPlugin
           handleImageClick={handleImageClick}
           handleColorClick={handleColorClick}
           bgColor={color}
@@ -147,7 +130,8 @@ export default function Admin({ ...rest }) {
           handleFixedClick={handleFixedClick}
           fixedClasses={fixedClasses}
         /> */}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

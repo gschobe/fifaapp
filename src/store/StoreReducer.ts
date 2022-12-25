@@ -3,15 +3,16 @@ import { createSlice, PayloadAction, Dictionary } from "@reduxjs/toolkit";
 import { Player, Team } from "../definitions/Definitions";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "./Store";
+import _ from "lodash";
 
 export interface StoreState {
   players: Dictionary<Player>;
-  teams: Team[];
+  teams: Dictionary<Team>;
 }
 
 const initialState: StoreState = {
   players: {},
-  teams: [],
+  teams: {},
 };
 
 export const storeSlice = createSlice({
@@ -32,7 +33,24 @@ export const storeSlice = createSlice({
       };
     },
     setTeams: (state, action: PayloadAction<Team[]>) => {
-      state.teams = action.payload;
+      state.teams = {
+        ...state.teams,
+        ..._(action.payload)
+          .keyBy((team) => team.name)
+          .value(),
+      };
+    },
+    updateTeamRating: (
+      state,
+      action: PayloadAction<{ id: string; rating: number }>
+    ) => {
+      const team = state.teams[action.payload.id];
+      if (team) {
+        team.rating = action.payload.rating;
+      }
+    },
+    updateTeam: (state, action: PayloadAction<Team>) => {
+      state.teams[action.payload.name] = action.payload;
     },
     setPlayers: (state, action: PayloadAction<Dictionary<Player>>) => {
       const newPlayers = action.payload;

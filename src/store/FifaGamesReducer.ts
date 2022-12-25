@@ -64,7 +64,7 @@ export const matchDaySlice = createSlice({
             matchday.usedTeams = [...matchday.usedTeams].filter(
               (t) =>
                 !tournament.useableTeams
-                  .flatMap((ut) => ut.name)
+                  .flatMap((ut) => ut?.name || "")
                   .includes(t.name)
             );
           }
@@ -106,6 +106,9 @@ export const matchDaySlice = createSlice({
 
         if (tournament) {
           tournament.state = "RUNNING";
+          if (action.payload.gameSeq === 1) {
+            tournament.started = new Date().toLocaleString();
+          }
 
           const game = tournament.games.find(
             (g) => g.sequence === action.payload.gameSeq
@@ -193,13 +196,6 @@ export const matchDaySlice = createSlice({
             game.goalsAway = action.payload.newAwayScore;
           }
           const sorted = getPlayersSortedByPoints(matchDay.players);
-          // set ranks
-          sorted.forEach((p, index) => {
-            const prev = p.rank;
-            console.log(prev);
-            p = { ...p, previousRank: prev, rank: index + 1 };
-            sorted[index] = p;
-          });
           matchDay.players = sorted;
         }
       }
@@ -219,6 +215,12 @@ export const matchDaySlice = createSlice({
         );
 
         if (tournament) {
+          if (
+            Math.max(...tournament.games.map((g) => g.sequence)) ===
+            action.payload.gameSeq
+          ) {
+            tournament.finished = new Date().toLocaleString();
+          }
           const game = tournament.games.find(
             (g) => g.sequence === action.payload.gameSeq
           );
@@ -251,13 +253,6 @@ export const matchDaySlice = createSlice({
           }
 
           const sorted = getPlayersSortedByPoints(matchDay.players);
-          // set ranks
-          sorted.forEach((p, index) => {
-            const prev = p.rank;
-            console.log(prev);
-            p = { ...p, previousRank: prev, rank: index + 1 };
-            sorted[index] = p;
-          });
           matchDay.players = sorted;
 
           if (
@@ -311,6 +306,9 @@ export const matchDaySlice = createSlice({
         matchDay.state = "FINISHED";
         matchDay.tournaments.map((t) => t.state === "FINISHED");
       }
+    },
+    deleteMatchDay: (state, action: PayloadAction<string>) => {
+      delete state.matchDays[action.payload];
     },
   },
 });

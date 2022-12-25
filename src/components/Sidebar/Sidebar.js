@@ -96,6 +96,20 @@ export default function Sidebar(props) {
       <div style={{ fontWeight: "bold" }}>{logoText}</div>
     </div>
   );
+  var user = (
+    <div
+      className={classes.logo}
+      style={{
+        color: "white",
+        display: "flex",
+      }}
+    >
+      <div className={classes.logoImage}>
+        <img src={logo} alt="logo" className={classes.img} />
+      </div>
+      <div style={{ fontWeight: "bold" }}>{logoText}</div>
+    </div>
+  );
   return (
     <div>
       <Hidden mdUp implementation="css">
@@ -139,6 +153,7 @@ export default function Sidebar(props) {
         >
           {brand}
           <div className={classes.sidebarWrapper}>{links}</div>
+          {/* {user} */}
           {image !== undefined ? (
             <div
               className={classes.background}

@@ -25,11 +25,14 @@ import Admin from "./layouts/Admin.js";
 import "./assets/css/material-dashboard-react.css?v=1.10.0";
 import { Provider } from "react-redux";
 import store from "store/Store.ts";
+import UserProvider from "components/Login/UserProvider";
 
 ReactDOM.render(
   <Router>
     <Provider store={store}>
-      <Admin />
+      <UserProvider>
+        <Admin auth={store.auth} />
+      </UserProvider>
     </Provider>
   </Router>,
   document.getElementById("root")

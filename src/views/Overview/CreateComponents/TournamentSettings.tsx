@@ -12,7 +12,7 @@ import { getStarsRender } from "definitions/TableDefinitions";
 
 export interface Props {
   handleRatingSelectionChange: (e: any) => void;
-  ratings: string[];
+  ratings: number[];
   includeSecondRound: boolean;
   handleIncludeChanged: (e: any) => void;
 }
@@ -47,7 +47,7 @@ const TournamentSettings: React.FC<Props> = ({
               return (
                 <MenuItem key={r} value={r}>
                   <CheckBox checked={ratings.indexOf(r) > -1} color="primary" />
-                  {getStarsRender(r)}
+                  {getStarsRender(r, r, true)}
                 </MenuItem>
               );
             })}

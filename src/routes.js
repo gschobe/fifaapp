@@ -39,6 +39,7 @@ import RoutingMatchday from "views/Matchday/RoutingMatchday";
 // core components/views for RTL layout
 // import RTLPage from "views/RTLPage/RTLPage.js";
 import React from "react";
+import TeamsPage from "views/Teams/TeamsPage";
 
 const dashboardRoutes = [
   {
@@ -59,6 +60,14 @@ const dashboardRoutes = [
     layout: "/admin",
     showInSidebar: false,
     hasId: true,
+  },
+  {
+    path: "/teams",
+    name: "Maintain Teams",
+    icon: HomeOutlined,
+    component: <TeamsPage />,
+    layout: "/admin",
+    showInSidebar: true,
   },
   // {
   //   path: "/dashboard",

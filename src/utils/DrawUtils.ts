@@ -56,7 +56,7 @@ export function chooseTeams(
 ): boolean {
   let clearUsedTeams = false;
   const teams = [...activeTournament?.useableTeams].filter(
-    (t) => !matchday.usedTeams.flatMap((ut) => ut.name).includes(t.name)
+    (t) => t && !matchday.usedTeams.flatMap((ut) => ut.name).includes(t.name)
   );
 
   if (teams.length < tournamentTeams.length) {

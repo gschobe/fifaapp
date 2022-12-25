@@ -12,7 +12,7 @@ import { TournamentTeam } from "definitions/Definitions";
 import determineTeamMatesAndTeams from "utils/DrawUtils";
 import { CardActions } from "@mui/material";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
-import CreateMatchDayAction from "views/Overview/CreateMatchDayAction";
+import CreateMatchDayAction from "views/Overview/actions/CreateMatchDayAction";
 import { getPlayersSortedByPoints } from "utils/TableUtils";
 import { GameScore, tournamenTeamComp } from "./GameScore";
 import { useNavigate } from "react-router-dom";
@@ -132,7 +132,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
         <div
           style={{ fontWeight: "bold", fontSize: 24, margin: "5pt" }}
         >{`Welcome to Matchday ${id} ${
-          activeTournament ? `/ tournament ${activeTournament.id}` : ``
+          activeTournament ? `/ Tournament ${activeTournament.id} ` : ``
         }`}</div>
         <Box flexGrow={1} />
         {matchday.state !== "FINISHED" && !liveGame && !upcomingGame && (
@@ -155,113 +155,117 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
           </>
         )}
       </Box>
-      <GridContainer>
-        <GridItem {...{ xs: 12, sm: 6, md: 4 }}>
-          <Card className="card-content">
-            <CardHeader color="info">
-              <div style={{ fontSize: "1.5em" }}>Draw</div>
-            </CardHeader>
-            <CardBody>
-              <Box
-                style={{
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                {activeTournament?.tournamentTeams.length === 0 ? (
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    size="large"
-                    onClick={createTournament}
-                  >
-                    Start Draw
-                  </Button>
-                ) : (
-                  <>
-                    {activeTournament?.tournamentTeams.map((tt, index) => {
-                      return tournamenTeamComp(index, tt);
-                    })}
-                  </>
-                )}
-              </Box>
-            </CardBody>
-          </Card>
-        </GridItem>
-        <GridItem {...{ xs: 12, sm: 6, md: 4 }}>
-          <Card className="card-content">
-            <CardHeader color="primary">
-              <div style={{ fontSize: "1.5em" }}>Live</div>
-            </CardHeader>
-            <CardBody>
-              {liveGame ? (
-                <GameScore
-                  liveGame={liveGame}
-                  homeScore={liveGame.goalsHome || 0}
-                  awayScore={liveGame.goalsAway || 0}
-                  handleHomeScoreChange={handleHomeScoreChange}
-                  handleAwayScoreChange={handleAwayScoreChange}
-                />
-              ) : (
-                ""
-              )}
-            </CardBody>
-            <CardActions>
-              <Button
-                size="small"
-                variant="outlined"
-                color="secondary"
-                disabled={liveGame === undefined}
-                onClick={handleConfirmResult}
-              >
-                Confirm Result
-              </Button>
-            </CardActions>
-          </Card>
-        </GridItem>
-        <GridItem {...{ xs: 12, sm: 6, md: 4 }}>
-          <Card className="card-content">
-            <CardHeader color="info">
-              <div style={{ fontSize: "1.5em" }}>Upcoming</div>
-            </CardHeader>
-            <CardBody>
-              {upcomingGame ? (
-                <div
+      {!(matchday.state === "FINISHED") && (
+        <GridContainer>
+          <GridItem {...{ xs: 12, sm: 6, md: 4 }}>
+            <Card className="card-content">
+              <CardHeader color="info">
+                <div style={{ fontSize: "1.5em" }}>Draw</div>
+              </CardHeader>
+              <CardBody>
+                <Box
                   style={{
+                    height: "100%",
                     display: "flex",
                     flexDirection: "column",
+                    justifyContent: "center",
                     alignItems: "center",
-                    marginTop: "10pt",
                   }}
                 >
-                  <div>{tournamenTeamComp(1, upcomingGame?.homePlayer)}</div>
-                  <div style={{ fontWeight: "bolder", fontSize: 20 }}>
-                    {"vs"}
+                  {activeTournament?.tournamentTeams.length === 0 ? (
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      size="large"
+                      onClick={createTournament}
+                    >
+                      Start Draw
+                    </Button>
+                  ) : (
+                    <>
+                      {activeTournament?.tournamentTeams.map((tt, index) => {
+                        return tournamenTeamComp(index, tt);
+                      })}
+                    </>
+                  )}
+                </Box>
+              </CardBody>
+            </Card>
+          </GridItem>
+          <GridItem {...{ xs: 12, sm: 6, md: 4 }}>
+            <Card className="card-content">
+              <CardHeader color="primary">
+                <div style={{ fontSize: "1.5em" }}>Live</div>
+              </CardHeader>
+              <CardBody>
+                {liveGame ? (
+                  <GameScore
+                    liveGame={liveGame}
+                    homeScore={liveGame.goalsHome || 0}
+                    awayScore={liveGame.goalsAway || 0}
+                    handleHomeScoreChange={handleHomeScoreChange}
+                    handleAwayScoreChange={handleAwayScoreChange}
+                  />
+                ) : (
+                  ""
+                )}
+              </CardBody>
+              <CardActions>
+                <Button
+                  size="small"
+                  variant="outlined"
+                  color="secondary"
+                  disabled={liveGame === undefined}
+                  onClick={handleConfirmResult}
+                >
+                  Confirm Result
+                </Button>
+              </CardActions>
+            </Card>
+          </GridItem>
+          <GridItem {...{ xs: 12, sm: 6, md: 4 }}>
+            <Card className="card-content">
+              <CardHeader color="info">
+                <div style={{ fontSize: "1.5em" }}>Upcoming</div>
+              </CardHeader>
+              <CardBody>
+                {upcomingGame ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      marginTop: "10pt",
+                    }}
+                  >
+                    <div>{tournamenTeamComp(1, upcomingGame?.homePlayer)}</div>
+                    <div style={{ fontWeight: "bolder", fontSize: 20 }}>
+                      {"vs"}
+                    </div>
+                    <div>{tournamenTeamComp(2, upcomingGame?.awayPlayer)}</div>
                   </div>
-                  <div>{tournamenTeamComp(2, upcomingGame?.awayPlayer)}</div>
-                </div>
-              ) : (
-                ""
-              )}
-            </CardBody>
-            <CardActions>
-              <Button
-                size="small"
-                variant="outlined"
-                color="secondary"
-                disabled={upcomingGame === undefined || liveGame !== undefined}
-                startIcon={<PlayArrowRoundedIcon />}
-                onClick={handleStartUpcoming}
-              >
-                Start Game
-              </Button>
-            </CardActions>
-          </Card>
-        </GridItem>
-      </GridContainer>
+                ) : (
+                  ""
+                )}
+              </CardBody>
+              <CardActions>
+                <Button
+                  size="small"
+                  variant="outlined"
+                  color="secondary"
+                  disabled={
+                    upcomingGame === undefined || liveGame !== undefined
+                  }
+                  startIcon={<PlayArrowRoundedIcon />}
+                  onClick={handleStartUpcoming}
+                >
+                  Start Game
+                </Button>
+              </CardActions>
+            </Card>
+          </GridItem>
+        </GridContainer>
+      )}
       <GridContainer>
         <GridItem {...{ xs: 12, sm: 12, md: 6 }}>
           <Card>
