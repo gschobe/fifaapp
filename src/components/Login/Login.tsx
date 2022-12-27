@@ -27,7 +27,10 @@ const Login: React.FC<LoginProps & AuthProps> = ({ isLoggedIn, logIn }) => {
       username &&
       username === "fifa" /*&& password && password === "fifa"*/
     ) {
-      setCookie("username", username, { expires: 0.5 });
+      setCookie("username", username, {
+        expires: 0.2,
+        path: "gschobe.github.io",
+      });
       logIn(username);
       setErrortxt("");
     } else {

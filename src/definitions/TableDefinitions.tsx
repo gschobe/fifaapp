@@ -46,32 +46,6 @@ export const playerTableColumns: GridColDef[] = [
       );
     },
   },
-  // {
-  //   field: "rangchange",
-  //   headerName: "",
-  //   flex: 0.1,
-  //   align: "center",
-  //   renderCell: (params: GridRenderCellParams) => {
-  //     const diff = params.row.previousRank - params.row.rank;
-  //     return (
-  //       <Box display={"flex"} flexDirection="row">
-  //         {diff > 0 ? (
-  //           <Box color="green">
-  //             <ArrowUpwardRoundedIcon fontSize="small" />
-  //             {diff}
-  //           </Box>
-  //         ) : diff < 0 ? (
-  //           <Box color="red">
-  //             <ArrowDownwardRoundedIcon fontSize="small" />
-  //             {Math.abs(diff)}
-  //           </Box>
-  //         ) : (
-  //           <Box color="blue">-</Box>
-  //         )}
-  //       </Box>
-  //     );
-  //   },
-  // },
   { field: "name", headerName: "Name", flex: 1 },
   {
     field: "points",
@@ -222,7 +196,7 @@ export const gamesColumns: GridColDef[] = [
   {
     field: "result",
     headerName: "Result",
-    flex: 0.25,
+    flex: 0.4,
     align: "center",
     headerAlign: "center",
     valueGetter: (params: GridValueGetterParams) =>
@@ -242,7 +216,8 @@ export const gamesColumns: GridColDef[] = [
   {
     field: "actions",
     headerName: "",
-    flex: 0.25,
+    sortable: false,
+    flex: 0.2,
     renderCell: (params: GridRenderCellParams<Game>) => {
       return params.row.state === "FINISHED" ? (
         <CorrectGameDialog game={params.row} />
@@ -255,20 +230,20 @@ export const overviewPlayersColumns: GridColDef[] = [
   { field: "name", headerName: "Name", flex: 1 },
   {
     field: "gamesPlayed",
-    headerName: "Games played",
+    headerName: "GP",
     flex: 1,
     valueGetter: (params: GridValueGetterParams) =>
       params.row.stats.gamesPlayed,
   },
   {
     field: "gamesWon",
-    headerName: "Won",
+    headerName: "W",
     flex: 1,
     valueGetter: (params: GridValueGetterParams) => params.row.stats.gamesWon,
   },
   {
     field: "winPercentage",
-    headerName: "Win percetage",
+    headerName: "W%",
     sortable: true,
     flex: 1,
     valueGetter: (params: GridValueGetterParams) =>

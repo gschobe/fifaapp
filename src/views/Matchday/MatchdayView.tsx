@@ -56,6 +56,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
 
   const mdPlayers = getPlayersSortedByPoints(
     matchday.players,
+    liveGame !== undefined,
     liveTable ? liveGame : undefined
   );
 

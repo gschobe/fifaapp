@@ -1,6 +1,13 @@
 import React from "react";
 import { Game } from "definitions/Definitions";
-import { Button, Dialog, DialogActions, DialogTitle } from "@material-ui/core";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  IconButton,
+} from "@material-ui/core";
+import CreateRoundedIcon from "@mui/icons-material/CreateRounded";
 import { matchDayConnector, MatchDayStoreProps } from "store/FifaGamesReducer";
 import { DialogContent } from "@mui/material";
 import { GameScore } from "./GameScore";
@@ -63,7 +70,9 @@ const CorrectGameDialog: React.FC<Props & MatchDayStoreProps> = ({
           <Button onClick={handleConfirm}>Confirm</Button>
         </DialogActions>
       </Dialog>
-      <Button onClick={onClick}>CORRECT</Button>
+      <IconButton onClick={onClick}>
+        <CreateRoundedIcon fontSize="small" />
+      </IconButton>
     </>
   );
 };

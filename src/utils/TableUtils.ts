@@ -4,6 +4,7 @@ import { calculatePoints, updateStats } from "store/FifaGamesReducer";
 
 export function getPlayersSortedByPoints(
   players: Player[],
+  calculateRank: boolean = true,
   liveGame?: Game
 ): Player[] {
   const ps = players.map((player) => ({ ...player }));
@@ -35,7 +36,9 @@ export function getPlayersSortedByPoints(
     return comparePlayers(p1, p2);
   });
 
-  calculateRanks(sorted);
+  if (calculateRank) {
+    calculateRanks(sorted);
+  }
 
   return sorted;
 }
@@ -59,14 +62,22 @@ export function calculateRanks(sorted: Player[]) {
 
 export function comparePlayers(p1: Player, p2: Player): number {
   if (p1.stats?.points !== undefined && p2.stats?.points !== undefined) {
+    // points
     let x = p2.stats.points - p1.stats.points;
     if (x !== 0) {
       return x;
     }
 
+    // goal difference
     const p1Diff = p1.stats.goalsScored || 0 - (p1.stats.goalsAgainst || 0);
     const p2Diff = p2.stats.goalsScored || 0 - (p2.stats.goalsAgainst || 0);
     x = p2Diff - p1Diff;
+    if (x !== 0) {
+      return x;
+    }
+
+    // goals scored
+    x = (p2.stats.goalsScored || 0) - (p1.stats.goalsScored || 0);
     return x;
   }
   return 0;

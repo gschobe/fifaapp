@@ -1,4 +1,5 @@
 import Rating from "@mui/material/Rating";
+import { Box } from "@mui/system";
 import React from "react";
 import { storeConnector, StoreProps } from "store/StoreReducer";
 
@@ -15,6 +16,7 @@ const TeamRating: React.FC<TeamRatingProps & StoreProps> = ({
   updateTeamRating,
 }) => {
   const [v, setValue] = React.useState(value);
+  const [label, setLabel] = React.useState(value);
   const onChange = React.useCallback((event: any, newValue: number | null) => {
     setValue(newValue || 0);
     updateTeamRating({ id: id, rating: newValue || 0 });
@@ -28,10 +30,11 @@ const TeamRating: React.FC<TeamRatingProps & StoreProps> = ({
         onChange={onChange}
         size="medium"
         readOnly={readOnly}
-        // onChangeActive={(event, newHover) => {
-        //   setLabel(newHover);
-        // }}
+        onChangeActive={(event, newHover) => {
+          setLabel(newHover);
+        }}
       />
+      {!readOnly && <Box marginLeft={2}>{label !== -1 ? label : v}</Box>}
     </div>
   );
 };

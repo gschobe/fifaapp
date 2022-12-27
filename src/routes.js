@@ -29,6 +29,7 @@ import HomeOutlined from "@material-ui/icons/HomeOutlined";
 // import DashboardPage from "views/Dashboard/Dashboard.js";
 // import UserProfile from "views/UserProfile/UserProfile.js";
 // import TableList from "views/TableList/TableList.js";
+import Groups2RoundedIcon from "@mui/icons-material/Groups2Rounded";
 import Overview from "views/Overview/Overview.tsx";
 import RoutingMatchday from "views/Matchday/RoutingMatchday";
 // import Typography from "views/Typography/Typography.js";
@@ -64,7 +65,7 @@ const dashboardRoutes = [
   {
     path: "/teams",
     name: "Maintain Teams",
-    icon: HomeOutlined,
+    icon: Groups2RoundedIcon,
     component: <TeamsPage />,
     layout: "/admin",
     showInSidebar: true,
