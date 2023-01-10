@@ -55,6 +55,7 @@ const CreateMatchDayAction: React.FC<
 
   const classes = useStyles();
   const [playerName, setPlayerName] = React.useState<string[]>([]);
+  const [location, setLocation] = React.useState<string>();
   const [ratings, setRatings] = React.useState<number[]>([]);
   const [includeSecondRound, setIncludeSecondRound] = React.useState(false);
 
@@ -92,6 +93,13 @@ const CreateMatchDayAction: React.FC<
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
+  };
+
+  const handleLocationChange: (event: any) => void = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setLocation(value);
   };
 
   const handleRatingSelectionChange: (event: any) => void = (event) => {
@@ -141,12 +149,14 @@ const CreateMatchDayAction: React.FC<
         const matchday: MatchDay = {
           id: id.toString(),
           startDate: new Date().toISOString(),
+          at: location ? player[location] : undefined,
           players: matchdayPlayers,
           mode: mode || "2on2",
           usedTeams: [],
           tournaments: [tournament],
           state: "NEW",
           possibleDraws: generatePossibleDraws(matchdayPlayers),
+          meta: {},
         };
         addMatchDay(matchday);
         navigate(`/matchday/${id}`);
@@ -168,7 +178,11 @@ const CreateMatchDayAction: React.FC<
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    if (activeStep === 0) {
+      handleNewTournamenClick();
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    }
   };
 
   const showMdSettings = createNewMatchday && activeStep === 0;
@@ -217,6 +231,7 @@ const CreateMatchDayAction: React.FC<
               handleModeChange={handleChange}
               mode={mode}
               players={players}
+              handleLocaitonSelectionChange={handleLocationChange}
             />
           )}
           {showTSettings && (
@@ -230,13 +245,8 @@ const CreateMatchDayAction: React.FC<
           <Box
             style={{ display: "flex", flexDirection: "row", paddingTop: 10 }}
           >
-            <Button
-              color="inherit"
-              disabled={activeStep === 0}
-              onClick={handleBack}
-              sx={{ mr: 1 }}
-            >
-              Back
+            <Button color="inherit" onClick={handleBack} sx={{ mr: 1 }}>
+              {activeStep === 0 ? "Cancel" : "Back"}
             </Button>
             <Box style={{ flex: "1 1 auto" }} />
             <Button onClick={handleNext} disabled={buttonDisabled}>
@@ -266,7 +276,7 @@ const CreateMatchDayAction: React.FC<
           aria-label="add player"
           className={classes.cardTitleWhite}
           onClick={handleNewTournamenClick}
-          style={{ padding: "0" }}
+          style={{ padding: "0 5pt" }}
         >
           <AddBoxOutlined />
         </IconButton>

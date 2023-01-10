@@ -9,6 +9,7 @@ export interface Stats {
   goalsAgainst?: number;
   points?: number;
   winPercentage?: number;
+  pointsPerGame?: number;
 }
 export interface Player {
   name: string;
@@ -55,6 +56,9 @@ export interface PossibleDraw {
   teams: TournamentTeam[];
 }
 
+export interface Location {
+  id: string;
+}
 export interface Game {
   matchdayId: string;
   tournamentId: string;
@@ -80,6 +84,7 @@ export interface Tournament {
 export interface MatchDay {
   id: string;
   startDate: string;
+  at?: Player | undefined;
   players: Player[];
   mode: TournamentMode;
   // useableTeams: Team[];
@@ -87,4 +92,7 @@ export interface MatchDay {
   tournaments: Tournament[];
   state: TournamentState;
   possibleDraws: PossibleDraw[];
+  meta: {
+    imported?: boolean;
+  };
 }

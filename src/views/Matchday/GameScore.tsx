@@ -14,14 +14,19 @@ export const tournamenTeamComp = (index: number, tt: TournamentTeam) => {
         margin: "5pt 0",
         width: "100%",
         textAlign: "center",
+        justifyContent: "space-evenly",
       }}
     >
-      <div>{tt.players.map((p) => p?.name).join(" & ")}</div>
+      <div style={{ minWidth: "40%", width: "fit-content" }}>
+        {tt.players.map((p) => p?.name).join(" & ")}
+      </div>
       <div style={{ padding: "0 5pt" }}>{`|`}</div>
       <div
         style={{
           fontStyle: "italic",
           color: "grey",
+          minWidth: "40%",
+          width: "fit-content",
         }}
       >
         {tt.team?.name}
@@ -52,7 +57,7 @@ export const GameScore: React.FC<GameScoreProps> = ({
         alignItems: "center",
       }}
     >
-      <div>{tournamenTeamComp(1, liveGame?.homePlayer)}</div>
+      {tournamenTeamComp(1, liveGame?.homePlayer)}
       <div
         style={{
           display: "flex",
@@ -109,7 +114,7 @@ export const GameScore: React.FC<GameScoreProps> = ({
           }}
         />
       </div>
-      <div>{tournamenTeamComp(2, liveGame?.awayPlayer)}</div>
+      {tournamenTeamComp(2, liveGame?.awayPlayer)}
     </div>
   );
 };

@@ -15,6 +15,7 @@ export interface Props {
   handleModeChange: (e: any) => void;
   players: (Player | undefined)[];
   mode: TournamentMode | undefined;
+  handleLocaitonSelectionChange: (e: any) => void;
 }
 const MatchDaySettings: React.FC<Props> = ({
   playerName,
@@ -22,6 +23,7 @@ const MatchDaySettings: React.FC<Props> = ({
   players,
   handleModeChange,
   mode,
+  handleLocaitonSelectionChange,
 }) => {
   return (
     <Box
@@ -31,6 +33,24 @@ const MatchDaySettings: React.FC<Props> = ({
       }}
     >
       <FormGroup style={{ marginLeft: "10px", marginBottom: "10px" }}>
+        <FormControl style={{ marginTop: "10px", width: "80%" }}>
+          <InputLabel style={{ paddingLeft: "5px" }}>
+            Select Location
+          </InputLabel>
+          <Select onChange={handleLocaitonSelectionChange}>
+            {players
+              ? players.map((p) => {
+                  if (p) {
+                    return (
+                      <MenuItem key={p.name} value={p.name}>
+                        {p.name}
+                      </MenuItem>
+                    );
+                  }
+                })
+              : []}
+          </Select>
+        </FormControl>
         <FormControl style={{ marginTop: "10px", width: "80%" }}>
           <InputLabel style={{ paddingLeft: "5px" }}>Select Players</InputLabel>
           <Select

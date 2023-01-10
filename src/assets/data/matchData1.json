@@ -1,0 +1,3603 @@
+[
+  {
+    "id": "1",
+    "startDate": "2022-12-29T16:24:47.097Z",
+    "at": { "name": "Dele" },
+    "players": [
+      {
+        "name": "Dele",
+        "stats": {
+          "gamesPlayed": 16,
+          "gamesLost": 4,
+          "gamesTie": 1,
+          "gamesWon": 11,
+          "goalsScored": 43,
+          "goalsAgainst": 29,
+          "points": 34,
+          "winPercentage": 0.688
+        },
+        "rank": 1,
+        "previousRank": 1
+      },
+      {
+        "name": "Gernot",
+        "stats": {
+          "gamesPlayed": 16,
+          "gamesLost": 6,
+          "gamesTie": 1,
+          "gamesWon": 9,
+          "goalsScored": 39,
+          "goalsAgainst": 33,
+          "points": 28,
+          "winPercentage": 0.563
+        },
+        "rank": 2,
+        "previousRank": 2
+      },
+      {
+        "name": "Kirchi",
+        "stats": {
+          "gamesPlayed": 16,
+          "gamesLost": 7,
+          "gamesTie": 2,
+          "gamesWon": 7,
+          "goalsScored": 30,
+          "goalsAgainst": 33,
+          "points": 23,
+          "winPercentage": 0.438
+        },
+        "rank": 3,
+        "previousRank": 3
+      },
+      {
+        "name": "Fertz",
+        "stats": {
+          "gamesPlayed": 16,
+          "gamesLost": 9,
+          "gamesTie": 0,
+          "gamesWon": 7,
+          "goalsScored": 38,
+          "goalsAgainst": 40,
+          "points": 21,
+          "winPercentage": 0.438
+        },
+        "rank": 4,
+        "previousRank": 5
+      },
+      {
+        "name": "Peter",
+        "stats": {
+          "gamesPlayed": 16,
+          "gamesLost": 8,
+          "gamesTie": 2,
+          "gamesWon": 6,
+          "goalsScored": 36,
+          "goalsAgainst": 37,
+          "points": 20,
+          "winPercentage": 0.375
+        },
+        "rank": 5,
+        "previousRank": 4
+      },
+      {
+        "name": "Martin",
+        "stats": {
+          "gamesPlayed": 16,
+          "gamesLost": 10,
+          "gamesTie": 2,
+          "gamesWon": 4,
+          "goalsScored": 36,
+          "goalsAgainst": 50,
+          "points": 14,
+          "winPercentage": 0.25
+        },
+        "rank": 6,
+        "previousRank": 6
+      }
+    ],
+    "mode": "2on2",
+    "usedTeams": [
+      {
+        "name": "Manchester United ",
+        "country": "English",
+        "league": "Premier League",
+        "rating": 4.5
+      },
+      {
+        "name": "Atalanta ",
+        "country": "Italian",
+        "league": "Serie A",
+        "rating": 4.5
+      },
+      {
+        "name": "Arsenal ",
+        "country": "English",
+        "league": "Premier League",
+        "rating": 4.5
+      },
+      {
+        "name": "Leicester City ",
+        "country": "English",
+        "league": "Premier League",
+        "rating": 4.5
+      },
+      {
+        "name": "Roma ",
+        "country": "Italian",
+        "league": "Serie A",
+        "rating": 4.5
+      },
+      {
+        "name": "Real Betis Balompié ",
+        "country": "Spain",
+        "league": "Primera Division",
+        "rating": 4.5
+      },
+      {
+        "name": "Sevilla FC ",
+        "country": "Spain",
+        "league": "Primera Division",
+        "rating": 4.5
+      },
+      {
+        "name": "Napoli ",
+        "country": "Italian",
+        "league": "Serie A",
+        "rating": 4.5
+      },
+      {
+        "name": "RB Leipzig ",
+        "country": "German",
+        "league": "1. Bundesliga",
+        "rating": 4.5
+      },
+      {
+        "name": "West Ham United ",
+        "country": "English",
+        "league": "Premier League",
+        "rating": 4.5
+      },
+      {
+        "name": "Lazio ",
+        "country": "Italian",
+        "league": "Serie A",
+        "rating": 4.5
+      },
+      {
+        "name": "Villarreal CF ",
+        "country": "Spain",
+        "league": "Primera Division",
+        "rating": 4.5
+      }
+    ],
+    "tournaments": [
+      {
+        "id": "1",
+        "tournamentTeams": [
+          {
+            "players": [
+              {
+                "name": "Gernot",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Martin",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "Manchester United ",
+              "country": "English",
+              "league": "Premier League",
+              "rating": 4.5
+            }
+          },
+          {
+            "players": [
+              {
+                "name": "Dele",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Fertz",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "Atalanta ",
+              "country": "Italian",
+              "league": "Serie A",
+              "rating": 4.5
+            }
+          },
+          {
+            "players": [
+              {
+                "name": "Peter",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Kirchi",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "Arsenal ",
+              "country": "English",
+              "league": "Premier League",
+              "rating": 4.5
+            }
+          }
+        ],
+        "players": [
+          {
+            "name": "Fertz",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 2,
+              "gamesTie": 0,
+              "gamesWon": 2,
+              "goalsScored": 8,
+              "goalsAgainst": 9,
+              "points": 6,
+              "winPercentage": 0.5
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Gernot",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 1,
+              "gamesTie": 1,
+              "gamesWon": 2,
+              "goalsScored": 10,
+              "goalsAgainst": 8,
+              "points": 7,
+              "winPercentage": 0.5
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Dele",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 2,
+              "gamesTie": 0,
+              "gamesWon": 2,
+              "goalsScored": 8,
+              "goalsAgainst": 9,
+              "points": 6,
+              "winPercentage": 0.5
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Peter",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 2,
+              "gamesTie": 1,
+              "gamesWon": 1,
+              "goalsScored": 4,
+              "goalsAgainst": 5,
+              "points": 4,
+              "winPercentage": 0.25
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Kirchi",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 2,
+              "gamesTie": 1,
+              "gamesWon": 1,
+              "goalsScored": 4,
+              "goalsAgainst": 5,
+              "points": 4,
+              "winPercentage": 0.25
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Martin",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 1,
+              "gamesTie": 1,
+              "gamesWon": 2,
+              "goalsScored": 10,
+              "goalsAgainst": 8,
+              "points": 7,
+              "winPercentage": 0.5
+            },
+            "rank": 1,
+            "previousRank": 1
+          }
+        ],
+        "games": [
+          {
+            "matchdayId": "1",
+            "tournamentId": "1",
+            "sequence": 1,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Atalanta ",
+                "country": "Italian",
+                "league": "Serie A",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Kirchi",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Arsenal ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 0,
+            "goalsAway": 1
+          },
+          {
+            "matchdayId": "1",
+            "tournamentId": "1",
+            "sequence": 2,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Martin",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Manchester United ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Atalanta ",
+                "country": "Italian",
+                "league": "Serie A",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 3,
+            "goalsAway": 4
+          },
+          {
+            "matchdayId": "1",
+            "tournamentId": "1",
+            "sequence": 3,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Kirchi",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Arsenal ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Martin",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Manchester United ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 1,
+            "goalsAway": 1
+          },
+          {
+            "matchdayId": "1",
+            "tournamentId": "1",
+            "sequence": 4,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Kirchi",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Arsenal ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Atalanta ",
+                "country": "Italian",
+                "league": "Serie A",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 1,
+            "goalsAway": 2
+          },
+          {
+            "matchdayId": "1",
+            "tournamentId": "1",
+            "sequence": 5,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Atalanta ",
+                "country": "Italian",
+                "league": "Serie A",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Martin",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Manchester United ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 2,
+            "goalsAway": 4
+          },
+          {
+            "matchdayId": "1",
+            "tournamentId": "1",
+            "sequence": 6,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Martin",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Manchester United ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Kirchi",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Arsenal ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 2,
+            "goalsAway": 1
+          }
+        ],
+        "state": "FINISHED",
+        "withSecondRound": true,
+        "useableTeams": [
+          {
+            "name": "Manchester United ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          },
+          {
+            "name": "Juventus ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "Tottenham Hotspur ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          },
+          {
+            "name": "RB Leipzig ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5
+          },
+          {
+            "name": "AC Milan ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "Sevilla FC ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5
+          },
+          {
+            "name": "Borussia Dortmund ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5
+          },
+          {
+            "name": "Bayer 04 Leverkusen ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5
+          },
+          {
+            "name": "Arsenal ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          },
+          {
+            "name": "Villarreal CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5
+          },
+          {
+            "name": "Roma ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "West Ham United ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          },
+          {
+            "name": "Leicester City ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          },
+          {
+            "name": "Real Betis Balompié ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5
+          },
+          {
+            "name": "Atalanta ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "Lazio ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "Napoli ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "Aston Villa ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          }
+        ],
+        "started": "29.12.2022, 17:25:24",
+        "finished": "29.12.2022, 20:06:41"
+      },
+      {
+        "id": "2",
+        "tournamentTeams": [
+          {
+            "players": [
+              {
+                "name": "Fertz",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Martin",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "Leicester City ",
+              "country": "English",
+              "league": "Premier League",
+              "rating": 4.5
+            }
+          },
+          {
+            "players": [
+              {
+                "name": "Gernot",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Kirchi",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "Roma ",
+              "country": "Italian",
+              "league": "Serie A",
+              "rating": 4.5
+            }
+          },
+          {
+            "players": [
+              {
+                "name": "Dele",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Peter",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "Real Betis Balompié ",
+              "country": "Spain",
+              "league": "Primera Division",
+              "rating": 4.5
+            }
+          }
+        ],
+        "players": [
+          {
+            "name": "Gernot",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 2,
+              "gamesTie": 0,
+              "gamesWon": 2,
+              "goalsScored": 11,
+              "goalsAgainst": 12,
+              "points": 6,
+              "winPercentage": 0.5
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Martin",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 3,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 13,
+              "goalsAgainst": 16,
+              "points": 3,
+              "winPercentage": 0.25
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Fertz",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 3,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 13,
+              "goalsAgainst": 16,
+              "points": 3,
+              "winPercentage": 0.25
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Dele",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 3,
+              "goalsScored": 16,
+              "goalsAgainst": 12,
+              "points": 9,
+              "winPercentage": 0.75
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Peter",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 3,
+              "goalsScored": 16,
+              "goalsAgainst": 12,
+              "points": 9,
+              "winPercentage": 0.75
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Kirchi",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 2,
+              "gamesTie": 0,
+              "gamesWon": 2,
+              "goalsScored": 11,
+              "goalsAgainst": 12,
+              "points": 6,
+              "winPercentage": 0.5
+            },
+            "rank": 1,
+            "previousRank": 1
+          }
+        ],
+        "games": [
+          {
+            "matchdayId": "1",
+            "tournamentId": "2",
+            "sequence": 1,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Kirchi",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Roma ",
+                "country": "Italian",
+                "league": "Serie A",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Real Betis Balompié ",
+                "country": "Spain",
+                "league": "Primera Division",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 3,
+            "goalsAway": 4
+          },
+          {
+            "matchdayId": "1",
+            "tournamentId": "2",
+            "sequence": 2,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Martin",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Leicester City ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Kirchi",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Roma ",
+                "country": "Italian",
+                "league": "Serie A",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 2,
+            "goalsAway": 3
+          },
+          {
+            "matchdayId": "1",
+            "tournamentId": "2",
+            "sequence": 3,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Real Betis Balompié ",
+                "country": "Spain",
+                "league": "Primera Division",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Martin",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Leicester City ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 7,
+            "goalsAway": 3
+          },
+          {
+            "matchdayId": "1",
+            "tournamentId": "2",
+            "sequence": 4,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Real Betis Balompié ",
+                "country": "Spain",
+                "league": "Primera Division",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Kirchi",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Roma ",
+                "country": "Italian",
+                "league": "Serie A",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 3,
+            "goalsAway": 1
+          },
+          {
+            "matchdayId": "1",
+            "tournamentId": "2",
+            "sequence": 5,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Kirchi",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Roma ",
+                "country": "Italian",
+                "league": "Serie A",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Martin",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Leicester City ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 4,
+            "goalsAway": 3
+          },
+          {
+            "matchdayId": "1",
+            "tournamentId": "2",
+            "sequence": 6,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Martin",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Leicester City ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Real Betis Balompié ",
+                "country": "Spain",
+                "league": "Primera Division",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 5,
+            "goalsAway": 2
+          }
+        ],
+        "state": "FINISHED",
+        "withSecondRound": true,
+        "useableTeams": [
+          {
+            "name": "Manchester United ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          },
+          {
+            "name": "Juventus ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "Tottenham Hotspur ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          },
+          {
+            "name": "RB Leipzig ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5
+          },
+          {
+            "name": "AC Milan ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "Sevilla FC ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5
+          },
+          {
+            "name": "Borussia Dortmund ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5
+          },
+          {
+            "name": "Bayer 04 Leverkusen ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5
+          },
+          {
+            "name": "Arsenal ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          },
+          {
+            "name": "Villarreal CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5
+          },
+          {
+            "name": "Roma ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "West Ham United ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          },
+          {
+            "name": "Leicester City ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          },
+          {
+            "name": "Real Betis Balompié ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5
+          },
+          {
+            "name": "Atalanta ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "Lazio ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "Napoli ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "Aston Villa ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          }
+        ],
+        "started": "29.12.2022, 20:24:54",
+        "finished": "29.12.2022, 22:16:16"
+      },
+      {
+        "id": "3",
+        "tournamentTeams": [
+          {
+            "players": [
+              {
+                "name": "Martin",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Kirchi",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "Sevilla FC ",
+              "country": "Spain",
+              "league": "Primera Division",
+              "rating": 4.5
+            }
+          },
+          {
+            "players": [
+              {
+                "name": "Fertz",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Peter",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "Napoli ",
+              "country": "Italian",
+              "league": "Serie A",
+              "rating": 4.5
+            }
+          },
+          {
+            "players": [
+              {
+                "name": "Gernot",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Dele",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "RB Leipzig ",
+              "country": "German",
+              "league": "1. Bundesliga",
+              "rating": 4.5
+            }
+          }
+        ],
+        "players": [
+          {
+            "name": "Dele",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 3,
+              "goalsScored": 9,
+              "goalsAgainst": 4,
+              "points": 9,
+              "winPercentage": 0.75
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Gernot",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 3,
+              "goalsScored": 9,
+              "goalsAgainst": 4,
+              "points": 9,
+              "winPercentage": 0.75
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Peter",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 2,
+              "gamesTie": 0,
+              "gamesWon": 2,
+              "goalsScored": 8,
+              "goalsAgainst": 6,
+              "points": 6,
+              "winPercentage": 0.5
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Martin",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 3,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 5,
+              "goalsAgainst": 12,
+              "points": 3,
+              "winPercentage": 0.25
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Kirchi",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 3,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 5,
+              "goalsAgainst": 12,
+              "points": 3,
+              "winPercentage": 0.25
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Fertz",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 2,
+              "gamesTie": 0,
+              "gamesWon": 2,
+              "goalsScored": 8,
+              "goalsAgainst": 6,
+              "points": 6,
+              "winPercentage": 0.5
+            },
+            "rank": 1,
+            "previousRank": 1
+          }
+        ],
+        "games": [
+          {
+            "matchdayId": "1",
+            "tournamentId": "3",
+            "sequence": 1,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Napoli ",
+                "country": "Italian",
+                "league": "Serie A",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "RB Leipzig ",
+                "country": "German",
+                "league": "1. Bundesliga",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 1,
+            "goalsAway": 2
+          },
+          {
+            "matchdayId": "1",
+            "tournamentId": "3",
+            "sequence": 2,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Martin",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Kirchi",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Sevilla FC ",
+                "country": "Spain",
+                "league": "Primera Division",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Napoli ",
+                "country": "Italian",
+                "league": "Serie A",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 2,
+            "goalsAway": 5
+          },
+          {
+            "matchdayId": "1",
+            "tournamentId": "3",
+            "sequence": 3,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "RB Leipzig ",
+                "country": "German",
+                "league": "1. Bundesliga",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Martin",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Kirchi",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Sevilla FC ",
+                "country": "Spain",
+                "league": "Primera Division",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 5,
+            "goalsAway": 0
+          },
+          {
+            "matchdayId": "1",
+            "tournamentId": "3",
+            "sequence": 4,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "RB Leipzig ",
+                "country": "German",
+                "league": "1. Bundesliga",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Napoli ",
+                "country": "Italian",
+                "league": "Serie A",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 0,
+            "goalsAway": 2
+          },
+          {
+            "matchdayId": "1",
+            "tournamentId": "3",
+            "sequence": 5,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Napoli ",
+                "country": "Italian",
+                "league": "Serie A",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Martin",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Kirchi",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Sevilla FC ",
+                "country": "Spain",
+                "league": "Primera Division",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 0,
+            "goalsAway": 2
+          },
+          {
+            "matchdayId": "1",
+            "tournamentId": "3",
+            "sequence": 6,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Martin",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Kirchi",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Sevilla FC ",
+                "country": "Spain",
+                "league": "Primera Division",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "RB Leipzig ",
+                "country": "German",
+                "league": "1. Bundesliga",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 1,
+            "goalsAway": 2
+          }
+        ],
+        "state": "FINISHED",
+        "withSecondRound": true,
+        "useableTeams": [
+          {
+            "name": "Manchester United ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          },
+          {
+            "name": "Juventus ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "Tottenham Hotspur ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          },
+          {
+            "name": "RB Leipzig ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5
+          },
+          {
+            "name": "AC Milan ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "Sevilla FC ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5
+          },
+          {
+            "name": "Borussia Dortmund ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5
+          },
+          {
+            "name": "Bayer 04 Leverkusen ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5
+          },
+          {
+            "name": "Arsenal ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          },
+          {
+            "name": "Villarreal CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5
+          },
+          {
+            "name": "Roma ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "West Ham United ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          },
+          {
+            "name": "Leicester City ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          },
+          {
+            "name": "Real Betis Balompié ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5
+          },
+          {
+            "name": "Atalanta ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "Lazio ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "Napoli ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "Aston Villa ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          }
+        ],
+        "started": "29.12.2022, 22:18:23",
+        "finished": "30.12.2022, 00:16:24"
+      },
+      {
+        "id": "4",
+        "tournamentTeams": [
+          {
+            "players": [
+              {
+                "name": "Martin",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Peter",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "West Ham United ",
+              "country": "English",
+              "league": "Premier League",
+              "rating": 4.5
+            }
+          },
+          {
+            "players": [
+              {
+                "name": "Kirchi",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Dele",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "Lazio ",
+              "country": "Italian",
+              "league": "Serie A",
+              "rating": 4.5
+            }
+          },
+          {
+            "players": [
+              {
+                "name": "Fertz",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Gernot",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "Villarreal CF ",
+              "country": "Spain",
+              "league": "Primera Division",
+              "rating": 4.5
+            }
+          }
+        ],
+        "players": [
+          {
+            "name": "Dele",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 0,
+              "gamesTie": 1,
+              "gamesWon": 3,
+              "goalsScored": 10,
+              "goalsAgainst": 4,
+              "points": 10,
+              "winPercentage": 0.75
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Gernot",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 2,
+              "gamesTie": 0,
+              "gamesWon": 2,
+              "goalsScored": 9,
+              "goalsAgainst": 9,
+              "points": 6,
+              "winPercentage": 0.5
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Peter",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 3,
+              "gamesTie": 1,
+              "gamesWon": 0,
+              "goalsScored": 8,
+              "goalsAgainst": 14,
+              "points": 1,
+              "winPercentage": 0
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Fertz",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 2,
+              "gamesTie": 0,
+              "gamesWon": 2,
+              "goalsScored": 9,
+              "goalsAgainst": 9,
+              "points": 6,
+              "winPercentage": 0.5
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Martin",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 3,
+              "gamesTie": 1,
+              "gamesWon": 0,
+              "goalsScored": 8,
+              "goalsAgainst": 14,
+              "points": 1,
+              "winPercentage": 0
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Kirchi",
+            "stats": {
+              "gamesPlayed": 4,
+              "gamesLost": 0,
+              "gamesTie": 1,
+              "gamesWon": 3,
+              "goalsScored": 10,
+              "goalsAgainst": 4,
+              "points": 10,
+              "winPercentage": 0.75
+            },
+            "rank": 1,
+            "previousRank": 1
+          }
+        ],
+        "games": [
+          {
+            "matchdayId": "1",
+            "tournamentId": "4",
+            "sequence": 1,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Kirchi",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Lazio ",
+                "country": "Italian",
+                "league": "Serie A",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Villarreal CF ",
+                "country": "Spain",
+                "league": "Primera Division",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 2,
+            "goalsAway": 0
+          },
+          {
+            "matchdayId": "1",
+            "tournamentId": "4",
+            "sequence": 2,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Martin",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "West Ham United ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Kirchi",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Lazio ",
+                "country": "Italian",
+                "league": "Serie A",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 1,
+            "goalsAway": 1
+          },
+          {
+            "matchdayId": "1",
+            "tournamentId": "4",
+            "sequence": 3,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Villarreal CF ",
+                "country": "Spain",
+                "league": "Primera Division",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Martin",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "West Ham United ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 3,
+            "goalsAway": 1
+          },
+          {
+            "matchdayId": "1",
+            "tournamentId": "4",
+            "sequence": 4,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Villarreal CF ",
+                "country": "Spain",
+                "league": "Primera Division",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Kirchi",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Lazio ",
+                "country": "Italian",
+                "league": "Serie A",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 1,
+            "goalsAway": 2
+          },
+          {
+            "matchdayId": "1",
+            "tournamentId": "4",
+            "sequence": 5,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Kirchi",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Lazio ",
+                "country": "Italian",
+                "league": "Serie A",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Martin",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "West Ham United ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 5,
+            "goalsAway": 2
+          },
+          {
+            "matchdayId": "1",
+            "tournamentId": "4",
+            "sequence": 6,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Martin",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "West Ham United ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 4.5
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Villarreal CF ",
+                "country": "Spain",
+                "league": "Primera Division",
+                "rating": 4.5
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 4,
+            "goalsAway": 5
+          }
+        ],
+        "state": "FINISHED",
+        "withSecondRound": true,
+        "useableTeams": [
+          {
+            "name": "Manchester United ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          },
+          {
+            "name": "Juventus ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "Tottenham Hotspur ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          },
+          {
+            "name": "RB Leipzig ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5
+          },
+          {
+            "name": "AC Milan ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "Sevilla FC ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5
+          },
+          {
+            "name": "Borussia Dortmund ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5
+          },
+          {
+            "name": "Bayer 04 Leverkusen ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5
+          },
+          {
+            "name": "Arsenal ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          },
+          {
+            "name": "Villarreal CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5
+          },
+          {
+            "name": "Roma ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "West Ham United ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          },
+          {
+            "name": "Leicester City ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          },
+          {
+            "name": "Real Betis Balompié ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5
+          },
+          {
+            "name": "Atalanta ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "Lazio ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "Napoli ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5
+          },
+          {
+            "name": "Aston Villa ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5
+          }
+        ],
+        "started": "30.12.2022, 00:29:07",
+        "finished": "30.12.2022, 02:13:38"
+      }
+    ],
+    "state": "FINISHED",
+    "possibleDraws": [
+      {
+        "teams": [
+          {
+            "players": [
+              {
+                "name": "Dele",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Martin",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ]
+          },
+          {
+            "players": [
+              {
+                "name": "Peter",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Gernot",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ]
+          },
+          {
+            "players": [
+              {
+                "name": "Kirchi",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Fertz",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

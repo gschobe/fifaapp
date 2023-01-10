@@ -14,7 +14,9 @@ import CorrectGameDialog from "views/Matchday/CorrectGameDialog";
 import RemoveMatchdayAction from "views/Overview/actions/RemoveMatchdayAction";
 import TeamRating from "views/Teams/TeamRating";
 
-export const playerTableColumns: GridColDef[] = [
+export const playerTableColumns: (overview: boolean) => GridColDef[] = (
+  overview
+) => [
   {
     field: "rank",
     headerName: "#",
@@ -23,6 +25,7 @@ export const playerTableColumns: GridColDef[] = [
     hideSortIcons: true,
     filterable: false,
     hideable: false,
+    hide: overview,
     disableColumnMenu: true,
     renderCell: (params: GridRenderCellParams) => {
       const diff = params.row.previousRank - params.row.rank;
@@ -103,6 +106,22 @@ export const playerTableColumns: GridColDef[] = [
         ? 0
         : params.row.stats.goalsScored - params.row.stats.goalsAgainst,
   },
+  {
+    field: "winPercentage",
+    headerName: "W%",
+    flex: 0.5,
+    hide: !overview,
+    valueGetter: (params: GridValueGetterParams) =>
+      params.row.stats.winPercentage,
+  },
+  {
+    field: "pointsPerGame",
+    headerName: "PtspG",
+    flex: 0.5,
+    hide: !overview,
+    valueGetter: (params: GridValueGetterParams) =>
+      params.row.stats.pointsPerGame,
+  },
 ];
 
 export const matchDayColumns: GridColDef[] = [
@@ -118,6 +137,12 @@ export const matchDayColumns: GridColDef[] = [
     headerName: "Started at",
     valueGetter: (params: GridValueGetterParams) =>
       new Date(params.row.startDate).toLocaleDateString("de-DE"),
+  },
+  {
+    field: "at",
+    headerName: "Location",
+    valueGetter: (params: GridValueGetterParams) =>
+      `${params.row.at?.name}'s place`,
   },
   { field: "state", headerName: "State" },
   { field: "mode", headerName: "Modus" },
@@ -171,15 +196,21 @@ export const matchDayColumns: GridColDef[] = [
       return (
         <>
           <Button onClick={onClick}>SHOW</Button>
-          <Box>|</Box>
-          <RemoveMatchdayAction matchDayId={params.row.id} />
+          {!params.row.meta?.imported && (
+            <>
+              <Box>|</Box>
+              <RemoveMatchdayAction matchDayId={params.row.id} />
+            </>
+          )}
         </>
       );
     },
   },
 ];
 
-export const gamesColumns: GridColDef[] = [
+export const gamesColumns: (correctable: boolean) => GridColDef[] = (
+  correctable
+) => [
   {
     field: "id",
     headerName: "#",
@@ -219,11 +250,15 @@ export const gamesColumns: GridColDef[] = [
     sortable: false,
     flex: 0.2,
     renderCell: (params: GridRenderCellParams<Game>) => {
-      return params.row.state === "FINISHED" ? (
+      return correctable && params.row.state === "FINISHED" ? (
         <CorrectGameDialog game={params.row} />
       ) : null;
     },
   },
+];
+
+export const overviewLocationColumns: GridColDef[] = [
+  { field: "id", headerName: "Location", flex: 1 },
 ];
 
 export const overviewPlayersColumns: GridColDef[] = [

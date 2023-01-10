@@ -16,6 +16,7 @@ import CreateMatchDayAction from "views/Overview/actions/CreateMatchDayAction";
 import { getPlayersSortedByPoints } from "utils/TableUtils";
 import { GameScore, tournamenTeamComp } from "./GameScore";
 import { useNavigate } from "react-router-dom";
+import AnimatedDraw from "./AnimatedDraw";
 
 interface MatchDayProps {
   id: string;
@@ -34,6 +35,9 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
   const navigate = useNavigate();
   const matchday = matchDays[id];
 
+  const [drawState, setDrawState] = React.useState<
+    "open" | "running" | "finished"
+  >("open");
   const [liveTable, setLiveTable] = React.useState(true);
   const handleLiveTableChange: (event: any) => void = (event) => {
     setLiveTable(event.target.checked);
@@ -45,7 +49,6 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
   const activeTournament = matchday.tournaments.find(
     (t) => t.state !== "FINISHED"
   );
-
   const upcomingGame = activeTournament?.games.find(
     (game) => game.state === "UPCOMING"
   );
@@ -82,6 +85,8 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
         matchdayId: id,
         draw: possibleDraws,
       });
+
+      setDrawState("running");
     }
   };
 
@@ -127,8 +132,16 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
     }
   };
 
+  const mdFinished = matchday.state !== "FINISHED";
   return (
     <>
+      {activeTournament && activeTournament.tournamentTeams.length > 0 && (
+        <AnimatedDraw
+          drawRunning={drawState}
+          setDrawRunning={setDrawState}
+          teams={activeTournament?.tournamentTeams || []}
+        />
+      )}
       <Box display={"flex"} flexDirection="row">
         <div
           style={{ fontWeight: "bold", fontSize: 24, margin: "5pt" }}
@@ -173,7 +186,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                     alignItems: "center",
                   }}
                 >
-                  {activeTournament?.tournamentTeams.length === 0 ? (
+                  {activeTournament?.tournamentTeams.length === 0 && (
                     <Button
                       variant="contained"
                       color="secondary"
@@ -182,7 +195,8 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                     >
                       Start Draw
                     </Button>
-                  ) : (
+                  )}
+                  {drawState !== "running" && (
                     <>
                       {activeTournament?.tournamentTeams.map((tt, index) => {
                         return tournamenTeamComp(index, tt);
@@ -230,7 +244,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                 <div style={{ fontSize: "1.5em" }}>Upcoming</div>
               </CardHeader>
               <CardBody>
-                {upcomingGame ? (
+                {drawState !== "running" && upcomingGame ? (
                   <div
                     style={{
                       display: "flex",
@@ -239,11 +253,11 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                       marginTop: "10pt",
                     }}
                   >
-                    <div>{tournamenTeamComp(1, upcomingGame?.homePlayer)}</div>
+                    {tournamenTeamComp(1, upcomingGame?.homePlayer)}
                     <div style={{ fontWeight: "bolder", fontSize: 20 }}>
                       {"vs"}
                     </div>
-                    <div>{tournamenTeamComp(2, upcomingGame?.awayPlayer)}</div>
+                    {tournamenTeamComp(2, upcomingGame?.awayPlayer)}
                   </div>
                 ) : (
                   ""
@@ -274,17 +288,20 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
               <div style={{ fontSize: "1.5em" }}>Games</div>
             </CardHeader>
             <CardBody>
-              {activeTournament?.games &&
-                activeTournament?.games.length > 0 && (
-                  <DataGrid
-                    headerHeight={30}
-                    rowHeight={30}
-                    autoPageSize
-                    getRowId={(row) => row.sequence}
-                    rows={activeTournament?.games || []}
-                    columns={gamesColumns}
-                  />
-                )}
+              {drawState !== "running" && (mdFinished || activeTournament) && (
+                <DataGrid
+                  headerHeight={30}
+                  rowHeight={30}
+                  autoPageSize
+                  getRowId={(row) => row.sequence}
+                  rows={
+                    mdFinished
+                      ? activeTournament?.games || []
+                      : matchday.tournaments.flatMap((t) => t.games)
+                  }
+                  columns={gamesColumns(mdFinished)}
+                />
+              )}
             </CardBody>
           </Card>
         </GridItem>
@@ -315,7 +332,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                 hideFooter
                 getRowId={(row) => row.name}
                 rows={mdPlayers}
-                columns={playerTableColumns}
+                columns={playerTableColumns(false)}
               />
             </CardBody>
           </Card>
@@ -343,7 +360,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                         rows={t.games}
                         autoHeight
                         hideFooter
-                        columns={gamesColumns}
+                        columns={gamesColumns(mdFinished)}
                       />
                     </CardBody>
                   </Card>
@@ -362,7 +379,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                         hideFooter
                         getRowId={(row) => row.name}
                         rows={getPlayersSortedByPoints(t.players)}
-                        columns={playerTableColumns}
+                        columns={playerTableColumns(false)}
                       />
                     </CardBody>
                   </Card>

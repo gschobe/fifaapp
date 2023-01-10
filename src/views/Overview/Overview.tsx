@@ -22,19 +22,19 @@ import CreateMatchDayAction from "./actions/CreateMatchDayAction";
 import { matchDayConnector, MatchDayStoreProps } from "store/FifaGamesReducer";
 import {
   matchDayColumns,
-  overviewPlayersColumns,
-  teamsColumns,
+  playerTableColumns,
 } from "definitions/TableDefinitions";
 import {
   calulateOverallStats,
   getPlayersSortedByWinPercentage,
 } from "utils/TableUtils";
-import ImportTeamsAction from "./actions/ImportTeamsAction";
+import { RoundRobin } from "tournament-pairings";
+import { Match } from "tournament-pairings/dist/Match";
+import ExportMatchdayDataAction from "./actions/ExportMatchdayDataAction";
 
 const useStyles = makeStyles(styles);
 
 const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
-  teams,
   player,
   addPlayer,
   matchDays,
@@ -50,6 +50,16 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
     return getPlayersSortedByWinPercentage(Object.values(player));
   }, [player]);
   const handleClick: () => void = () => {
+    const matches = RoundRobin(5, 1, true);
+    const teams = matches
+      .filter((m) => m.player1 !== null && m.player2 !== null)
+      .map((t: Match, index) => {
+        return { team: index + 1, player: { p1: t.player1, p2: t.player2 } };
+      });
+
+    console.log(teams);
+    console.log(RoundRobin(teams.length, 1, true));
+
     setAddPlayerOpen((addPlayerOpen) => !addPlayerOpen);
   };
 
@@ -97,37 +107,7 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
         </DialogActions>
       </Dialog>
       <GridContainer>
-        <GridItem {...{ xs: 12, sm: 10, md: 8 }}>
-          <Card {...{ height: "300px !important" }}>
-            <CardHeader color="info">
-              <div
-                style={{
-                  fontSize: "1.2rem",
-                  display: "flex",
-                  flexDirection: "row",
-                }}
-              >
-                <div className={classes.cardTitleWhite}>Teams</div>
-                <div style={{ flexGrow: 1 }} />
-                <ImportTeamsAction />
-              </div>
-            </CardHeader>
-            <CardBody>
-              {teams && Object.keys(teams).length > 0 && (
-                <DataGrid
-                  disableSelectionOnClick
-                  headerHeight={35}
-                  autoPageSize
-                  rowHeight={30}
-                  getRowId={(row) => row.name}
-                  rows={Object.values(teams)}
-                  columns={teamsColumns(false)}
-                />
-              )}
-            </CardBody>
-          </Card>
-        </GridItem>
-        <GridItem {...{ xs: 12, sm: 12, md: 4 }}>
+        <GridItem {...{ xs: 12, sm: 12, md: 12 }}>
           <Card>
             <CardHeader color="info">
               <div
@@ -168,7 +148,7 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
                   autoPageSize
                   getRowId={(row) => row.name}
                   rows={players}
-                  columns={overviewPlayersColumns}
+                  columns={playerTableColumns(true)}
                 />
               )}
             </CardBody>
@@ -188,6 +168,7 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
               >
                 <div className={classes.cardTitleWhite}>Matchdays</div>
                 <div style={{ flexGrow: 1 }} />
+                <ExportMatchdayDataAction />
                 <CreateMatchDayAction buttonType="ICON" createNewMatchday />
               </div>
             </CardHeader>

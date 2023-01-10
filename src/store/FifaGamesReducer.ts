@@ -28,6 +28,16 @@ export const matchDaySlice = createSlice({
     addMatchDay: (state, action: PayloadAction<MatchDay>) => {
       state.matchDays[action.payload.id] = action.payload;
     },
+    addMatchDays: (state, action: PayloadAction<MatchDay[]>) => {
+      action.payload.map((matchday) => {
+        if (state.matchDays[matchday.id] === undefined) {
+          state.matchDays[matchday.id] = {
+            ...matchday,
+            meta: { imported: true },
+          };
+        }
+      });
+    },
     addTournament: (
       state,
       action: PayloadAction<{ matchdayId: string; tournament: Tournament }>
@@ -365,6 +375,10 @@ export function updateStats(
     stats.winPercentage =
       stats.gamesWon && stats.gamesPlayed
         ? Number((stats.gamesWon / stats.gamesPlayed).toFixed(3))
+        : 0;
+    stats.pointsPerGame =
+      stats.points && stats.gamesPlayed
+        ? Number((stats.points / stats.gamesPlayed).toFixed(1))
         : 0;
   }
 }

@@ -1,0 +1,15 @@
+.animated-new {
+  opacity: 0;
+}
+.animated-draw {
+  animation: 4s normal animatedDraw;
+}
+@keyframes animatedDraw {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

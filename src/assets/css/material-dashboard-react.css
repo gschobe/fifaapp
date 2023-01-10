@@ -525,3 +525,7 @@ footer ul li a:hover {
   height: fit-content !important;
   min-height: 33vh;
 }
+
+.cardFullScreen {
+  height: 92vh !important;
+}

@@ -168,6 +168,9 @@ export function calulateOverallStats(
         stats["winPercentage"] = Number(
           (stats.gamesWon / stats.gamesPlayed).toFixed(3)
         );
+        stats["pointsPerGame"] = Number(
+          (stats.points / stats.gamesPlayed).toFixed(1)
+        );
       }
       playerStats[player.name] = pStat;
     }

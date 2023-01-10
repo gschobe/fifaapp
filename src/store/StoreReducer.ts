@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { createSlice, PayloadAction, Dictionary } from "@reduxjs/toolkit";
-import { Player, Team } from "../definitions/Definitions";
+import { Player, Team, Location } from "../definitions/Definitions";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "./Store";
 import _ from "lodash";
@@ -8,11 +8,13 @@ import _ from "lodash";
 export interface StoreState {
   players: Dictionary<Player>;
   teams: Dictionary<Team>;
+  locations: Dictionary<Location>;
 }
 
 const initialState: StoreState = {
   players: {},
   teams: {},
+  locations: {},
 };
 
 export const storeSlice = createSlice({
@@ -31,6 +33,9 @@ export const storeSlice = createSlice({
           goalsAgainst: 0,
         },
       };
+    },
+    addLocation: (state, action: PayloadAction<Location>) => {
+      state.locations[action.payload.id] = action.payload;
     },
     setTeams: (state, action: PayloadAction<Team[]>) => {
       state.teams = {
@@ -75,6 +80,7 @@ export const storeConnector = connect(
   (state: RootState) => ({
     player: state.fifadata.players,
     teams: state.fifadata.teams,
+    locations: state.fifadata.locations,
   }),
   { ...storeSlice.actions },
   undefined,

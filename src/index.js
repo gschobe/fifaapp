@@ -26,12 +26,15 @@ import "./assets/css/material-dashboard-react.css?v=1.10.0";
 import { Provider } from "react-redux";
 import store from "store/Store.ts";
 import UserProvider from "components/Login/UserProvider";
+import DefaultDataProvider from "components/Login/DefaultDataProvider.tsx";
 
 ReactDOM.render(
   <Router>
     <Provider store={store}>
       <UserProvider>
-        <Admin auth={store.auth} />
+        <DefaultDataProvider>
+          <Admin auth={store.auth} />
+        </DefaultDataProvider>
       </UserProvider>
     </Provider>
   </Router>,
