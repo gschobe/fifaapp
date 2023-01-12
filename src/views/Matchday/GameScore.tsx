@@ -55,6 +55,7 @@ export const GameScore: React.FC<GameScoreProps> = ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        width: "100%",
       }}
     >
       {tournamenTeamComp(1, liveGame?.homePlayer)}

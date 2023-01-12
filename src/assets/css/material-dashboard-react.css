@@ -529,3 +529,8 @@ footer ul li a:hover {
 .cardFullScreen {
   height: 92vh !important;
 }
+
+.cardCenter {
+  display: flex !important;
+  align-items: center !important;
+}

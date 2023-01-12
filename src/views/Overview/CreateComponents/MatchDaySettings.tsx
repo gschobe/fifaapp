@@ -7,7 +7,11 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 import Box from "@material-ui/core/Box";
-import { Player, TournamentMode } from "definitions/Definitions";
+import {
+  ALL_TOURNAMENT_MODES,
+  Player,
+  TournamentMode,
+} from "definitions/Definitions";
 
 export interface Props {
   playerName: string[];
@@ -37,7 +41,7 @@ const MatchDaySettings: React.FC<Props> = ({
           <InputLabel style={{ paddingLeft: "5px" }}>
             Select Location
           </InputLabel>
-          <Select onChange={handleLocaitonSelectionChange}>
+          <Select onChange={handleLocaitonSelectionChange} defaultValue="">
             {players
               ? players.map((p) => {
                   if (p) {
@@ -62,9 +66,12 @@ const MatchDaySettings: React.FC<Props> = ({
             renderValue={(selected: any) => selected.join(", ")}
             error={
               playerName.length < 2 ||
-              (mode === "2on2" && playerName.length < 4)
+              (mode === "2on2" &&
+                (playerName.length < 4 || playerName.length % 2 !== 0)) ||
+              (mode === "2on2-odd" && playerName.length !== 5)
             }
           >
+            <MenuItem key={"undef"} value={""}></MenuItem>
             {players.map((p) => {
               if (p) {
                 return (
@@ -81,21 +88,20 @@ const MatchDaySettings: React.FC<Props> = ({
           </Select>
         </FormControl>
         <FormControl style={{ marginTop: "10px", width: "80%" }}>
-          <InputLabel id="demo-simple-select-label">Mode</InputLabel>
+          <InputLabel style={{ paddingLeft: "5px" }}>Mode</InputLabel>
           <Select
             error={mode === undefined}
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={mode}
+            defaultValue=""
             label="Mode"
             onChange={handleModeChange}
           >
-            <MenuItem key={"1on1"} value={"1on1"}>
-              <ListItemText primary={"1 on 1"} />
-            </MenuItem>
-            <MenuItem key={"2on2"} value={"2on2"}>
-              <ListItemText primary={"2 on 2"} />
-            </MenuItem>
+            {ALL_TOURNAMENT_MODES.map((tm) => {
+              return (
+                <MenuItem key={tm} value={tm}>
+                  <ListItemText primary={tm} />
+                </MenuItem>
+              );
+            })}
           </Select>
         </FormControl>
       </FormGroup>

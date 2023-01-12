@@ -155,7 +155,7 @@ const CreateMatchDayAction: React.FC<
           usedTeams: [],
           tournaments: [tournament],
           state: "NEW",
-          possibleDraws: generatePossibleDraws(matchdayPlayers),
+          possibleDraws: generatePossibleDraws(matchdayPlayers, mode),
           meta: {},
         };
         addMatchDay(matchday);
@@ -199,7 +199,8 @@ const CreateMatchDayAction: React.FC<
       (mode === undefined ||
         playerName.length < 2 ||
         (mode === "2on2" &&
-          (playerName.length < 4 || playerName.length % 2 !== 0))));
+          (playerName.length < 4 || playerName.length % 2 !== 0)) ||
+        (mode === "2on2-odd" && playerName.length !== 5)));
 
   return (
     <>

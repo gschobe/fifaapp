@@ -10,13 +10,14 @@ import { DataGrid } from "@mui/x-data-grid";
 import { gamesColumns, playerTableColumns } from "definitions/TableDefinitions";
 import { TournamentTeam } from "definitions/Definitions";
 import determineTeamMatesAndTeams from "utils/DrawUtils";
-import { CardActions } from "@mui/material";
+import { CardActions, Stack } from "@mui/material";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
 import CreateMatchDayAction from "views/Overview/actions/CreateMatchDayAction";
 import { getPlayersSortedByPoints } from "utils/TableUtils";
 import { GameScore, tournamenTeamComp } from "./GameScore";
 import { useNavigate } from "react-router-dom";
 import AnimatedDraw from "./AnimatedDraw";
+import DataSwitch from "./DataSwitch";
 
 interface MatchDayProps {
   id: string;
@@ -35,9 +36,24 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
   const navigate = useNavigate();
   const matchday = matchDays[id];
 
+  // games table content hooks
+  const [gamesAll, setGamesAll] = React.useState(false);
+  const handleGamesAllChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGamesAll(event.target.checked);
+  };
+
+  // player table content hooks
+  const [tableAll, setTableAll] = React.useState(true);
+  const handleTableAllChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTableAll(event.target.checked);
+  };
+
+  // animated draw hook
   const [drawState, setDrawState] = React.useState<
     "open" | "running" | "finished"
   >("open");
+
+  // show live table hooks
   const [liveTable, setLiveTable] = React.useState(true);
   const handleLiveTableChange: (event: any) => void = (event) => {
     setLiveTable(event.target.checked);
@@ -86,7 +102,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
         draw: possibleDraws,
       });
 
-      setDrawState("running");
+      setDrawState(matchday.mode === "2on2-odd" ? "finished" : "running");
     }
   };
 
@@ -132,16 +148,19 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
     }
   };
 
-  const mdFinished = matchday.state !== "FINISHED";
+  const mdFinished = matchday.state === "FINISHED";
   return (
     <>
-      {activeTournament && activeTournament.tournamentTeams.length > 0 && (
-        <AnimatedDraw
-          drawRunning={drawState}
-          setDrawRunning={setDrawState}
-          teams={activeTournament?.tournamentTeams || []}
-        />
-      )}
+      {matchday.mode !== "2on2-odd" &&
+        drawState === "running" &&
+        activeTournament &&
+        activeTournament.tournamentTeams.length > 0 && (
+          <AnimatedDraw
+            drawRunning={drawState}
+            setDrawRunning={setDrawState}
+            teams={activeTournament?.tournamentTeams || []}
+          />
+        )}
       <Box display={"flex"} flexDirection="row">
         <div
           style={{ fontWeight: "bold", fontSize: 24, margin: "5pt" }}
@@ -149,25 +168,28 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
           activeTournament ? `/ Tournament ${activeTournament.id} ` : ``
         }`}</div>
         <Box flexGrow={1} />
-        {matchday.state !== "FINISHED" && !liveGame && !upcomingGame && (
-          <>
-            <CreateMatchDayAction
-              buttonType="TEXT"
-              createNewMatchday={false}
-              activeMatchday={matchday}
-            />
-            <Button
-              onClick={() => {
-                finishMatchday(matchday.id);
-                navigate("/overview");
-              }}
-              variant="outlined"
-              color="secondary"
-            >
-              FINISH Matchday
-            </Button>
-          </>
-        )}
+        {!activeTournament &&
+          matchday.state !== "FINISHED" &&
+          !liveGame &&
+          !upcomingGame && (
+            <>
+              <CreateMatchDayAction
+                buttonType="TEXT"
+                createNewMatchday={false}
+                activeMatchday={matchday}
+              />
+              <Button
+                onClick={() => {
+                  finishMatchday(matchday.id);
+                  navigate("/overview");
+                }}
+                variant="outlined"
+                color="secondary"
+              >
+                FINISH Matchday
+              </Button>
+            </>
+          )}
       </Box>
       {!(matchday.state === "FINISHED") && (
         <GridContainer>
@@ -212,7 +234,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
               <CardHeader color="primary">
                 <div style={{ fontSize: "1.5em" }}>Live</div>
               </CardHeader>
-              <CardBody>
+              <CardBody className={"cardCenter"}>
                 {liveGame ? (
                   <GameScore
                     liveGame={liveGame}
@@ -243,7 +265,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
               <CardHeader color="info">
                 <div style={{ fontSize: "1.5em" }}>Upcoming</div>
               </CardHeader>
-              <CardBody>
+              <CardBody className={"cardCenter"}>
                 {drawState !== "running" && upcomingGame ? (
                   <div
                     style={{
@@ -251,6 +273,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                       flexDirection: "column",
                       alignItems: "center",
                       marginTop: "10pt",
+                      width: "100%",
                     }}
                   >
                     {tournamenTeamComp(1, upcomingGame?.homePlayer)}
@@ -282,10 +305,19 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
         </GridContainer>
       )}
       <GridContainer>
-        <GridItem {...{ xs: 12, sm: 12, md: 6 }}>
+        <GridItem {...{ xs: 12, sm: 12, md: 7 }}>
           <Card>
             <CardHeader color="success">
-              <div style={{ fontSize: "1.5em" }}>Games</div>
+              <Stack direction="row">
+                <div style={{ fontSize: "1.5em" }}>Games</div>
+                <Box flex={1} />
+                <DataSwitch
+                  checked={activeTournament ? gamesAll : true}
+                  onChange={handleGamesAllChange}
+                  disabled={!activeTournament}
+                />
+                <Box flex={1} />
+              </Stack>
             </CardHeader>
             <CardBody>
               {drawState !== "running" && (mdFinished || activeTournament) && (
@@ -293,23 +325,37 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                   headerHeight={30}
                   rowHeight={30}
                   autoPageSize
-                  getRowId={(row) => row.sequence}
-                  rows={
-                    mdFinished
-                      ? activeTournament?.games || []
-                      : matchday.tournaments.flatMap((t) => t.games)
+                  getRowId={(row) => `${row.tournamentId}${row.sequence}`}
+                  selectionModel={
+                    liveGame
+                      ? [`${liveGame.tournamentId}${liveGame.sequence}`]
+                      : []
                   }
-                  columns={gamesColumns(mdFinished)}
+                  rows={
+                    mdFinished || gamesAll
+                      ? matchday.tournaments.flatMap((t) => t.games)
+                      : activeTournament?.games || []
+                  }
+                  columns={gamesColumns(
+                    !mdFinished,
+                    activeTournament ? gamesAll : true
+                  )}
                 />
               )}
             </CardBody>
           </Card>
         </GridItem>
-        <GridItem {...{ xs: 12, sm: 12, md: 6 }}>
+        <GridItem {...{ xs: 12, sm: 12, md: 5 }}>
           <Card>
             <CardHeader color="success">
               <Box display="flex" flexDirection="row">
                 <div style={{ fontSize: "1.5em" }}>Table</div>
+                <Box flex={1} />
+                <DataSwitch
+                  checked={tableAll}
+                  onChange={handleTableAllChange}
+                  disabled={!activeTournament}
+                />
                 <Box flex={1} />
                 <Box fontWeight="bold" paddingRight="5pt">
                   LIVE TABLE
@@ -331,7 +377,11 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                 autoHeight
                 hideFooter
                 getRowId={(row) => row.name}
-                rows={mdPlayers}
+                rows={
+                  tableAll || mdFinished || !activeTournament
+                    ? mdPlayers
+                    : activeTournament.players
+                }
                 columns={playerTableColumns(false)}
               />
             </CardBody>
@@ -346,7 +396,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
               <hr />
               <div>{`Tournament ${t.id} - ${t.state}`}</div>
               <GridContainer>
-                <GridItem {...{ xs: 12, sm: 12, md: 6 }}>
+                <GridItem {...{ xs: 12, sm: 12, md: 7 }}>
                   <Card>
                     <CardHeader color="success">
                       <div style={{ fontSize: "1.5em" }}>Games</div>
@@ -360,12 +410,12 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                         rows={t.games}
                         autoHeight
                         hideFooter
-                        columns={gamesColumns(mdFinished)}
+                        columns={gamesColumns(!mdFinished)}
                       />
                     </CardBody>
                   </Card>
                 </GridItem>
-                <GridItem {...{ xs: 12, sm: 12, md: 6 }}>
+                <GridItem {...{ xs: 12, sm: 12, md: 5 }}>
                   <Card>
                     <CardHeader color="success">
                       <div style={{ fontSize: "1.5em" }}>Table</div>
@@ -379,7 +429,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                         hideFooter
                         getRowId={(row) => row.name}
                         rows={getPlayersSortedByPoints(t.players)}
-                        columns={playerTableColumns(false)}
+                        columns={playerTableColumns(false, false)}
                       />
                     </CardBody>
                   </Card>

@@ -104,7 +104,7 @@ const AnimatedDraw: React.FC<Props> = ({
                             textAlign={"center"}
                             xs={t.players.length === 1 ? 8 : 5}
                             sm={5}
-                            md={3}
+                            md={t.players.length === 1 ? 5 : 3}
                             className={
                               seq < animationSequence.indexOf(p.name)
                                 ? "animated-new"
@@ -151,7 +151,7 @@ const AnimatedDraw: React.FC<Props> = ({
                         color="grey"
                         xs={t.players.length === 1 ? 10 : 6}
                         sm={6}
-                        md={3}
+                        md={t.players.length === 1 ? 5 : 3}
                         className={
                           seq < animationSequence.indexOf(t.team?.name || "")
                             ? "animated-new"

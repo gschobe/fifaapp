@@ -4,6 +4,7 @@ import {
   Player,
   PossibleDraw,
   Tournament,
+  TournamentMode,
   TournamentTeam,
 } from "definitions/Definitions";
 import { RoundRobin } from "tournament-pairings";
@@ -21,7 +22,12 @@ export default function determineTeamMatesAndTeams(
   const remaining = defineTeamMates(matchday, tournamentTeams);
   const clear = chooseTeams(matchday, activeTournament, tournamentTeams);
   return {
-    games: generateGames(matchday.id, activeTournament, tournamentTeams),
+    games: generateGames(
+      matchday.id,
+      activeTournament,
+      tournamentTeams,
+      matchday.mode
+    ),
     possibleDraws: remaining,
     clearUsed: clear,
   };
@@ -42,11 +48,24 @@ export function defineTeamMates(
     matchday.players.forEach((player) =>
       tournamentTeams.push({ players: [{ ...player }] })
     );
+  } else if (matchday.mode === "2on2-odd") {
+    const players = matchday.players;
+    RoundRobin(players.length, 1, true)
+      .filter((m) => m.player1 !== null && m.player2 !== null)
+      .forEach((t: Match) => {
+        console.log(t);
+        const ip1: number = Number(t.player1) - 1;
+        const ip2: number = Number(t.player2) - 1;
+        console.log(ip1, " ", ip2);
+        tournamentTeams.push({ players: [players[ip1], players[ip2]] });
+      });
+
+    console.log(tournamentTeams);
   }
 
   return possible.length > 0
     ? possible
-    : generatePossibleDraws(matchday.players);
+    : generatePossibleDraws(matchday.players, matchday.mode);
 }
 
 export function chooseTeams(
@@ -74,8 +93,12 @@ export function chooseTeams(
 }
 
 export function generatePossibleDraws(
-  players: (Player | undefined)[]
+  players: (Player | undefined)[],
+  mode: TournamentMode = "2on2"
 ): PossibleDraw[] {
+  if (mode !== "2on2") {
+    return [];
+  }
   const possible: PossibleDraw[] = [];
   const draws = RoundRobin(players.length, 1, true);
 
@@ -102,38 +125,93 @@ export function generatePossibleDraws(
 export function generateGames(
   matchdayId: string,
   activeTournament: Tournament,
-  tournamentTeams: TournamentTeam[]
+  tournamentTeams: TournamentTeam[],
+  mode: TournamentMode
 ): Game[] {
   const sched = RoundRobin(tournamentTeams.length, 1, true);
 
-  const games: Game[] = sched
-    .filter((s) => s.player1 !== null && s.player2 !== null)
-    .map((s, index) => {
-      return {
-        matchdayId: matchdayId,
-        tournamentId: activeTournament.id,
-        sequence: index + 1,
-        homePlayer: tournamentTeams[Number(s.player1) - 1],
-        awayPlayer: tournamentTeams[Number(s.player2) - 1],
-        state: "OPEN",
-      };
-    });
+  if (mode === "2on2-odd") {
+    const filteredGames = sched
+      .filter((g: Match) => {
+        const t1 = tournamentTeams[Number(g.player1) - 1 || 0];
+        const t2 = tournamentTeams[Number(g.player2) - 1 || 0];
+        const players = t1.players.concat(
+          t2.players.filter((p) => t1.players.indexOf(p) < 0)
+        );
+        return players.length === 4;
+      })
+      .map((g) => {
+        const t1_id = Number(g.player1);
+        const t2_id = Number(g.player2);
+        const t1: TournamentTeam = tournamentTeams[t1_id - 1];
+        const t2: TournamentTeam = tournamentTeams[t2_id - 1];
+        return {
+          t1: { team: t1_id, players: t1 },
+          t2: { team: t2_id, players: t2 },
+          pause: activeTournament.players
+            .filter(
+              (p) =>
+                !t1.players
+                  .concat(t2.players)
+                  .flatMap((pl) => pl.name)
+                  .includes(p.name)
+            )
+            .at(0),
+        };
+      });
 
-  if (activeTournament.withSecondRound) {
-    const secondRound: Game[] = sched
+    let pause = 0;
+    const sequencedGames: Game[] = [];
+    for (let i = 1; sequencedGames.length < 15; i++) {
+      const game = filteredGames.find(
+        (g) => g.pause?.name === activeTournament.players[pause].name
+      );
+      if (game) {
+        filteredGames.splice(filteredGames.indexOf(game), 1);
+        sequencedGames.push({
+          matchdayId: matchdayId,
+          tournamentId: activeTournament.id,
+          sequence: i,
+          homePlayer: game.t1.players,
+          awayPlayer: game.t2.players,
+          state: "OPEN",
+        });
+      }
+      pause === activeTournament.players.length - 1 ? (pause = 0) : pause++;
+    }
+
+    sequencedGames[0].state = "UPCOMING";
+    return sequencedGames;
+  } else {
+    const games: Game[] = sched
       .filter((s) => s.player1 !== null && s.player2 !== null)
       .map((s, index) => {
         return {
           matchdayId: matchdayId,
           tournamentId: activeTournament.id,
-          sequence: index + 1 + games.length,
-          homePlayer: tournamentTeams[Number(s.player2) - 1],
-          awayPlayer: tournamentTeams[Number(s.player1) - 1],
+          sequence: index + 1,
+          homePlayer: tournamentTeams[Number(s.player1) - 1],
+          awayPlayer: tournamentTeams[Number(s.player2) - 1],
           state: "OPEN",
         };
       });
-    games.push(...secondRound);
+
+    if (activeTournament.withSecondRound) {
+      const secondRound: Game[] = sched
+        .filter((s) => s.player1 !== null && s.player2 !== null)
+        .map((s, index) => {
+          return {
+            matchdayId: matchdayId,
+            tournamentId: activeTournament.id,
+            sequence: index + 1 + games.length,
+            homePlayer: tournamentTeams[Number(s.player2) - 1],
+            awayPlayer: tournamentTeams[Number(s.player1) - 1],
+            state: "OPEN",
+          };
+        });
+      games.push(...secondRound);
+    }
+    games[0].state = "UPCOMING";
+    return games;
   }
-  games[0].state = "UPCOMING";
-  return games;
 }

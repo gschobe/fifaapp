@@ -60,17 +60,25 @@ export const storeSlice = createSlice({
     setPlayers: (state, action: PayloadAction<Dictionary<Player>>) => {
       const newPlayers = action.payload;
       if (newPlayers) {
-        Object.values(state.players).forEach((p) => {
-          if (p) {
-            const stats = newPlayers[p.name]?.stats;
-            if (stats) {
-              const player = state.players[p.name];
-              if (player) {
-                player.stats = stats;
+        if (Object.keys(state.players).length === 0) {
+          state.players = newPlayers;
+        } else {
+          Object.values(state.players).forEach((p) => {
+            if (p) {
+              const stats = newPlayers[p.name]?.stats;
+              if (stats) {
+                const player = state.players[p.name];
+                if (player) {
+                  player.stats = stats;
+                }
               }
             }
-          }
-        });
+          });
+          const missingPlayers = Object.keys(newPlayers).filter(
+            (p) => Object.keys(state.players).indexOf(p) < 0
+          );
+          missingPlayers.forEach((mp) => (state.players[mp] = newPlayers[mp]));
+        }
       }
     },
   },

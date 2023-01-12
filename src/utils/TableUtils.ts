@@ -133,7 +133,7 @@ export function calulateOverallStats(
 
     return newplayers;
   }
-  const allPlayers = Object.values(matchDays).flatMap((md) => md?.players);
+  const allPlayers = matchDays.flatMap((md) => md?.players);
 
   const playerStats: Dictionary<Player> = {};
   allPlayers.forEach((player) => {
@@ -155,16 +155,18 @@ export function calulateOverallStats(
       const stats = pStat.stats;
       if (stats) {
         stats["gamesPlayed"] =
-          stats.gamesPlayed || 0 + (player.stats?.gamesPlayed || 0);
-        stats["gamesWon"] = stats.gamesWon || 0 + (player.stats?.gamesWon || 0);
+          (stats.gamesPlayed || 0) + (player.stats?.gamesPlayed || 0);
+        stats["gamesWon"] =
+          (stats.gamesWon || 0) + (player.stats?.gamesWon || 0);
         stats["gamesLost"] =
-          stats.gamesLost || 0 + (player.stats?.gamesLost || 0);
-        stats["gamesTie"] = stats.gamesTie || 0 + (player.stats?.gamesTie || 0);
+          (stats.gamesLost || 0) + (player.stats?.gamesLost || 0);
+        stats["gamesTie"] =
+          (stats.gamesTie || 0) + (player.stats?.gamesTie || 0);
         stats["goalsScored"] =
-          stats.goalsScored || 0 + (player.stats?.goalsScored || 0);
+          (stats.goalsScored || 0) + (player.stats?.goalsScored || 0);
         stats["goalsAgainst"] =
-          stats.goalsAgainst || 0 + (player.stats?.goalsAgainst || 0);
-        stats["points"] = stats.points || 0 + (player.stats?.points || 0);
+          (stats.goalsAgainst || 0) + (player.stats?.goalsAgainst || 0);
+        stats["points"] = (stats.points || 0) + (player.stats?.points || 0);
         stats["winPercentage"] = Number(
           (stats.gamesWon / stats.gamesPlayed).toFixed(3)
         );

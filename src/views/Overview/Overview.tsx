@@ -54,11 +54,51 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
     const teams = matches
       .filter((m) => m.player1 !== null && m.player2 !== null)
       .map((t: Match, index) => {
-        return { team: index + 1, player: { p1: t.player1, p2: t.player2 } };
+        return {
+          team: index + 1,
+          players: [t.player1?.toString() || "", t.player2?.toString() || ""],
+        };
       });
 
     console.log(teams);
-    console.log(RoundRobin(teams.length, 1, true));
+    const games = RoundRobin(teams.length, 1, true);
+
+    const filteredGames = games
+      .filter((g: Match) => {
+        const t1 = teams[Number(g.player1) - 1 || 0];
+        const t2 = teams[Number(g.player2) - 1 || 0];
+        const players = t1.players.concat(
+          t2.players.filter((p) => t1.players.indexOf(p) < 0)
+        );
+        return players.length === 4;
+      })
+      .map((g) => {
+        const t1_id = Number(g.player1);
+        const t2_id = Number(g.player2);
+        const t1: string[] = teams[t1_id - 1].players;
+        const t2: string[] = teams[t2_id - 1].players;
+        return {
+          t1: { team: t1_id, players: t1 },
+          t2: { team: t2_id, players: t2 },
+          pause: ["1", "2", "3", "4", "5"]
+            .filter((p) => t1.concat(t2).indexOf(p) < 0)
+            .at(0),
+        };
+      });
+    console.log(filteredGames);
+
+    let pause = 1;
+    const sequencedGames = [];
+    for (let i = 1; sequencedGames.length < 15; i++) {
+      const game = filteredGames.find((g) => g.pause === pause.toString());
+      if (game) {
+        filteredGames.splice(filteredGames.indexOf(game), 1);
+        sequencedGames.push({ sequence: i, game: game });
+      }
+      pause === 5 ? (pause = 1) : pause++;
+    }
+
+    console.log(sequencedGames);
 
     setAddPlayerOpen((addPlayerOpen) => !addPlayerOpen);
   };

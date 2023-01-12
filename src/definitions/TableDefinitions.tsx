@@ -14,9 +14,10 @@ import CorrectGameDialog from "views/Matchday/CorrectGameDialog";
 import RemoveMatchdayAction from "views/Overview/actions/RemoveMatchdayAction";
 import TeamRating from "views/Teams/TeamRating";
 
-export const playerTableColumns: (overview: boolean) => GridColDef[] = (
-  overview
-) => [
+export const playerTableColumns: (
+  overview: boolean,
+  showRankChange?: boolean
+) => GridColDef[] = (overview, showRankChange = true) => [
   {
     field: "rank",
     headerName: "#",
@@ -32,12 +33,12 @@ export const playerTableColumns: (overview: boolean) => GridColDef[] = (
       return (
         <Box display={"flex"} flexDirection="row">
           <div>{params.row.rank}</div>
-          {diff > 0 ? (
+          {showRankChange && diff > 0 ? (
             <Box color="green" fontSize={10}>
               <ArrowUpwardRoundedIcon fontSize="inherit" />
               {diff}
             </Box>
-          ) : diff < 0 ? (
+          ) : showRankChange && diff < 0 ? (
             <Box color="red" fontSize={10}>
               <ArrowDownwardRoundedIcon fontSize="inherit" />
               {Math.abs(diff)}
@@ -142,7 +143,7 @@ export const matchDayColumns: GridColDef[] = [
     field: "at",
     headerName: "Location",
     valueGetter: (params: GridValueGetterParams) =>
-      `${params.row.at?.name}'s place`,
+      params.row.at ? `${params.row.at.name}'s place` : "",
   },
   { field: "state", headerName: "State" },
   { field: "mode", headerName: "Modus" },
@@ -208,14 +209,29 @@ export const matchDayColumns: GridColDef[] = [
   },
 ];
 
-export const gamesColumns: (correctable: boolean) => GridColDef[] = (
-  correctable
-) => [
+export const gamesColumns: (
+  correctable: boolean,
+  all?: boolean
+) => GridColDef[] = (correctable, all = false) => [
   {
     field: "id",
     headerName: "#",
     flex: 0.1,
     valueGetter: (params: GridValueGetterParams) => params.row.sequence,
+  },
+  {
+    field: "tid",
+    headerName: "T-ID",
+    hide: !all,
+    flex: 0.1,
+    valueGetter: (params: GridValueGetterParams) => params.row.tournamentId,
+  },
+  {
+    field: "hometeam",
+    headerName: "",
+    flex: 0.5,
+    valueGetter: (params: GridValueGetterParams) =>
+      params.row.homePlayer.players.map((p: Player) => p?.name).join(" & "),
   },
   {
     field: "home",
@@ -243,6 +259,13 @@ export const gamesColumns: (correctable: boolean) => GridColDef[] = (
     flex: 0.5,
     valueGetter: (params: GridValueGetterParams) =>
       params.row.awayPlayer.team.name,
+  },
+  {
+    field: "awayteam",
+    headerName: "",
+    flex: 0.5,
+    valueGetter: (params: GridValueGetterParams) =>
+      params.row.awayPlayer.players.map((p: Player) => p?.name).join(" & "),
   },
   {
     field: "actions",

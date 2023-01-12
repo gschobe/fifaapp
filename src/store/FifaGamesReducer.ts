@@ -262,6 +262,8 @@ export const matchDaySlice = createSlice({
             });
           }
 
+          tournament.players = getPlayersSortedByPoints(tournament.players);
+
           const sorted = getPlayersSortedByPoints(matchDay.players);
           matchDay.players = sorted;
 

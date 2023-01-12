@@ -39,8 +39,9 @@ export interface TeamImport {
   DEF: number;
   Rating: number;
 }
-
-export type TournamentMode = "1on1" | "2on2";
+export const ALL_TOURNAMENT_MODES: string[] = ["1on1", "2on2", "2on2-odd"];
+type TournamentModeTuple = typeof ALL_TOURNAMENT_MODES;
+export type TournamentMode = TournamentModeTuple[number];
 
 export type TournamentState = "FINISHED" | "RUNNING" | "NEW";
 
@@ -92,7 +93,7 @@ export interface MatchDay {
   tournaments: Tournament[];
   state: TournamentState;
   possibleDraws: PossibleDraw[];
-  meta: {
+  meta?: {
     imported?: boolean;
   };
 }
