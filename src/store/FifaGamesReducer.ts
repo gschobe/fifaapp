@@ -320,7 +320,10 @@ export const matchDaySlice = createSlice({
       }
     },
     deleteMatchDay: (state, action: PayloadAction<string>) => {
-      delete state.matchDays[action.payload];
+      const matchDay = state.matchDays[action.payload];
+      if (matchDay) {
+        matchDay.state = "DELETED";
+      }
     },
   },
 });

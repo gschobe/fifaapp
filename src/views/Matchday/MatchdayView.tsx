@@ -52,6 +52,12 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
   const [drawState, setDrawState] = React.useState<
     "open" | "running" | "finished"
   >("open");
+  const [drawPlayersFirst, setDrawPlayersFirst] = React.useState(true);
+  const handleDrawFirstChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setDrawPlayersFirst(event.target.checked);
+  };
 
   // show live table hooks
   const [liveTable, setLiveTable] = React.useState(true);
@@ -74,7 +80,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
   );
 
   const mdPlayers = getPlayersSortedByPoints(
-    matchday.players,
+    tableAll || !activeTournament ? matchday.players : activeTournament.players,
     liveGame !== undefined,
     liveTable ? liveGame : undefined
   );
@@ -159,6 +165,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
             drawRunning={drawState}
             setDrawRunning={setDrawState}
             teams={activeTournament?.tournamentTeams || []}
+            drawPlayersFirst={drawPlayersFirst}
           />
         )}
       <Box display={"flex"} flexDirection="row">
@@ -198,10 +205,17 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
               <CardHeader color="info">
                 <div style={{ fontSize: "1.5em" }}>Draw</div>
               </CardHeader>
-              <CardBody>
+              <CardBody
+                className={
+                  activeTournament?.tournamentTeams.length === 0
+                    ? "cardCenter"
+                    : ""
+                }
+              >
                 <Box
                   style={{
                     height: "100%",
+                    width: "100%",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
@@ -209,14 +223,24 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                   }}
                 >
                   {activeTournament?.tournamentTeams.length === 0 && (
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      size="large"
-                      onClick={createTournament}
-                    >
-                      Start Draw
-                    </Button>
+                    <>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        size="large"
+                        onClick={createTournament}
+                      >
+                        Start Draw
+                      </Button>
+                      <Box margin="3pt 0" />
+                      <DataSwitch
+                        checked={drawPlayersFirst}
+                        onChange={handleDrawFirstChange}
+                        checkedText={"Players first"}
+                        uncheckedText={"Teams first"}
+                        color="secondary"
+                      />
+                    </>
                   )}
                   {drawState !== "running" && (
                     <>
@@ -270,17 +294,23 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                   <div
                     style={{
                       display: "flex",
-                      flexDirection: "column",
+                      flexDirection: "row",
                       alignItems: "center",
                       marginTop: "10pt",
                       width: "100%",
                     }}
                   >
-                    {tournamenTeamComp(1, upcomingGame?.homePlayer)}
-                    <div style={{ fontWeight: "bolder", fontSize: 20 }}>
+                    {tournamenTeamComp(1, upcomingGame?.homePlayer, "column")}
+                    <div
+                      style={{
+                        fontWeight: "bolder",
+                        fontSize: 20,
+                        margin: "0 10pt",
+                      }}
+                    >
                       {"vs"}
                     </div>
-                    {tournamenTeamComp(2, upcomingGame?.awayPlayer)}
+                    {tournamenTeamComp(2, upcomingGame?.awayPlayer, "column")}
                   </div>
                 ) : (
                   ""
@@ -320,7 +350,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
               </Stack>
             </CardHeader>
             <CardBody>
-              {drawState !== "running" && (mdFinished || activeTournament) && (
+              {drawState !== "running" && (
                 <DataGrid
                   headerHeight={30}
                   rowHeight={30}
@@ -332,7 +362,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                       : []
                   }
                   rows={
-                    mdFinished || gamesAll
+                    mdFinished || gamesAll || !activeTournament
                       ? matchday.tournaments.flatMap((t) => t.games)
                       : activeTournament?.games || []
                   }
@@ -377,11 +407,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                 autoHeight
                 hideFooter
                 getRowId={(row) => row.name}
-                rows={
-                  tableAll || mdFinished || !activeTournament
-                    ? mdPlayers
-                    : activeTournament.players
-                }
+                rows={mdPlayers}
                 columns={playerTableColumns(false)}
               />
             </CardBody>

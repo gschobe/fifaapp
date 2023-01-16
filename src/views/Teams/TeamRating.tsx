@@ -19,7 +19,7 @@ const TeamRating: React.FC<TeamRatingProps & StoreProps> = ({
   const [label, setLabel] = React.useState(value);
   const onChange = React.useCallback((event: any, newValue: number | null) => {
     setValue(newValue || 0);
-    updateTeamRating({ id: id, rating: newValue || 0 });
+    // updateTeamRating({ id: id, rating: newValue || 0 });
   }, []);
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
@@ -28,6 +28,10 @@ const TeamRating: React.FC<TeamRatingProps & StoreProps> = ({
         precision={0.5}
         value={v}
         onChange={onChange}
+        onBlur={() => {
+          console.log("blue");
+          updateTeamRating({ id: id, rating: v || 0 });
+        }}
         size="medium"
         readOnly={readOnly}
         onChangeActive={(event, newHover) => {

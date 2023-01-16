@@ -1,3 +1,4 @@
+import { Link } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Card from "components/Card/Card";
 import CardBody from "components/Card/CardBody";
@@ -25,16 +26,32 @@ const TeamsPage: React.FC<StoreProps> = ({ teams }) => {
               >
                 <div>Teams</div>
                 <div style={{ flexGrow: 1 }} />
+                <Link
+                  fontSize={16}
+                  style={{
+                    color: "white",
+                    fontWeight: "bold",
+                    margin: "0 20pt",
+                  }}
+                  target="_blank"
+                  href="https://os5.mycloud.com/action/share/702d870a-ef5c-41fd-bb61-8e2d2dd81cbb"
+                >
+                  GET EXCEL
+                </Link>
                 <ImportTeamsAction />
               </div>
             </CardHeader>
             <CardBody>
               <DataGrid
                 experimentalFeatures={{ newEditingApi: true }}
+                initialState={{
+                  sorting: {
+                    sortModel: [{ field: "OVA", sort: "desc" }],
+                  },
+                }}
                 disableSelectionOnClick
                 headerHeight={35}
                 autoPageSize
-                //   editMode="row"
                 rowHeight={30}
                 getRowId={(row) => row.name}
                 rows={Object.values(teams)}

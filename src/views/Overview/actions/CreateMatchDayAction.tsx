@@ -52,12 +52,25 @@ const CreateMatchDayAction: React.FC<
   const players = React.useMemo(() => {
     return Object.values(player);
   }, [player]);
+  const allLeagues = React.useMemo(() => {
+    const leagues = Object.values(teams).map((t) => getLeageString(t));
+    return Array.from(new Set(leagues));
+  }, [teams]);
 
   const classes = useStyles();
   const [playerName, setPlayerName] = React.useState<string[]>([]);
   const [location, setLocation] = React.useState<string>();
   const [ratings, setRatings] = React.useState<number[]>([]);
-  const [includeSecondRound, setIncludeSecondRound] = React.useState(false);
+  const [selectedLeagues, setSelectedLeagues] = React.useState<string[]>([]);
+  const [includeSecondRound, setIncludeSecondRound] = React.useState(
+    activeMatchday?.tournaments
+      ? activeMatchday?.tournaments[activeMatchday?.tournaments.length - 1]
+          .withSecondRound
+      : false
+  );
+  const [reuseTeamsSelection, setReuseTeamsSelection] = React.useState(
+    activeMatchday?.tournaments ? activeMatchday.tournaments.length > 0 : false
+  );
 
   const [newTournamentOpen, setNewTournamentOpen] = React.useState(false);
 
@@ -65,8 +78,17 @@ const CreateMatchDayAction: React.FC<
 
   const [selectedTeams, setSelectedTeams] = React.useState<
     (Team | undefined)[]
-  >([]);
-  const [selectionModel, setSelectionModel] = React.useState<GridRowId[]>([]);
+  >(
+    reuseTeamsSelection && activeMatchday
+      ? [
+          ...activeMatchday?.tournaments[activeMatchday?.tournaments.length - 1]
+            .useableTeams,
+        ]
+      : []
+  );
+  const [selectionModel, setSelectionModel] = React.useState<GridRowId[]>(
+    selectedTeams ? selectedTeams.map((t) => t?.name || "") : []
+  );
 
   const handleNewTournamenClick: () => void = () => {
     setNewTournamentOpen((newTournamentOpen) => !newTournamentOpen);
@@ -75,9 +97,24 @@ const CreateMatchDayAction: React.FC<
   const handleIncludeSecondRoundChanged: (event: any) => void = (event) => {
     setIncludeSecondRound(event.target.checked);
   };
+  const handleReuseTeamsSelectionChanged: (event: any) => void = (event) => {
+    setReuseTeamsSelection(event.target.checked);
+    if (event.target.checked && activeMatchday) {
+      const selectedTeams = [
+        ...activeMatchday?.tournaments[activeMatchday?.tournaments.length - 1]
+          .useableTeams,
+      ];
+      setSelectedTeams(selectedTeams);
+      setSelectionModel(() => selectedTeams.map((t) => t?.name || ""));
+    }
+  };
 
   const steps = createNewMatchday
-    ? ["Select matchday settings", "Select Teams", "Create tournament"]
+    ? [
+        "Select matchday settings",
+        "Select tournament settings",
+        "Create tournament",
+      ]
     : ["Select Teams", "Create tournament"];
 
   const [mode, setMode] = React.useState<TournamentMode>();
@@ -107,10 +144,26 @@ const CreateMatchDayAction: React.FC<
       target: { value },
     } = event;
     const ratings = typeof value === "string" ? value.split(",") : value;
-    setRatings(ratings);
+    setRatings(ratings.filter((r: string) => r !== undefined));
+  };
+
+  const handleLeagueSelectionChange: (event: any) => void = (event) => {
+    const {
+      target: { value },
+    } = event;
+    const selected = typeof value === "string" ? value.split(",") : value;
+    setSelectedLeagues(selected.filter((s: string) => s !== undefined));
+  };
+
+  const updateSelectedTeams = () => {
     const selectedTeams = [
       ...Object.values(teams).filter(
-        (team) => team && ratings.includes(team.rating)
+        (team) =>
+          team &&
+          (ratings.length === 0 ? true : ratings.includes(team.rating)) &&
+          (selectedLeagues.length === 0
+            ? true
+            : selectedLeagues.includes(getLeageString(team)))
       ),
     ];
     setSelectedTeams(selectedTeams);
@@ -118,18 +171,23 @@ const CreateMatchDayAction: React.FC<
   };
 
   const handleNext = () => {
+    updateSelectedTeams();
     if (activeStep === steps.length - 1) {
       const matchdayPlayers = createNewMatchday
         ? newPlayers(playerName)
         : activeMatchday?.players || [];
 
-      const usabeleTeams = [
-        ...Object.values(teams).filter(
-          (team) => team && selectionModel.includes(team.name)
-          // &&
-          // !activeMatchday?.usedTeams.includes(team)
-        ),
-      ];
+      const usabeleTeams =
+        reuseTeamsSelection && activeMatchday
+          ? activeMatchday.tournaments[activeMatchday.tournaments.length - 1]
+              .useableTeams
+          : [
+              ...Object.values(teams).filter(
+                (team) => team && selectionModel.includes(team.name)
+                // &&
+                // !activeMatchday?.usedTeams.includes(team)
+              ),
+            ];
       const tournament: Tournament = {
         id: createNewMatchday
           ? "1"
@@ -194,7 +252,11 @@ const CreateMatchDayAction: React.FC<
     (!createNewMatchday && activeStep === 1);
 
   const buttonDisabled =
-    (showTSettings && ratings.length === 0) ||
+    (showTeamsSelection && selectedTeams.length === 0) || //
+    (showTSettings &&
+      selectedLeagues.length === 0 &&
+      ratings.length === 0 &&
+      !reuseTeamsSelection) ||
     (showMdSettings &&
       (mode === undefined ||
         playerName.length < 2 ||
@@ -241,6 +303,14 @@ const CreateMatchDayAction: React.FC<
               handleRatingSelectionChange={handleRatingSelectionChange}
               handleIncludeChanged={handleIncludeSecondRoundChanged}
               includeSecondRound={includeSecondRound}
+              reuseTeamsSelection={reuseTeamsSelection}
+              handleReuseTeamsSelection={handleReuseTeamsSelectionChanged}
+              lastTournamentExists={
+                activeMatchday ? activeMatchday.tournaments.length > 0 : false
+              }
+              leagues={allLeagues}
+              selectedLeagues={selectedLeagues}
+              handleLeagueChange={handleLeagueSelectionChange}
             />
           )}
           <Box
@@ -296,6 +366,10 @@ const CreateMatchDayAction: React.FC<
 };
 
 export default storeConnector(matchDayConnector(CreateMatchDayAction));
+
+function getLeageString(t: Team | undefined): string {
+  return `${t?.league} - ${t?.country}` || "";
+}
 
 function newPlayers(playerName: string[]): Player[] {
   return playerName.map((p) => {

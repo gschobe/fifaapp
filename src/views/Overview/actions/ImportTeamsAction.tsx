@@ -41,6 +41,10 @@ const ImportTeamsAction: React.FC<StoreProps> = ({ setTeams }) => {
           country: team.Country,
           league: team.League,
           rating: team.Rating,
+          OVA: team.OVA,
+          ATT: team.ATT,
+          MID: team.MID,
+          DEF: team.DEF,
         };
       });
       setDefaultFileContent(teams);
@@ -73,6 +77,10 @@ const ImportTeamsAction: React.FC<StoreProps> = ({ setTeams }) => {
           country: team.Country,
           league: team.League,
           rating: team.Rating,
+          OVA: team.OVA,
+          ATT: team.ATT,
+          MID: team.MID,
+          DEF: team.DEF,
         };
       });
       setFileContent(teams);

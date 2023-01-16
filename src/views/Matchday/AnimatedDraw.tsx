@@ -12,12 +12,14 @@ interface Props {
   drawRunning: "open" | "running" | "finished";
   setDrawRunning: (b: "open" | "running" | "finished") => void;
   teams: TournamentTeam[];
+  drawPlayersFirst?: boolean;
 }
 
 const AnimatedDraw: React.FC<Props> = ({
   drawRunning,
   setDrawRunning,
   teams,
+  drawPlayersFirst = true,
 }) => {
   //   const [open, setOpen] = React.useState(drawRunning);
   const [seq, setSeq] = React.useState(0);
@@ -28,20 +30,15 @@ const AnimatedDraw: React.FC<Props> = ({
 
   const animationSequence = React.useMemo(() => {
     const sequence: string[] = [];
-    teams.forEach((t) => sequence.push(t.team?.name || ""));
-    let pIndex = 0;
-    for (
-      let i = 0;
-      i <
-      teams.flatMap((t) => t.players.length).reduce((a, b) => a + b, 0) /
-        teams.length;
-      i++
-    ) {
-      teams.forEach((t) => sequence.push(t.players[pIndex].name));
-      pIndex++;
+    if (drawPlayersFirst) {
+      addPlayersToSequence(teams, sequence);
+      teams.forEach((t) => sequence.push(t.team?.name || ""));
+    } else {
+      teams.forEach((t) => sequence.push(t.team?.name || ""));
+      addPlayersToSequence(teams, sequence);
     }
     return sequence;
-  }, teams);
+  }, [teams, drawPlayersFirst]);
 
   React.useEffect(() => {
     const timer = setInterval(() => {
@@ -182,3 +179,16 @@ const AnimatedDraw: React.FC<Props> = ({
 };
 
 export default AnimatedDraw;
+function addPlayersToSequence(teams: TournamentTeam[], sequence: string[]) {
+  let pIndex = 0;
+  for (
+    let i = 0;
+    i <
+    teams.flatMap((t) => t.players.length).reduce((a, b) => a + b, 0) /
+      teams.length;
+    i++
+  ) {
+    teams.forEach((t) => sequence.push(t.players[pIndex].name));
+    pIndex++;
+  }
+}

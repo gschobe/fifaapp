@@ -12,6 +12,7 @@ import {
   Player,
   TournamentMode,
 } from "definitions/Definitions";
+import { Button } from "@material-ui/core";
 
 export interface Props {
   playerName: string[];
@@ -29,6 +30,10 @@ const MatchDaySettings: React.FC<Props> = ({
   mode,
   handleLocaitonSelectionChange,
 }) => {
+  const [playerOpen, setPlayerOpen] = React.useState(false);
+  const mode2on2error =
+    mode === "2on2" && (playerName.length < 4 || playerName.length % 2 !== 0);
+  const mode2on2oddError = mode === "2on2-odd" && playerName.length % 2 !== 1;
   return (
     <Box
       style={{
@@ -61,17 +66,14 @@ const MatchDaySettings: React.FC<Props> = ({
             labelId="demo-multiple-checkbox-label"
             id="demo-multiple-checkbox"
             multiple
+            open={playerOpen}
+            onClose={() => setPlayerOpen(false)}
+            onOpen={() => setPlayerOpen(true)}
             value={playerName}
             onChange={handleSelectionChange}
             renderValue={(selected: any) => selected.join(", ")}
-            error={
-              playerName.length < 2 ||
-              (mode === "2on2" &&
-                (playerName.length < 4 || playerName.length % 2 !== 0)) ||
-              (mode === "2on2-odd" && playerName.length !== 5)
-            }
+            error={playerName.length < 2 || mode2on2error || mode2on2oddError}
           >
-            <MenuItem key={"undef"} value={""}></MenuItem>
             {players.map((p) => {
               if (p) {
                 return (
@@ -85,13 +87,22 @@ const MatchDaySettings: React.FC<Props> = ({
                 );
               }
             })}
+            <MenuItem>
+              <Button
+                onClick={() => setPlayerOpen(false)}
+                color="primary"
+                variant="contained"
+              >
+                CONFIRM
+              </Button>
+            </MenuItem>
           </Select>
         </FormControl>
         <FormControl style={{ marginTop: "10px", width: "80%" }}>
           <InputLabel style={{ paddingLeft: "5px" }}>Mode</InputLabel>
           <Select
             error={mode === undefined}
-            defaultValue=""
+            value={mode ? mode : ""}
             label="Mode"
             onChange={handleModeChange}
           >

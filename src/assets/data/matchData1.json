@@ -3598,6 +3598,5662 @@
           }
         ]
       }
-    ]
+    ],
+    "meta": { "imported": true }
+  },
+  {
+    "id": "2",
+    "startDate": "2023-01-13T19:11:21.146Z",
+    "at": {
+      "name": "Fertz",
+      "stats": {
+        "gamesPlayed": 16,
+        "gamesLost": 9,
+        "gamesTie": 0,
+        "gamesWon": 7,
+        "goalsScored": 38,
+        "goalsAgainst": 40,
+        "points": 21,
+        "winPercentage": 0.438,
+        "pointsPerGame": 1.3
+      }
+    },
+    "players": [
+      {
+        "name": "Gernot",
+        "stats": {
+          "gamesPlayed": 16,
+          "gamesLost": 6,
+          "gamesTie": 2,
+          "gamesWon": 8,
+          "goalsScored": 34,
+          "goalsAgainst": 22,
+          "points": 26,
+          "winPercentage": 0.5,
+          "pointsPerGame": 1.6
+        },
+        "rank": 1,
+        "previousRank": 1
+      },
+      {
+        "name": "Fertz",
+        "stats": {
+          "gamesPlayed": 16,
+          "gamesLost": 6,
+          "gamesTie": 2,
+          "gamesWon": 8,
+          "goalsScored": 31,
+          "goalsAgainst": 25,
+          "points": 26,
+          "winPercentage": 0.5,
+          "pointsPerGame": 1.6
+        },
+        "rank": 2,
+        "previousRank": 2
+      },
+      {
+        "name": "Dele",
+        "stats": {
+          "gamesPlayed": 16,
+          "gamesLost": 7,
+          "gamesTie": 2,
+          "gamesWon": 7,
+          "goalsScored": 23,
+          "goalsAgainst": 33,
+          "points": 23,
+          "winPercentage": 0.438,
+          "pointsPerGame": 1.4
+        },
+        "rank": 3,
+        "previousRank": 3
+      },
+      {
+        "name": "Peter",
+        "stats": {
+          "gamesPlayed": 16,
+          "gamesLost": 9,
+          "gamesTie": 2,
+          "gamesWon": 5,
+          "goalsScored": 24,
+          "goalsAgainst": 32,
+          "points": 17,
+          "winPercentage": 0.313,
+          "pointsPerGame": 1.1
+        },
+        "rank": 4,
+        "previousRank": 4
+      }
+    ],
+    "mode": "2on2",
+    "usedTeams": [
+      {
+        "name": "Atalanta ",
+        "country": "Italian",
+        "league": "Serie A",
+        "rating": 4.5,
+        "OVA": 79,
+        "ATT": 81,
+        "MID": 79,
+        "DEF": 77
+      },
+      {
+        "name": "Borussia Dortmund ",
+        "country": "German",
+        "league": "1. Bundesliga",
+        "rating": 4.5,
+        "OVA": 81,
+        "ATT": 73,
+        "MID": 81,
+        "DEF": 82
+      },
+      {
+        "name": "Sevilla FC ",
+        "country": "Spain",
+        "league": "Primera Division",
+        "rating": 4.5,
+        "OVA": 81,
+        "ATT": 78,
+        "MID": 82,
+        "DEF": 80
+      },
+      {
+        "name": "Villarreal CF ",
+        "country": "Spain",
+        "league": "Primera Division",
+        "rating": 4.5,
+        "OVA": 80,
+        "ATT": 82,
+        "MID": 80,
+        "DEF": 79
+      },
+      {
+        "name": "Tottenham Hotspur ",
+        "country": "English",
+        "league": "Premier League",
+        "rating": 4.5,
+        "OVA": 81,
+        "ATT": 83,
+        "MID": 81,
+        "DEF": 80
+      },
+      {
+        "name": "Athletic Club de Bilbao ",
+        "country": "Spain",
+        "league": "Primera Division",
+        "rating": 4.5,
+        "OVA": 79,
+        "ATT": 80,
+        "MID": 78,
+        "DEF": 79
+      },
+      {
+        "name": "FC Augsburg ",
+        "country": "German",
+        "league": "1. Bundesliga",
+        "rating": 4,
+        "OVA": 75,
+        "ATT": 74,
+        "MID": 74,
+        "DEF": 74
+      },
+      {
+        "name": "Clube Atlético Mineiro ",
+        "country": "Campeonato",
+        "league": "Brasileiro Série A",
+        "rating": 4,
+        "OVA": 75,
+        "ATT": 73,
+        "MID": 77,
+        "DEF": 76
+      },
+      {
+        "name": "TSG Hoffenheim ",
+        "country": "German",
+        "league": "1. Bundesliga",
+        "rating": 4,
+        "OVA": 76,
+        "ATT": 77,
+        "MID": 76,
+        "DEF": 76
+      },
+      {
+        "name": "Olympique de Marseille ",
+        "country": "French",
+        "league": "Ligue 1",
+        "rating": 4,
+        "OVA": 77,
+        "ATT": 79,
+        "MID": 78,
+        "DEF": 76
+      },
+      {
+        "name": "Leeds United ",
+        "country": "English",
+        "league": "Premier League",
+        "rating": 4,
+        "OVA": 76,
+        "ATT": 77,
+        "MID": 76,
+        "DEF": 75
+      },
+      {
+        "name": "FC Porto ",
+        "country": "Portuguese",
+        "league": "Primeira Liga",
+        "rating": 4,
+        "OVA": 78,
+        "ATT": 80,
+        "MID": 78,
+        "DEF": 76
+      },
+      {
+        "name": "Manchester City ",
+        "country": "English",
+        "league": "Premier League",
+        "rating": 5,
+        "OVA": 85,
+        "ATT": 85,
+        "MID": 86,
+        "DEF": 86
+      },
+      {
+        "name": "Inter ",
+        "country": "Italian",
+        "league": "Serie A",
+        "rating": 5,
+        "OVA": 83,
+        "ATT": 85,
+        "MID": 83,
+        "DEF": 83
+      },
+      {
+        "name": "Chelsea ",
+        "country": "English",
+        "league": "Premier League",
+        "rating": 5,
+        "OVA": 84,
+        "ATT": 83,
+        "MID": 85,
+        "DEF": 82
+      },
+      {
+        "name": "Paris Saint-Germain ",
+        "country": "French",
+        "league": "Ligue 1",
+        "rating": 5,
+        "OVA": 85,
+        "ATT": 87,
+        "MID": 83,
+        "DEF": 83
+      }
+    ],
+    "tournaments": [
+      {
+        "id": "1",
+        "tournamentTeams": [
+          {
+            "players": [
+              {
+                "name": "Gernot",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Peter",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "Atalanta ",
+              "country": "Italian",
+              "league": "Serie A",
+              "rating": 4.5,
+              "OVA": 79,
+              "ATT": 81,
+              "MID": 79,
+              "DEF": 77
+            }
+          },
+          {
+            "players": [
+              {
+                "name": "Fertz",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Dele",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "Borussia Dortmund ",
+              "country": "German",
+              "league": "1. Bundesliga",
+              "rating": 4.5,
+              "OVA": 81,
+              "ATT": 73,
+              "MID": 81,
+              "DEF": 82
+            }
+          }
+        ],
+        "players": [
+          {
+            "name": "Gernot",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 6,
+              "goalsAgainst": 3,
+              "points": 3,
+              "winPercentage": 0.5,
+              "pointsPerGame": 1.5
+            },
+            "rank": 1,
+            "previousRank": 3
+          },
+          {
+            "name": "Peter",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 6,
+              "goalsAgainst": 3,
+              "points": 3,
+              "winPercentage": 0.5,
+              "pointsPerGame": 1.5
+            },
+            "rank": 1,
+            "previousRank": 3
+          },
+          {
+            "name": "Dele",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 3,
+              "goalsAgainst": 6,
+              "points": 3,
+              "winPercentage": 0.5,
+              "pointsPerGame": 1.5
+            },
+            "rank": 3,
+            "previousRank": 1
+          },
+          {
+            "name": "Fertz",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 3,
+              "goalsAgainst": 6,
+              "points": 3,
+              "winPercentage": 0.5,
+              "pointsPerGame": 1.5
+            },
+            "rank": 3,
+            "previousRank": 1
+          }
+        ],
+        "games": [
+          {
+            "matchdayId": "2",
+            "tournamentId": "1",
+            "sequence": 1,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Atalanta ",
+                "country": "Italian",
+                "league": "Serie A",
+                "rating": 4.5,
+                "OVA": 79,
+                "ATT": 81,
+                "MID": 79,
+                "DEF": 77
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Borussia Dortmund ",
+                "country": "German",
+                "league": "1. Bundesliga",
+                "rating": 4.5,
+                "OVA": 81,
+                "ATT": 73,
+                "MID": 81,
+                "DEF": 82
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 1,
+            "goalsAway": 2
+          },
+          {
+            "matchdayId": "2",
+            "tournamentId": "1",
+            "sequence": 2,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Borussia Dortmund ",
+                "country": "German",
+                "league": "1. Bundesliga",
+                "rating": 4.5,
+                "OVA": 81,
+                "ATT": 73,
+                "MID": 81,
+                "DEF": 82
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Atalanta ",
+                "country": "Italian",
+                "league": "Serie A",
+                "rating": 4.5,
+                "OVA": 79,
+                "ATT": 81,
+                "MID": 79,
+                "DEF": 77
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 1,
+            "goalsAway": 5
+          }
+        ],
+        "state": "FINISHED",
+        "withSecondRound": true,
+        "useableTeams": [
+          {
+            "name": "Manchester United ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5,
+            "OVA": 82,
+            "ATT": 81,
+            "MID": 84,
+            "DEF": 81
+          },
+          {
+            "name": "Juventus ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5,
+            "OVA": 82,
+            "ATT": 83,
+            "MID": 80,
+            "DEF": 81
+          },
+          {
+            "name": "Tottenham Hotspur ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5,
+            "OVA": 81,
+            "ATT": 83,
+            "MID": 81,
+            "DEF": 80
+          },
+          {
+            "name": "RB Leipzig ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5,
+            "OVA": 81,
+            "ATT": 83,
+            "MID": 81,
+            "DEF": 80
+          },
+          {
+            "name": "AC Milan ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5,
+            "OVA": 81,
+            "ATT": 81,
+            "MID": 81,
+            "DEF": 80
+          },
+          {
+            "name": "Sevilla FC ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5,
+            "OVA": 81,
+            "ATT": 78,
+            "MID": 82,
+            "DEF": 80
+          },
+          {
+            "name": "Borussia Dortmund ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5,
+            "OVA": 81,
+            "ATT": 73,
+            "MID": 81,
+            "DEF": 82
+          },
+          {
+            "name": "Arsenal ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5,
+            "OVA": 80,
+            "ATT": 84,
+            "MID": 81,
+            "DEF": 79
+          },
+          {
+            "name": "Villarreal CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5,
+            "OVA": 80,
+            "ATT": 82,
+            "MID": 80,
+            "DEF": 79
+          },
+          {
+            "name": "Roma ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5,
+            "OVA": 80,
+            "ATT": 82,
+            "MID": 78,
+            "DEF": 81
+          },
+          {
+            "name": "Bayer 04 Leverkusen ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5,
+            "OVA": 80,
+            "ATT": 81,
+            "MID": 79,
+            "DEF": 80
+          },
+          {
+            "name": "Napoli ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5,
+            "OVA": 80,
+            "ATT": 80,
+            "MID": 81,
+            "DEF": 79
+          },
+          {
+            "name": "Leicester City ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 80,
+            "MID": 80,
+            "DEF": 78
+          },
+          {
+            "name": "Athletic Club de Bilbao ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 80,
+            "MID": 78,
+            "DEF": 79
+          },
+          {
+            "name": "Real Betis Balompié ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 80,
+            "MID": 80,
+            "DEF": 77
+          },
+          {
+            "name": "SL Benfica ",
+            "country": "Portuguese",
+            "league": "Primeira Liga",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 80,
+            "MID": 79,
+            "DEF": 78
+          },
+          {
+            "name": "West Ham United ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 79,
+            "MID": 80,
+            "DEF": 78
+          },
+          {
+            "name": "Atalanta ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 81,
+            "MID": 79,
+            "DEF": 77
+          },
+          {
+            "name": "Lazio ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 80,
+            "MID": 79,
+            "DEF": 78
+          },
+          {
+            "name": "Aston Villa ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 78,
+            "MID": 78,
+            "DEF": 80
+          }
+        ],
+        "started": "13.1.2023, 20:36:47",
+        "finished": "13.1.2023, 21:01:30"
+      },
+      {
+        "id": "2",
+        "tournamentTeams": [
+          {
+            "players": [
+              {
+                "name": "Dele",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Peter",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "Sevilla FC ",
+              "country": "Spain",
+              "league": "Primera Division",
+              "rating": 4.5,
+              "OVA": 81,
+              "ATT": 78,
+              "MID": 82,
+              "DEF": 80
+            }
+          },
+          {
+            "players": [
+              {
+                "name": "Gernot",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Fertz",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "Villarreal CF ",
+              "country": "Spain",
+              "league": "Primera Division",
+              "rating": 4.5,
+              "OVA": 80,
+              "ATT": 82,
+              "MID": 80,
+              "DEF": 79
+            }
+          }
+        ],
+        "players": [
+          {
+            "name": "Gernot",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 2,
+              "goalsAgainst": 1,
+              "points": 3,
+              "winPercentage": 0.5,
+              "pointsPerGame": 1.5
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Fertz",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 2,
+              "goalsAgainst": 1,
+              "points": 3,
+              "winPercentage": 0.5,
+              "pointsPerGame": 1.5
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Peter",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 1,
+              "goalsAgainst": 2,
+              "points": 3,
+              "winPercentage": 0.5,
+              "pointsPerGame": 1.5
+            },
+            "rank": 3,
+            "previousRank": 3
+          },
+          {
+            "name": "Dele",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 1,
+              "goalsAgainst": 2,
+              "points": 3,
+              "winPercentage": 0.5,
+              "pointsPerGame": 1.5
+            },
+            "rank": 3,
+            "previousRank": 3
+          }
+        ],
+        "games": [
+          {
+            "matchdayId": "2",
+            "tournamentId": "2",
+            "sequence": 1,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Sevilla FC ",
+                "country": "Spain",
+                "league": "Primera Division",
+                "rating": 4.5,
+                "OVA": 81,
+                "ATT": 78,
+                "MID": 82,
+                "DEF": 80
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Villarreal CF ",
+                "country": "Spain",
+                "league": "Primera Division",
+                "rating": 4.5,
+                "OVA": 80,
+                "ATT": 82,
+                "MID": 80,
+                "DEF": 79
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 0,
+            "goalsAway": 2
+          },
+          {
+            "matchdayId": "2",
+            "tournamentId": "2",
+            "sequence": 2,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Villarreal CF ",
+                "country": "Spain",
+                "league": "Primera Division",
+                "rating": 4.5,
+                "OVA": 80,
+                "ATT": 82,
+                "MID": 80,
+                "DEF": 79
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Sevilla FC ",
+                "country": "Spain",
+                "league": "Primera Division",
+                "rating": 4.5,
+                "OVA": 81,
+                "ATT": 78,
+                "MID": 82,
+                "DEF": 80
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 0,
+            "goalsAway": 1
+          }
+        ],
+        "state": "FINISHED",
+        "withSecondRound": true,
+        "useableTeams": [
+          {
+            "name": "Manchester United ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5,
+            "OVA": 82,
+            "ATT": 81,
+            "MID": 84,
+            "DEF": 81
+          },
+          {
+            "name": "Juventus ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5,
+            "OVA": 82,
+            "ATT": 83,
+            "MID": 80,
+            "DEF": 81
+          },
+          {
+            "name": "Tottenham Hotspur ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5,
+            "OVA": 81,
+            "ATT": 83,
+            "MID": 81,
+            "DEF": 80
+          },
+          {
+            "name": "RB Leipzig ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5,
+            "OVA": 81,
+            "ATT": 83,
+            "MID": 81,
+            "DEF": 80
+          },
+          {
+            "name": "AC Milan ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5,
+            "OVA": 81,
+            "ATT": 81,
+            "MID": 81,
+            "DEF": 80
+          },
+          {
+            "name": "Sevilla FC ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5,
+            "OVA": 81,
+            "ATT": 78,
+            "MID": 82,
+            "DEF": 80
+          },
+          {
+            "name": "Borussia Dortmund ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5,
+            "OVA": 81,
+            "ATT": 73,
+            "MID": 81,
+            "DEF": 82
+          },
+          {
+            "name": "Arsenal ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5,
+            "OVA": 80,
+            "ATT": 84,
+            "MID": 81,
+            "DEF": 79
+          },
+          {
+            "name": "Villarreal CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5,
+            "OVA": 80,
+            "ATT": 82,
+            "MID": 80,
+            "DEF": 79
+          },
+          {
+            "name": "Roma ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5,
+            "OVA": 80,
+            "ATT": 82,
+            "MID": 78,
+            "DEF": 81
+          },
+          {
+            "name": "Bayer 04 Leverkusen ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5,
+            "OVA": 80,
+            "ATT": 81,
+            "MID": 79,
+            "DEF": 80
+          },
+          {
+            "name": "Napoli ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5,
+            "OVA": 80,
+            "ATT": 80,
+            "MID": 81,
+            "DEF": 79
+          },
+          {
+            "name": "Leicester City ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 80,
+            "MID": 80,
+            "DEF": 78
+          },
+          {
+            "name": "Athletic Club de Bilbao ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 80,
+            "MID": 78,
+            "DEF": 79
+          },
+          {
+            "name": "Real Betis Balompié ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 80,
+            "MID": 80,
+            "DEF": 77
+          },
+          {
+            "name": "SL Benfica ",
+            "country": "Portuguese",
+            "league": "Primeira Liga",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 80,
+            "MID": 79,
+            "DEF": 78
+          },
+          {
+            "name": "West Ham United ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 79,
+            "MID": 80,
+            "DEF": 78
+          },
+          {
+            "name": "Atalanta ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 81,
+            "MID": 79,
+            "DEF": 77
+          },
+          {
+            "name": "Lazio ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 80,
+            "MID": 79,
+            "DEF": 78
+          },
+          {
+            "name": "Aston Villa ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 78,
+            "MID": 78,
+            "DEF": 80
+          }
+        ],
+        "started": "13.1.2023, 21:23:18",
+        "finished": "13.1.2023, 21:42:14"
+      },
+      {
+        "id": "3",
+        "tournamentTeams": [
+          {
+            "players": [
+              {
+                "name": "Peter",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Fertz",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "Tottenham Hotspur ",
+              "country": "English",
+              "league": "Premier League",
+              "rating": 4.5,
+              "OVA": 81,
+              "ATT": 83,
+              "MID": 81,
+              "DEF": 80
+            }
+          },
+          {
+            "players": [
+              {
+                "name": "Dele",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Gernot",
+                "stats": {
+                  "gamesPlayed": 0,
+                  "gamesLost": 0,
+                  "gamesTie": 0,
+                  "gamesWon": 0,
+                  "goalsScored": 0,
+                  "goalsAgainst": 0,
+                  "points": 0
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "Athletic Club de Bilbao ",
+              "country": "Spain",
+              "league": "Primera Division",
+              "rating": 4.5,
+              "OVA": 79,
+              "ATT": 80,
+              "MID": 78,
+              "DEF": 79
+            }
+          }
+        ],
+        "players": [
+          {
+            "name": "Peter",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 4,
+              "goalsAgainst": 3,
+              "points": 3,
+              "winPercentage": 0.5,
+              "pointsPerGame": 1.5
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Fertz",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 4,
+              "goalsAgainst": 3,
+              "points": 3,
+              "winPercentage": 0.5,
+              "pointsPerGame": 1.5
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Gernot",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 3,
+              "goalsAgainst": 4,
+              "points": 3,
+              "winPercentage": 0.5,
+              "pointsPerGame": 1.5
+            },
+            "rank": 3,
+            "previousRank": 3
+          },
+          {
+            "name": "Dele",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 3,
+              "goalsAgainst": 4,
+              "points": 3,
+              "winPercentage": 0.5,
+              "pointsPerGame": 1.5
+            },
+            "rank": 3,
+            "previousRank": 3
+          }
+        ],
+        "games": [
+          {
+            "matchdayId": "2",
+            "tournamentId": "3",
+            "sequence": 1,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Tottenham Hotspur ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 4.5,
+                "OVA": 81,
+                "ATT": 83,
+                "MID": 81,
+                "DEF": 80
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Athletic Club de Bilbao ",
+                "country": "Spain",
+                "league": "Primera Division",
+                "rating": 4.5,
+                "OVA": 79,
+                "ATT": 80,
+                "MID": 78,
+                "DEF": 79
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 2,
+            "goalsAway": 0
+          },
+          {
+            "matchdayId": "2",
+            "tournamentId": "3",
+            "sequence": 2,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Athletic Club de Bilbao ",
+                "country": "Spain",
+                "league": "Primera Division",
+                "rating": 4.5,
+                "OVA": 79,
+                "ATT": 80,
+                "MID": 78,
+                "DEF": 79
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 0,
+                    "gamesLost": 0,
+                    "gamesTie": 0,
+                    "gamesWon": 0,
+                    "goalsScored": 0,
+                    "goalsAgainst": 0,
+                    "points": 0
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Tottenham Hotspur ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 4.5,
+                "OVA": 81,
+                "ATT": 83,
+                "MID": 81,
+                "DEF": 80
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 3,
+            "goalsAway": 2
+          }
+        ],
+        "state": "FINISHED",
+        "withSecondRound": true,
+        "useableTeams": [
+          {
+            "name": "Manchester United ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5,
+            "OVA": 82,
+            "ATT": 81,
+            "MID": 84,
+            "DEF": 81
+          },
+          {
+            "name": "Juventus ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5,
+            "OVA": 82,
+            "ATT": 83,
+            "MID": 80,
+            "DEF": 81
+          },
+          {
+            "name": "Tottenham Hotspur ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5,
+            "OVA": 81,
+            "ATT": 83,
+            "MID": 81,
+            "DEF": 80
+          },
+          {
+            "name": "RB Leipzig ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5,
+            "OVA": 81,
+            "ATT": 83,
+            "MID": 81,
+            "DEF": 80
+          },
+          {
+            "name": "AC Milan ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5,
+            "OVA": 81,
+            "ATT": 81,
+            "MID": 81,
+            "DEF": 80
+          },
+          {
+            "name": "Sevilla FC ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5,
+            "OVA": 81,
+            "ATT": 78,
+            "MID": 82,
+            "DEF": 80
+          },
+          {
+            "name": "Borussia Dortmund ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5,
+            "OVA": 81,
+            "ATT": 73,
+            "MID": 81,
+            "DEF": 82
+          },
+          {
+            "name": "Arsenal ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5,
+            "OVA": 80,
+            "ATT": 84,
+            "MID": 81,
+            "DEF": 79
+          },
+          {
+            "name": "Villarreal CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5,
+            "OVA": 80,
+            "ATT": 82,
+            "MID": 80,
+            "DEF": 79
+          },
+          {
+            "name": "Roma ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5,
+            "OVA": 80,
+            "ATT": 82,
+            "MID": 78,
+            "DEF": 81
+          },
+          {
+            "name": "Bayer 04 Leverkusen ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4.5,
+            "OVA": 80,
+            "ATT": 81,
+            "MID": 79,
+            "DEF": 80
+          },
+          {
+            "name": "Napoli ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5,
+            "OVA": 80,
+            "ATT": 80,
+            "MID": 81,
+            "DEF": 79
+          },
+          {
+            "name": "Leicester City ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 80,
+            "MID": 80,
+            "DEF": 78
+          },
+          {
+            "name": "Athletic Club de Bilbao ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 80,
+            "MID": 78,
+            "DEF": 79
+          },
+          {
+            "name": "Real Betis Balompié ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 80,
+            "MID": 80,
+            "DEF": 77
+          },
+          {
+            "name": "SL Benfica ",
+            "country": "Portuguese",
+            "league": "Primeira Liga",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 80,
+            "MID": 79,
+            "DEF": 78
+          },
+          {
+            "name": "West Ham United ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 79,
+            "MID": 80,
+            "DEF": 78
+          },
+          {
+            "name": "Atalanta ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 81,
+            "MID": 79,
+            "DEF": 77
+          },
+          {
+            "name": "Lazio ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 80,
+            "MID": 79,
+            "DEF": 78
+          },
+          {
+            "name": "Aston Villa ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4.5,
+            "OVA": 79,
+            "ATT": 78,
+            "MID": 78,
+            "DEF": 80
+          }
+        ],
+        "started": "13.1.2023, 22:03:12",
+        "finished": "13.1.2023, 22:21:53"
+      },
+      {
+        "id": "4",
+        "tournamentTeams": [
+          {
+            "players": [
+              {
+                "name": "Gernot",
+                "stats": {
+                  "gamesPlayed": 4,
+                  "gamesLost": 2,
+                  "gamesTie": 0,
+                  "gamesWon": 2,
+                  "goalsScored": 8,
+                  "goalsAgainst": 4,
+                  "points": 6,
+                  "winPercentage": 0.5,
+                  "pointsPerGame": 1.5
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Dele",
+                "stats": {
+                  "gamesPlayed": 4,
+                  "gamesLost": 2,
+                  "gamesTie": 0,
+                  "gamesWon": 2,
+                  "goalsScored": 4,
+                  "goalsAgainst": 8,
+                  "points": 6,
+                  "winPercentage": 0.5,
+                  "pointsPerGame": 1.5
+                },
+                "rank": 4,
+                "previousRank": 4
+              }
+            ],
+            "team": {
+              "name": "FC Augsburg ",
+              "country": "German",
+              "league": "1. Bundesliga",
+              "rating": 4,
+              "OVA": 75,
+              "ATT": 74,
+              "MID": 74,
+              "DEF": 74
+            }
+          },
+          {
+            "players": [
+              {
+                "name": "Peter",
+                "stats": {
+                  "gamesPlayed": 4,
+                  "gamesLost": 2,
+                  "gamesTie": 0,
+                  "gamesWon": 2,
+                  "goalsScored": 7,
+                  "goalsAgainst": 5,
+                  "points": 6,
+                  "winPercentage": 0.5,
+                  "pointsPerGame": 1.5
+                },
+                "rank": 2,
+                "previousRank": 3
+              },
+              {
+                "name": "Fertz",
+                "stats": {
+                  "gamesPlayed": 4,
+                  "gamesLost": 2,
+                  "gamesTie": 0,
+                  "gamesWon": 2,
+                  "goalsScored": 5,
+                  "goalsAgainst": 7,
+                  "points": 6,
+                  "winPercentage": 0.5,
+                  "pointsPerGame": 1.5
+                },
+                "rank": 3,
+                "previousRank": 2
+              }
+            ],
+            "team": {
+              "name": "Clube Atlético Mineiro ",
+              "country": "Campeonato",
+              "league": "Brasileiro Série A",
+              "rating": 4,
+              "OVA": 75,
+              "ATT": 73,
+              "MID": 77,
+              "DEF": 76
+            }
+          }
+        ],
+        "players": [
+          {
+            "name": "Peter",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 4,
+              "goalsAgainst": 4,
+              "points": 3,
+              "winPercentage": 0.5,
+              "pointsPerGame": 1.5
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Fertz",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 4,
+              "goalsAgainst": 4,
+              "points": 3,
+              "winPercentage": 0.5,
+              "pointsPerGame": 1.5
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Gernot",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 4,
+              "goalsAgainst": 4,
+              "points": 3,
+              "winPercentage": 0.5,
+              "pointsPerGame": 1.5
+            },
+            "rank": 1,
+            "previousRank": 3
+          },
+          {
+            "name": "Dele",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 4,
+              "goalsAgainst": 4,
+              "points": 3,
+              "winPercentage": 0.5,
+              "pointsPerGame": 1.5
+            },
+            "rank": 1,
+            "previousRank": 3
+          }
+        ],
+        "games": [
+          {
+            "matchdayId": "2",
+            "tournamentId": "4",
+            "sequence": 1,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 8,
+                    "goalsAgainst": 4,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 4,
+                    "goalsAgainst": 8,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 4,
+                  "previousRank": 4
+                }
+              ],
+              "team": {
+                "name": "FC Augsburg ",
+                "country": "German",
+                "league": "1. Bundesliga",
+                "rating": 4,
+                "OVA": 75,
+                "ATT": 74,
+                "MID": 74,
+                "DEF": 74
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 7,
+                    "goalsAgainst": 5,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 2,
+                  "previousRank": 3
+                },
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 5,
+                    "goalsAgainst": 7,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 3,
+                  "previousRank": 2
+                }
+              ],
+              "team": {
+                "name": "Clube Atlético Mineiro ",
+                "country": "Campeonato",
+                "league": "Brasileiro Série A",
+                "rating": 4,
+                "OVA": 75,
+                "ATT": 73,
+                "MID": 77,
+                "DEF": 76
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 1,
+            "goalsAway": 2
+          },
+          {
+            "matchdayId": "2",
+            "tournamentId": "4",
+            "sequence": 2,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 7,
+                    "goalsAgainst": 5,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 2,
+                  "previousRank": 3
+                },
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 5,
+                    "goalsAgainst": 7,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 3,
+                  "previousRank": 2
+                }
+              ],
+              "team": {
+                "name": "Clube Atlético Mineiro ",
+                "country": "Campeonato",
+                "league": "Brasileiro Série A",
+                "rating": 4,
+                "OVA": 75,
+                "ATT": 73,
+                "MID": 77,
+                "DEF": 76
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 8,
+                    "goalsAgainst": 4,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 4,
+                    "goalsAgainst": 8,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 4,
+                  "previousRank": 4
+                }
+              ],
+              "team": {
+                "name": "FC Augsburg ",
+                "country": "German",
+                "league": "1. Bundesliga",
+                "rating": 4,
+                "OVA": 75,
+                "ATT": 74,
+                "MID": 74,
+                "DEF": 74
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 2,
+            "goalsAway": 3
+          }
+        ],
+        "state": "FINISHED",
+        "withSecondRound": true,
+        "useableTeams": [
+          {
+            "name": "AFC Richmond ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 81,
+            "MID": 79,
+            "DEF": 77
+          },
+          {
+            "name": "Newcastle United ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 79,
+            "MID": 78,
+            "DEF": 79
+          },
+          {
+            "name": "Real Sociedad ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 77,
+            "MID": 80,
+            "DEF": 78
+          },
+          {
+            "name": "Ajax ",
+            "country": "Holland",
+            "league": "Eredivisie",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 80,
+            "MID": 78,
+            "DEF": 77
+          },
+          {
+            "name": "Sporting CP ",
+            "country": "Portuguese",
+            "league": "Primeira Liga",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 78,
+            "MID": 78,
+            "DEF": 79
+          },
+          {
+            "name": "FC Porto ",
+            "country": "Portuguese",
+            "league": "Primeira Liga",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 80,
+            "MID": 78,
+            "DEF": 76
+          },
+          {
+            "name": "Wolverhampton Wanderers ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 78,
+            "MID": 80,
+            "DEF": 76
+          },
+          {
+            "name": "Borussia Mönchengladbach ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 79,
+            "MID": 78,
+            "DEF": 75
+          },
+          {
+            "name": "Eintracht Frankfurt ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 78,
+            "MID": 78,
+            "DEF": 76
+          },
+          {
+            "name": "AS Monaco ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 81,
+            "MID": 77,
+            "DEF": 77
+          },
+          {
+            "name": "Olympique de Marseille ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 79,
+            "MID": 78,
+            "DEF": 76
+          },
+          {
+            "name": "OGC Nice ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 80,
+            "MID": 76,
+            "DEF": 76
+          },
+          {
+            "name": "RC Celta de Vigo ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 77,
+            "MID": 77,
+            "DEF": 77
+          },
+          {
+            "name": "Fiorentina ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 77,
+            "MID": 76,
+            "DEF": 78
+          },
+          {
+            "name": "Getafe CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 76,
+            "MID": 78,
+            "DEF": 76
+          },
+          {
+            "name": "PSV ",
+            "country": "Holland",
+            "league": "Eredivisie",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 77,
+            "MID": 77,
+            "DEF": 76
+          },
+          {
+            "name": "Everton ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 77,
+            "MID": 77,
+            "DEF": 76
+          },
+          {
+            "name": "Olympique Lyonnais ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 78,
+            "MID": 76,
+            "DEF": 76
+          },
+          {
+            "name": "Stade Rennais FC ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 76,
+            "MID": 78,
+            "DEF": 76
+          },
+          {
+            "name": "VfL Wolfsburg ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 76,
+            "MID": 77,
+            "DEF": 76
+          },
+          {
+            "name": "RCD Espanyol de Barcelona ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 80,
+            "MID": 76,
+            "DEF": 75
+          },
+          {
+            "name": "Valencia CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 78,
+            "MID": 74,
+            "DEF": 78
+          },
+          {
+            "name": "Galatasaray SK ",
+            "country": "Turkish",
+            "league": "Süper Lig",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 79,
+            "MID": 77,
+            "DEF": 74
+          },
+          {
+            "name": "Crystal Palace ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 77,
+            "MID": 76,
+            "DEF": 76
+          },
+          {
+            "name": "Palmeiras ",
+            "country": "Campeonato",
+            "league": "Brasileiro Série A",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 78,
+            "MID": 77,
+            "DEF": 74
+          },
+          {
+            "name": "TSG Hoffenheim ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 77,
+            "MID": 76,
+            "DEF": 76
+          },
+          {
+            "name": "CA Osasuna ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 77,
+            "MID": 76,
+            "DEF": 75
+          },
+          {
+            "name": "Fulham ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 77,
+            "MID": 76,
+            "DEF": 75
+          },
+          {
+            "name": "Leeds United ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 77,
+            "MID": 76,
+            "DEF": 75
+          },
+          {
+            "name": "Sport-Club Freiburg ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 75,
+            "MID": 76,
+            "DEF": 77
+          },
+          {
+            "name": "Trabzonspor ",
+            "country": "Turkish",
+            "league": "Süper Lig",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 75,
+            "MID": 77,
+            "DEF": 75
+          },
+          {
+            "name": "SC Braga ",
+            "country": "Portuguese",
+            "league": "Primeira Liga",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 75,
+            "MID": 77,
+            "DEF": 75
+          },
+          {
+            "name": "Brighton & Hove Albion ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 75,
+            "MID": 75,
+            "DEF": 77
+          },
+          {
+            "name": "Nottingham Forest ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 76,
+            "MID": 76,
+            "DEF": 75
+          },
+          {
+            "name": "Flamengo ",
+            "country": "Campeonato",
+            "league": "Brasileiro Série A",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 77,
+            "MID": 75,
+            "DEF": 75
+          },
+          {
+            "name": "Rayo Vallecano ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 76,
+            "MID": 75,
+            "DEF": 75
+          },
+          {
+            "name": "Fenerbahçe SK ",
+            "country": "Turkish",
+            "league": "Süper Lig",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 76,
+            "MID": 76,
+            "DEF": 74
+          },
+          {
+            "name": "River Plate ",
+            "country": "Argentina",
+            "league": "Primera División",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 75,
+            "MID": 76,
+            "DEF": 75
+          },
+          {
+            "name": "LOSC Lille ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 77,
+            "MID": 75,
+            "DEF": 75
+          },
+          {
+            "name": "Udinese Calcio ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 78,
+            "MID": 75,
+            "DEF": 73
+          },
+          {
+            "name": "RC Strasbourg Alsace ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 77,
+            "MID": 75,
+            "DEF": 74
+          },
+          {
+            "name": "Clube Atlético Mineiro ",
+            "country": "Campeonato",
+            "league": "Brasileiro Série A",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 73,
+            "MID": 77,
+            "DEF": 76
+          },
+          {
+            "name": "U.S. Sassuolo Calcio ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 78,
+            "MID": 75,
+            "DEF": 73
+          },
+          {
+            "name": "Brentford ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 76,
+            "MID": 74,
+            "DEF": 75
+          },
+          {
+            "name": "Southampton ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 76,
+            "MID": 74,
+            "DEF": 75
+          },
+          {
+            "name": "Bologna ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 78,
+            "MID": 74,
+            "DEF": 73
+          },
+          {
+            "name": "Cádiz CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 75,
+            "MID": 74,
+            "DEF": 75
+          },
+          {
+            "name": "Girona FC ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 76,
+            "MID": 75,
+            "DEF": 73
+          },
+          {
+            "name": "1. FSV Mainz 05 ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 75,
+            "MID": 75,
+            "DEF": 74
+          },
+          {
+            "name": "RCD Mallorca ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 75,
+            "MID": 74,
+            "DEF": 74
+          },
+          {
+            "name": "Boca Juniors ",
+            "country": "Argentina",
+            "league": "Primera División",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 74,
+            "MID": 74,
+            "DEF": 75
+          },
+          {
+            "name": "Feyenoord ",
+            "country": "Holland",
+            "league": "Eredivisie",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 73,
+            "MID": 76,
+            "DEF": 74
+          },
+          {
+            "name": "Club Brugge KV ",
+            "country": "Belgian",
+            "league": "Pro League",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 75,
+            "MID": 74,
+            "DEF": 74
+          },
+          {
+            "name": "Montpellier Hérault SC ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 75,
+            "MID": 76,
+            "DEF": 72
+          },
+          {
+            "name": "Real Valladolid CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 74,
+            "MID": 74,
+            "DEF": 74
+          },
+          {
+            "name": "FC Augsburg ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 74,
+            "MID": 74,
+            "DEF": 74
+          },
+          {
+            "name": "AC Monza ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 74,
+            "MID": 74,
+            "DEF": 74
+          }
+        ],
+        "started": "13.1.2023, 22:46:47",
+        "finished": "13.1.2023, 23:08:35"
+      },
+      {
+        "id": "5",
+        "tournamentTeams": [
+          {
+            "players": [
+              {
+                "name": "Dele",
+                "stats": {
+                  "gamesPlayed": 4,
+                  "gamesLost": 2,
+                  "gamesTie": 0,
+                  "gamesWon": 2,
+                  "goalsScored": 4,
+                  "goalsAgainst": 8,
+                  "points": 6,
+                  "winPercentage": 0.5,
+                  "pointsPerGame": 1.5
+                },
+                "rank": 4,
+                "previousRank": 4
+              },
+              {
+                "name": "Fertz",
+                "stats": {
+                  "gamesPlayed": 4,
+                  "gamesLost": 2,
+                  "gamesTie": 0,
+                  "gamesWon": 2,
+                  "goalsScored": 5,
+                  "goalsAgainst": 7,
+                  "points": 6,
+                  "winPercentage": 0.5,
+                  "pointsPerGame": 1.5
+                },
+                "rank": 3,
+                "previousRank": 2
+              }
+            ],
+            "team": {
+              "name": "TSG Hoffenheim ",
+              "country": "German",
+              "league": "1. Bundesliga",
+              "rating": 4,
+              "OVA": 76,
+              "ATT": 77,
+              "MID": 76,
+              "DEF": 76
+            }
+          },
+          {
+            "players": [
+              {
+                "name": "Gernot",
+                "stats": {
+                  "gamesPlayed": 4,
+                  "gamesLost": 2,
+                  "gamesTie": 0,
+                  "gamesWon": 2,
+                  "goalsScored": 8,
+                  "goalsAgainst": 4,
+                  "points": 6,
+                  "winPercentage": 0.5,
+                  "pointsPerGame": 1.5
+                },
+                "rank": 1,
+                "previousRank": 1
+              },
+              {
+                "name": "Peter",
+                "stats": {
+                  "gamesPlayed": 4,
+                  "gamesLost": 2,
+                  "gamesTie": 0,
+                  "gamesWon": 2,
+                  "goalsScored": 7,
+                  "goalsAgainst": 5,
+                  "points": 6,
+                  "winPercentage": 0.5,
+                  "pointsPerGame": 1.5
+                },
+                "rank": 2,
+                "previousRank": 3
+              }
+            ],
+            "team": {
+              "name": "Olympique de Marseille ",
+              "country": "French",
+              "league": "Ligue 1",
+              "rating": 4,
+              "OVA": 77,
+              "ATT": 79,
+              "MID": 78,
+              "DEF": 76
+            }
+          }
+        ],
+        "players": [
+          {
+            "name": "Fertz",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 0,
+              "gamesTie": 1,
+              "gamesWon": 1,
+              "goalsScored": 1,
+              "goalsAgainst": 0,
+              "points": 4,
+              "winPercentage": 0.5,
+              "pointsPerGame": 2
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Dele",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 0,
+              "gamesTie": 1,
+              "gamesWon": 1,
+              "goalsScored": 1,
+              "goalsAgainst": 0,
+              "points": 4,
+              "winPercentage": 0.5,
+              "pointsPerGame": 2
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Peter",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 1,
+              "gamesWon": 0,
+              "goalsScored": 0,
+              "goalsAgainst": 1,
+              "points": 1,
+              "winPercentage": 0,
+              "pointsPerGame": 0.5
+            },
+            "rank": 3,
+            "previousRank": 1
+          },
+          {
+            "name": "Gernot",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 1,
+              "gamesWon": 0,
+              "goalsScored": 0,
+              "goalsAgainst": 1,
+              "points": 1,
+              "winPercentage": 0,
+              "pointsPerGame": 0.5
+            },
+            "rank": 3,
+            "previousRank": 1
+          }
+        ],
+        "games": [
+          {
+            "matchdayId": "2",
+            "tournamentId": "5",
+            "sequence": 1,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 4,
+                    "goalsAgainst": 8,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 4,
+                  "previousRank": 4
+                },
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 5,
+                    "goalsAgainst": 7,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 3,
+                  "previousRank": 2
+                }
+              ],
+              "team": {
+                "name": "TSG Hoffenheim ",
+                "country": "German",
+                "league": "1. Bundesliga",
+                "rating": 4,
+                "OVA": 76,
+                "ATT": 77,
+                "MID": 76,
+                "DEF": 76
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 8,
+                    "goalsAgainst": 4,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 7,
+                    "goalsAgainst": 5,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 2,
+                  "previousRank": 3
+                }
+              ],
+              "team": {
+                "name": "Olympique de Marseille ",
+                "country": "French",
+                "league": "Ligue 1",
+                "rating": 4,
+                "OVA": 77,
+                "ATT": 79,
+                "MID": 78,
+                "DEF": 76
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 0,
+            "goalsAway": 0
+          },
+          {
+            "matchdayId": "2",
+            "tournamentId": "5",
+            "sequence": 2,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 8,
+                    "goalsAgainst": 4,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 7,
+                    "goalsAgainst": 5,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 2,
+                  "previousRank": 3
+                }
+              ],
+              "team": {
+                "name": "Olympique de Marseille ",
+                "country": "French",
+                "league": "Ligue 1",
+                "rating": 4,
+                "OVA": 77,
+                "ATT": 79,
+                "MID": 78,
+                "DEF": 76
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 4,
+                    "goalsAgainst": 8,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 4,
+                  "previousRank": 4
+                },
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 5,
+                    "goalsAgainst": 7,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 3,
+                  "previousRank": 2
+                }
+              ],
+              "team": {
+                "name": "TSG Hoffenheim ",
+                "country": "German",
+                "league": "1. Bundesliga",
+                "rating": 4,
+                "OVA": 76,
+                "ATT": 77,
+                "MID": 76,
+                "DEF": 76
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 0,
+            "goalsAway": 1
+          }
+        ],
+        "state": "FINISHED",
+        "withSecondRound": true,
+        "useableTeams": [
+          {
+            "name": "AFC Richmond ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 81,
+            "MID": 79,
+            "DEF": 77
+          },
+          {
+            "name": "Newcastle United ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 79,
+            "MID": 78,
+            "DEF": 79
+          },
+          {
+            "name": "Real Sociedad ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 77,
+            "MID": 80,
+            "DEF": 78
+          },
+          {
+            "name": "Ajax ",
+            "country": "Holland",
+            "league": "Eredivisie",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 80,
+            "MID": 78,
+            "DEF": 77
+          },
+          {
+            "name": "Sporting CP ",
+            "country": "Portuguese",
+            "league": "Primeira Liga",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 78,
+            "MID": 78,
+            "DEF": 79
+          },
+          {
+            "name": "FC Porto ",
+            "country": "Portuguese",
+            "league": "Primeira Liga",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 80,
+            "MID": 78,
+            "DEF": 76
+          },
+          {
+            "name": "Wolverhampton Wanderers ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 78,
+            "MID": 80,
+            "DEF": 76
+          },
+          {
+            "name": "Borussia Mönchengladbach ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 79,
+            "MID": 78,
+            "DEF": 75
+          },
+          {
+            "name": "Eintracht Frankfurt ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 78,
+            "MID": 78,
+            "DEF": 76
+          },
+          {
+            "name": "AS Monaco ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 81,
+            "MID": 77,
+            "DEF": 77
+          },
+          {
+            "name": "Olympique de Marseille ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 79,
+            "MID": 78,
+            "DEF": 76
+          },
+          {
+            "name": "OGC Nice ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 80,
+            "MID": 76,
+            "DEF": 76
+          },
+          {
+            "name": "RC Celta de Vigo ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 77,
+            "MID": 77,
+            "DEF": 77
+          },
+          {
+            "name": "Fiorentina ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 77,
+            "MID": 76,
+            "DEF": 78
+          },
+          {
+            "name": "Getafe CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 76,
+            "MID": 78,
+            "DEF": 76
+          },
+          {
+            "name": "PSV ",
+            "country": "Holland",
+            "league": "Eredivisie",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 77,
+            "MID": 77,
+            "DEF": 76
+          },
+          {
+            "name": "Everton ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 77,
+            "MID": 77,
+            "DEF": 76
+          },
+          {
+            "name": "Olympique Lyonnais ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 78,
+            "MID": 76,
+            "DEF": 76
+          },
+          {
+            "name": "Stade Rennais FC ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 76,
+            "MID": 78,
+            "DEF": 76
+          },
+          {
+            "name": "VfL Wolfsburg ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 76,
+            "MID": 77,
+            "DEF": 76
+          },
+          {
+            "name": "RCD Espanyol de Barcelona ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 80,
+            "MID": 76,
+            "DEF": 75
+          },
+          {
+            "name": "Valencia CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 78,
+            "MID": 74,
+            "DEF": 78
+          },
+          {
+            "name": "Galatasaray SK ",
+            "country": "Turkish",
+            "league": "Süper Lig",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 79,
+            "MID": 77,
+            "DEF": 74
+          },
+          {
+            "name": "Crystal Palace ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 77,
+            "MID": 76,
+            "DEF": 76
+          },
+          {
+            "name": "TSG Hoffenheim ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 77,
+            "MID": 76,
+            "DEF": 76
+          },
+          {
+            "name": "CA Osasuna ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 77,
+            "MID": 76,
+            "DEF": 75
+          },
+          {
+            "name": "Fulham ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 77,
+            "MID": 76,
+            "DEF": 75
+          },
+          {
+            "name": "Leeds United ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 77,
+            "MID": 76,
+            "DEF": 75
+          },
+          {
+            "name": "Sport-Club Freiburg ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 75,
+            "MID": 76,
+            "DEF": 77
+          },
+          {
+            "name": "Trabzonspor ",
+            "country": "Turkish",
+            "league": "Süper Lig",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 75,
+            "MID": 77,
+            "DEF": 75
+          },
+          {
+            "name": "SC Braga ",
+            "country": "Portuguese",
+            "league": "Primeira Liga",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 75,
+            "MID": 77,
+            "DEF": 75
+          },
+          {
+            "name": "Brighton & Hove Albion ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 75,
+            "MID": 75,
+            "DEF": 77
+          },
+          {
+            "name": "Nottingham Forest ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 76,
+            "MID": 76,
+            "DEF": 75
+          },
+          {
+            "name": "Rayo Vallecano ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 76,
+            "MID": 75,
+            "DEF": 75
+          },
+          {
+            "name": "Fenerbahçe SK ",
+            "country": "Turkish",
+            "league": "Süper Lig",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 76,
+            "MID": 76,
+            "DEF": 74
+          },
+          {
+            "name": "River Plate ",
+            "country": "Argentina",
+            "league": "Primera División",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 75,
+            "MID": 76,
+            "DEF": 75
+          },
+          {
+            "name": "LOSC Lille ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 77,
+            "MID": 75,
+            "DEF": 75
+          },
+          {
+            "name": "Udinese Calcio ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 78,
+            "MID": 75,
+            "DEF": 73
+          },
+          {
+            "name": "RC Strasbourg Alsace ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 77,
+            "MID": 75,
+            "DEF": 74
+          },
+          {
+            "name": "U.S. Sassuolo Calcio ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 78,
+            "MID": 75,
+            "DEF": 73
+          },
+          {
+            "name": "Brentford ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 76,
+            "MID": 74,
+            "DEF": 75
+          },
+          {
+            "name": "Southampton ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 76,
+            "MID": 74,
+            "DEF": 75
+          },
+          {
+            "name": "Bologna ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 78,
+            "MID": 74,
+            "DEF": 73
+          },
+          {
+            "name": "Cádiz CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 75,
+            "MID": 74,
+            "DEF": 75
+          },
+          {
+            "name": "Girona FC ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 76,
+            "MID": 75,
+            "DEF": 73
+          },
+          {
+            "name": "1. FSV Mainz 05 ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 75,
+            "MID": 75,
+            "DEF": 74
+          },
+          {
+            "name": "RCD Mallorca ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 75,
+            "MID": 74,
+            "DEF": 74
+          },
+          {
+            "name": "Boca Juniors ",
+            "country": "Argentina",
+            "league": "Primera División",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 74,
+            "MID": 74,
+            "DEF": 75
+          },
+          {
+            "name": "Feyenoord ",
+            "country": "Holland",
+            "league": "Eredivisie",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 73,
+            "MID": 76,
+            "DEF": 74
+          },
+          {
+            "name": "Club Brugge KV ",
+            "country": "Belgian",
+            "league": "Pro League",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 75,
+            "MID": 74,
+            "DEF": 74
+          },
+          {
+            "name": "Montpellier Hérault SC ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 75,
+            "MID": 76,
+            "DEF": 72
+          },
+          {
+            "name": "Real Valladolid CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 74,
+            "MID": 74,
+            "DEF": 74
+          },
+          {
+            "name": "FC Augsburg ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 74,
+            "MID": 74,
+            "DEF": 74
+          },
+          {
+            "name": "AC Monza ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 74,
+            "MID": 74,
+            "DEF": 74
+          }
+        ],
+        "started": "13.1.2023, 23:30:34",
+        "finished": "13.1.2023, 23:50:28"
+      },
+      {
+        "id": "6",
+        "tournamentTeams": [
+          {
+            "players": [
+              {
+                "name": "Peter",
+                "stats": {
+                  "gamesPlayed": 4,
+                  "gamesLost": 2,
+                  "gamesTie": 0,
+                  "gamesWon": 2,
+                  "goalsScored": 7,
+                  "goalsAgainst": 5,
+                  "points": 6,
+                  "winPercentage": 0.5,
+                  "pointsPerGame": 1.5
+                },
+                "rank": 2,
+                "previousRank": 3
+              },
+              {
+                "name": "Dele",
+                "stats": {
+                  "gamesPlayed": 4,
+                  "gamesLost": 2,
+                  "gamesTie": 0,
+                  "gamesWon": 2,
+                  "goalsScored": 4,
+                  "goalsAgainst": 8,
+                  "points": 6,
+                  "winPercentage": 0.5,
+                  "pointsPerGame": 1.5
+                },
+                "rank": 4,
+                "previousRank": 4
+              }
+            ],
+            "team": {
+              "name": "Leeds United ",
+              "country": "English",
+              "league": "Premier League",
+              "rating": 4,
+              "OVA": 76,
+              "ATT": 77,
+              "MID": 76,
+              "DEF": 75
+            }
+          },
+          {
+            "players": [
+              {
+                "name": "Fertz",
+                "stats": {
+                  "gamesPlayed": 4,
+                  "gamesLost": 2,
+                  "gamesTie": 0,
+                  "gamesWon": 2,
+                  "goalsScored": 5,
+                  "goalsAgainst": 7,
+                  "points": 6,
+                  "winPercentage": 0.5,
+                  "pointsPerGame": 1.5
+                },
+                "rank": 3,
+                "previousRank": 2
+              },
+              {
+                "name": "Gernot",
+                "stats": {
+                  "gamesPlayed": 4,
+                  "gamesLost": 2,
+                  "gamesTie": 0,
+                  "gamesWon": 2,
+                  "goalsScored": 8,
+                  "goalsAgainst": 4,
+                  "points": 6,
+                  "winPercentage": 0.5,
+                  "pointsPerGame": 1.5
+                },
+                "rank": 1,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "FC Porto ",
+              "country": "Portuguese",
+              "league": "Primeira Liga",
+              "rating": 4,
+              "OVA": 78,
+              "ATT": 80,
+              "MID": 78,
+              "DEF": 76
+            }
+          }
+        ],
+        "players": [
+          {
+            "name": "Fertz",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 0,
+              "gamesTie": 0,
+              "gamesWon": 2,
+              "goalsScored": 12,
+              "goalsAgainst": 4,
+              "points": 6,
+              "winPercentage": 1,
+              "pointsPerGame": 3
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Gernot",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 0,
+              "gamesTie": 0,
+              "gamesWon": 2,
+              "goalsScored": 12,
+              "goalsAgainst": 4,
+              "points": 6,
+              "winPercentage": 1,
+              "pointsPerGame": 3
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Dele",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 2,
+              "gamesTie": 0,
+              "gamesWon": 0,
+              "goalsScored": 4,
+              "goalsAgainst": 12,
+              "points": 0,
+              "winPercentage": 0,
+              "pointsPerGame": 0
+            },
+            "rank": 3,
+            "previousRank": 3
+          },
+          {
+            "name": "Peter",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 2,
+              "gamesTie": 0,
+              "gamesWon": 0,
+              "goalsScored": 4,
+              "goalsAgainst": 12,
+              "points": 0,
+              "winPercentage": 0,
+              "pointsPerGame": 0
+            },
+            "rank": 3,
+            "previousRank": 3
+          }
+        ],
+        "games": [
+          {
+            "matchdayId": "2",
+            "tournamentId": "6",
+            "sequence": 1,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 7,
+                    "goalsAgainst": 5,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 2,
+                  "previousRank": 3
+                },
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 4,
+                    "goalsAgainst": 8,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 4,
+                  "previousRank": 4
+                }
+              ],
+              "team": {
+                "name": "Leeds United ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 4,
+                "OVA": 76,
+                "ATT": 77,
+                "MID": 76,
+                "DEF": 75
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 5,
+                    "goalsAgainst": 7,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 3,
+                  "previousRank": 2
+                },
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 8,
+                    "goalsAgainst": 4,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "FC Porto ",
+                "country": "Portuguese",
+                "league": "Primeira Liga",
+                "rating": 4,
+                "OVA": 78,
+                "ATT": 80,
+                "MID": 78,
+                "DEF": 76
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 3,
+            "goalsAway": 5
+          },
+          {
+            "matchdayId": "2",
+            "tournamentId": "6",
+            "sequence": 2,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 5,
+                    "goalsAgainst": 7,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 3,
+                  "previousRank": 2
+                },
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 8,
+                    "goalsAgainst": 4,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 1,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "FC Porto ",
+                "country": "Portuguese",
+                "league": "Primeira Liga",
+                "rating": 4,
+                "OVA": 78,
+                "ATT": 80,
+                "MID": 78,
+                "DEF": 76
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 7,
+                    "goalsAgainst": 5,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 2,
+                  "previousRank": 3
+                },
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 4,
+                    "gamesLost": 2,
+                    "gamesTie": 0,
+                    "gamesWon": 2,
+                    "goalsScored": 4,
+                    "goalsAgainst": 8,
+                    "points": 6,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.5
+                  },
+                  "rank": 4,
+                  "previousRank": 4
+                }
+              ],
+              "team": {
+                "name": "Leeds United ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 4,
+                "OVA": 76,
+                "ATT": 77,
+                "MID": 76,
+                "DEF": 75
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 7,
+            "goalsAway": 1
+          }
+        ],
+        "state": "FINISHED",
+        "withSecondRound": true,
+        "useableTeams": [
+          {
+            "name": "AFC Richmond ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 81,
+            "MID": 79,
+            "DEF": 77
+          },
+          {
+            "name": "Newcastle United ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 79,
+            "MID": 78,
+            "DEF": 79
+          },
+          {
+            "name": "Real Sociedad ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 77,
+            "MID": 80,
+            "DEF": 78
+          },
+          {
+            "name": "Ajax ",
+            "country": "Holland",
+            "league": "Eredivisie",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 80,
+            "MID": 78,
+            "DEF": 77
+          },
+          {
+            "name": "Sporting CP ",
+            "country": "Portuguese",
+            "league": "Primeira Liga",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 78,
+            "MID": 78,
+            "DEF": 79
+          },
+          {
+            "name": "FC Porto ",
+            "country": "Portuguese",
+            "league": "Primeira Liga",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 80,
+            "MID": 78,
+            "DEF": 76
+          },
+          {
+            "name": "Wolverhampton Wanderers ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 78,
+            "MID": 80,
+            "DEF": 76
+          },
+          {
+            "name": "Borussia Mönchengladbach ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 79,
+            "MID": 78,
+            "DEF": 75
+          },
+          {
+            "name": "Eintracht Frankfurt ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 78,
+            "ATT": 78,
+            "MID": 78,
+            "DEF": 76
+          },
+          {
+            "name": "AS Monaco ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 81,
+            "MID": 77,
+            "DEF": 77
+          },
+          {
+            "name": "Olympique de Marseille ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 79,
+            "MID": 78,
+            "DEF": 76
+          },
+          {
+            "name": "OGC Nice ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 80,
+            "MID": 76,
+            "DEF": 76
+          },
+          {
+            "name": "RC Celta de Vigo ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 77,
+            "MID": 77,
+            "DEF": 77
+          },
+          {
+            "name": "Fiorentina ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 77,
+            "MID": 76,
+            "DEF": 78
+          },
+          {
+            "name": "Getafe CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 76,
+            "MID": 78,
+            "DEF": 76
+          },
+          {
+            "name": "PSV ",
+            "country": "Holland",
+            "league": "Eredivisie",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 77,
+            "MID": 77,
+            "DEF": 76
+          },
+          {
+            "name": "Everton ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 77,
+            "MID": 77,
+            "DEF": 76
+          },
+          {
+            "name": "Olympique Lyonnais ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 78,
+            "MID": 76,
+            "DEF": 76
+          },
+          {
+            "name": "Stade Rennais FC ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 76,
+            "MID": 78,
+            "DEF": 76
+          },
+          {
+            "name": "VfL Wolfsburg ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 77,
+            "ATT": 76,
+            "MID": 77,
+            "DEF": 76
+          },
+          {
+            "name": "RCD Espanyol de Barcelona ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 80,
+            "MID": 76,
+            "DEF": 75
+          },
+          {
+            "name": "Valencia CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 78,
+            "MID": 74,
+            "DEF": 78
+          },
+          {
+            "name": "Galatasaray SK ",
+            "country": "Turkish",
+            "league": "Süper Lig",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 79,
+            "MID": 77,
+            "DEF": 74
+          },
+          {
+            "name": "Crystal Palace ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 77,
+            "MID": 76,
+            "DEF": 76
+          },
+          {
+            "name": "TSG Hoffenheim ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 77,
+            "MID": 76,
+            "DEF": 76
+          },
+          {
+            "name": "CA Osasuna ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 77,
+            "MID": 76,
+            "DEF": 75
+          },
+          {
+            "name": "Fulham ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 77,
+            "MID": 76,
+            "DEF": 75
+          },
+          {
+            "name": "Leeds United ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 77,
+            "MID": 76,
+            "DEF": 75
+          },
+          {
+            "name": "Sport-Club Freiburg ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 75,
+            "MID": 76,
+            "DEF": 77
+          },
+          {
+            "name": "Trabzonspor ",
+            "country": "Turkish",
+            "league": "Süper Lig",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 75,
+            "MID": 77,
+            "DEF": 75
+          },
+          {
+            "name": "SC Braga ",
+            "country": "Portuguese",
+            "league": "Primeira Liga",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 75,
+            "MID": 77,
+            "DEF": 75
+          },
+          {
+            "name": "Brighton & Hove Albion ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 75,
+            "MID": 75,
+            "DEF": 77
+          },
+          {
+            "name": "Nottingham Forest ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 76,
+            "MID": 76,
+            "DEF": 75
+          },
+          {
+            "name": "Rayo Vallecano ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 76,
+            "MID": 75,
+            "DEF": 75
+          },
+          {
+            "name": "Fenerbahçe SK ",
+            "country": "Turkish",
+            "league": "Süper Lig",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 76,
+            "MID": 76,
+            "DEF": 74
+          },
+          {
+            "name": "River Plate ",
+            "country": "Argentina",
+            "league": "Primera División",
+            "rating": 4,
+            "OVA": 76,
+            "ATT": 75,
+            "MID": 76,
+            "DEF": 75
+          },
+          {
+            "name": "LOSC Lille ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 77,
+            "MID": 75,
+            "DEF": 75
+          },
+          {
+            "name": "Udinese Calcio ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 78,
+            "MID": 75,
+            "DEF": 73
+          },
+          {
+            "name": "RC Strasbourg Alsace ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 77,
+            "MID": 75,
+            "DEF": 74
+          },
+          {
+            "name": "U.S. Sassuolo Calcio ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 78,
+            "MID": 75,
+            "DEF": 73
+          },
+          {
+            "name": "Brentford ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 76,
+            "MID": 74,
+            "DEF": 75
+          },
+          {
+            "name": "Southampton ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 76,
+            "MID": 74,
+            "DEF": 75
+          },
+          {
+            "name": "Bologna ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 78,
+            "MID": 74,
+            "DEF": 73
+          },
+          {
+            "name": "Cádiz CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 75,
+            "MID": 74,
+            "DEF": 75
+          },
+          {
+            "name": "Girona FC ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 76,
+            "MID": 75,
+            "DEF": 73
+          },
+          {
+            "name": "1. FSV Mainz 05 ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 75,
+            "MID": 75,
+            "DEF": 74
+          },
+          {
+            "name": "RCD Mallorca ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 75,
+            "MID": 74,
+            "DEF": 74
+          },
+          {
+            "name": "Boca Juniors ",
+            "country": "Argentina",
+            "league": "Primera División",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 74,
+            "MID": 74,
+            "DEF": 75
+          },
+          {
+            "name": "Feyenoord ",
+            "country": "Holland",
+            "league": "Eredivisie",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 73,
+            "MID": 76,
+            "DEF": 74
+          },
+          {
+            "name": "Club Brugge KV ",
+            "country": "Belgian",
+            "league": "Pro League",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 75,
+            "MID": 74,
+            "DEF": 74
+          },
+          {
+            "name": "Montpellier Hérault SC ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 75,
+            "MID": 76,
+            "DEF": 72
+          },
+          {
+            "name": "Real Valladolid CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 74,
+            "MID": 74,
+            "DEF": 74
+          },
+          {
+            "name": "FC Augsburg ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 74,
+            "MID": 74,
+            "DEF": 74
+          },
+          {
+            "name": "AC Monza ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 4,
+            "OVA": 75,
+            "ATT": 74,
+            "MID": 74,
+            "DEF": 74
+          }
+        ],
+        "started": "14.1.2023, 00:15:39",
+        "finished": "14.1.2023, 00:37:31"
+      },
+      {
+        "id": "7",
+        "tournamentTeams": [
+          {
+            "players": [
+              {
+                "name": "Dele",
+                "stats": {
+                  "gamesPlayed": 10,
+                  "gamesLost": 4,
+                  "gamesTie": 1,
+                  "gamesWon": 5,
+                  "goalsScored": 12,
+                  "goalsAgainst": 16,
+                  "points": 16,
+                  "winPercentage": 0.5,
+                  "pointsPerGame": 1.6
+                },
+                "rank": 2,
+                "previousRank": 4
+              },
+              {
+                "name": "Gernot",
+                "stats": {
+                  "gamesPlayed": 10,
+                  "gamesLost": 5,
+                  "gamesTie": 1,
+                  "gamesWon": 4,
+                  "goalsScored": 15,
+                  "goalsAgainst": 13,
+                  "points": 13,
+                  "winPercentage": 0.4,
+                  "pointsPerGame": 1.3
+                },
+                "rank": 3,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "Manchester City ",
+              "country": "English",
+              "league": "Premier League",
+              "rating": 5,
+              "OVA": 85,
+              "ATT": 85,
+              "MID": 86,
+              "DEF": 86
+            }
+          },
+          {
+            "players": [
+              {
+                "name": "Peter",
+                "stats": {
+                  "gamesPlayed": 10,
+                  "gamesLost": 5,
+                  "gamesTie": 1,
+                  "gamesWon": 4,
+                  "goalsScored": 15,
+                  "goalsAgainst": 13,
+                  "points": 13,
+                  "winPercentage": 0.4,
+                  "pointsPerGame": 1.3
+                },
+                "rank": 3,
+                "previousRank": 1
+              },
+              {
+                "name": "Fertz",
+                "stats": {
+                  "gamesPlayed": 10,
+                  "gamesLost": 4,
+                  "gamesTie": 1,
+                  "gamesWon": 5,
+                  "goalsScored": 14,
+                  "goalsAgainst": 14,
+                  "points": 16,
+                  "winPercentage": 0.5,
+                  "pointsPerGame": 1.6
+                },
+                "rank": 1,
+                "previousRank": 3
+              }
+            ],
+            "team": {
+              "name": "Inter ",
+              "country": "Italian",
+              "league": "Serie A",
+              "rating": 5,
+              "OVA": 83,
+              "ATT": 85,
+              "MID": 83,
+              "DEF": 83
+            }
+          }
+        ],
+        "players": [
+          {
+            "name": "Gernot",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 0,
+              "gamesTie": 1,
+              "gamesWon": 1,
+              "goalsScored": 5,
+              "goalsAgainst": 3,
+              "points": 4,
+              "winPercentage": 0.5,
+              "pointsPerGame": 2
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Dele",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 0,
+              "gamesTie": 1,
+              "gamesWon": 1,
+              "goalsScored": 5,
+              "goalsAgainst": 3,
+              "points": 4,
+              "winPercentage": 0.5,
+              "pointsPerGame": 2
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Fertz",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 1,
+              "gamesWon": 0,
+              "goalsScored": 3,
+              "goalsAgainst": 5,
+              "points": 1,
+              "winPercentage": 0,
+              "pointsPerGame": 0.5
+            },
+            "rank": 3,
+            "previousRank": 1
+          },
+          {
+            "name": "Peter",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 1,
+              "gamesWon": 0,
+              "goalsScored": 3,
+              "goalsAgainst": 5,
+              "points": 1,
+              "winPercentage": 0,
+              "pointsPerGame": 0.5
+            },
+            "rank": 3,
+            "previousRank": 1
+          }
+        ],
+        "games": [
+          {
+            "matchdayId": "2",
+            "tournamentId": "7",
+            "sequence": 1,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 10,
+                    "gamesLost": 4,
+                    "gamesTie": 1,
+                    "gamesWon": 5,
+                    "goalsScored": 12,
+                    "goalsAgainst": 16,
+                    "points": 16,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.6
+                  },
+                  "rank": 2,
+                  "previousRank": 4
+                },
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 10,
+                    "gamesLost": 5,
+                    "gamesTie": 1,
+                    "gamesWon": 4,
+                    "goalsScored": 15,
+                    "goalsAgainst": 13,
+                    "points": 13,
+                    "winPercentage": 0.4,
+                    "pointsPerGame": 1.3
+                  },
+                  "rank": 3,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Manchester City ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 5,
+                "OVA": 85,
+                "ATT": 85,
+                "MID": 86,
+                "DEF": 86
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 10,
+                    "gamesLost": 5,
+                    "gamesTie": 1,
+                    "gamesWon": 4,
+                    "goalsScored": 15,
+                    "goalsAgainst": 13,
+                    "points": 13,
+                    "winPercentage": 0.4,
+                    "pointsPerGame": 1.3
+                  },
+                  "rank": 3,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 10,
+                    "gamesLost": 4,
+                    "gamesTie": 1,
+                    "gamesWon": 5,
+                    "goalsScored": 14,
+                    "goalsAgainst": 14,
+                    "points": 16,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.6
+                  },
+                  "rank": 1,
+                  "previousRank": 3
+                }
+              ],
+              "team": {
+                "name": "Inter ",
+                "country": "Italian",
+                "league": "Serie A",
+                "rating": 5,
+                "OVA": 83,
+                "ATT": 85,
+                "MID": 83,
+                "DEF": 83
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 2,
+            "goalsAway": 2
+          },
+          {
+            "matchdayId": "2",
+            "tournamentId": "7",
+            "sequence": 2,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 10,
+                    "gamesLost": 5,
+                    "gamesTie": 1,
+                    "gamesWon": 4,
+                    "goalsScored": 15,
+                    "goalsAgainst": 13,
+                    "points": 13,
+                    "winPercentage": 0.4,
+                    "pointsPerGame": 1.3
+                  },
+                  "rank": 3,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 10,
+                    "gamesLost": 4,
+                    "gamesTie": 1,
+                    "gamesWon": 5,
+                    "goalsScored": 14,
+                    "goalsAgainst": 14,
+                    "points": 16,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.6
+                  },
+                  "rank": 1,
+                  "previousRank": 3
+                }
+              ],
+              "team": {
+                "name": "Inter ",
+                "country": "Italian",
+                "league": "Serie A",
+                "rating": 5,
+                "OVA": 83,
+                "ATT": 85,
+                "MID": 83,
+                "DEF": 83
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 10,
+                    "gamesLost": 4,
+                    "gamesTie": 1,
+                    "gamesWon": 5,
+                    "goalsScored": 12,
+                    "goalsAgainst": 16,
+                    "points": 16,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.6
+                  },
+                  "rank": 2,
+                  "previousRank": 4
+                },
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 10,
+                    "gamesLost": 5,
+                    "gamesTie": 1,
+                    "gamesWon": 4,
+                    "goalsScored": 15,
+                    "goalsAgainst": 13,
+                    "points": 13,
+                    "winPercentage": 0.4,
+                    "pointsPerGame": 1.3
+                  },
+                  "rank": 3,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Manchester City ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 5,
+                "OVA": 85,
+                "ATT": 85,
+                "MID": 86,
+                "DEF": 86
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 1,
+            "goalsAway": 3
+          }
+        ],
+        "state": "FINISHED",
+        "withSecondRound": true,
+        "useableTeams": [
+          {
+            "name": "Manchester City ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 5,
+            "OVA": 85,
+            "ATT": 85,
+            "MID": 86,
+            "DEF": 86
+          },
+          {
+            "name": "Real Madrid CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 5,
+            "OVA": 85,
+            "ATT": 85,
+            "MID": 86,
+            "DEF": 84
+          },
+          {
+            "name": "Paris Saint-Germain ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 5,
+            "OVA": 85,
+            "ATT": 87,
+            "MID": 83,
+            "DEF": 83
+          },
+          {
+            "name": "FC Barcelona ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 5,
+            "OVA": 84,
+            "ATT": 84,
+            "MID": 85,
+            "DEF": 82
+          },
+          {
+            "name": "Liverpool ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 5,
+            "OVA": 84,
+            "ATT": 84,
+            "MID": 82,
+            "DEF": 85
+          },
+          {
+            "name": "Chelsea ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 5,
+            "OVA": 84,
+            "ATT": 83,
+            "MID": 85,
+            "DEF": 82
+          },
+          {
+            "name": "FC Bayern München ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 5,
+            "OVA": 84,
+            "ATT": 76,
+            "MID": 86,
+            "DEF": 83
+          },
+          {
+            "name": "Inter ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 5,
+            "OVA": 83,
+            "ATT": 85,
+            "MID": 83,
+            "DEF": 83
+          },
+          {
+            "name": "Atlético de Madrid ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 5,
+            "OVA": 83,
+            "ATT": 82,
+            "MID": 83,
+            "DEF": 81
+          }
+        ],
+        "started": "14.1.2023, 00:55:16",
+        "finished": "14.1.2023, 01:32:23"
+      },
+      {
+        "id": "8",
+        "tournamentTeams": [
+          {
+            "players": [
+              {
+                "name": "Gernot",
+                "stats": {
+                  "gamesPlayed": 10,
+                  "gamesLost": 5,
+                  "gamesTie": 1,
+                  "gamesWon": 4,
+                  "goalsScored": 15,
+                  "goalsAgainst": 13,
+                  "points": 13,
+                  "winPercentage": 0.4,
+                  "pointsPerGame": 1.3
+                },
+                "rank": 3,
+                "previousRank": 1
+              },
+              {
+                "name": "Peter",
+                "stats": {
+                  "gamesPlayed": 10,
+                  "gamesLost": 5,
+                  "gamesTie": 1,
+                  "gamesWon": 4,
+                  "goalsScored": 15,
+                  "goalsAgainst": 13,
+                  "points": 13,
+                  "winPercentage": 0.4,
+                  "pointsPerGame": 1.3
+                },
+                "rank": 3,
+                "previousRank": 1
+              }
+            ],
+            "team": {
+              "name": "Chelsea ",
+              "country": "English",
+              "league": "Premier League",
+              "rating": 5,
+              "OVA": 84,
+              "ATT": 83,
+              "MID": 85,
+              "DEF": 82
+            }
+          },
+          {
+            "players": [
+              {
+                "name": "Fertz",
+                "stats": {
+                  "gamesPlayed": 10,
+                  "gamesLost": 4,
+                  "gamesTie": 1,
+                  "gamesWon": 5,
+                  "goalsScored": 14,
+                  "goalsAgainst": 14,
+                  "points": 16,
+                  "winPercentage": 0.5,
+                  "pointsPerGame": 1.6
+                },
+                "rank": 1,
+                "previousRank": 3
+              },
+              {
+                "name": "Dele",
+                "stats": {
+                  "gamesPlayed": 10,
+                  "gamesLost": 4,
+                  "gamesTie": 1,
+                  "gamesWon": 5,
+                  "goalsScored": 12,
+                  "goalsAgainst": 16,
+                  "points": 16,
+                  "winPercentage": 0.5,
+                  "pointsPerGame": 1.6
+                },
+                "rank": 2,
+                "previousRank": 4
+              }
+            ],
+            "team": {
+              "name": "Paris Saint-Germain ",
+              "country": "French",
+              "league": "Ligue 1",
+              "rating": 5,
+              "OVA": 85,
+              "ATT": 87,
+              "MID": 83,
+              "DEF": 83
+            }
+          }
+        ],
+        "players": [
+          {
+            "name": "Gernot",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 2,
+              "goalsAgainst": 2,
+              "points": 3,
+              "winPercentage": 0.5,
+              "pointsPerGame": 1.5
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Peter",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 2,
+              "goalsAgainst": 2,
+              "points": 3,
+              "winPercentage": 0.5,
+              "pointsPerGame": 1.5
+            },
+            "rank": 1,
+            "previousRank": 1
+          },
+          {
+            "name": "Fertz",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 2,
+              "goalsAgainst": 2,
+              "points": 3,
+              "winPercentage": 0.5,
+              "pointsPerGame": 1.5
+            },
+            "rank": 1,
+            "previousRank": 3
+          },
+          {
+            "name": "Dele",
+            "stats": {
+              "gamesPlayed": 2,
+              "gamesLost": 1,
+              "gamesTie": 0,
+              "gamesWon": 1,
+              "goalsScored": 2,
+              "goalsAgainst": 2,
+              "points": 3,
+              "winPercentage": 0.5,
+              "pointsPerGame": 1.5
+            },
+            "rank": 1,
+            "previousRank": 3
+          }
+        ],
+        "games": [
+          {
+            "matchdayId": "2",
+            "tournamentId": "8",
+            "sequence": 1,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 10,
+                    "gamesLost": 5,
+                    "gamesTie": 1,
+                    "gamesWon": 4,
+                    "goalsScored": 15,
+                    "goalsAgainst": 13,
+                    "points": 13,
+                    "winPercentage": 0.4,
+                    "pointsPerGame": 1.3
+                  },
+                  "rank": 3,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 10,
+                    "gamesLost": 5,
+                    "gamesTie": 1,
+                    "gamesWon": 4,
+                    "goalsScored": 15,
+                    "goalsAgainst": 13,
+                    "points": 13,
+                    "winPercentage": 0.4,
+                    "pointsPerGame": 1.3
+                  },
+                  "rank": 3,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Chelsea ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 5,
+                "OVA": 84,
+                "ATT": 83,
+                "MID": 85,
+                "DEF": 82
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 10,
+                    "gamesLost": 4,
+                    "gamesTie": 1,
+                    "gamesWon": 5,
+                    "goalsScored": 14,
+                    "goalsAgainst": 14,
+                    "points": 16,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.6
+                  },
+                  "rank": 1,
+                  "previousRank": 3
+                },
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 10,
+                    "gamesLost": 4,
+                    "gamesTie": 1,
+                    "gamesWon": 5,
+                    "goalsScored": 12,
+                    "goalsAgainst": 16,
+                    "points": 16,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.6
+                  },
+                  "rank": 2,
+                  "previousRank": 4
+                }
+              ],
+              "team": {
+                "name": "Paris Saint-Germain ",
+                "country": "French",
+                "league": "Ligue 1",
+                "rating": 5,
+                "OVA": 85,
+                "ATT": 87,
+                "MID": 83,
+                "DEF": 83
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 1,
+            "goalsAway": 0
+          },
+          {
+            "matchdayId": "2",
+            "tournamentId": "8",
+            "sequence": 2,
+            "homePlayer": {
+              "players": [
+                {
+                  "name": "Fertz",
+                  "stats": {
+                    "gamesPlayed": 10,
+                    "gamesLost": 4,
+                    "gamesTie": 1,
+                    "gamesWon": 5,
+                    "goalsScored": 14,
+                    "goalsAgainst": 14,
+                    "points": 16,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.6
+                  },
+                  "rank": 1,
+                  "previousRank": 3
+                },
+                {
+                  "name": "Dele",
+                  "stats": {
+                    "gamesPlayed": 10,
+                    "gamesLost": 4,
+                    "gamesTie": 1,
+                    "gamesWon": 5,
+                    "goalsScored": 12,
+                    "goalsAgainst": 16,
+                    "points": 16,
+                    "winPercentage": 0.5,
+                    "pointsPerGame": 1.6
+                  },
+                  "rank": 2,
+                  "previousRank": 4
+                }
+              ],
+              "team": {
+                "name": "Paris Saint-Germain ",
+                "country": "French",
+                "league": "Ligue 1",
+                "rating": 5,
+                "OVA": 85,
+                "ATT": 87,
+                "MID": 83,
+                "DEF": 83
+              }
+            },
+            "awayPlayer": {
+              "players": [
+                {
+                  "name": "Gernot",
+                  "stats": {
+                    "gamesPlayed": 10,
+                    "gamesLost": 5,
+                    "gamesTie": 1,
+                    "gamesWon": 4,
+                    "goalsScored": 15,
+                    "goalsAgainst": 13,
+                    "points": 13,
+                    "winPercentage": 0.4,
+                    "pointsPerGame": 1.3
+                  },
+                  "rank": 3,
+                  "previousRank": 1
+                },
+                {
+                  "name": "Peter",
+                  "stats": {
+                    "gamesPlayed": 10,
+                    "gamesLost": 5,
+                    "gamesTie": 1,
+                    "gamesWon": 4,
+                    "goalsScored": 15,
+                    "goalsAgainst": 13,
+                    "points": 13,
+                    "winPercentage": 0.4,
+                    "pointsPerGame": 1.3
+                  },
+                  "rank": 3,
+                  "previousRank": 1
+                }
+              ],
+              "team": {
+                "name": "Chelsea ",
+                "country": "English",
+                "league": "Premier League",
+                "rating": 5,
+                "OVA": 84,
+                "ATT": 83,
+                "MID": 85,
+                "DEF": 82
+              }
+            },
+            "state": "FINISHED",
+            "goalsHome": 2,
+            "goalsAway": 1
+          }
+        ],
+        "state": "FINISHED",
+        "withSecondRound": true,
+        "useableTeams": [
+          {
+            "name": "Manchester City ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 5,
+            "OVA": 85,
+            "ATT": 85,
+            "MID": 86,
+            "DEF": 86
+          },
+          {
+            "name": "Real Madrid CF ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 5,
+            "OVA": 85,
+            "ATT": 85,
+            "MID": 86,
+            "DEF": 84
+          },
+          {
+            "name": "Paris Saint-Germain ",
+            "country": "French",
+            "league": "Ligue 1",
+            "rating": 5,
+            "OVA": 85,
+            "ATT": 87,
+            "MID": 83,
+            "DEF": 83
+          },
+          {
+            "name": "FC Barcelona ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 5,
+            "OVA": 84,
+            "ATT": 84,
+            "MID": 85,
+            "DEF": 82
+          },
+          {
+            "name": "Liverpool ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 5,
+            "OVA": 84,
+            "ATT": 84,
+            "MID": 82,
+            "DEF": 85
+          },
+          {
+            "name": "Chelsea ",
+            "country": "English",
+            "league": "Premier League",
+            "rating": 5,
+            "OVA": 84,
+            "ATT": 83,
+            "MID": 85,
+            "DEF": 82
+          },
+          {
+            "name": "FC Bayern München ",
+            "country": "German",
+            "league": "1. Bundesliga",
+            "rating": 5,
+            "OVA": 84,
+            "ATT": 76,
+            "MID": 86,
+            "DEF": 83
+          },
+          {
+            "name": "Inter ",
+            "country": "Italian",
+            "league": "Serie A",
+            "rating": 5,
+            "OVA": 83,
+            "ATT": 85,
+            "MID": 83,
+            "DEF": 83
+          },
+          {
+            "name": "Atlético de Madrid ",
+            "country": "Spain",
+            "league": "Primera Division",
+            "rating": 5,
+            "OVA": 83,
+            "ATT": 82,
+            "MID": 83,
+            "DEF": 81
+          }
+        ],
+        "started": "14.1.2023, 01:51:20",
+        "finished": "14.1.2023, 02:08:42"
+      }
+    ],
+    "state": "FINISHED",
+    "possibleDraws": [
+      {
+        "teams": [
+          {
+            "players": [
+              {
+                "name": "Fertz",
+                "stats": {
+                  "gamesPlayed": 10,
+                  "gamesLost": 4,
+                  "gamesTie": 1,
+                  "gamesWon": 5,
+                  "goalsScored": 14,
+                  "goalsAgainst": 14,
+                  "points": 16,
+                  "winPercentage": 0.5,
+                  "pointsPerGame": 1.6
+                },
+                "rank": 1,
+                "previousRank": 3
+              },
+              {
+                "name": "Gernot",
+                "stats": {
+                  "gamesPlayed": 10,
+                  "gamesLost": 5,
+                  "gamesTie": 1,
+                  "gamesWon": 4,
+                  "goalsScored": 15,
+                  "goalsAgainst": 13,
+                  "points": 13,
+                  "winPercentage": 0.4,
+                  "pointsPerGame": 1.3
+                },
+                "rank": 3,
+                "previousRank": 1
+              }
+            ]
+          },
+          {
+            "players": [
+              {
+                "name": "Dele",
+                "stats": {
+                  "gamesPlayed": 10,
+                  "gamesLost": 4,
+                  "gamesTie": 1,
+                  "gamesWon": 5,
+                  "goalsScored": 12,
+                  "goalsAgainst": 16,
+                  "points": 16,
+                  "winPercentage": 0.5,
+                  "pointsPerGame": 1.6
+                },
+                "rank": 2,
+                "previousRank": 4
+              },
+              {
+                "name": "Peter",
+                "stats": {
+                  "gamesPlayed": 10,
+                  "gamesLost": 5,
+                  "gamesTie": 1,
+                  "gamesWon": 4,
+                  "goalsScored": 15,
+                  "goalsAgainst": 13,
+                  "points": 13,
+                  "winPercentage": 0.4,
+                  "pointsPerGame": 1.3
+                },
+                "rank": 3,
+                "previousRank": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "meta": {}
   }
 ]

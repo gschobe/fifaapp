@@ -28,8 +28,6 @@ import {
   calulateOverallStats,
   getPlayersSortedByWinPercentage,
 } from "utils/TableUtils";
-import { RoundRobin } from "tournament-pairings";
-import { Match } from "tournament-pairings/dist/Match";
 import ExportMatchdayDataAction from "./actions/ExportMatchdayDataAction";
 
 const useStyles = makeStyles(styles);
@@ -42,6 +40,12 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
 }) => {
   const classes = useStyles();
 
+  const matchdays = React.useMemo(() => {
+    return Object.values(matchDays).filter(
+      (md) => md && md.state !== "DELETED"
+    );
+  }, [matchDays]);
+
   const [addPlayerOpen, setAddPlayerOpen] = React.useState(false);
   const [name, setName] = React.useState<string>("");
   const [playerError, setPlayerError] = React.useState(true);
@@ -50,63 +54,11 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
     return getPlayersSortedByWinPercentage(Object.values(player));
   }, [player]);
   const handleClick: () => void = () => {
-    const matches = RoundRobin(5, 1, true);
-    const teams = matches
-      .filter((m) => m.player1 !== null && m.player2 !== null)
-      .map((t: Match, index) => {
-        return {
-          team: index + 1,
-          players: [t.player1?.toString() || "", t.player2?.toString() || ""],
-        };
-      });
-
-    console.log(teams);
-    const games = RoundRobin(teams.length, 1, true);
-
-    const filteredGames = games
-      .filter((g: Match) => {
-        const t1 = teams[Number(g.player1) - 1 || 0];
-        const t2 = teams[Number(g.player2) - 1 || 0];
-        const players = t1.players.concat(
-          t2.players.filter((p) => t1.players.indexOf(p) < 0)
-        );
-        return players.length === 4;
-      })
-      .map((g) => {
-        const t1_id = Number(g.player1);
-        const t2_id = Number(g.player2);
-        const t1: string[] = teams[t1_id - 1].players;
-        const t2: string[] = teams[t2_id - 1].players;
-        return {
-          t1: { team: t1_id, players: t1 },
-          t2: { team: t2_id, players: t2 },
-          pause: ["1", "2", "3", "4", "5"]
-            .filter((p) => t1.concat(t2).indexOf(p) < 0)
-            .at(0),
-        };
-      });
-    console.log(filteredGames);
-
-    let pause = 1;
-    const sequencedGames = [];
-    for (let i = 1; sequencedGames.length < 15; i++) {
-      const game = filteredGames.find((g) => g.pause === pause.toString());
-      if (game) {
-        filteredGames.splice(filteredGames.indexOf(game), 1);
-        sequencedGames.push({ sequence: i, game: game });
-      }
-      pause === 5 ? (pause = 1) : pause++;
-    }
-
-    console.log(sequencedGames);
-
     setAddPlayerOpen((addPlayerOpen) => !addPlayerOpen);
   };
 
   const handleRecalcStats: () => void = () => {
-    setPlayers(
-      calulateOverallStats(Object.values(matchDays), Object.values(player))
-    );
+    setPlayers(calulateOverallStats(matchdays, Object.values(player)));
   };
 
   const handlePlayerAdd: () => void = () => {
@@ -213,7 +165,7 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
               </div>
             </CardHeader>
             <CardBody>
-              {matchDays && Object.values(matchDays).length > 0 && (
+              {matchdays && matchdays.length > 0 && (
                 <DataGrid
                   initialState={{
                     sorting: {
@@ -224,7 +176,7 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
                   headerHeight={35}
                   rowHeight={30}
                   autoPageSize
-                  rows={Object.values(matchDays)}
+                  rows={matchdays}
                   columns={matchDayColumns}
                 />
               )}

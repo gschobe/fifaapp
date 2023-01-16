@@ -50,7 +50,7 @@ export const playerTableColumns: (
       );
     },
   },
-  { field: "name", headerName: "Name", flex: 1 },
+  { field: "name", headerName: "Name", flex: 1, minWidth: 100 },
   {
     field: "points",
     headerName: "Points",
@@ -166,10 +166,13 @@ export const matchDayColumns: GridColDef[] = [
   {
     field: "winner",
     headerName: "Winner/Leader",
-    // flex: 0.5,
+    flex: 1,
     minWidth: 150,
     valueGetter: (params: GridValueGetterParams<MatchDay>) =>
-      params.row.players.find((p: Player) => p.rank === 1)?.name,
+      params.row.players
+        .filter((p: Player) => p.rank === 1)
+        .map((p: Player) => p.name)
+        .join(", "),
   },
   {
     field: "players",
@@ -310,8 +313,23 @@ export const overviewPlayersColumns: GridColDef[] = [
 ];
 
 export const teamsColumns: (editable: boolean) => GridColDef[] = (editable) => [
+  {
+    field: "nownum",
+    headerName: "#",
+    filterable: false,
+    sortable: false,
+    disableColumnMenu: true,
+    width: 30,
+    renderCell: (index) => index.api.getRowIndex(index.row.name) + 1,
+  },
   { field: "name", headerName: "Name", flex: 1 },
-  { field: "country", headerName: "Country", flex: 0.5, hideable: true },
+  {
+    field: "country",
+    headerName: "Country",
+    flex: 0.5,
+    hideable: true,
+    hide: !editable,
+  },
   { field: "league", headerName: "League", flex: 1 },
   {
     field: "rating",
@@ -323,6 +341,46 @@ export const teamsColumns: (editable: boolean) => GridColDef[] = (editable) => [
     renderEditCell: (params: GridRenderCellParams<number>) =>
       getStarsRender(params.id, params.value, false),
   },
+  {
+    field: "OVA",
+    headerName: "OVA",
+    flex: 0.5,
+    hide: !editable,
+    align: "center",
+    headerAlign: "center",
+    renderCell: (params: GridRenderCellParams<number>) =>
+      getStatRender(params.value),
+  },
+  {
+    field: "ATT",
+    headerName: "ATT",
+    flex: 0.5,
+    hide: !editable,
+    align: "center",
+    headerAlign: "center",
+    renderCell: (params: GridRenderCellParams<number>) =>
+      getStatRender(params.value),
+  },
+  {
+    field: "MID",
+    headerName: "MID",
+    flex: 0.5,
+    hide: !editable,
+    align: "center",
+    headerAlign: "center",
+    renderCell: (params: GridRenderCellParams<number>) =>
+      getStatRender(params.value),
+  },
+  {
+    field: "DEF",
+    headerName: "DEF",
+    flex: 0.5,
+    hide: !editable,
+    align: "center",
+    headerAlign: "center",
+    renderCell: (params: GridRenderCellParams<number>) =>
+      getStatRender(params.value),
+  },
 ];
 
 export function getStarsRender(
@@ -332,39 +390,20 @@ export function getStarsRender(
 ): ReactNode {
   return (
     <TeamRating id={id.toString()} value={value || 3} readOnly={readOnly} />
-    // <div style={{ color: "#f7e840" }}>
-    //   {value === "5 stars" && (
-    //     <>
-    //       <StarRounded color="inherit" /> <StarRounded />
-    //       <StarRounded /> <StarRounded />
-    //       <StarRounded />
-    //     </>
-    //   )}
-    //   {value === "4.5 stars" && (
-    //     <>
-    //       <StarRounded /> <StarRounded />
-    //       <StarRounded /> <StarRounded />
-    //       <StarHalfRounded />
-    //     </>
-    //   )}
-    //   {value === "4 stars" && (
-    //     <>
-    //       <StarRounded /> <StarRounded />
-    //       <StarRounded /> <StarRounded />
-    //     </>
-    //   )}
-    //   {value === "3.5 stars" && (
-    //     <>
-    //       <StarRounded /> <StarRounded />
-    //       <StarRounded /> <StarHalfRounded />
-    //     </>
-    //   )}
-    //   {value === "3 stars" && (
-    //     <>
-    //       <StarRounded /> <StarRounded />
-    //       <StarRounded />
-    //     </>
-    //   )}
-    // </div>
   );
+}
+
+function getStatRender(value: number | undefined): ReactNode {
+  const color = !value
+    ? "silver"
+    : value >= 86
+    ? "ruby"
+    : value >= 84
+    ? "sapphire"
+    : value >= 80
+    ? "emerald"
+    : value >= 75
+    ? "gold"
+    : "silver";
+  return <Box className={`attribute-box-team ${color}`}>{value}</Box>;
 }

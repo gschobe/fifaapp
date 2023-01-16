@@ -29,9 +29,10 @@ const ExportMatchdayDataAction: React.FC<MatchDayStoreProps> = ({
   };
   const handleExport = () => {
     if (kind === "export") {
-      downLoadMatchDayData(Object.values(matchDays));
-    }
-    if (kind === "import" && file) {
+      downLoadMatchDayData(
+        Object.values(matchDays).filter((md) => md?.state !== "DELETED")
+      );
+    } else if (kind === "import" && file) {
       getUploadedMatchdayData(file);
     }
     handleToggle(undefined);

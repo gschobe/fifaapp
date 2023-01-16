@@ -27,6 +27,10 @@ export interface Team {
   country: string;
   league: string;
   rating: number;
+  OVA?: number;
+  ATT?: number;
+  MID?: number;
+  DEF?: number;
 }
 
 export interface TeamImport {
@@ -91,7 +95,7 @@ export interface MatchDay {
   // useableTeams: Team[];
   usedTeams: Team[];
   tournaments: Tournament[];
-  state: TournamentState;
+  state: TournamentState | "DELETED";
   possibleDraws: PossibleDraw[];
   meta?: {
     imported?: boolean;

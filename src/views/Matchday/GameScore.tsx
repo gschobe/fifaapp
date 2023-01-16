@@ -2,13 +2,17 @@ import { TextField } from "@mui/material";
 import { Game, TournamentTeam } from "definitions/Definitions";
 import React from "react";
 
-export const tournamenTeamComp = (index: number, tt: TournamentTeam) => {
+export const tournamenTeamComp = (
+  index: number,
+  tt: TournamentTeam,
+  direction: "row" | "column" = "row"
+) => {
   return (
     <div
       key={index}
       style={{
         display: "flex",
-        flexDirection: "row",
+        flexDirection: direction,
         fontWeight: "bold",
         fontSize: 18,
         margin: "5pt 0",
@@ -17,16 +21,21 @@ export const tournamenTeamComp = (index: number, tt: TournamentTeam) => {
         justifyContent: "space-evenly",
       }}
     >
-      <div style={{ minWidth: "40%", width: "fit-content" }}>
+      <div
+        style={{
+          flex: 1,
+        }}
+      >
         {tt.players.map((p) => p?.name).join(" & ")}
       </div>
-      <div style={{ padding: "0 5pt" }}>{`|`}</div>
+      {direction === "row" && (
+        <div style={{ flex: 0.1, padding: "0 5pt" }}>{`|`}</div>
+      )}
       <div
         style={{
           fontStyle: "italic",
           color: "grey",
-          minWidth: "40%",
-          width: "fit-content",
+          flex: 1,
         }}
       >
         {tt.team?.name}
@@ -50,21 +59,29 @@ export const GameScore: React.FC<GameScoreProps> = ({
   handleAwayScoreChange,
 }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        width: "100%",
-      }}
-    >
-      {tournamenTeamComp(1, liveGame?.homePlayer)}
+    <div style={{ width: "100%" }}>
       <div
         style={{
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
+          width: "100%",
+        }}
+      >
+        {tournamenTeamComp(1, liveGame?.homePlayer, "column")}
+        <div style={{ fontWeight: "bolder", fontSize: 20, margin: "0 10pt" }}>
+          {"vs"}
+        </div>
+        {tournamenTeamComp(2, liveGame?.awayPlayer, "column")}
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          width: "100%",
           margin: "5pt 0",
+          justifyContent: "space-evenly",
         }}
       >
         <TextField
@@ -78,7 +95,8 @@ export const GameScore: React.FC<GameScoreProps> = ({
           }}
           inputProps={{
             style: {
-              width: "40px",
+              flex: 1,
+              width: "60px",
               textAlign: "center",
               fontSize: 30,
               margin: 0,
@@ -91,6 +109,8 @@ export const GameScore: React.FC<GameScoreProps> = ({
             fontWeight: "bolder",
             fontSize: 20,
             margin: "0 10pt",
+            flex: 0.1,
+            textAlign: "center",
           }}
         >
           {":"}
@@ -106,7 +126,8 @@ export const GameScore: React.FC<GameScoreProps> = ({
           }}
           inputProps={{
             style: {
-              width: "40px",
+              flex: 1,
+              width: "60px",
               textAlign: "center",
               fontSize: 30,
               margin: 0,
@@ -115,7 +136,6 @@ export const GameScore: React.FC<GameScoreProps> = ({
           }}
         />
       </div>
-      {tournamenTeamComp(2, liveGame?.awayPlayer)}
     </div>
   );
 };
