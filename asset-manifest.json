@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/fifaapp/static/css/main.26476b63.chunk.css",
-    "main.js": "/fifaapp/static/js/main.767d088b.chunk.js",
-    "main.js.map": "/fifaapp/static/js/main.767d088b.chunk.js.map",
+    "main.js": "/fifaapp/static/js/main.dbcb5808.chunk.js",
+    "main.js.map": "/fifaapp/static/js/main.dbcb5808.chunk.js.map",
     "runtime-main.js": "/fifaapp/static/js/runtime-main.5028f42d.js",
     "runtime-main.js.map": "/fifaapp/static/js/runtime-main.5028f42d.js.map",
     "static/css/2.1881a404.chunk.css": "/fifaapp/static/css/2.1881a404.chunk.css",
-    "static/js/2.b5cd6a16.chunk.js": "/fifaapp/static/js/2.b5cd6a16.chunk.js",
-    "static/js/2.b5cd6a16.chunk.js.map": "/fifaapp/static/js/2.b5cd6a16.chunk.js.map",
+    "static/js/2.67c10056.chunk.js": "/fifaapp/static/js/2.67c10056.chunk.js",
+    "static/js/2.67c10056.chunk.js.map": "/fifaapp/static/js/2.67c10056.chunk.js.map",
     "index.html": "/fifaapp/index.html",
     "static/css/2.1881a404.chunk.css.map": "/fifaapp/static/css/2.1881a404.chunk.css.map",
     "static/css/main.26476b63.chunk.css.map": "/fifaapp/static/css/main.26476b63.chunk.css.map",
-    "static/js/2.b5cd6a16.chunk.js.LICENSE.txt": "/fifaapp/static/js/2.b5cd6a16.chunk.js.LICENSE.txt",
-    "static/js/main.767d088b.chunk.js.LICENSE.txt": "/fifaapp/static/js/main.767d088b.chunk.js.LICENSE.txt",
+    "static/js/2.67c10056.chunk.js.LICENSE.txt": "/fifaapp/static/js/2.67c10056.chunk.js.LICENSE.txt",
+    "static/js/main.dbcb5808.chunk.js.LICENSE.txt": "/fifaapp/static/js/main.dbcb5808.chunk.js.LICENSE.txt",
     "static/media/EA_Sports.svg.1e14100c.png": "/fifaapp/static/media/EA_Sports.svg.1e14100c.png",
     "static/media/material-dashboard-react.css?v=1.10.0": "/fifaapp/static/media/Soccer_Field_Transparant.svg.2bc359a5.png",
     "static/media/draw2.a560fbe3.webp": "/fifaapp/static/media/draw2.a560fbe3.webp",
@@ -21,8 +21,8 @@
   "entrypoints": [
     "static/js/runtime-main.5028f42d.js",
     "static/css/2.1881a404.chunk.css",
-    "static/js/2.b5cd6a16.chunk.js",
+    "static/js/2.67c10056.chunk.js",
     "static/css/main.26476b63.chunk.css",
-    "static/js/main.767d088b.chunk.js"
+    "static/js/main.dbcb5808.chunk.js"
   ]
 }
