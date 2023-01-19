@@ -26,7 +26,10 @@ const MultiSelect: React.FC<Props> = ({
 }) => {
   const [open, setOpen] = React.useState(false);
   return (
-    <FormControl style={{ width: "90%" }} disabled={disabled}>
+    <FormControl
+      style={{ width: "90%", marginTop: "10px" }}
+      disabled={disabled}
+    >
       <InputLabel style={{ paddingLeft: "5px" }}>{labelText}</InputLabel>
       <Select
         id="select-ratings"

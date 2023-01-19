@@ -177,7 +177,7 @@ const Overview: React.FC<StoreProps & MatchDayStoreProps> = ({
                   rowHeight={30}
                   autoPageSize
                   rows={matchdays}
-                  columns={matchDayColumns}
+                  columns={matchDayColumns(false)}
                 />
               )}
             </CardBody>

@@ -5,7 +5,7 @@ import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import CardHeader from "components/Card/CardHeader";
 import CardBody from "components/Card/CardBody";
-import { Box, Button, Checkbox } from "@material-ui/core";
+import { Box, Button, Checkbox, IconButton } from "@material-ui/core";
 import { DataGrid } from "@mui/x-data-grid";
 import { gamesColumns, playerTableColumns } from "definitions/TableDefinitions";
 import { TournamentTeam } from "definitions/Definitions";
@@ -13,6 +13,8 @@ import determineTeamMatesAndTeams from "utils/DrawUtils";
 import { CardActions, Stack } from "@mui/material";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
 import CreateMatchDayAction from "views/Overview/actions/CreateMatchDayAction";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import { getPlayersSortedByPoints } from "utils/TableUtils";
 import { GameScore, tournamenTeamComp } from "./GameScore";
 import { useNavigate } from "react-router-dom";
@@ -35,6 +37,23 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
 }) => {
   const navigate = useNavigate();
   const matchday = matchDays[id];
+
+  const { previousMd, nextMd } = React.useMemo(() => {
+    const matchdayKeys = Object.keys(matchDays).filter(
+      (key) => !isNaN(parseInt(key))
+    );
+    const currentMdIndex = matchdayKeys.indexOf(id);
+    const previousMd =
+      currentMdIndex === 0 ? undefined : matchdayKeys[currentMdIndex - 1];
+    const nextMd =
+      id === matchdayKeys[matchdayKeys.length - 1]
+        ? undefined
+        : matchdayKeys[currentMdIndex + 1];
+    return {
+      previousMd: previousMd,
+      nextMd: nextMd,
+    };
+  }, [id, matchDays]);
 
   // games table content hooks
   const [gamesAll, setGamesAll] = React.useState(false);
@@ -169,6 +188,13 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
           />
         )}
       <Box display={"flex"} flexDirection="row">
+        <IconButton
+          onClick={() => navigate(`/matchday/${previousMd}`)}
+          disabled={previousMd === undefined}
+          style={{ padding: 0, marginLeft: "-30px" }}
+        >
+          <NavigateBeforeIcon fontSize="large" />
+        </IconButton>
         <div
           style={{ fontWeight: "bold", fontSize: 24, margin: "5pt" }}
         >{`Welcome to Matchday ${id} ${
@@ -197,6 +223,13 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
               </Button>
             </>
           )}
+        <IconButton
+          onClick={() => navigate(`/matchday/${nextMd}`)}
+          style={{ padding: 0, marginRight: "-30px" }}
+          disabled={nextMd === undefined}
+        >
+          <NavigateNextIcon fontSize="large" style={{ padding: 0 }} />
+        </IconButton>
       </Box>
       {!(matchday.state === "FINISHED") && (
         <GridContainer>

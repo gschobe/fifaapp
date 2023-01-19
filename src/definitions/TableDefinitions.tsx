@@ -113,7 +113,9 @@ export const playerTableColumns: (
     flex: 0.5,
     hide: !overview,
     valueGetter: (params: GridValueGetterParams) =>
-      params.row.stats.winPercentage,
+      params.row.stats.gamesPlayed === 0
+        ? "0 %"
+        : `${(params.row.stats.winPercentage * 100).toFixed(0)} %`,
   },
   {
     field: "pointsPerGame",
@@ -125,7 +127,7 @@ export const playerTableColumns: (
   },
 ];
 
-export const matchDayColumns: GridColDef[] = [
+export const matchDayColumns: (filter: boolean) => GridColDef[] = (filter) => [
   {
     field: "id",
     headerName: "ID",
@@ -189,6 +191,7 @@ export const matchDayColumns: GridColDef[] = [
     field: "actions",
     headerName: "",
     // flex: 0.3,
+    hide: filter,
     align: "right",
     width: 150,
     renderCell: (params: GridRenderCellParams<MatchDay>) => {
@@ -308,7 +311,9 @@ export const overviewPlayersColumns: GridColDef[] = [
     sortable: true,
     flex: 1,
     valueGetter: (params: GridValueGetterParams) =>
-      params.row.stats.gamesPlayed === 0 ? 0 : params.row.stats.winPercentage,
+      params.row.stats.gamesPlayed === 0
+        ? "0 %"
+        : `${(params.row.stats.winPercentage * 100).toFixed(0)} %`,
   },
 ];
 
@@ -389,7 +394,12 @@ export function getStarsRender(
   readOnly: boolean
 ): ReactNode {
   return (
-    <TeamRating id={id.toString()} value={value || 3} readOnly={readOnly} />
+    <TeamRating
+      key={id.toString()}
+      id={id.toString()}
+      value={value || 3}
+      readOnly={readOnly}
+    />
   );
 }
 

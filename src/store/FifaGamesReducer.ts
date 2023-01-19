@@ -323,6 +323,13 @@ export const matchDaySlice = createSlice({
       const matchDay = state.matchDays[action.payload];
       if (matchDay) {
         matchDay.state = "DELETED";
+        const nextId = `D${
+          Object.values(state.matchDays).filter(
+            (md) => md && md.id.startsWith("D")
+          ).length + 1
+        }`;
+        state.matchDays[nextId] = { ...matchDay, id: nextId };
+        delete state.matchDays[action.payload];
       }
     },
   },
@@ -377,14 +384,7 @@ export function updateStats(
     stats.gamesLost =
       points === 0 ? (stats.gamesLost || 0) + 1 : stats.gamesLost;
     stats.points = (stats.points || 0) + points;
-    stats.winPercentage =
-      stats.gamesWon && stats.gamesPlayed
-        ? Number((stats.gamesWon / stats.gamesPlayed).toFixed(3))
-        : 0;
-    stats.pointsPerGame =
-      stats.points && stats.gamesPlayed
-        ? Number((stats.points / stats.gamesPlayed).toFixed(1))
-        : 0;
+    calculateStatValues(stats);
   }
 }
 
@@ -422,9 +422,25 @@ function correctStats(
 
     stats.points = (stats.points || 0) - points + newPoints;
 
-    stats.winPercentage =
-      stats.gamesWon && stats.gamesPlayed
-        ? Number((stats.gamesWon / stats.gamesPlayed).toFixed(3))
-        : 0;
+    calculateStatValues(stats);
   }
+}
+
+function calculateStatValues(stats: Stats) {
+  stats.winPercentage =
+    stats.gamesWon && stats.gamesPlayed
+      ? Number((stats.gamesWon / stats.gamesPlayed).toFixed(3))
+      : 0;
+  stats.pointsPerGame =
+    stats.points && stats.gamesPlayed
+      ? Number((stats.points / stats.gamesPlayed).toFixed(1))
+      : 0;
+  stats.goalsPerGame =
+    stats.goalsScored && stats.gamesPlayed
+      ? Number((stats.goalsScored / stats.gamesPlayed).toFixed(1))
+      : 0;
+  stats.goalsAgainstPerGame =
+    stats.goalsAgainst && stats.gamesPlayed
+      ? Number((stats.goalsAgainst / stats.gamesPlayed).toFixed(1))
+      : 0;
 }

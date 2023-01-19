@@ -530,6 +530,9 @@ footer ul li a:hover {
   height: 92vh !important;
 }
 
+.cardKpi {
+  height: fit-content !important;
+}
 .cardCenter {
   display: flex !important;
   align-items: center !important;

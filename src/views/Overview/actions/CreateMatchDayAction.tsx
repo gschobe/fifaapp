@@ -126,10 +126,8 @@ const CreateMatchDayAction: React.FC<
     const {
       target: { value },
     } = event;
-    setPlayerName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+    const players = typeof value === "string" ? value.split(",") : value;
+    setPlayerName(players.filter((p: Player) => !!p));
   };
 
   const handleLocationChange: (event: any) => void = (event) => {
@@ -203,7 +201,11 @@ const CreateMatchDayAction: React.FC<
         const id =
           Object.keys(matchDays).length === 0
             ? 1
-            : Math.max(...Object.keys(matchDays).map((id) => Number(id))) + 1;
+            : Math.max(
+                ...Object.keys(matchDays)
+                  .filter((id) => !isNaN(parseInt(id)))
+                  .map((id) => Number(id))
+              ) + 1;
         const matchday: MatchDay = {
           id: id.toString(),
           startDate: new Date().toISOString(),
@@ -225,18 +227,24 @@ const CreateMatchDayAction: React.FC<
         });
       }
       setActiveStep(0);
-      setIncludeSecondRound(false);
-      setMode(undefined);
-      setPlayerName([]);
-      setRatings([]);
+      resetStates();
       setNewTournamentOpen(false);
     }
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
+  function resetStates() {
+    setIncludeSecondRound(false);
+    setMode(undefined);
+    setPlayerName([]);
+    setRatings([]);
+    setSelectedLeagues([]);
+  }
+
   const handleBack = () => {
     if (activeStep === 0) {
+      resetStates();
       handleNewTournamenClick();
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep - 1);

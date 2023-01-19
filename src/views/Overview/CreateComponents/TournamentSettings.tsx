@@ -77,8 +77,16 @@ const TournamentSettings: React.FC<Props> = ({
             renderValue={(selected) => {
               return (
                 <Stack
+                  key={`${selected}-stack`}
                   direction="row"
-                  divider={<Divider orientation="vertical" flexItem />}
+                  divider={
+                    <Divider
+                      key={`${selected}-divider`}
+                      style={{ margin: "0 4px" }}
+                      orientation="vertical"
+                      flexItem
+                    />
+                  }
                 >
                   {selected.map((s: number) => getStarsRender(s, s, true))}
                 </Stack>

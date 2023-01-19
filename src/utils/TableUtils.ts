@@ -173,6 +173,12 @@ export function calulateOverallStats(
         stats["pointsPerGame"] = Number(
           (stats.points / stats.gamesPlayed).toFixed(1)
         );
+        stats["goalsPerGame"] = Number(
+          (stats.goalsScored / stats.gamesPlayed).toFixed(1)
+        );
+        stats["goalsAgainstPerGame"] = Number(
+          (stats.goalsAgainst / stats.gamesPlayed).toFixed(1)
+        );
       }
       playerStats[player.name] = pStat;
     }

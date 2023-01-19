@@ -10,6 +10,8 @@ export interface Stats {
   points?: number;
   winPercentage?: number;
   pointsPerGame?: number;
+  goalsPerGame?: number;
+  goalsAgainstPerGame?: number;
 }
 export interface Player {
   name: string;
@@ -31,6 +33,15 @@ export interface Team {
   ATT?: number;
   MID?: number;
   DEF?: number;
+}
+
+export interface TeamStats {
+  name: string;
+  games: number;
+  won: number;
+  tie: number;
+  lost: number;
+  winPercentage: number;
 }
 
 export interface TeamImport {
