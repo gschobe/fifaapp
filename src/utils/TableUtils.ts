@@ -168,7 +168,7 @@ export function calulateOverallStats(
           (stats.goalsAgainst || 0) + (player.stats?.goalsAgainst || 0);
         stats["points"] = (stats.points || 0) + (player.stats?.points || 0);
         stats["winPercentage"] = Number(
-          (stats.gamesWon / stats.gamesPlayed).toFixed(3)
+          ((stats.gamesWon / stats.gamesPlayed) * 100).toFixed(0)
         );
         stats["pointsPerGame"] = Number(
           (stats.points / stats.gamesPlayed).toFixed(1)

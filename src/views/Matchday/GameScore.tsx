@@ -1,12 +1,22 @@
 import { TextField } from "@mui/material";
 import { Game, TournamentTeam } from "definitions/Definitions";
 import React from "react";
+import { IconButton } from "@material-ui/core";
+import AutorenewRoundedIcon from "@mui/icons-material/AutorenewRounded";
 
 export const tournamenTeamComp = (
   index: number,
   tt: TournamentTeam,
-  direction: "row" | "column" = "row"
+  direction: "row" | "column" = "row",
+  switchTeamAllowed: boolean = false,
+  reDrawTeam: (index: number) => void = (index: number) => {
+    console.log(index);
+  }
 ) => {
+  const redraw = () => {
+    reDrawTeam(index);
+  };
+
   return (
     <div
       key={index}
@@ -39,6 +49,11 @@ export const tournamenTeamComp = (
         }}
       >
         {tt.team?.name}
+        {switchTeamAllowed && (
+          <IconButton style={{ padding: 0 }} onClick={redraw}>
+            <AutorenewRoundedIcon />
+          </IconButton>
+        )}
       </div>
     </div>
   );

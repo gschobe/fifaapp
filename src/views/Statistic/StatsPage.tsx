@@ -11,12 +11,18 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import TableChartIcon from "@mui/icons-material/TableChart";
+import StackedLineChartIcon from "@mui/icons-material/StackedLineChart";
 import { DataGrid, GridRowId } from "@mui/x-data-grid";
 import { playerTableColumns } from "definitions/TableDefinitions";
 import { calulateOverallStats } from "utils/TableUtils";
-import { getPlayerStats, getTeamAndGameStats } from "./StatsUtil";
+import {
+  getPlayerStats,
+  getPointsPerGameChartData,
+  getTeamAndGameStats,
+} from "./StatsUtil";
 import { tournamenTeamComp } from "views/Matchday/GameScore";
 import MatchDayFilterAccordion from "./MatchDayFilterAccordion";
+import Chart from "./Chart";
 
 const StatsPage: React.FC<MatchDayStoreProps & StoreProps> = ({
   matchDays,
@@ -53,6 +59,13 @@ const StatsPage: React.FC<MatchDayStoreProps & StoreProps> = ({
       : { team: {}, game: {} };
   }, [selectedMatchdays]);
 
+  const chartStats = React.useMemo(() => {
+    return selectedMatchdays
+      ? getPointsPerGameChartData(selectedMatchdays)
+      : undefined;
+  }, [selectedMatchdays]);
+  console.log(chartStats);
+
   return (
     <>
       <MatchDayFilterAccordion
@@ -60,7 +73,7 @@ const StatsPage: React.FC<MatchDayStoreProps & StoreProps> = ({
         selectionModel={selectionModel}
         setSelectionModel={setSelectionModel}
       />
-      <Accordion style={{ borderRadius: " 0 0 4px 4px" }}>
+      <Accordion>
         <AccordionSummary expandIcon={<TableChartIcon />}>
           <Typography style={{ width: "33%", flexShrink: 0 }}>
             Player Table
@@ -78,6 +91,18 @@ const StatsPage: React.FC<MatchDayStoreProps & StoreProps> = ({
             rows={players}
             columns={playerTableColumns(true)}
           />
+        </AccordionDetails>
+      </Accordion>
+      <Accordion style={{ borderRadius: " 0 0 4px 4px" }}>
+        <AccordionSummary expandIcon={<StackedLineChartIcon />}>
+          <Typography style={{ width: "33%", flexShrink: 0 }}>
+            Charts
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <GridContainer>
+            <Chart stats={chartStats} md={6} lg={6} />
+          </GridContainer>
         </AccordionDetails>
       </Accordion>
       <GridContainer>

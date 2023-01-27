@@ -429,7 +429,7 @@ function correctStats(
 function calculateStatValues(stats: Stats) {
   stats.winPercentage =
     stats.gamesWon && stats.gamesPlayed
-      ? Number((stats.gamesWon / stats.gamesPlayed).toFixed(3))
+      ? Number(((stats.gamesWon / stats.gamesPlayed) * 100).toFixed(0))
       : 0;
   stats.pointsPerGame =
     stats.points && stats.gamesPlayed

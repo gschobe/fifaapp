@@ -53,10 +53,8 @@ export function defineTeamMates(
     RoundRobin(players.length, 1, true)
       .filter((m) => m.player1 !== null && m.player2 !== null)
       .forEach((t: Match) => {
-        console.log(t);
         const ip1: number = Number(t.player1) - 1;
         const ip2: number = Number(t.player2) - 1;
-        console.log(ip1, " ", ip2);
         tournamentTeams.push({ players: [players[ip1], players[ip2]] });
       });
 
@@ -132,7 +130,15 @@ export function generateGames(
 
   if (mode === "2on2-odd") {
     const filteredGames = sched
+      .filter((g: Match) => g.player1 !== null && g.player2 !== null)
       .filter((g: Match) => {
+        console.log(
+          g.player1,
+          " and ",
+          g.player2,
+          " of ",
+          tournamentTeams.length
+        );
         const t1 = tournamentTeams[Number(g.player1) - 1 || 0];
         const t2 = tournamentTeams[Number(g.player2) - 1 || 0];
         const players = t1.players.concat(
@@ -161,21 +167,29 @@ export function generateGames(
       });
 
     let pause = 0;
+    let lastTeams: number[] = [];
     const sequencedGames: Game[] = [];
-    for (let i = 1; sequencedGames.length < 15; i++) {
+    const numGames = filteredGames.length;
+    for (let i = 1; sequencedGames.length < numGames; i++) {
+      console.log("sequence: ", i);
+      console.log(lastTeams);
       const game = filteredGames.find(
-        (g) => g.pause?.name === activeTournament.players[pause].name
+        (g) =>
+          g.pause?.name === activeTournament.players[pause].name &&
+          !sameTeam(g.t1.team, g.t2.team, lastTeams)
       );
+      console.log(game?.t1.team, " ", game?.t2.team);
       if (game) {
         filteredGames.splice(filteredGames.indexOf(game), 1);
         sequencedGames.push({
           matchdayId: matchdayId,
           tournamentId: activeTournament.id,
-          sequence: i,
+          sequence: sequencedGames.length + 1,
           homePlayer: game.t1.players,
           awayPlayer: game.t2.players,
           state: "OPEN",
         });
+        lastTeams = [game.t1.team, game.t2.team];
       }
       pause === activeTournament.players.length - 1 ? (pause = 0) : pause++;
     }
@@ -214,4 +228,8 @@ export function generateGames(
     games[0].state = "UPCOMING";
     return games;
   }
+}
+
+function sameTeam(t1: number, t2: number, lastTeams: number[]): boolean {
+  return lastTeams.includes(t1) || lastTeams.includes(t2);
 }

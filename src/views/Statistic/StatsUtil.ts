@@ -1,5 +1,6 @@
 import { Dictionary } from "@reduxjs/toolkit";
 import { Game, MatchDay, Player, TeamStats } from "definitions/Definitions";
+import { calulateOverallStats } from "utils/TableUtils";
 
 export interface TeamStatistics {
   numberOfTeams?: number;
@@ -31,6 +32,12 @@ export interface Statistics {
   mostMdWins?: { name: string[]; wins: number };
 }
 
+export interface ChartStatistics {
+  id: string[];
+  started: string[];
+  stats: { id: string; series: { name: string; values: number[] }[] }[];
+}
+
 export function getPlayerStats(
   players: (Player | undefined)[]
 ): PlayerStatistics {
@@ -57,6 +64,72 @@ export function getPlayerStats(
     gpg: gpg,
     gapg: gapg,
   };
+}
+
+export function getPointsPerGameChartData(
+  selectedMatchdays: (MatchDay | undefined)[]
+): ChartStatistics {
+  const a = selectedMatchdays.map((md, index) => {
+    if (md) {
+      const mdstats = Object.values(
+        calulateOverallStats(selectedMatchdays.slice(0, index + 1), [])
+      );
+      return { id: md.id, started: md.startDate, stats: mdstats };
+    }
+  });
+
+  const playerstat = new Map<string, Map<string, number[]>>();
+  a.forEach((i) => {
+    if (i) {
+      i.stats.forEach((p) => {
+        if (p) {
+          addChartSeriesFor("Points Per Game", "pointsPerGame", playerstat, p);
+          addChartSeriesFor("Win Percentage", "winPercentage", playerstat, p);
+          addChartSeriesFor("Goals Per Game", "goalsPerGame", playerstat, p);
+          addChartSeriesFor(
+            "Goals Against Per Game",
+            "goalsAgainstPerGame",
+            playerstat,
+            p
+          );
+        }
+      });
+    }
+  });
+  return {
+    id: a.map((i) => i?.id || ""),
+    started: a.map((i) =>
+      i?.started ? new Date(i.started).toLocaleDateString("de-DE") : ""
+    ),
+    stats: Array.from(playerstat.entries()).map((entry) => {
+      return {
+        id: entry[0],
+        series: Array.from(entry[1].entries()).map((k) => ({
+          name: k[0],
+          values: k[1],
+        })),
+      };
+    }),
+  };
+}
+
+function addChartSeriesFor(
+  label: string,
+  attribute: string,
+  playerstat: Map<string, Map<string, number[]>>,
+  p: Player
+) {
+  if (!playerstat.has(label)) {
+    playerstat.set(label, new Map());
+  }
+  const statMap = playerstat.get(label);
+  if (statMap && p.stats) {
+    if (statMap?.has(p.name)) {
+      statMap.get(p.name)?.push(p.stats[attribute] || 0);
+    } else {
+      statMap.set(p.name, [p.stats[attribute] || 0]);
+    }
+  }
 }
 
 export function getTeamAndGameStats(
@@ -108,7 +181,6 @@ export function getTeamAndGameStats(
         g.goalsHome === g.goalsAway
       ) {
         numTies = numTies + 1;
-        console.log(g.sequence, "/", g.matchdayId);
       } else if ((g?.goalsHome || 0) > (g?.goalsAway || 0)) {
         g.homePlayer.players.forEach((p) => {
           increaseWins(mostWins, p);

@@ -270,7 +270,7 @@ const CreateMatchDayAction: React.FC<
         playerName.length < 2 ||
         (mode === "2on2" &&
           (playerName.length < 4 || playerName.length % 2 !== 0)) ||
-        (mode === "2on2-odd" && playerName.length !== 5)));
+        (mode === "2on2-odd" && ![5, 7].includes(playerName.length))));
 
   return (
     <>

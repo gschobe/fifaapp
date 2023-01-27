@@ -8,8 +8,8 @@ import CardBody from "components/Card/CardBody";
 import { Box, Button, Checkbox, IconButton } from "@material-ui/core";
 import { DataGrid } from "@mui/x-data-grid";
 import { gamesColumns, playerTableColumns } from "definitions/TableDefinitions";
-import { TournamentTeam } from "definitions/Definitions";
-import determineTeamMatesAndTeams from "utils/DrawUtils";
+import { Game, TournamentTeam } from "definitions/Definitions";
+import determineTeamMatesAndTeams, { chooseTeams } from "utils/DrawUtils";
 import { CardActions, Stack } from "@mui/material";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
 import CreateMatchDayAction from "views/Overview/actions/CreateMatchDayAction";
@@ -173,6 +173,41 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
     }
   };
 
+  const reDrawTeam = (teamIndex: number) => {
+    if (activeTournament) {
+      const tTeams = [...activeTournament?.tournamentTeams];
+      if (tTeams && tTeams.length > 0) {
+        const redrawTeam: TournamentTeam[] = [{ ...tTeams[teamIndex] }];
+        if (redrawTeam) {
+          const oldTeam = redrawTeam[0].team;
+          const clear = chooseTeams(matchday, activeTournament, redrawTeam);
+          const newTeam = redrawTeam[0].team;
+          if (newTeam && oldTeam) {
+            tTeams[teamIndex] = redrawTeam[0];
+            const newTTeam = { ...redrawTeam[0], team: newTeam };
+            const newGames: Game[] = [];
+            activeTournament.games.forEach((g) => {
+              if (g.homePlayer.team?.name === oldTeam?.name) {
+                newGames.push({ ...g, homePlayer: newTTeam });
+              } else if (g.awayPlayer.team?.name === oldTeam?.name) {
+                newGames.push({ ...g, homePlayer: newTTeam });
+              } else {
+                newGames.push({ ...g });
+              }
+            });
+            setTournamentTeams({
+              matchdayId: id,
+              tournamentId: activeTournament?.id,
+              tTeams: tTeams,
+              games: newGames,
+              clearUsed: clear,
+            });
+          }
+        }
+      }
+    }
+  };
+
   const mdFinished = matchday.state === "FINISHED";
   return (
     <>
@@ -278,7 +313,13 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                   {drawState !== "running" && (
                     <>
                       {activeTournament?.tournamentTeams.map((tt, index) => {
-                        return tournamenTeamComp(index, tt);
+                        return tournamenTeamComp(
+                          index,
+                          tt,
+                          "row",
+                          activeTournament.state === "NEW",
+                          reDrawTeam
+                        );
                       })}
                     </>
                   )}

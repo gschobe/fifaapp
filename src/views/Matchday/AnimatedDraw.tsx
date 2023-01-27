@@ -163,7 +163,7 @@ const AnimatedDraw: React.FC<Props> = ({
                     </>
                   </Grid>
                   {tIndex < teams.length - 1 && (
-                    <hr style={{ margin: "30pt 10pt" }} />
+                    <hr key={`${tIndex}-hr`} style={{ margin: "30pt 10pt" }} />
                   )}
                 </>
               );

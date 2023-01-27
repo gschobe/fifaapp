@@ -115,7 +115,7 @@ export const playerTableColumns: (
     valueGetter: (params: GridValueGetterParams) =>
       params.row.stats.gamesPlayed === 0
         ? "0 %"
-        : `${(params.row.stats.winPercentage * 100).toFixed(0)} %`,
+        : `${params.row.stats.winPercentage} %`,
   },
   {
     field: "pointsPerGame",
