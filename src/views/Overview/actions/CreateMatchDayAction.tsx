@@ -56,12 +56,17 @@ const CreateMatchDayAction: React.FC<
     const leagues = Object.values(teams).map((t) => getLeageString(t));
     return Array.from(new Set(leagues));
   }, [teams]);
+  const allOVA = React.useMemo(() => {
+    const ova = Object.values(teams).map((t) => t?.OVA || 0);
+    return Array.from(new Set(ova));
+  }, [teams]);
 
   const classes = useStyles();
   const [playerName, setPlayerName] = React.useState<string[]>([]);
   const [location, setLocation] = React.useState<string>();
   const [ratings, setRatings] = React.useState<number[]>([]);
   const [selectedLeagues, setSelectedLeagues] = React.useState<string[]>([]);
+  const [selectedOva, setSelectedOva] = React.useState<number[]>([]);
   const [includeSecondRound, setIncludeSecondRound] = React.useState(
     activeMatchday?.tournaments
       ? activeMatchday?.tournaments[activeMatchday?.tournaments.length - 1]
@@ -152,6 +157,13 @@ const CreateMatchDayAction: React.FC<
     const selected = typeof value === "string" ? value.split(",") : value;
     setSelectedLeagues(selected.filter((s: string) => s !== undefined));
   };
+  const handleOvaSelectionChange: (event: any) => void = (event) => {
+    const {
+      target: { value },
+    } = event;
+    const selected = typeof value === "string" ? value.split(",") : value;
+    setSelectedOva(selected.filter((s: number) => s !== undefined));
+  };
 
   const updateSelectedTeams = () => {
     const selectedTeams = [
@@ -161,7 +173,10 @@ const CreateMatchDayAction: React.FC<
           (ratings.length === 0 ? true : ratings.includes(team.rating)) &&
           (selectedLeagues.length === 0
             ? true
-            : selectedLeagues.includes(getLeageString(team)))
+            : selectedLeagues.includes(getLeageString(team))) &&
+          (selectedOva.length === 0
+            ? true
+            : selectedOva.includes(team.OVA || 0))
       ),
     ];
     setSelectedTeams(selectedTeams);
@@ -262,6 +277,7 @@ const CreateMatchDayAction: React.FC<
   const buttonDisabled =
     (showTeamsSelection && selectedTeams.length === 0) || //
     (showTSettings &&
+      selectedOva.length === 0 &&
       selectedLeagues.length === 0 &&
       ratings.length === 0 &&
       !reuseTeamsSelection) ||
@@ -319,6 +335,9 @@ const CreateMatchDayAction: React.FC<
               leagues={allLeagues}
               selectedLeagues={selectedLeagues}
               handleLeagueChange={handleLeagueSelectionChange}
+              ova={allOVA}
+              selectedOva={selectedOva}
+              handleOvaSelectionChange={handleOvaSelectionChange}
             />
           )}
           <Box

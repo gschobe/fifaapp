@@ -5,7 +5,7 @@ import CheckBox from "@material-ui/core/Checkbox";
 import MenuItem from "@material-ui/core/MenuItem";
 import Box from "@material-ui/core/Box";
 import { ALL_TEAM_RATINGS } from "definitions/Definitions";
-import { getStarsRender } from "definitions/TableDefinitions";
+import { getStarsRender, getStatRender } from "definitions/TableDefinitions";
 import MultiSelect from "./MutliSelect";
 import Stack from "@mui/material/Stack";
 import { Divider } from "@material-ui/core";
@@ -21,6 +21,9 @@ export interface Props {
   leagues: string[];
   selectedLeagues: string[];
   handleLeagueChange: (e: any) => void;
+  ova: number[];
+  selectedOva: number[];
+  handleOvaSelectionChange: (e: any) => void;
 }
 const TournamentSettings: React.FC<Props> = ({
   ratings,
@@ -33,11 +36,15 @@ const TournamentSettings: React.FC<Props> = ({
   leagues,
   selectedLeagues,
   handleLeagueChange,
+  ova,
+  selectedOva,
+  handleOvaSelectionChange,
 }) => {
   const teamFilterError =
     !reuseTeamsSelection &&
     ratings.length === 0 &&
-    selectedLeagues.length === 0;
+    selectedLeagues.length === 0 &&
+    selectedOva.length === 0;
 
   return (
     <>
@@ -110,6 +117,24 @@ const TournamentSettings: React.FC<Props> = ({
               );
             })}
             onChange={handleLeagueChange}
+          />
+          <MultiSelect
+            disabled={reuseTeamsSelection}
+            error={teamFilterError}
+            value={selectedOva}
+            labelText="Select OVA"
+            menuItems={ova.map((o) => {
+              return (
+                <MenuItem key={o} value={o}>
+                  <CheckBox
+                    checked={selectedOva.indexOf(o) > -1}
+                    color="primary"
+                  />
+                  {getStatRender(o)}
+                </MenuItem>
+              );
+            })}
+            onChange={handleOvaSelectionChange}
           />
         </FormGroup>
       </Box>

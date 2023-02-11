@@ -190,7 +190,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
               if (g.homePlayer.team?.name === oldTeam?.name) {
                 newGames.push({ ...g, homePlayer: newTTeam });
               } else if (g.awayPlayer.team?.name === oldTeam?.name) {
-                newGames.push({ ...g, homePlayer: newTTeam });
+                newGames.push({ ...g, awayPlayer: newTTeam });
               } else {
                 newGames.push({ ...g });
               }
@@ -444,6 +444,11 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                     !mdFinished,
                     activeTournament ? gamesAll : true
                   )}
+                  initialState={{
+                    sorting: {
+                      sortModel: [{ field: "id", sort: "asc" }],
+                    },
+                  }}
                 />
               )}
             </CardBody>

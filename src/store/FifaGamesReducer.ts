@@ -332,6 +332,54 @@ export const matchDaySlice = createSlice({
         delete state.matchDays[action.payload];
       }
     },
+    moveGameDown: (state, action: PayloadAction<Game>) => {
+      const tournament = state.matchDays[
+        action.payload.matchdayId
+      ]?.tournaments.find((t) => t.id === action.payload.tournamentId);
+
+      if (tournament) {
+        const game = tournament.games.find(
+          (g) => g.sequence === action.payload.sequence
+        );
+        const gameAfter = tournament.games.find(
+          (g) => g.sequence === action.payload.sequence + 1
+        );
+        if (game && gameAfter) {
+          game.sequence = game.sequence + 1;
+          gameAfter.sequence = gameAfter.sequence - 1;
+          if (game.state === "UPCOMING") {
+            game.state = "OPEN";
+            gameAfter.state = "UPCOMING";
+          }
+        }
+      }
+    },
+    moveGameUp: (state, action: PayloadAction<Game>) => {
+      const tournament = state.matchDays[
+        action.payload.matchdayId
+      ]?.tournaments.find((t) => t.id === action.payload.tournamentId);
+
+      if (tournament) {
+        const game = tournament.games.find(
+          (g) => g.sequence === action.payload.sequence
+        );
+        const gameBefore = tournament.games.find(
+          (g) => g.sequence === action.payload.sequence - 1
+        );
+        if (
+          game &&
+          gameBefore &&
+          !["FINISHED", "RUNNING"].includes(gameBefore.state)
+        ) {
+          game.sequence = game.sequence - 1;
+          gameBefore.sequence = gameBefore.sequence + 1;
+          if (gameBefore.state === "UPCOMING") {
+            gameBefore.state = "OPEN";
+            game.state = "UPCOMING";
+          }
+        }
+      }
+    },
   },
 });
 

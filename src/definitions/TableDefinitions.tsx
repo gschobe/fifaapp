@@ -13,6 +13,7 @@ import Box from "@material-ui/core/Box";
 import CorrectGameDialog from "views/Matchday/CorrectGameDialog";
 import RemoveMatchdayAction from "views/Overview/actions/RemoveMatchdayAction";
 import TeamRating from "views/Teams/TeamRating";
+import ChangeGameSequenceAction from "views/Matchday/ChangeGameSequenceAction";
 
 export const playerTableColumns: (
   overview: boolean,
@@ -277,10 +278,23 @@ export const gamesColumns: (
     field: "actions",
     headerName: "",
     sortable: false,
-    flex: 0.2,
+    hide: !correctable,
+    flex: 0.4,
     renderCell: (params: GridRenderCellParams<Game>) => {
-      return correctable && params.row.state === "FINISHED" ? (
-        <CorrectGameDialog game={params.row} />
+      return correctable ? (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "end",
+            width: "100%",
+          }}
+        >
+          {correctable && params.row.state === "FINISHED" && (
+            <CorrectGameDialog game={params.row} />
+          )}
+          <ChangeGameSequenceAction game={params.row} />
+        </div>
       ) : null;
     },
   },
@@ -320,11 +334,11 @@ export const overviewPlayersColumns: GridColDef[] = [
 export const teamsColumns: (editable: boolean) => GridColDef[] = (editable) => [
   {
     field: "nownum",
-    headerName: "#",
+    headerName: "",
     filterable: false,
     sortable: false,
     disableColumnMenu: true,
-    width: 30,
+    minWidth: 25,
     renderCell: (index) => index.api.getRowIndex(index.row.name) + 1,
   },
   { field: "name", headerName: "Name", flex: 1 },
@@ -350,7 +364,6 @@ export const teamsColumns: (editable: boolean) => GridColDef[] = (editable) => [
     field: "OVA",
     headerName: "OVA",
     flex: 0.5,
-    hide: !editable,
     align: "center",
     headerAlign: "center",
     renderCell: (params: GridRenderCellParams<number>) =>
@@ -403,10 +416,12 @@ export function getStarsRender(
   );
 }
 
-function getStatRender(value: number | undefined): ReactNode {
+export function getStatRender(value: number | undefined): ReactNode {
   const color = !value
     ? "silver"
-    : value >= 86
+    : value >= 91
+    ? "amethyst"
+    : value >= 87
     ? "ruby"
     : value >= 84
     ? "sapphire"

@@ -133,18 +133,3 @@ const ImportTeamsAction: React.FC<StoreProps> = ({ setTeams }) => {
 };
 
 export default storeConnector(ImportTeamsAction);
-
-// function convertRating(Rating: any): TeamRating {
-//   switch (Rating) {
-//     case 5:
-//       return "5 stars";
-//     case 4.5:
-//       return "4.5 stars";
-//     case 4:
-//       return "4 stars";
-//     case 3.5:
-//       return "3.5 stars";
-//     default:
-//       return "3 stars";
-//   }
-// }
