@@ -23,12 +23,12 @@ import {
 import { tournamenTeamComp } from "views/Matchday/GameScore";
 import MatchDayFilterAccordion from "./MatchDayFilterAccordion";
 import Chart from "./Chart";
+import { statisticsConnector, StatisticsProps } from "store/StatisticsReducer";
 
-const StatsPage: React.FC<MatchDayStoreProps & StoreProps> = ({
-  matchDays,
-}) => {
+const StatsPage: React.FC<
+  MatchDayStoreProps & StoreProps & StatisticsProps
+> = ({ matchDays, selection, setSelection }) => {
   const [selectionModel, setSelectionModel] = React.useState<GridRowId[]>();
-
   const [matchdays, setMatchDays] = React.useState<(MatchDay | undefined)[]>();
 
   React.useEffect(() => {
@@ -36,12 +36,19 @@ const StatsPage: React.FC<MatchDayStoreProps & StoreProps> = ({
       (md) => md?.state !== "DELETED"
     );
     setMatchDays(mds);
-    setSelectionModel(mds.map((md) => md?.id || ""));
-  }, [matchDays]);
+    setSelectionModel(
+      selection.length > 0 ? selection : mds.map((md) => md?.id || "")
+    );
+  }, [matchDays, selection]);
 
   const selectedMatchdays = React.useMemo(() => {
     return matchdays?.filter((md) => md && selectionModel?.includes(md.id));
   }, [selectionModel]);
+
+  const updateSelection = (newSelection: GridRowId[]) => {
+    setSelection(newSelection);
+    setSelectionModel(newSelection);
+  };
 
   const players = React.useMemo(() => {
     return selectedMatchdays
@@ -64,14 +71,13 @@ const StatsPage: React.FC<MatchDayStoreProps & StoreProps> = ({
       ? getPointsPerGameChartData(selectedMatchdays)
       : undefined;
   }, [selectedMatchdays]);
-  console.log(chartStats);
 
   return (
     <>
       <MatchDayFilterAccordion
         matchdays={matchdays}
         selectionModel={selectionModel}
-        setSelectionModel={setSelectionModel}
+        setSelectionModel={updateSelection}
       />
       <Accordion>
         <AccordionSummary expandIcon={<TableChartIcon />}>
@@ -276,7 +282,9 @@ const StatsPage: React.FC<MatchDayStoreProps & StoreProps> = ({
   );
 };
 
-export default storeConnector(matchDayConnector(StatsPage));
+export default storeConnector(
+  matchDayConnector(statisticsConnector(StatsPage))
+);
 
 function getTeamsRender(game: Game | undefined): React.ReactNode {
   if (game) {

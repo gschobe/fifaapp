@@ -70,7 +70,7 @@ const CorrectGameDialog: React.FC<Props & MatchDayStoreProps> = ({
           <Button onClick={handleConfirm}>Confirm</Button>
         </DialogActions>
       </Dialog>
-      <IconButton onClick={onClick}>
+      <IconButton onClick={onClick} style={{ padding: 5 }}>
         <CreateRoundedIcon fontSize="small" />
       </IconButton>
     </>

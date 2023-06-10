@@ -32,7 +32,7 @@ ReactDOM.render(
   <Router>
     <Provider store={store}>
       <UserProvider>
-        <DefaultDataProvider>
+        <DefaultDataProvider dispatch={store.dispatch}>
           <Admin auth={store.auth} />
         </DefaultDataProvider>
       </UserProvider>

@@ -338,10 +338,10 @@ export const teamsColumns: (editable: boolean) => GridColDef[] = (editable) => [
     filterable: false,
     sortable: false,
     disableColumnMenu: true,
-    minWidth: 25,
+    flex: 0.1,
     renderCell: (index) => index.api.getRowIndex(index.row.name) + 1,
   },
-  { field: "name", headerName: "Name", flex: 1 },
+  { field: "name", headerName: "Name", flex: 1, minWidth: 150 },
   {
     field: "country",
     headerName: "Country",
@@ -349,11 +349,12 @@ export const teamsColumns: (editable: boolean) => GridColDef[] = (editable) => [
     hideable: true,
     hide: !editable,
   },
-  { field: "league", headerName: "League", flex: 1 },
+  { field: "league", headerName: "League", flex: 1, minWidth: 150 },
   {
     field: "rating",
     headerName: "Rating",
     flex: 1,
+    minWidth: 150,
     editable: editable,
     renderCell: (params: GridRenderCellParams<number>) =>
       getStarsRender(params.id, params.value, true),

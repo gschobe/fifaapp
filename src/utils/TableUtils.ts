@@ -69,8 +69,8 @@ export function comparePlayers(p1: Player, p2: Player): number {
     }
 
     // goal difference
-    const p1Diff = p1.stats.goalsScored || 0 - (p1.stats.goalsAgainst || 0);
-    const p2Diff = p2.stats.goalsScored || 0 - (p2.stats.goalsAgainst || 0);
+    const p1Diff = (p1.stats.goalsScored || 0) - (p1.stats.goalsAgainst || 0);
+    const p2Diff = (p2.stats.goalsScored || 0) - (p2.stats.goalsAgainst || 0);
     x = p2Diff - p1Diff;
     if (x !== 0) {
       return x;

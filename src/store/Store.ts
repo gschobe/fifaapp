@@ -6,12 +6,14 @@ import { persistReducer, persistStore } from "redux-persist";
 import storeReducer from "./StoreReducer";
 import matchDayReducer from "./FifaGamesReducer";
 import authReducer from "./AuthRecucer";
+import StatisticsReducer from "./StatisticsReducer";
 
 const store = configureStore({
   reducer: {
     fifadata: persistReducer({ key: "fifadata", storage }, storeReducer),
     fifagames: persistReducer({ key: "fifagames", storage }, matchDayReducer),
     auth: authReducer,
+    statistics: StatisticsReducer,
   },
 });
 

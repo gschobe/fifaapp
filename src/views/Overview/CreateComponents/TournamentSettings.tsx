@@ -11,6 +11,7 @@ import Stack from "@mui/material/Stack";
 import { Divider } from "@material-ui/core";
 
 export interface Props {
+  numSelected: number;
   handleRatingSelectionChange: (e: any) => void;
   ratings: number[];
   includeSecondRound: boolean;
@@ -26,6 +27,7 @@ export interface Props {
   handleOvaSelectionChange: (e: any) => void;
 }
 const TournamentSettings: React.FC<Props> = ({
+  numSelected,
   ratings,
   handleRatingSelectionChange,
   includeSecondRound,
@@ -52,9 +54,15 @@ const TournamentSettings: React.FC<Props> = ({
         style={{
           border: "2px solid lightgrey",
           borderRadius: "10px",
+          minWidth: "30vw",
         }}
       >
-        <FormGroup style={{ marginLeft: "10px", marginBottom: "10px" }}>
+        <FormGroup
+          style={{
+            marginBottom: "10px",
+            alignContent: "center",
+          }}
+        >
           <FormControlLabel
             style={{ marginTop: "5px" }}
             control={
@@ -137,6 +145,15 @@ const TournamentSettings: React.FC<Props> = ({
             onChange={handleOvaSelectionChange}
           />
         </FormGroup>
+        <div
+          style={{
+            width: "90%",
+            margin: "15pt 0 5pt 0",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "end",
+          }}
+        >{`${numSelected} teams selected`}</div>
       </Box>
       <Box
         style={{

@@ -29,7 +29,8 @@ export const matchDaySlice = createSlice({
       state.matchDays[action.payload.id] = action.payload;
     },
     addMatchDays: (state, action: PayloadAction<MatchDay[]>) => {
-      action.payload.map((matchday) => {
+      console.log(Object.entries(state.matchDays));
+      action.payload.forEach((matchday) => {
         if (state.matchDays[matchday.id] === undefined) {
           state.matchDays[matchday.id] = {
             ...matchday,
@@ -382,6 +383,8 @@ export const matchDaySlice = createSlice({
     },
   },
 });
+
+export const { addMatchDays } = matchDaySlice.actions;
 
 export const matchDayConnector = connect(
   (state: RootState) => ({

@@ -266,20 +266,14 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
           <NavigateNextIcon fontSize="large" style={{ padding: 0 }} />
         </IconButton>
       </Box>
-      {!(matchday.state === "FINISHED") && (
+      {matchday.state !== "FINISHED" && activeTournament && (
         <GridContainer>
           <GridItem {...{ xs: 12, sm: 6, md: 4 }}>
             <Card className="card-content">
               <CardHeader color="info">
                 <div style={{ fontSize: "1.5em" }}>Draw</div>
               </CardHeader>
-              <CardBody
-                className={
-                  activeTournament?.tournamentTeams.length === 0
-                    ? "cardCenter"
-                    : ""
-                }
-              >
+              <CardBody className={"cardCenter"}>
                 <Box
                   style={{
                     height: "100%",
@@ -327,7 +321,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
               </CardBody>
             </Card>
           </GridItem>
-          <GridItem {...{ xs: 12, sm: 6, md: 4 }}>
+          <GridItem {...{ xs: 12, sm: 6, md: 5 }}>
             <Card className="card-content">
               <CardHeader color="primary">
                 <div style={{ fontSize: "1.5em" }}>Live</div>
@@ -358,7 +352,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
               </CardActions>
             </Card>
           </GridItem>
-          <GridItem {...{ xs: 12, sm: 6, md: 4 }}>
+          <GridItem {...{ xs: 12, sm: 6, md: 3 }}>
             <Card className="card-content">
               <CardHeader color="info">
                 <div style={{ fontSize: "1.5em" }}>Upcoming</div>
@@ -368,13 +362,13 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                   <div
                     style={{
                       display: "flex",
-                      flexDirection: "row",
+                      flexDirection: "column",
                       alignItems: "center",
                       marginTop: "10pt",
                       width: "100%",
                     }}
                   >
-                    {tournamenTeamComp(1, upcomingGame?.homePlayer, "column")}
+                    {tournamenTeamComp(1, upcomingGame?.homePlayer, "row")}
                     <div
                       style={{
                         fontWeight: "bolder",
@@ -384,7 +378,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
                     >
                       {"vs"}
                     </div>
-                    {tournamenTeamComp(2, upcomingGame?.awayPlayer, "column")}
+                    {tournamenTeamComp(2, upcomingGame?.awayPlayer, "row")}
                   </div>
                 ) : (
                   ""
@@ -495,6 +489,7 @@ const MatchdayView: React.FC<MatchDayProps & MatchDayStoreProps> = ({
       </GridContainer>
       {matchday.tournaments
         .filter((t) => t.state === "FINISHED")
+        .reverse()
         .map((t) => {
           return (
             <div key={`tournament-${t.id}`}>

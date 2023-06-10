@@ -17,13 +17,13 @@ const ChangeGameSequenceAction: React.FC<
   return (
     <>
       {game.state === "OPEN" && (
-        <IconButton onClick={moveUp}>
-          <MoveUpRoundedIcon />
+        <IconButton onClick={moveUp} style={{ padding: 5 }}>
+          <MoveUpRoundedIcon fontSize="small" />
         </IconButton>
       )}
       {["OPEN", "UPCOMING"].includes(game.state) && (
-        <IconButton onClick={moveDown}>
-          <MoveDownRoundedIcon />
+        <IconButton onClick={moveDown} style={{ padding: 5 }}>
+          <MoveDownRoundedIcon fontSize="small" />
         </IconButton>
       )}
     </>

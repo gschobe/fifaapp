@@ -71,7 +71,7 @@ const CreateMatchDayAction: React.FC<
     activeMatchday?.tournaments
       ? activeMatchday?.tournaments[activeMatchday?.tournaments.length - 1]
           .withSecondRound
-      : false
+      : true
   );
   const [reuseTeamsSelection, setReuseTeamsSelection] = React.useState(
     activeMatchday?.tournaments ? activeMatchday.tournaments.length > 0 : false
@@ -148,6 +148,7 @@ const CreateMatchDayAction: React.FC<
     } = event;
     const ratings = typeof value === "string" ? value.split(",") : value;
     setRatings(ratings.filter((r: string) => r !== undefined));
+    setSelectedTeams(getSelectedTeams(ratings, selectedLeagues, selectedOva));
   };
 
   const handleLeagueSelectionChange: (event: any) => void = (event) => {
@@ -156,6 +157,7 @@ const CreateMatchDayAction: React.FC<
     } = event;
     const selected = typeof value === "string" ? value.split(",") : value;
     setSelectedLeagues(selected.filter((s: string) => s !== undefined));
+    setSelectedTeams(getSelectedTeams(ratings, selected, selectedOva));
   };
   const handleOvaSelectionChange: (event: any) => void = (event) => {
     const {
@@ -163,28 +165,41 @@ const CreateMatchDayAction: React.FC<
     } = event;
     const selected = typeof value === "string" ? value.split(",") : value;
     setSelectedOva(selected.filter((s: number) => s !== undefined));
+    setSelectedTeams(getSelectedTeams(ratings, selectedLeagues, selected));
   };
 
   const updateSelectedTeams = () => {
-    const selectedTeams = [
-      ...Object.values(teams).filter(
-        (team) =>
-          team &&
-          (ratings.length === 0 ? true : ratings.includes(team.rating)) &&
-          (selectedLeagues.length === 0
-            ? true
-            : selectedLeagues.includes(getLeageString(team))) &&
-          (selectedOva.length === 0
-            ? true
-            : selectedOva.includes(team.OVA || 0))
-      ),
-    ];
+    const selectedTeams = getSelectedTeams(
+      ratings,
+      selectedLeagues,
+      selectedOva
+    );
     setSelectedTeams(selectedTeams);
     setSelectionModel(() => selectedTeams.map((t) => t?.name || ""));
   };
 
+  function getSelectedTeams(
+    selRatings: number[],
+    selLeagues: string[],
+    selOva: number[]
+  ) {
+    return [
+      ...Object.values(teams).filter(
+        (team) =>
+          team &&
+          (selRatings.length === 0 ? true : selRatings.includes(team.rating)) &&
+          (selLeagues.length === 0
+            ? true
+            : selLeagues.includes(getLeageString(team))) &&
+          (selOva.length === 0 ? true : selOva.includes(team.OVA || 0))
+      ),
+    ];
+  }
+
   const handleNext = () => {
-    updateSelectedTeams();
+    if (!reuseTeamsSelection) {
+      updateSelectedTeams();
+    }
     if (activeStep === steps.length - 1) {
       const matchdayPlayers = createNewMatchday
         ? newPlayers(playerName)
@@ -277,6 +292,7 @@ const CreateMatchDayAction: React.FC<
   const buttonDisabled =
     (showTeamsSelection && selectedTeams.length === 0) || //
     (showTSettings &&
+      selectedTeams.length === 0 &&
       selectedOva.length === 0 &&
       selectedLeagues.length === 0 &&
       ratings.length === 0 &&
@@ -288,10 +304,12 @@ const CreateMatchDayAction: React.FC<
           (playerName.length < 4 || playerName.length % 2 !== 0)) ||
         (mode === "2on2-odd" && ![5, 7].includes(playerName.length))));
 
+  console.log(selectedTeams);
   return (
     <>
       <Dialog
-        fullWidth
+        // fullScreen
+        maxWidth="md"
         open={newTournamentOpen}
         onClose={handleNewTournamenClick}
       >
@@ -323,6 +341,7 @@ const CreateMatchDayAction: React.FC<
           )}
           {showTSettings && (
             <TournamentSettings
+              numSelected={selectedTeams.length}
               ratings={ratings}
               handleRatingSelectionChange={handleRatingSelectionChange}
               handleIncludeChanged={handleIncludeSecondRoundChanged}
@@ -352,19 +371,21 @@ const CreateMatchDayAction: React.FC<
             </Button>
           </Box>
           {showTeamsSelection && (
-            <DataGrid
-              checkboxSelection
-              selectionModel={selectionModel}
-              autoHeight
-              headerHeight={35}
-              rowHeight={30}
-              getRowId={(row) => row.name}
-              rows={selectedTeams}
-              columns={teamsColumns(false)}
-              onSelectionModelChange={(newSelectionModel) => {
-                setSelectionModel(newSelectionModel);
-              }}
-            />
+            <Box minWidth={"600px"}>
+              <DataGrid
+                checkboxSelection
+                selectionModel={selectionModel}
+                autoHeight
+                headerHeight={35}
+                rowHeight={30}
+                getRowId={(row) => row.name}
+                rows={selectedTeams}
+                columns={teamsColumns(false)}
+                onSelectionModelChange={(newSelectionModel) => {
+                  setSelectionModel(newSelectionModel);
+                }}
+              />
+            </Box>
           )}
         </DialogContent>
       </Dialog>

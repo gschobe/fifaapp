@@ -1,27 +1,31 @@
 import React, { ReactNode } from "react";
-import { matchDayConnector, MatchDayStoreProps } from "store/FifaGamesReducer";
+import { addMatchDays, MatchDayStoreProps } from "store/FifaGamesReducer";
+import { AppDispatch } from "store/Store";
 import { storeConnector, StoreProps } from "store/StoreReducer";
 import { calulateOverallStats } from "utils/TableUtils";
 import matchData from "../../assets/data/matchData1.json";
 
 interface Props {
+  dispatch: AppDispatch;
   children?: ReactNode[];
 }
 const DefaultDataProvider: React.FC<
   Props & MatchDayStoreProps & StoreProps
-> = ({ children, addMatchDays, matchDays, player, setPlayers }) => {
+> = ({ children, dispatch, matchDays, player, setPlayers }) => {
   React.useEffect(() => {
     console.log("add matchdays");
-    addMatchDays(matchData);
+    dispatch(addMatchDays(matchData));
   }, [matchData]);
   React.useEffect(() => {
     console.log("calc player stats");
-    setPlayers(
-      calulateOverallStats(Object.values(matchDays), Object.values(player))
-    );
+    if (matchDays && player) {
+      setPlayers(
+        calulateOverallStats(Object.values(matchDays), Object.values(player))
+      );
+    }
   }, [matchDays]);
 
   return <>{children}</>;
 };
 
-export default storeConnector(matchDayConnector(DefaultDataProvider));
+export default storeConnector(DefaultDataProvider);

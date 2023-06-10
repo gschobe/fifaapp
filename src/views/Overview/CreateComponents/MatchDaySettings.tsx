@@ -41,7 +41,12 @@ const MatchDaySettings: React.FC<Props> = ({
         borderRadius: "10px",
       }}
     >
-      <FormGroup style={{ marginLeft: "10px", marginBottom: "10px" }}>
+      <FormGroup
+        style={{
+          marginBottom: "10px",
+          alignContent: "center",
+        }}
+      >
         <FormControl style={{ marginTop: "10px", width: "80%" }}>
           <InputLabel style={{ paddingLeft: "5px" }}>
             Select Location
