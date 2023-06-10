@@ -24,6 +24,8 @@ import RoutingMatchday from "views/Matchday/RoutingMatchday";
 import React from "react";
 import TeamsPage from "views/Teams/TeamsPage";
 import StatsPage from "views/Statistic/StatsPage";
+// import DartOverview from "dart/DartOverview";
+import DartHome from "dart/DartHome";
 
 const dashboardRoutes = [
   {
@@ -58,6 +60,14 @@ const dashboardRoutes = [
     name: "Maintain Teams",
     icon: Groups2RoundedIcon,
     component: <TeamsPage />,
+    layout: "/admin",
+    showInSidebar: true,
+  },
+  {
+    path: "/dart",
+    name: "DartApp",
+    icon: Groups2RoundedIcon,
+    component: <DartHome />,
     layout: "/admin",
     showInSidebar: true,
   },
