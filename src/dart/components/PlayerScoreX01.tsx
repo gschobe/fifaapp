@@ -13,6 +13,7 @@ const PlayerScoreX01: React.FC<Props> = ({ player }) => {
   const possible = possibleOuts ? possibleOuts[0] : "";
   return (
     <div
+      id="X01ScoreBoard"
       style={{
         display: "flex",
         flexDirection: "row",
@@ -22,6 +23,7 @@ const PlayerScoreX01: React.FC<Props> = ({ player }) => {
       }}
     >
       <div
+        id="player"
         style={{
           textAlign: "center",
           verticalAlign: "middle",
@@ -52,15 +54,15 @@ const PlayerScoreX01: React.FC<Props> = ({ player }) => {
         >
           <div
             style={{
-              flex: 3,
+              flex: 2,
               display: "flex",
               flexDirection: "row",
               textAlign: "center",
               verticalAlign: "middle",
               fontWeight: "bold",
               //   display: "table-cell",
-              lineHeight: "40px",
-              fontSize: "32px",
+              lineHeight: "7vh",
+              fontSize: "5vh",
             }}
           >
             <div
@@ -84,13 +86,13 @@ const PlayerScoreX01: React.FC<Props> = ({ player }) => {
             </div>
             <div
               style={{
-                flex: 1,
+                flex: 1.5,
                 textAlign: "center",
                 verticalAlign: "middle",
                 display: "table-cell",
                 fontWeight: "normal",
-                lineHeight: "40px",
-                fontSize: "20px",
+                lineHeight: "7vh",
+                fontSize: "3.5vh",
               }}
             >
               {possible}
@@ -101,10 +103,10 @@ const PlayerScoreX01: React.FC<Props> = ({ player }) => {
               flex: 1,
               textAlign: "center",
               verticalAlign: "middle",
-              fontWeight: "bold",
+              // fontWeight: "bold",
               display: "table-cell",
-              lineHeight: "40px",
-              fontSize: "20px",
+              lineHeight: "7vh",
+              fontSize: "4vh",
             }}
           >
             {getNumDartsThrown(player)}
@@ -116,8 +118,8 @@ const PlayerScoreX01: React.FC<Props> = ({ player }) => {
               verticalAlign: "middle",
               fontWeight: "bold",
               display: "table-cell",
-              lineHeight: "40px",
-              fontSize: "20px",
+              lineHeight: "7vh",
+              fontSize: "4vh",
             }}
           >
             {`Ø ${player.score.average}`}
@@ -127,8 +129,8 @@ const PlayerScoreX01: React.FC<Props> = ({ player }) => {
           style={{
             display: "flex",
             flexDirection: "row",
-            lineHeight: "26px",
-            fontSize: "18px",
+            lineHeight: "5vh",
+            fontSize: "3.5vh",
           }}
         >
           {threeDartScore.map((s, idx) => (
@@ -139,7 +141,6 @@ const PlayerScoreX01: React.FC<Props> = ({ player }) => {
                 textAlign: "center",
                 verticalAlign: "middle",
                 display: "table-cell",
-                lineHeight: "34px",
                 borderStyle: "solid",
                 borderWidth: "2px 0px 0px 0px",
               }}
@@ -154,8 +155,8 @@ const PlayerScoreX01: React.FC<Props> = ({ player }) => {
               verticalAlign: "middle",
               fontWeight: "bold",
               display: "table-cell",
-              lineHeight: "34px",
-              fontSize: "24px",
+              lineHeight: "5vh",
+              fontSize: "3.5vh",
               borderStyle: "solid",
               borderWidth: "2px 0px 0px 0px",
             }}

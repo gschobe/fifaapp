@@ -80,7 +80,10 @@ const DartHome: React.FC = () => {
               width: "100%",
               display: "flex",
               flexDirection: "row",
-              height: "40px",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "7vh",
+              fontSize: "5vh",
             }}
           >
             <IconButton onClick={() => setStartGame(false)}>

@@ -21,9 +21,9 @@ const FullKeyboard: React.FC<Props> = ({ setScoredPoints, backClicked }) => {
   const [double, setDouble] = React.useState(false);
 
   return (
-    <Grid container spacing={2} style={{ height: "90%" }}>
+    <Grid container spacing={1} style={{ height: "98%" }}>
       {buttons.map((b) => (
-        <Grid key={b} item xs={3}>
+        <Grid key={b} item xs={3} style={{ height: "14%", display: "flex" }}>
           <div
             key={b}
             onClick={() => {
@@ -44,14 +44,17 @@ const FullKeyboard: React.FC<Props> = ({ setScoredPoints, backClicked }) => {
               pointerEvents: b === 25 && triple ? "none" : "auto",
               textAlign: "center",
               fontWeight: "bold",
-              fontSize: "24px",
-              display: "table-cell",
-              verticalAlign: "middle",
+              fontSize: "2.4vw",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
               border: "solid black 1pt",
               boxShadow: "3px 2px 2px grey",
               borderRadius: "5pt",
               width: "12vw",
-              height: "10vh",
+              height: "auto",
+              lineHeight: "100%",
+              flex: 1,
               opacity: b === 25 && triple ? 0.5 : 1,
               backgroundColor:
                 (b === "Triple" && triple) || (double && b === "Double")
@@ -67,7 +70,7 @@ const FullKeyboard: React.FC<Props> = ({ setScoredPoints, backClicked }) => {
           </div>
         </Grid>
       ))}
-      <Grid key={"back"} item xs={3}>
+      <Grid key={"back"} item xs={3} style={{ height: "14%", display: "flex" }}>
         <div
           key={"back"}
           onClick={() => {
@@ -79,20 +82,28 @@ const FullKeyboard: React.FC<Props> = ({ setScoredPoints, backClicked }) => {
             cursor: "pointer",
             textAlign: "center",
             fontWeight: "bold",
-            fontSize: "24px",
-            display: "table-cell",
-            verticalAlign: "middle",
+            fontSize: "2.4vw",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
             border: "solid black 1pt",
             boxShadow: "3px 2px 2px grey",
             borderRadius: "5pt",
             width: "12vw",
-            height: "10vh",
+            height: "auto",
+            lineHeight: "100%",
+            flex: 1,
           }}
         >
           {"MISS"}
         </div>
       </Grid>
-      <Grid key={"back-grid"} item xs={3}>
+      <Grid
+        key={"back-grid"}
+        item
+        xs={3}
+        style={{ height: "14%", display: "flex" }}
+      >
         <div
           key={"back"}
           onClick={() => {
@@ -104,14 +115,17 @@ const FullKeyboard: React.FC<Props> = ({ setScoredPoints, backClicked }) => {
             cursor: "pointer",
             textAlign: "center",
             fontWeight: "bold",
-            fontSize: "24px",
-            display: "table-cell",
-            verticalAlign: "middle",
+            fontSize: "2.4vw",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
             border: "solid black 1pt",
             boxShadow: "3px 2px 2px grey",
             borderRadius: "5pt",
             width: "12vw",
-            height: "10vh",
+            height: "auto",
+            lineHeight: "100%",
+            flex: 1,
             backgroundColor: "lightgray",
           }}
         >

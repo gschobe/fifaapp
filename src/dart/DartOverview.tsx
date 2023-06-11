@@ -40,8 +40,14 @@ const DartOverview: React.FC<Props> = ({ start, finish, kind }) => {
         threeDartScore[actTry - 1] = points;
         activePlayer.score.threeDartScore[game.round - 1] = threeDartScore;
       } else {
-        // regular throw
-        activePlayer.score.remaining = activePlayer.score.remaining - points;
+        if (
+          score !== game.startScoreKind ||
+          game.startKind === "SINGLE IN" ||
+          (game.startKind === "DOUBLE IN" && double)
+        ) {
+          // regular throw
+          activePlayer.score.remaining = activePlayer.score.remaining - points;
+        }
 
         const threeDartScore = activePlayer.score.threeDartScore[
           game.round - 1
@@ -133,18 +139,19 @@ const DartOverview: React.FC<Props> = ({ start, finish, kind }) => {
     >
       <div
         style={{
-          minWidth: "400px",
-          flex: 1,
+          minWidth: "350px",
+          flex: 1.5,
           display: "flex",
           flexDirection: "column",
           rowGap: 5,
+          overflow: "auto",
         }}
       >
         {game.finishedPlayers.concat(game.players).map((p) => {
           return <PlayerScoreX01 key={p.name} player={p} />;
         })}
       </div>
-      <div style={{ flex: 1, minWidth: "400px", margin: "2pt" }}>
+      <div style={{ flex: 1, minWidth: "240px", margin: "2pt" }}>
         <FullKeyboard setScoredPoints={setScoredPoints} backClicked={undo} />
       </div>
     </div>
