@@ -1,33 +1,38 @@
 {
   "files": {
     "main.css": "/fifaapp/static/css/main.e11c85db.chunk.css",
-    "main.js": "/fifaapp/static/js/main.4c7f8473.chunk.js",
-    "main.js.map": "/fifaapp/static/js/main.4c7f8473.chunk.js.map",
-    "runtime-main.js": "/fifaapp/static/js/runtime-main.a3481701.js",
-    "runtime-main.js.map": "/fifaapp/static/js/runtime-main.a3481701.js.map",
+    "main.js": "/fifaapp/static/js/main.b760091b.chunk.js",
+    "main.js.map": "/fifaapp/static/js/main.b760091b.chunk.js.map",
+    "runtime-main.js": "/fifaapp/static/js/runtime-main.0cf93487.js",
+    "runtime-main.js.map": "/fifaapp/static/js/runtime-main.0cf93487.js.map",
     "static/css/2.1881a404.chunk.css": "/fifaapp/static/css/2.1881a404.chunk.css",
-    "static/js/2.9beac8fb.chunk.js": "/fifaapp/static/js/2.9beac8fb.chunk.js",
-    "static/js/2.9beac8fb.chunk.js.map": "/fifaapp/static/js/2.9beac8fb.chunk.js.map",
-    "static/js/3.93902450.chunk.js": "/fifaapp/static/js/3.93902450.chunk.js",
-    "static/js/3.93902450.chunk.js.map": "/fifaapp/static/js/3.93902450.chunk.js.map",
+    "static/js/2.69beaec5.chunk.js": "/fifaapp/static/js/2.69beaec5.chunk.js",
+    "static/js/2.69beaec5.chunk.js.map": "/fifaapp/static/js/2.69beaec5.chunk.js.map",
+    "static/js/3.3f8e6828.chunk.js": "/fifaapp/static/js/3.3f8e6828.chunk.js",
+    "static/js/3.3f8e6828.chunk.js.map": "/fifaapp/static/js/3.3f8e6828.chunk.js.map",
     "index.html": "/fifaapp/index.html",
     "static/css/2.1881a404.chunk.css.map": "/fifaapp/static/css/2.1881a404.chunk.css.map",
     "static/css/main.e11c85db.chunk.css.map": "/fifaapp/static/css/main.e11c85db.chunk.css.map",
-    "static/js/2.9beac8fb.chunk.js.LICENSE.txt": "/fifaapp/static/js/2.9beac8fb.chunk.js.LICENSE.txt",
-    "static/js/3.93902450.chunk.js.LICENSE.txt": "/fifaapp/static/js/3.93902450.chunk.js.LICENSE.txt",
-    "static/js/main.4c7f8473.chunk.js.LICENSE.txt": "/fifaapp/static/js/main.4c7f8473.chunk.js.LICENSE.txt",
+    "static/js/2.69beaec5.chunk.js.LICENSE.txt": "/fifaapp/static/js/2.69beaec5.chunk.js.LICENSE.txt",
+    "static/js/3.3f8e6828.chunk.js.LICENSE.txt": "/fifaapp/static/js/3.3f8e6828.chunk.js.LICENSE.txt",
+    "static/js/main.b760091b.chunk.js.LICENSE.txt": "/fifaapp/static/js/main.b760091b.chunk.js.LICENSE.txt",
     "static/media/EA_Sports.svg.1e14100c.png": "/fifaapp/static/media/EA_Sports.svg.1e14100c.png",
     "static/media/material-dashboard-react.css?v=1.10.0": "/fifaapp/static/media/Soccer_Field_Transparant.svg.2bc359a5.png",
+    "static/media/boonzai.5554b735.mp3": "/fifaapp/static/media/boonzai.5554b735.mp3",
+    "static/media/bust.a3ed866c.mp3": "/fifaapp/static/media/bust.a3ed866c.mp3",
     "static/media/click.4373782c.wav": "/fifaapp/static/media/click.4373782c.wav",
     "static/media/dart.9ececb7c.png": "/fifaapp/static/media/dart.9ececb7c.png",
+    "static/media/double.c8d7ded8.mp3": "/fifaapp/static/media/double.c8d7ded8.mp3",
     "static/media/draw2.a560fbe3.webp": "/fifaapp/static/media/draw2.a560fbe3.webp",
-    "static/media/fifa-23-kylian-mbappe.2f33fdb2.jpg": "/fifaapp/static/media/fifa-23-kylian-mbappe.2f33fdb2.jpg"
+    "static/media/fifa-23-kylian-mbappe.2f33fdb2.jpg": "/fifaapp/static/media/fifa-23-kylian-mbappe.2f33fdb2.jpg",
+    "static/media/miss2.16b5f6f1.mp3": "/fifaapp/static/media/miss2.16b5f6f1.mp3",
+    "static/media/triple.4165c530.mp3": "/fifaapp/static/media/triple.4165c530.mp3"
   },
   "entrypoints": [
-    "static/js/runtime-main.a3481701.js",
+    "static/js/runtime-main.0cf93487.js",
     "static/css/2.1881a404.chunk.css",
-    "static/js/2.9beac8fb.chunk.js",
+    "static/js/2.69beaec5.chunk.js",
     "static/css/main.e11c85db.chunk.css",
-    "static/js/main.4c7f8473.chunk.js"
+    "static/js/main.b760091b.chunk.js"
   ]
 }
