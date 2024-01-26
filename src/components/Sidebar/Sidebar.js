@@ -14,6 +14,7 @@ import Icon from "@material-ui/core/Icon";
 // core components
 import AdminNavbarLinks from "components/Navbars/AdminNavbarLinks.js";
 import RTLNavbarLinks from "components/Navbars/RTLNavbarLinks.js";
+import dartLogo from "../../assets/img/dart.png";
 
 import styles from "assets/jss/material-dashboard-react/components/sidebarStyle.js";
 
@@ -27,10 +28,65 @@ export default function Sidebar(props) {
     return location.pathname === routeName;
   }
   const { color, logo, image, logoText, routes } = props;
+  var dartLinks = (
+    <List className={classes.list}>
+      {routes
+        .filter((route) => route.showInSidebar && route.group === "DART")
+        .map((prop, key) => {
+          var activePro = " ";
+          var listItemClasses;
+          if (prop.path === "/upgrade-to-pro") {
+            activePro = classes.activePro + " ";
+            listItemClasses = classNames({
+              [" " + classes[color]]: true,
+            });
+          } else {
+            listItemClasses = classNames({
+              [" " + classes[color]]: activeRoute(prop.layout + prop.path),
+            });
+          }
+          const whiteFontClasses = classNames({
+            [" " + classes.whiteFont]: activeRoute(prop.layout + prop.path),
+          });
+          return (
+            <NavLink
+              to={prop.path}
+              className={activePro + classes.item}
+              key={key}
+            >
+              <ListItem button className={classes.itemLink + listItemClasses}>
+                {typeof prop.icon === "string" ? (
+                  <Icon
+                    className={classNames(classes.itemIcon, whiteFontClasses, {
+                      [classes.itemIconRTL]: props.rtlActive,
+                    })}
+                  >
+                    {prop.icon}
+                  </Icon>
+                ) : (
+                  <prop.icon
+                    className={classNames(classes.itemIcon, whiteFontClasses, {
+                      [classes.itemIconRTL]: props.rtlActive,
+                    })}
+                  />
+                )}
+                <ListItemText
+                  primary={props.rtlActive ? prop.rtlName : prop.name}
+                  className={classNames(classes.itemText, whiteFontClasses, {
+                    [classes.itemTextRTL]: props.rtlActive,
+                  })}
+                  disableTypography={true}
+                />
+              </ListItem>
+            </NavLink>
+          );
+        })}
+    </List>
+  );
   var links = (
     <List className={classes.list}>
       {routes
-        .filter((route) => route.showInSidebar)
+        .filter((route) => route.showInSidebar && !route.group)
         .map((prop, key) => {
           var activePro = " ";
           var listItemClasses;
@@ -96,6 +152,20 @@ export default function Sidebar(props) {
       <div style={{ fontWeight: "bold" }}>{logoText}</div>
     </div>
   );
+  var dartBrand = (
+    <div
+      className={classes.logo}
+      style={{
+        color: "white",
+        display: "flex",
+      }}
+    >
+      <div className={classes.logoImage}>
+        <img src={dartLogo} alt="logo" className={classes.img} />
+      </div>
+      <div style={{ fontWeight: "bold" }}>Dart APP</div>
+    </div>
+  );
   var user = (
     <div
       className={classes.logo}
@@ -153,6 +223,8 @@ export default function Sidebar(props) {
         >
           {brand}
           <div className={classes.sidebarWrapper}>{links}</div>
+          {dartBrand}
+          <div className={classes.sidebarWrapper}>{dartLinks}</div>
           {/* {user} */}
           {image !== undefined ? (
             <div

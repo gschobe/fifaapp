@@ -37,6 +37,7 @@
     "tournament-pairings": "^1.4.5",
     "ts-xlsx": "^0.0.11",
     "typescript-cookie": "^1.0.4",
+    "use-sound": "^4.0.1",
     "xlsx": "^0.18.5",
     "xslx": "^1.0.0"
   },

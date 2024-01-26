@@ -1,21 +1,23 @@
+import { Grid, GridSize } from "@material-ui/core";
+import { Button, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { SoundKind, usePlaySound } from "dart/utils/SoundUtil";
 import React from "react";
-import { Grid } from "@material-ui/core";
 
 interface Props {
   setScoredPoints: (points: number, double: boolean, triple: boolean) => void;
   backClicked: () => void;
+  numbers: number[];
+  keySize?: GridSize;
 }
-const FullKeyboard: React.FC<Props> = ({ setScoredPoints, backClicked }) => {
+const FullKeyboard: React.FC<Props> = ({
+  setScoredPoints,
+  backClicked,
+  numbers,
+  keySize = 3,
+}) => {
   const buttons = React.useMemo(() => {
-    const scores = [];
-    for (let score = 1; score < 21; score++) {
-      scores.push(score);
-    }
-    scores.push(25);
-    scores.push("Double");
-    scores.push("Triple");
-    return scores;
-  }, []);
+    return [...numbers];
+  }, [numbers]);
 
   const [triple, setTriple] = React.useState(false);
   const [double, setDouble] = React.useState(false);
@@ -23,117 +25,169 @@ const FullKeyboard: React.FC<Props> = ({ setScoredPoints, backClicked }) => {
   return (
     <Grid container spacing={1} style={{ height: "98%" }}>
       {buttons.map((b) => (
-        <Grid key={b} item xs={3} style={{ height: "14%", display: "flex" }}>
-          <div
-            key={b}
+        <Grid
+          key={b}
+          item
+          xs={keySize}
+          style={{ height: "14%", display: "flex" }}
+        >
+          <Key
+            label={b}
             onClick={() => {
-              if (b === "Triple") {
-                setTriple((triple) => !triple);
-                setDouble(false);
-              } else if (b === "Double") {
-                setDouble((double) => !double);
-                setTriple(false);
-              } else {
-                setScoredPoints(Number(b), double, triple);
-                setDouble(false);
-                setTriple(false);
-              }
+              setScoredPoints(Number(b), double, triple);
+              setDouble(false);
+              setTriple(false);
             }}
-            style={{
-              cursor: "pointer",
-              pointerEvents: b === 25 && triple ? "none" : "auto",
-              textAlign: "center",
-              fontWeight: "bold",
-              fontSize: "2.4vw",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              border: "solid black 1pt",
-              boxShadow: "3px 2px 2px grey",
-              borderRadius: "5pt",
-              width: "12vw",
-              height: "auto",
-              lineHeight: "100%",
-              flex: 1,
-              opacity: b === 25 && triple ? 0.5 : 1,
-              backgroundColor:
-                (b === "Triple" && triple) || (double && b === "Double")
-                  ? "blue"
-                  : "inherit",
-              color:
-                (b === "Triple" && triple) || (double && b === "Double")
-                  ? "white"
-                  : "inherit",
-            }}
-          >
-            {b}
-          </div>
+            active={!(triple && b === 25)}
+            soundKind={b === 25 ? "BULL" : "CLICK"}
+          />
         </Grid>
       ))}
-      <Grid key={"back"} item xs={3} style={{ height: "14%", display: "flex" }}>
-        <div
-          key={"back"}
+      <Grid
+        key={"double"}
+        item
+        xs={keySize}
+        style={{ height: "14%", display: "flex" }}
+      >
+        <Toggle
+          label="Double"
+          onClick={() => {
+            setDouble((double) => !double);
+            setTriple(false);
+          }}
+          active={double}
+          soundKind={"DOUBLE"}
+        />
+      </Grid>
+      <Grid
+        key={"triple"}
+        item
+        xs={keySize}
+        style={{ height: "14%", display: "flex" }}
+      >
+        <Toggle
+          label="Triple"
+          onClick={() => {
+            setTriple((triple) => !triple);
+            setDouble(false);
+          }}
+          active={triple}
+          soundKind={"TRIPLE"}
+        />
+      </Grid>
+      <Grid
+        key={"miss"}
+        item
+        xs={keySize}
+        style={{ height: "14%", display: "flex" }}
+      >
+        <Key
+          label="Miss"
           onClick={() => {
             setScoredPoints(0, false, false);
             setTriple(false);
             setDouble(false);
           }}
-          style={{
-            cursor: "pointer",
-            textAlign: "center",
-            fontWeight: "bold",
-            fontSize: "2.4vw",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            border: "solid black 1pt",
-            boxShadow: "3px 2px 2px grey",
-            borderRadius: "5pt",
-            width: "12vw",
-            height: "auto",
-            lineHeight: "100%",
-            flex: 1,
-          }}
-        >
-          {"MISS"}
-        </div>
+          color="error"
+          soundKind={"MISS"}
+        />
       </Grid>
       <Grid
         key={"back-grid"}
         item
-        xs={3}
+        xs={keySize}
         style={{ height: "14%", display: "flex" }}
       >
-        <div
-          key={"back"}
+        <Key
+          label="Zurück"
           onClick={() => {
             backClicked();
             setTriple(false);
             setDouble(false);
           }}
-          style={{
-            cursor: "pointer",
-            textAlign: "center",
-            fontWeight: "bold",
-            fontSize: "2.4vw",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            border: "solid black 1pt",
-            boxShadow: "3px 2px 2px grey",
-            borderRadius: "5pt",
-            width: "12vw",
-            height: "auto",
-            lineHeight: "100%",
-            flex: 1,
-            backgroundColor: "lightgray",
-          }}
-        >
-          {"Zurück"}
-        </div>
+          color="inherit"
+        />
       </Grid>
     </Grid>
   );
 };
 
 export default FullKeyboard;
+
+export const Key: React.FC<{
+  label: string | number;
+  onClick: () => void;
+  soundKind?: SoundKind;
+  color?: "inherit" | "info" | "primary" | "secondary" | "success" | "error";
+  backgroundColor?: string;
+  active?: boolean;
+}> = ({
+  label,
+  onClick,
+  color,
+  soundKind = "CLICK",
+  // backgroundColor = "inherit",
+  active = true,
+}) => {
+  const [play] = usePlaySound(soundKind);
+  return (
+    <Button
+      variant="contained"
+      disabled={!active}
+      key={label}
+      color={color ?? "info"}
+      onClick={() => {
+        play();
+        onClick();
+      }}
+      sx={{
+        flex: 1,
+        fontWeight: "bold",
+        fontSize: "2vw",
+        // backgroundColor: "skyblue",
+        // color: "black",
+        boxShadow: 3,
+      }}
+      // TouchRippleProps={{ color: "pink" }}
+    >
+      {label}
+    </Button>
+  );
+};
+
+export const Toggle: React.FC<{
+  label: string | number;
+  onClick: () => void;
+  active?: boolean;
+  soundKind?: SoundKind;
+}> = ({ label, onClick, active = true, soundKind = "CLICK" }) => {
+  const [play] = usePlaySound(soundKind);
+  return (
+    <ToggleButtonGroup
+      value={active ? label : undefined}
+      fullWidth
+      unselectable="on"
+      exclusive
+      color="secondary"
+      onChange={() => {
+        play();
+        onClick();
+      }}
+      sx={{
+        height: "100%",
+        width: "100%",
+      }}
+    >
+      <ToggleButton
+        value={label}
+        sx={{
+          fontWeight: "bold",
+          fontSize: "2.0vw",
+          boxShadow: 3,
+        }}
+      >
+        {label}
+      </ToggleButton>
+    </ToggleButtonGroup>
+  );
+};

@@ -7,11 +7,13 @@ import storeReducer from "./StoreReducer";
 import matchDayReducer from "./FifaGamesReducer";
 import authReducer from "./AuthRecucer";
 import StatisticsReducer from "./StatisticsReducer";
+import dartReducer from "./DartStore";
 
 const store = configureStore({
   reducer: {
     fifadata: persistReducer({ key: "fifadata", storage }, storeReducer),
     fifagames: persistReducer({ key: "fifagames", storage }, matchDayReducer),
+    dart: persistReducer({ key: "dart", storage }, dartReducer),
     auth: authReducer,
     statistics: StatisticsReducer,
   },

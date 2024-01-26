@@ -26,6 +26,8 @@ import TeamsPage from "views/Teams/TeamsPage";
 import StatsPage from "views/Statistic/StatsPage";
 // import DartOverview from "dart/DartOverview";
 import DartHome from "dart/DartHome";
+import RoutingDartNight from "dart/RoutingDartNight";
+// import dartLogo from "./assets/img/dart.png";
 
 const dashboardRoutes = [
   {
@@ -65,11 +67,22 @@ const dashboardRoutes = [
   },
   {
     path: "/dart",
-    name: "DartApp",
-    icon: Groups2RoundedIcon,
+    name: "Overview",
+    icon: HomeOutlined,
     component: <DartHome />,
     layout: "/admin",
     showInSidebar: true,
+    group: "DART",
+  },
+  {
+    path: "/dart/dartNight",
+    name: "Dart Night",
+    icon: Groups2RoundedIcon,
+    component: <RoutingDartNight />,
+    layout: "/admin",
+    showInSidebar: false,
+    hasId: true,
+    group: "DART",
   },
 ];
 

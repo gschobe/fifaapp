@@ -1,31 +1,41 @@
 import React from "react";
-import _ from "lodash";
-import { X01Player } from "dart/Definitions";
+import { CricketGame, CricketPlayer } from "dart/Definitions";
 import {
   getCurrentRoundDarts,
-  getNumDartsThrown,
-  getPossibleOuts,
+  getPlayerPointsCricket,
 } from "dart/utils/DartUtil";
 
 interface Props {
-  player: X01Player;
-  round: number;
+  player: CricketPlayer;
+  game: CricketGame;
 }
-const PlayerScoreX01: React.FC<Props> = ({ player, round }) => {
+const PlayerScoreCricket: React.FC<Props> = ({ player, game }) => {
+  const points = getPlayerPointsCricket(
+    game.settings.mode,
+    player,
+    game.players
+  );
+  const hits = new Map(game.settings.numbers.map((num) => [num, 0]));
+  player.score.tries
+    .filter((t) => t.number !== 0)
+    .forEach((t) => {
+      hits.set(t.number, (hits.get(t.number) ?? 0) + t.hits);
+    });
   const displayRound =
-    player.active || player.finishRank > 0 || round === 1 ? round : round - 1;
+    player.active || player.finishRank > 0 || game.round === 1
+      ? game.round
+      : game.round - 1;
   const currentRoundDarts = getCurrentRoundDarts(displayRound, player);
   const threeDartScore: (number | string)[] = currentRoundDarts.map(
-    (t) => t.points
+    (t) =>
+      `${t.multiplier === 3 ? "T" : t.multiplier === 2 ? "D" : ""}${t.number}`
   );
   while (threeDartScore.length < 3) {
     threeDartScore.push("-");
   }
-  const possibleOuts = getPossibleOuts(player.score.remaining);
-  const possible = possibleOuts ? possibleOuts[0] : "";
   return (
     <div
-      id="X01ScoreBoard"
+      id="CricketScoreBoard"
       style={{
         display: "flex",
         overflow: "hidden",
@@ -79,13 +89,12 @@ const PlayerScoreX01: React.FC<Props> = ({ player, round }) => {
         >
           <div
             style={{
-              flex: 2,
+              flex: 1,
               display: "flex",
               flexDirection: "row",
               textAlign: "center",
               verticalAlign: "middle",
               fontWeight: "bold",
-              //   display: "table-cell",
               lineHeight: "7vh",
               fontSize: "5vh",
             }}
@@ -108,48 +117,39 @@ const PlayerScoreX01: React.FC<Props> = ({ player, round }) => {
                       ? "rd"
                       : "th"
                   }`
-                : player.score.remaining}
+                : points}
             </div>
-            <div
-              style={{
-                flex: 1.5,
-                textAlign: "center",
-                verticalAlign: "middle",
-                display: "table-cell",
-                fontWeight: "normal",
-                lineHeight: "7vh",
-                fontSize: "3.5vh",
-              }}
-            >
-              {player.finishRank ? "" : possible}
-            </div>
-          </div>
-          <div
-            style={{
-              flex: 0.5,
-              textAlign: "center",
-              verticalAlign: "middle",
-              // fontWeight: "bold",
-              display: "table-cell",
-              lineHeight: "7vh",
-              fontSize: "3.5vh",
-            }}
-          >
-            {getNumDartsThrown(player)}
           </div>
           <div
             style={{
               flex: 1,
               textAlign: "center",
               verticalAlign: "middle",
-              fontWeight: "bold",
               display: "table-cell",
               lineHeight: "7vh",
-              fontSize: "3.5vh",
+              fontSize: "4vh",
             }}
           >
-            {`Ø ${player.score.average}`}
+            {player.score.tries.length}
           </div>
+          {threeDartScore.map((s, idx) => (
+            <div
+              key={idx}
+              style={{
+                flex: 0.5,
+                textAlign: "center",
+                verticalAlign: "middle",
+                display: "table-cell",
+                lineHeight: "7vh",
+                fontSize: "2.5vh",
+                fontWeight: "bold",
+                // borderStyle: "solid",
+                // borderWidth: "2px 0px 0px 0px",
+              }}
+            >
+              {threeDartScore[idx]}
+            </div>
+          ))}
         </div>
         <div
           style={{
@@ -159,7 +159,7 @@ const PlayerScoreX01: React.FC<Props> = ({ player, round }) => {
             fontSize: "3.5vh",
           }}
         >
-          {threeDartScore.map((s, idx) => (
+          {Array.from(hits.keys()).map((s, idx) => (
             <div
               key={idx}
               style={{
@@ -171,28 +171,37 @@ const PlayerScoreX01: React.FC<Props> = ({ player, round }) => {
                 borderWidth: "2px 0px 0px 0px",
               }}
             >
-              {threeDartScore[idx]}
+              {s}
             </div>
           ))}
-          <div
-            style={{
-              flex: 1,
-              textAlign: "center",
-              verticalAlign: "middle",
-              fontWeight: "bold",
-              display: "table-cell",
-              lineHeight: "5vh",
-              fontSize: "3.5vh",
-              borderStyle: "solid",
-              borderWidth: "2px 0px 0px 0px",
-            }}
-          >
-            {_.sum(threeDartScore).toString().split("-")[0]}
-          </div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            lineHeight: "5vh",
+            fontSize: "3.5vh",
+          }}
+        >
+          {Array.from(hits.values()).map((s, idx) => (
+            <div
+              key={idx}
+              style={{
+                flex: 1,
+                textAlign: "center",
+                verticalAlign: "middle",
+                display: "table-cell",
+                borderStyle: "solid",
+                borderWidth: "2px 0px 0px 0px",
+              }}
+            >
+              {s === 0 ? "-" : s === 1 ? "/" : s === 2 ? "X" : "⦻"}
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
 };
 
-export default PlayerScoreX01;
+export default PlayerScoreCricket;

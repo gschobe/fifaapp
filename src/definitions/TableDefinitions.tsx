@@ -15,6 +15,119 @@ import RemoveMatchdayAction from "views/Overview/actions/RemoveMatchdayAction";
 import TeamRating from "views/Teams/TeamRating";
 import ChangeGameSequenceAction from "views/Matchday/ChangeGameSequenceAction";
 
+export const playerTableColumnsForDart: (
+  overview: boolean,
+  showRankChange?: boolean
+) => GridColDef[] = (overview, showRankChange = true) => [
+  {
+    field: "rank",
+    headerName: "#",
+    flex: 0.1,
+    sortable: false,
+    hideSortIcons: true,
+    filterable: false,
+    hideable: false,
+    hide: overview,
+    disableColumnMenu: true,
+    renderCell: (params: GridRenderCellParams) => {
+      const diff = params.row.previousRank - params.row.rank;
+      return (
+        <Box display={"flex"} flexDirection="row">
+          <div>{params.row.rank}</div>
+          {showRankChange && diff > 0 ? (
+            <Box color="green" fontSize={10}>
+              <ArrowUpwardRoundedIcon fontSize="inherit" />
+              {diff}
+            </Box>
+          ) : showRankChange && diff < 0 ? (
+            <Box color="red" fontSize={10}>
+              <ArrowDownwardRoundedIcon fontSize="inherit" />
+              {Math.abs(diff)}
+            </Box>
+          ) : (
+            <Box color="blue" fontSize={10}></Box>
+          )}
+        </Box>
+      );
+    },
+  },
+  { field: "name", headerName: "Name", flex: 1, minWidth: 100 },
+  // {
+  //   field: "points",
+  //   headerName: "Points",
+  //   flex: 1,
+  //   valueGetter: (params: GridValueGetterParams) =>
+  //     params.row.stats.points || 0,
+  // },
+  // {
+  //   field: "gamesPlayed",
+  //   headerName: "GP",
+  //   flex: 0.5,
+  //   valueGetter: (params: GridValueGetterParams) =>
+  //     params.row.stats.gamesPlayed,
+  // },
+  // {
+  //   field: "win",
+  //   headerName: "W",
+  //   flex: 0.5,
+  //   valueGetter: (params: GridValueGetterParams) => params.row.stats.gamesWon,
+  // },
+  // {
+  //   field: "tie",
+  //   headerName: "T",
+  //   flex: 0.5,
+  //   valueGetter: (params: GridValueGetterParams) => params.row.stats.gamesTie,
+  // },
+  // {
+  //   field: "lost",
+  //   headerName: "L",
+  //   flex: 0.5,
+  //   valueGetter: (params: GridValueGetterParams) => params.row.stats.gamesLost,
+  // },
+  // {
+  //   field: "goalsScored",
+  //   headerName: "GS",
+  //   flex: 0.5,
+  //   valueGetter: (params: GridValueGetterParams) =>
+  //     params.row.stats.goalsScored,
+  // },
+  // {
+  //   field: "goalsAgainst",
+  //   headerName: "GA",
+  //   flex: 0.5,
+  //   valueGetter: (params: GridValueGetterParams) =>
+  //     params.row.stats.goalsAgainst,
+  // },
+  // {
+  //   field: "goalDif",
+  //   headerName: "DIF",
+  //   sortable: true,
+  //   flex: 0.5,
+  //   valueGetter: (params: GridValueGetterParams) =>
+  //     params.row.stats.gamesPlayed === 0
+  //       ? 0
+  //       : params.row.stats.goalsScored - params.row.stats.goalsAgainst,
+  // },
+  // {
+  //   field: "winPercentage",
+  //   headerName: "W%",
+  //   flex: 0.5,
+  //   hide: !overview,
+  //   valueGetter: (params: GridValueGetterParams) =>
+  //     params.row.stats.gamesPlayed === 0
+  //       ? "0 %"
+  //       : `${params.row.stats.winPercentage} %`,
+  // },
+  // {
+  //   field: "pointsPerGame",
+  //   headerName: "PtspG",
+  //   flex: 0.5,
+  //   hide: !overview,
+  //   valueGetter: (params: GridValueGetterParams) =>
+  //     params.row.stats.pointsPerGame,
+  // },
+];
+
 export const playerTableColumns: (
   overview: boolean,
   showRankChange?: boolean

@@ -1,17 +1,18 @@
-import React from "react";
-import _ from "lodash";
-import { X01Player } from "dart/Definitions";
+import { EliminationPlayer, X01Kind } from "dart/Definitions";
 import {
   getCurrentRoundDarts,
   getNumDartsThrown,
   getPossibleOuts,
 } from "dart/utils/DartUtil";
+import _ from "lodash";
+import React from "react";
 
 interface Props {
-  player: X01Player;
+  player: EliminationPlayer;
   round: number;
+  kind: X01Kind;
 }
-const PlayerScoreX01: React.FC<Props> = ({ player, round }) => {
+const PlayerScoreElimination: React.FC<Props> = ({ player, round, kind }) => {
   const displayRound =
     player.active || player.finishRank > 0 || round === 1 ? round : round - 1;
   const currentRoundDarts = getCurrentRoundDarts(displayRound, player);
@@ -21,7 +22,7 @@ const PlayerScoreX01: React.FC<Props> = ({ player, round }) => {
   while (threeDartScore.length < 3) {
     threeDartScore.push("-");
   }
-  const possibleOuts = getPossibleOuts(player.score.remaining);
+  const possibleOuts = getPossibleOuts(kind - player.score.points);
   const possible = possibleOuts ? possibleOuts[0] : "";
   return (
     <div
@@ -33,7 +34,6 @@ const PlayerScoreX01: React.FC<Props> = ({ player, round }) => {
         border: "solid 2px",
         borderRadius: "5px",
         backgroundColor: player.finishRank !== 0 ? "lightgreen" : "inherit",
-        boxShadow: "3px 3px 5px grey",
       }}
     >
       <div
@@ -108,7 +108,7 @@ const PlayerScoreX01: React.FC<Props> = ({ player, round }) => {
                       ? "rd"
                       : "th"
                   }`
-                : player.score.remaining}
+                : player.score.points}
             </div>
             <div
               style={{
@@ -195,4 +195,4 @@ const PlayerScoreX01: React.FC<Props> = ({ player, round }) => {
   );
 };
 
-export default PlayerScoreX01;
+export default PlayerScoreElimination;

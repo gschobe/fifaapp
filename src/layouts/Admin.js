@@ -28,13 +28,23 @@ const switchRoutes = (
     {routes.map((prop, key) => {
       if (prop.layout === "/admin") {
         if (prop.hasId) {
-          return (
-            <Route
-              path={prop.path + "/:matchdayId"}
-              element={prop.component}
-              key={key}
-            />
-          );
+          if (prop.path.includes("dart")) {
+            return (
+              <Route
+                path={prop.path + "/:dartNightId"}
+                element={prop.component}
+                key={key}
+              />
+            );
+          } else {
+            return (
+              <Route
+                path={prop.path + "/:matchdayId"}
+                element={prop.component}
+                key={key}
+              />
+            );
+          }
         }
         return <Route path={prop.path} element={prop.component} key={key} />;
       }
