@@ -47,7 +47,9 @@ const CricketDartOverview: React.FC<Props> = ({
           state: "RUNNING",
         };
   }, [dartGame, players]);
-  const [actTry, setActTry] = React.useState(1);
+  const [actTry, setActTry] = React.useState(
+    ((game?.players?.find((p) => p.active)?.score?.tries?.length ?? 0) % 3) + 1
+  );
 
   const allMissed = () => {
     const active = game.players.find((pl) => pl.active);

@@ -19,6 +19,8 @@ import {
   X01Player,
 } from "../Definitions";
 import { possibleOuts } from "../assets/data";
+import { DartGame } from "store/DartStore";
+import React from "react";
 
 export const defaultGameSettings: GameSettings = {
   choosenGame: "X01",
@@ -212,10 +214,53 @@ export function getPlayerPointsCricket(
       );
 }
 
-// export function getDartTeams(
-//   settings: GameSettings,
-//   players: DPlayer[]
-// ): DartTeam[] {
-//   if (settings.teamMode === "SINGLE" || settings.teamSize === 1)
-//   return players.map((p) => ({ name: p.name, players: [{ ...p }] }));
-// }
+export function getChoosenGameSettings(game: DartGame) {
+  switch (game.type) {
+    case "X01": {
+      return (
+        <>
+          <div>{`Kind: ${game.settings.kind}`}</div>
+          <div>{`Start: ${game.settings.startKind}`}</div>
+          <div>{`Finish: ${game.settings.finishKind}`}</div>
+        </>
+      );
+    }
+    case "Cricket":
+      return (
+        <>
+          <div>{`Mode: ${game.settings.mode}`}</div>
+          <div>{`Numbers: ${game.settings.numbersMode}`}</div>
+        </>
+      );
+    case "ATC":
+      return (
+        <>
+          <div>{`Mode: ${game.settings.mode}`}</div>
+          <div>{`Numbers: ${game.settings.numberMode}`}</div>
+          <div>{`Hit: ${game.settings.hitMode}`}</div>
+        </>
+      );
+    case "Shooter":
+      return (
+        <>
+          <div>{`Mode: ${game.settings.numberMode}`}</div>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            {`Rounds:`}
+            <div style={{ fontWeight: "bold", margin: "0 10px" }}>
+              {game?.round}
+            </div>
+            {` / ${game.settings.rounds}`}
+          </div>
+          <div>{`Sets: ${game.settings.sets}`}</div>
+          <div>{`First to: ${game.settings.legs} Leg(s)`}</div>
+        </>
+      );
+    case "Elimination":
+      return (
+        <>
+          <div>{`Kind: ${game.settings.kind}`}</div>
+          <div>{`Finish: ${game.settings.finishKind}`}</div>
+        </>
+      );
+  }
+}

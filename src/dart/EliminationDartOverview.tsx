@@ -35,6 +35,9 @@ const EliminationDartOverview: React.FC<Props> = ({
       dartGame
         ? { ...dartGame, players: [...dartGame.players] }
         : {
+            id: new Date().getTime(),
+            set: 1,
+            leg: 1,
             type: "Elimination",
             settings: gameSettings,
             round: 1,
@@ -47,7 +50,9 @@ const EliminationDartOverview: React.FC<Props> = ({
           },
     [dartGame, players, gameSettings]
   );
-  const [actTry, setActTry] = React.useState(1);
+  const [actTry, setActTry] = React.useState(
+    ((game?.players?.find((p) => p.active)?.score?.tries?.length ?? 0) % 3) + 1
+  );
 
   const setScoredPoints = (p: number, double: boolean, triple: boolean) => {
     const points = triple ? p * 3 : double ? p * 2 : p;
@@ -118,6 +123,26 @@ const EliminationDartOverview: React.FC<Props> = ({
           activePlayer,
           activePlayer.score.points
         );
+
+        newGame.players
+          .filter(
+            (p) =>
+              p.team.name !== activePlayer.team.name &&
+              p.score.points === activePlayer.score.points
+          )
+          .forEach((ep) => {
+            const player = {
+              ...ep,
+              score: {
+                ...ep.score,
+                points: 0,
+              },
+            };
+            const index = newGame.players.findIndex(
+              (p) => p.team.name === player.team.name
+            );
+            newGame.players[index] = player;
+          });
       }
 
       if (game.settings.kind - activePlayer.score.points === 0) {

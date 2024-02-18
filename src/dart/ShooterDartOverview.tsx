@@ -46,7 +46,9 @@ const ShooterDartOverview: React.FC<Props> = ({
           },
     [dartGame, players, gameSettings]
   );
-  const [actTry, setActTry] = React.useState(1);
+  const [actTry, setActTry] = React.useState(
+    ((game?.players?.find((p) => p.active)?.score?.tries?.length ?? 0) % 3) + 1
+  );
 
   const setScored = (hit: ATCHitScore) => {
     const active = game.players.find((pl) => pl.active);

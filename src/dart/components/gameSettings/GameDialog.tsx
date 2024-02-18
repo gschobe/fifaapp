@@ -3,12 +3,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ATCDartOverview from "dart/ATCDartOverview";
 import CricketDartOverview from "dart/CricketDartOverview";
 import { DartTeam, GameSettings } from "dart/Definitions";
+import EliminationDartOverview from "dart/EliminationDartOverview";
+import ShooterDartOverview from "dart/ShooterDartOverview";
 import X01DartOverview from "dart/X01DartOverview";
+import { getChoosenGameSettings } from "dart/utils/DartUtil";
 import React from "react";
 import { DartGame } from "store/DartStore";
 import "../../DartApp.css";
-import ShooterDartOverview from "dart/ShooterDartOverview";
-import EliminationDartOverview from "dart/EliminationDartOverview";
 
 interface Props {
   open: boolean;
@@ -48,46 +49,7 @@ const GameDialog: React.FC<Props> = ({
               <MenuIcon sx={{ padding: 0 }} fontSize="small" />
             </IconButton>
             <div>{`Game: ${game?.type}`}</div>
-            {game?.type === "X01" && (
-              <>
-                <div>{`Kind: ${gameSettings.x01.kind}`}</div>
-                <div>{`Start: ${gameSettings.x01.startKind}`}</div>
-                <div>{`Finish: ${gameSettings.x01.finishKind}`}</div>
-              </>
-            )}
-            {game?.type === "Cricket" && (
-              <>
-                <div>{`Mode: ${gameSettings.cricket.mode}`}</div>
-                <div>{`Numbers: ${gameSettings.cricket.numbersMode}`}</div>
-              </>
-            )}
-            {game?.type === "ATC" && (
-              <>
-                <div>{`Mode: ${gameSettings.atc.mode}`}</div>
-                <div>{`Numbers: ${gameSettings.atc.numberMode}`}</div>
-                <div>{`Hit: ${gameSettings.atc.hitMode}`}</div>
-              </>
-            )}
-            {game?.type === "Shooter" && (
-              <>
-                <div>{`Mode: ${gameSettings.shooter.numberMode}`}</div>
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                  {`Rounds:`}
-                  <div style={{ fontWeight: "bold", margin: "0 10px" }}>
-                    {game?.round}
-                  </div>
-                  {` / ${gameSettings.shooter.rounds}`}
-                </div>
-                <div>{`Sets: ${gameSettings.shooter.sets}`}</div>
-                <div>{`First to: ${gameSettings.shooter.legs} Leg(s)`}</div>
-              </>
-            )}
-            {game?.type === "Elimination" && (
-              <>
-                <div>{`Kind: ${gameSettings.elimination.kind}`}</div>
-                <div>{`Finish: ${gameSettings.elimination.finishKind}`}</div>
-              </>
-            )}
+            {game && getChoosenGameSettings(game)}
           </div>
 
           {game?.type === "X01" ? (
