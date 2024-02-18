@@ -5,6 +5,7 @@ import {
   CricketGame,
   DPlayer,
   DartNight,
+  DartNightSettings,
   DartTournament,
   EliminationGame,
   ShooterGame,
@@ -23,12 +24,14 @@ export interface DartState {
   players: Dictionary<DPlayer>;
   dartNight: Dictionary<DartNight>;
   fastGame: DartGame | undefined;
+  fastGameHistory: DartGame[];
 }
 
 const initialState: DartState = {
   players: {},
   dartNight: {},
   fastGame: undefined,
+  fastGameHistory: [],
 };
 
 const dartSlice = createSlice({
@@ -41,10 +44,21 @@ const dartSlice = createSlice({
       };
     },
     setFastGame: (state, action: PayloadAction<DartGame>) => {
+      const current = state.fastGame;
+      current && state.fastGameHistory.push({ ...current });
+      if (state.fastGameHistory.length >= 4) {
+        state.fastGameHistory.sort((g1, g2) => g1.id - g2.id).shift();
+      }
       state.fastGame = action.payload;
+    },
+    removeFastGame: (state) => {
+      delete state.fastGame;
     },
     addDartNight: (state, action: PayloadAction<DartNight>) => {
       state.dartNight[action.payload.id] = action.payload;
+    },
+    removeDartNight: (state, action: PayloadAction<number | undefined>) => {
+      action.payload && delete state.dartNight[action.payload];
     },
     addTournament: (
       state,
@@ -55,12 +69,23 @@ const dartSlice = createSlice({
         dartNight.tournaments.push(action.payload.tournament);
       }
     },
+    removeTournament: (
+      state,
+      action: PayloadAction<{ dartNight: number; tournament: DartTournament }>
+    ) => {
+      const dartNight = state.dartNight[action.payload.dartNight];
+      if (dartNight) {
+        dartNight.tournaments = dartNight.tournaments.filter(
+          (dt) => dt.id !== action.payload.tournament.id
+        );
+      }
+    },
     setTournamentGames: (
       state,
       action: PayloadAction<{
         dartNight: number;
         tournamentId: number;
-        games: (X01Game | CricketGame | ATCGame)[];
+        games: DartGame[];
       }>
     ) => {
       const dartNight = state.dartNight[action.payload.dartNight];
@@ -92,23 +117,51 @@ const dartSlice = createSlice({
     },
     setGame: (state, action: PayloadAction<DartGame>) => {
       const game = action.payload;
-      if (game) {
-        const dartNight = state.dartNight[game.dartNightId ?? 0];
-        if (dartNight) {
-          const tournament = dartNight.tournaments.find(
-            (t) => t.id === game.dartTournamentId
+      console.log(game);
+      if (game.players.every((p) => p.finishRank > 0)) {
+        game.state = "FINISHED";
+      }
+      const dartNight = state.dartNight[game.dartNightId ?? 0];
+      if (dartNight) {
+        const tournament = dartNight.tournaments.find(
+          (t) => t.id === game.dartTournamentId
+        );
+        if (tournament) {
+          const activeGame = tournament.games.find(
+            (g) => g.state === "RUNNING"
           );
-          if (tournament) {
-            const activeGame = tournament.games.find(
-              (g) => g.state === "RUNNING"
-            );
-            if (activeGame) {
-              tournament.games[tournament.games.indexOf(activeGame)] = game;
-            }
+          if (activeGame) {
+            tournament.games[tournament.games.indexOf(activeGame)] = game;
           }
         } else {
-          state.fastGame = game;
+          const index = dartNight.games.findIndex(
+            (g) => g.sequence === game.sequence
+          );
+          if (index != -1) {
+            dartNight.games[index] = game;
+          }
         }
+      } else {
+        state.fastGame = game;
+      }
+    },
+    addGame: (state, action: PayloadAction<DartGame>) => {
+      const game = action.payload;
+      const dartNight = state.dartNight[game.dartNightId ?? 0];
+      if (dartNight) {
+        dartNight.games.push(game);
+      }
+    },
+    changeSettings: (
+      state,
+      action: PayloadAction<{
+        dartNightId: number;
+        settings: DartNightSettings;
+      }>
+    ) => {
+      const dartNight = state.dartNight[action.payload.dartNightId];
+      if (dartNight) {
+        dartNight.settings = action.payload.settings;
       }
     },
   },
@@ -119,6 +172,7 @@ export const dartConnector = connect(
     dPlayers: state.dart.players,
     dartNights: state.dart.dartNight,
     fastGame: state.dart.fastGame,
+    fastGameHistory: state.dart.fastGameHistory,
   }),
   { ...dartSlice.actions },
   undefined,

@@ -1,26 +1,27 @@
 import { FormControl, FormGroup, InputLabel } from "@material-ui/core";
 import {
+  Button,
   Dialog,
+  DialogActions,
   DialogContent,
   DialogTitle,
-  Button,
-  DialogActions,
+  MenuItem,
   // ToggleButton,
   // ToggleButtonGroup,
   Select,
-  MenuItem,
 } from "@mui/material";
-import { Player } from "definitions/Definitions";
+import { DPlayer } from "dart/Definitions";
 import React from "react";
+import { DartStoreProps, dartConnector } from "store/DartStore";
 import PlayerSelect from "views/Overview/CreateComponents/PlayerSelect";
 
-interface Props {
+interface Props extends DartStoreProps {
   open: boolean;
   setOpen: (open: boolean) => void;
-  playerValue: Player[];
+  playerValue: DPlayer[];
   location: string;
   setLocation: (location: string) => void;
-  setPlayerValue: (players: Player[]) => void;
+  setPlayerValue: (players: DPlayer[]) => void;
   next: () => void;
   cancel: () => void;
 }
@@ -34,8 +35,12 @@ const CreateDartNightDialog: React.FC<Props> = ({
   setLocation,
   next,
   cancel,
+  dPlayers,
 }) => {
   const [playerOpen, setPlayerOpen] = React.useState(false);
+  const playerOptions = React.useMemo(() => {
+    return Object.values(dPlayers);
+  }, [dPlayers]);
   return (
     <Dialog maxWidth={"xs"} fullWidth open={open}>
       <DialogTitle>Choose Night Settings</DialogTitle>
@@ -53,6 +58,7 @@ const CreateDartNightDialog: React.FC<Props> = ({
               setPlayerOpen={setPlayerOpen}
               playerValue={playerValue}
               setPlayerValue={setPlayerValue}
+              playerOptions={playerOptions}
             />
             <FormControl style={{ marginTop: "10px", width: "80%" }}>
               <InputLabel style={{ paddingLeft: "5px" }}>
@@ -76,71 +82,6 @@ const CreateDartNightDialog: React.FC<Props> = ({
               </Select>
             </FormControl>
           </FormGroup>
-          {/* <div
-            style={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "row",
-              columnGap: 20,
-            }}
-          >
-            <div style={{ flex: 1, maxWidth: "60%" }}>
-              <ToggleButtonGroup
-                fullWidth
-                color="primary"
-                exclusive
-                value={playerMode}
-                onChange={(_event, value) => {
-                  if (value) {
-                    setPlayerMode(value);
-                  }
-                }}
-              >
-                <ToggleButton value={"SINGLE"}>SINGLE</ToggleButton>
-                <ToggleButton disabled={playerValue.length < 3} value={"TEAM"}>
-                  TEAM
-                </ToggleButton>
-              </ToggleButtonGroup>
-            </div>
-            {playerMode === "TEAM" && (
-              <div
-                style={{
-                  flex: 0.5,
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  columnGap: 5,
-                }}
-              >
-                Teams:
-                <Select
-                  value={numTeams}
-                  size="small"
-                  onChange={(event) => setNumTeams(event.target.value)}
-                >
-                  {teamOptions.map((size) => (
-                    <MenuItem key={size} value={size}>
-                      {size}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </div>
-            )}
-          </div>
-          <ToggleButtonGroup
-            fullWidth
-            color="primary"
-            exclusive
-            value={tournamentSettings.mode}
-            onChange={(_event, value) => {
-              if (value) {
-                setTournamentSettings({ ...tournamentSettings, mode: value });
-              }
-            }}
-          >
-            <ToggleButton value={"LEAGUE"}>LEAGUE MODE</ToggleButton>
-            <ToggleButton value={"KO"}>KO MODE</ToggleButton>
-          </ToggleButtonGroup> */}
         </div>
       </DialogContent>
       <DialogActions>
@@ -154,7 +95,7 @@ const CreateDartNightDialog: React.FC<Props> = ({
           Cancel
         </Button>
         <Button
-          disabled={playerValue.length < 3}
+          disabled={playerValue.length < 2}
           variant="contained"
           color="primary"
           onClick={() => {
@@ -169,4 +110,4 @@ const CreateDartNightDialog: React.FC<Props> = ({
   );
 };
 
-export default CreateDartNightDialog;
+export default dartConnector(CreateDartNightDialog);

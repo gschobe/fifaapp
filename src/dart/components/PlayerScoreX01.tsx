@@ -1,17 +1,20 @@
-import React from "react";
-import _ from "lodash";
-import { X01Player } from "dart/Definitions";
+import { Divider } from "@mui/material";
+import { X01Game, X01Player } from "dart/Definitions";
 import {
   getCurrentRoundDarts,
   getNumDartsThrown,
   getPossibleOuts,
 } from "dart/utils/DartUtil";
+import _ from "lodash";
+import React from "react";
 
 interface Props {
   player: X01Player;
-  round: number;
+  game: X01Game;
 }
-const PlayerScoreX01: React.FC<Props> = ({ player, round }) => {
+const PlayerScoreX01: React.FC<Props> = ({ player, game }) => {
+  const round = game.round;
+  const settings = game.settings;
   const displayRound =
     player.active || player.finishRank > 0 || round === 1 ? round : round - 1;
   const currentRoundDarts = getCurrentRoundDarts(displayRound, player);
@@ -63,6 +66,62 @@ const PlayerScoreX01: React.FC<Props> = ({ player, round }) => {
         </div>
       </div>
       <div
+        id="player-points"
+        style={{
+          overflow: "auto",
+          display: "flex",
+          flexDirection: "row",
+          fontWeight: "bold",
+          fontSize: "6vh",
+          width: "15%",
+          height: "100%",
+          borderStyle: "solid",
+          borderWidth: "0px 0px 0px 2px",
+        }}
+      >
+        {settings.legs > 1 && (
+          <div
+            style={{
+              height: "100%",
+              width: "20%",
+              fontSize: "24px",
+              borderStyle: "solid",
+              borderWidth: "0px 2px 0px 0px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "space-evenly",
+            }}
+          >
+            <div>{player.legsWon}</div>
+            <Divider />
+            <div>{player.setsWon}</div>
+          </div>
+        )}
+        <div
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            display: "flex",
+            height: "auto",
+            lineHeight: "100%",
+          }}
+        >
+          {player.finishRank
+            ? `${player.finishRank}${
+                player.finishRank === 1
+                  ? "st"
+                  : player.finishRank === 2
+                  ? "nd"
+                  : player.finishRank === 3
+                  ? "rd"
+                  : "th"
+              }`
+            : player.score.remaining}
+        </div>
+      </div>
+      <div
         style={{
           flex: 1,
           display: "flex",
@@ -90,7 +149,7 @@ const PlayerScoreX01: React.FC<Props> = ({ player, round }) => {
               fontSize: "5vh",
             }}
           >
-            <div
+            {/* <div
               style={{
                 flex: 1,
                 textAlign: "center",
@@ -109,16 +168,16 @@ const PlayerScoreX01: React.FC<Props> = ({ player, round }) => {
                       : "th"
                   }`
                 : player.score.remaining}
-            </div>
+            </div> */}
             <div
               style={{
                 flex: 1.5,
                 textAlign: "center",
                 verticalAlign: "middle",
                 display: "table-cell",
-                fontWeight: "normal",
+                fontWeight: "bold",
                 lineHeight: "7vh",
-                fontSize: "3.5vh",
+                fontSize: "4vh",
               }}
             >
               {player.finishRank ? "" : possible}

@@ -1,14 +1,9 @@
-import { Stack, Grid, Button } from "@mui/material";
-import {
-  ATCGame,
-  CricketGame,
-  DartTournament,
-  X01Game,
-} from "dart/Definitions";
-import React from "react";
-import GameDialog from "./gameSettings/GameDialog";
+import { Button, Grid, Stack } from "@mui/material";
+import { DartTournament } from "dart/Definitions";
 import { defaultGameSettings } from "dart/utils/DartUtil";
-import { DartStoreProps, dartConnector } from "store/DartStore";
+import React from "react";
+import { DartGame, DartStoreProps, dartConnector } from "store/DartStore";
+import GameDialog from "./gameSettings/GameDialog";
 
 interface Props extends DartStoreProps {
   dartNight: number;
@@ -28,9 +23,7 @@ const DartTournamentPanel: React.FC<Props> = ({
   console.log(dt);
   const [gameOpen, setGameOpen] = React.useState(false);
 
-  const [activeGame, setActiveGame] = React.useState<
-    X01Game | CricketGame | ATCGame
-  >();
+  const [activeGame, setActiveGame] = React.useState<DartGame>();
   const startNextGame = () => {
     startGame({ dartNight: dartNight, tournamentId: dt?.id ?? 0 });
     // setActiveGame(dt?.games.find((g) => g.state === "UPCOMING"));
@@ -81,7 +74,7 @@ const DartTournamentPanel: React.FC<Props> = ({
             </Button>
           ) : (
             <Stack width={"100%"}>
-              {dt?.games.map((g) => (
+              {dt?.games?.map((g) => (
                 <Stack direction={"row"} key={g.sequence} columnGap={10}>
                   <div>{(g.sequence ?? 0) + 1}</div>
                   <div>{g.state}</div>

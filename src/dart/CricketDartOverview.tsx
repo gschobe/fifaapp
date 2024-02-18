@@ -46,6 +46,39 @@ const CricketDartOverview: React.FC<Props> = ({
   }, [dartGame, players]);
   const [actTry, setActTry] = React.useState(1);
 
+  const allMissed = () => {
+    const active = game.players.find((pl) => pl.active);
+    const activeIndex = game.players.findIndex(
+      (p) => p.team.name === active?.team.name
+    );
+    if (active && activeIndex !== -1) {
+      const activePlayer = {
+        ...active,
+        finishRank: 0,
+        score: { ...active.score, tries: [...active.score.tries] },
+      };
+      const newGame = { ...game };
+      newGame.players[activeIndex] = activePlayer;
+
+      const tries: CricketTry[] = Array(3)
+        .fill(0)
+        .map(() => ({
+          number: 0,
+          hits: 0,
+          multiplier: 1,
+          points: 0,
+          cutThroat: [],
+          score: "SINGLE",
+        }));
+
+      activePlayer.score.tries.push(...tries);
+
+      activateNext(activePlayer, game, newGame);
+
+      setGame(newGame);
+    }
+  };
+
   const setScoredPoints = (p: number, double: boolean, triple: boolean) => {
     const hits = triple ? 3 : double ? 2 : 1;
     const active = game.players.find((pl) => pl.active);
@@ -221,7 +254,7 @@ const CricketDartOverview: React.FC<Props> = ({
       <div
         style={{
           minWidth: "350px",
-          flex: 1.5,
+          flex: 2,
           display: "flex",
           flexDirection: "column",
           rowGap: 5,
@@ -236,8 +269,6 @@ const CricketDartOverview: React.FC<Props> = ({
         style={{
           flex: 1,
           minWidth: "220px",
-          marginBottom: "14pt",
-          marginRight: "5pt",
         }}
       >
         <FullKeyboard
@@ -245,6 +276,8 @@ const CricketDartOverview: React.FC<Props> = ({
           backClicked={undo}
           numbers={gameSettings.numbers}
           keySize={6}
+          allMissed={allMissed}
+          actTry={actTry}
         />
       </div>
     </div>

@@ -1,17 +1,25 @@
 import { PersonAdd } from "@material-ui/icons";
-import { Button, Grid, IconButton } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Grid,
+  IconButton,
+} from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Card from "components/Card/Card";
 import CardBody from "components/Card/CardBody";
 import CardHeader from "components/Card/CardHeader";
-import { Player } from "definitions/Definitions";
 import { playerTableColumnsForDart } from "definitions/TableDefinitions";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { DartStoreProps, dartConnector } from "store/DartStore";
 import AddPlayerModal from "views/Overview/CreateComponents/AddPlayerModal";
 import "./DartApp.css";
-import { GameSettings } from "./Definitions";
+import { DPlayer, DartTeam, GameSettings } from "./Definitions";
+import DartGameItem from "./components/DartGameItem";
 import DartNightItem from "./components/DartNightItem";
 import CreateDartNightDialog from "./components/gameSettings/CreateDartNightDialog";
 import GameDialog from "./components/gameSettings/GameDialog";
@@ -22,6 +30,7 @@ import { defaultGameSettings } from "./utils/DartUtil";
 const DartHome: React.FC<DartStoreProps> = ({
   dartNights,
   addDartNight,
+  fastGameHistory,
   fastGame,
   setFastGame,
   dPlayers,
@@ -29,7 +38,8 @@ const DartHome: React.FC<DartStoreProps> = ({
   const [open, setOpen] = React.useState(false);
   const [tournamentOpen, setTournamentOpen] = React.useState(false);
   const [startGame, setStartGame] = React.useState(false);
-  const [playerValue, setPlayerValue] = React.useState<Player[]>([]);
+  const [playerValue, setPlayerValue] = React.useState<DPlayer[]>([]);
+  const [teams, setTeams] = React.useState<DartTeam[]>([]);
   const [location, setLocation] = React.useState<string>("");
   const [createTournament, setCreateTournament] = React.useState(false);
   const [addPlayerOpen, setAddPlayerOpen] = React.useState(false);
@@ -49,7 +59,9 @@ const DartHome: React.FC<DartStoreProps> = ({
     setFastGame(
       getFastGame(
         settings,
-        playerValue.map((p) => ({ name: p.name, players: [{ ...p }] }))
+        teams.length > 0
+          ? teams
+          : playerValue.map((p) => ({ name: p.name, players: [{ ...p }] }))
       )
     );
     setStartGame(true);
@@ -57,13 +69,18 @@ const DartHome: React.FC<DartStoreProps> = ({
 
   const createDartNight = () => {
     const now = new Date();
+    const players = playerValue.filter((p) => p != undefined);
     addDartNight({
       id: now.getTime(),
-      players: playerValue.filter((p) => p != undefined),
+      players: players,
       startDate: now.toISOString(),
       state: "NEW",
       tournaments: [],
       games: [],
+      settings: {
+        money: players.map((_p, idx) => ({ rank: idx + 1, money: 0 })),
+      },
+      possibleDraws: [],
     });
   };
 
@@ -75,7 +92,7 @@ const DartHome: React.FC<DartStoreProps> = ({
   };
 
   return (
-    <div style={{ height: "100%", width: "100%" }}>
+    <div style={{ height: "100vh", width: "100%" }}>
       <AddPlayerModal
         open={addPlayerOpen}
         close={() => setAddPlayerOpen(false)}
@@ -90,6 +107,8 @@ const DartHome: React.FC<DartStoreProps> = ({
         playerValue={playerValue}
         setPlayerValue={setPlayerValue}
         createTournament={createTournament}
+        setTeams={setTeams}
+        teams={teams}
       />
       <GameDialog
         open={startGame}
@@ -110,88 +129,50 @@ const DartHome: React.FC<DartStoreProps> = ({
         next={createDartNight}
         cancel={cancel}
       />
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "row",
-          columnGap: 20,
-          margin: "10pt 0pt",
-        }}
-      >
-        {fastGame && (
-          <div style={{ flex: 1 }}>
-            <Button
-              sx={{ lineHeight: "5vh", fontSize: "3vh" }}
-              fullWidth
-              variant="contained"
-              color="success"
-              onClick={() => setStartGame(true)}
-            >
-              Schnelles Spiel fortsetzen
-            </Button>
-          </div>
-        )}
-        <div style={{ flex: 1 }}>
-          <Button
-            sx={{ lineHeight: "5vh", fontSize: "3vh" }}
-            fullWidth
-            variant="contained"
-            color="primary"
-            onClick={() => setOpen(true)}
-          >
-            Schnelles Spiel
-          </Button>
-        </div>
-        <div style={{ flex: 1 }}>
-          <Button
-            sx={{ lineHeight: "5vh", fontSize: "3vh" }}
-            fullWidth
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              setTournamentOpen(true);
-              setCreateTournament(true);
-            }}
-          >
-            Neuer Dartabend
-          </Button>
-        </div>
-      </div>
-      <Grid container width={"100%"} spacing={3}>
-        <Grid item xs={8}>
+      <Grid container columnSpacing={3} display={"flex"}>
+        <Grid item xs={12}>
           <Card>
-            <CardHeader color="default">
+            <CardHeader color="info">
               <div
                 style={{
                   fontSize: "1.2rem",
                   display: "flex",
                   flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
                 }}
               >
-                <div>Dart Nights</div>
+                <div>Schnelles Spiel</div>
+                <Button
+                  // sx={{ lineHeight: "5vh", fontSize: "3vh" }}
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setOpen(true)}
+                  disabled={fastGame && fastGame.state !== "FINISHED"}
+                >
+                  Neues Schnelles Spiel
+                </Button>
               </div>
             </CardHeader>
             <CardBody>
-              <Grid container spacing={1}>
-                {Object.values(dartNights)
-                  .reverse()
-                  .map((dn) => (
-                    <Grid item key={dn?.id} xs={12}>
-                      <DartNightItem
-                        dn={dn}
-                        dartNight={Object.values(dartNights)}
-                        open={() => navigate(`/dart/dartNight/${dn?.id}`)}
-                      />
-                    </Grid>
-                  ))}
-              </Grid>
+              {fastGame && (
+                <DartGameItem game={fastGame} open={() => setStartGame(true)} />
+              )}
+              {[...fastGameHistory]
+                .sort((g1, g2) => g2.id - g1.id)
+                .map((fg) => (
+                  <DartGameItem
+                    key={fg.id}
+                    game={fg}
+                    open={() => setStartGame(true)}
+                  />
+                ))}
             </CardBody>
           </Card>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={12} md={4}>
           <Card>
-            <CardHeader color="default">
+            <CardHeader color="info">
               <div
                 style={{
                   fontSize: "1.2rem",
@@ -199,13 +180,12 @@ const DartHome: React.FC<DartStoreProps> = ({
                   flexDirection: "row",
                 }}
               >
-                <div>Players</div>
+                <div>Spieler</div>
                 <div style={{ flexGrow: 1 }} />
                 <IconButton
                   color="primary"
                   aria-label="add player"
                   style={{ padding: "0" }}
-                  // className={classes.cardTitleWhite}
                   onClick={() => setAddPlayerOpen(true)}
                 >
                   <PersonAdd />
@@ -227,9 +207,83 @@ const DartHome: React.FC<DartStoreProps> = ({
             </CardBody>
           </Card>
         </Grid>
+        <Grid item xs={12} md={8}>
+          <Card>
+            <CardHeader color="success">
+              <div
+                style={{
+                  fontSize: "1.2rem",
+                  display: "flex",
+                  flexWrap: "wrap",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <div>Dart Abende</div>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    setTournamentOpen(true);
+                    setCreateTournament(true);
+                  }}
+                >
+                  Neuer Dartabend
+                </Button>
+              </div>
+            </CardHeader>
+            <CardBody>
+              <Grid container spacing={1}>
+                {Object.values(dartNights)
+                  .reverse()
+                  .map((dn) => (
+                    <Grid item key={dn?.id} xs={12}>
+                      <DartNightItem
+                        dn={dn}
+                        dartNight={Object.values(dartNights)}
+                        open={() => navigate(`/dart/dartNight/${dn?.id}`)}
+                      />
+                    </Grid>
+                  ))}
+              </Grid>
+            </CardBody>
+          </Card>
+        </Grid>
       </Grid>
     </div>
   );
 };
 
 export default dartConnector(DartHome);
+
+export const DeleteModal: React.FC<{
+  open: boolean;
+  close: () => void;
+  remove: () => void;
+}> = ({ open, close, remove }) => {
+  return (
+    <Dialog open={open} onClose={close}>
+      <DialogTitle>Dartabend löschen?</DialogTitle>
+      <DialogContent>Willst du den Dartabend wirklich löschen?</DialogContent>
+      <DialogActions>
+        <Button
+          onClick={(e) => {
+            e.stopPropagation();
+            close();
+          }}
+        >
+          Abbrechen
+        </Button>
+        <Button
+          onClick={(e) => {
+            e.stopPropagation();
+            remove();
+          }}
+        >
+          Löschen
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+};

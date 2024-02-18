@@ -2,6 +2,7 @@ import { ShooterGame, ShooterPlayer } from "dart/Definitions";
 import { getCurrentRoundDarts } from "dart/utils/DartUtil";
 import React from "react";
 import _ from "lodash";
+import { Divider } from "@mui/material";
 
 interface Props {
   player: ShooterPlayer;
@@ -9,6 +10,7 @@ interface Props {
 }
 const PlayerScoreShooter: React.FC<Props> = ({ player, game }) => {
   const points = _.sumBy(player.score.tries, "points");
+  const settings = game.settings;
   const currentRoundDarts = getCurrentRoundDarts(game.round, player);
   const threeDartScore: (number | string)[] = currentRoundDarts.map(
     (t) => t.score
@@ -89,6 +91,26 @@ const PlayerScoreShooter: React.FC<Props> = ({ player, game }) => {
               height: "100%",
             }}
           >
+            {settings.legs > 1 && (
+              <div
+                style={{
+                  height: "100%",
+                  lineHeight: "50%",
+                  padding: "10px",
+                  fontSize: "24px",
+                  borderStyle: "solid",
+                  borderWidth: "0px 2px 0px 0px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "space-evenly",
+                }}
+              >
+                <div>{player.legsWon}</div>
+                <Divider />
+                <div>{player.setsWon}</div>
+              </div>
+            )}
             <div
               style={{
                 width: "25%",

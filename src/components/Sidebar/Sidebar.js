@@ -197,11 +197,11 @@ export default function Sidebar(props) {
             keepMounted: true, // Better open performance on mobile.
           }}
         >
-          {/* {brand} */}
-          <div className={classes.sidebarWrapper}>
-            {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks />}
-            {links}
-          </div>
+          {brand}
+          <div className={classes.sidebarWrapper}>{links}</div>
+          {dartBrand}
+          <div className={classes.sidebarWrapper}>{dartLinks}</div>
+          {/* {user} */}
           {image !== undefined ? (
             <div
               className={classes.background}

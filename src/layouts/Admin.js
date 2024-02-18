@@ -34,7 +34,13 @@ const switchRoutes = (
                 path={prop.path + "/:dartNightId"}
                 element={prop.component}
                 key={key}
-              />
+              >
+                <Route
+                  path={prop.path + "/:dartNightId" + "/:dartTournamentId"}
+                  element={prop.component}
+                  key={key}
+                />
+              </Route>
             );
           } else {
             return (

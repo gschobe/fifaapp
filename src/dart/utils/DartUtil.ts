@@ -2,6 +2,7 @@ import {
   defaultCricketNumbers,
   defaultDartBoardNumbers,
 } from "dart/assets/numbers";
+import _ from "lodash";
 import {
   ATCPlayer,
   ATCSettings,
@@ -18,31 +19,46 @@ import {
   X01Player,
 } from "../Definitions";
 import { possibleOuts } from "../assets/data";
-import _ from "lodash";
 
 export const defaultGameSettings: GameSettings = {
   choosenGame: "X01",
-  x01: { kind: 301, startKind: "SINGLE IN", finishKind: "SINGLE OUT" },
+  teamMode: "SINGLE",
+  teamSize: 1,
+  x01: {
+    kind: 301,
+    startKind: "SINGLE IN",
+    finishKind: "SINGLE OUT",
+    legs: 1,
+    sets: 1,
+  },
   cricket: {
     numbers: defaultCricketNumbers,
     mode: "DEFAULT",
     numbersMode: "DEFAULT",
+    legs: 1,
+    sets: 1,
   },
   atc: {
     mode: "DEFAULT",
     hitMode: "SINGLE",
     numberMode: "SEQUENCIAL",
     numbers: defaultDartBoardNumbers.slice(0, 20),
+    legs: 1,
+    sets: 1,
   },
   shooter: {
     rounds: 10,
     numberMode: "RANDOM",
     countSettings: { single: 1, double: 2, triple: 3, singleBull: 2, bull: 4 },
     numbers: [],
+    legs: 1,
+    sets: 1,
   },
   elimination: {
     kind: 301,
     finishKind: "SINGLE OUT",
+    legs: 1,
+    sets: 1,
   },
 };
 export function calculateAverage(
@@ -81,6 +97,8 @@ export function getNewX01Player(
     team: team,
     active: active,
     finishRank: 0,
+    legsWon: 0,
+    setsWon: 0,
     score: {
       remaining: kind,
       average: 0,
@@ -98,6 +116,8 @@ export function getNewEliminationPlayer(
     team: team,
     active: active,
     finishRank: 0,
+    legsWon: 0,
+    setsWon: 0,
     score: {
       points: 0,
       average: 0,
@@ -114,6 +134,8 @@ export function getNewCricketPlayer(
     team: team,
     active: active,
     finishRank: 0,
+    legsWon: 0,
+    setsWon: 0,
     score: {
       points: 0,
       tries: [],
@@ -130,6 +152,8 @@ export function getNewATCPlayer(
     active: active,
     finishRank: 0,
     dartsThrown: 0,
+    legsWon: 0,
+    setsWon: 0,
     score: {
       hits: new Map(settings.numbers.map((num) => [num, undefined])),
       tries: [],
@@ -146,6 +170,8 @@ export function getNewShooterPlayer(
     active: active,
     finishRank: 0,
     dartsThrown: 0,
+    legsWon: 0,
+    setsWon: 0,
     score: {
       points: 0,
       tries: [],
@@ -185,3 +211,11 @@ export function getPlayerPointsCricket(
         (t) => t.points
       );
 }
+
+// export function getDartTeams(
+//   settings: GameSettings,
+//   players: DPlayer[]
+// ): DartTeam[] {
+//   if (settings.teamMode === "SINGLE" || settings.teamSize === 1)
+//   return players.map((p) => ({ name: p.name, players: [{ ...p }] }));
+// }

@@ -45,6 +45,7 @@ const ATCKeyboard: React.FC<Props> = ({
               onClick={() => {
                 setScored("DOUBLE");
               }}
+              soundKind={"DOUBLE"}
             />
           </Grid>
           <Grid
@@ -56,6 +57,7 @@ const ATCKeyboard: React.FC<Props> = ({
             <Key
               label="Triple"
               active={!disableTriple}
+              soundKind={"TRIPLE"}
               onClick={() => {
                 setScored("TRIPLE");
               }}
@@ -92,6 +94,7 @@ const ATCKeyboard: React.FC<Props> = ({
             setScored("MISS");
           }}
           color="error"
+          soundKind={"MISS"}
         />
       </Grid>
       <Grid

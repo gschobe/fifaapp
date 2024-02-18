@@ -1,4 +1,5 @@
 import { GameState, TournamentState } from "definitions/Definitions";
+import { DartGame } from "store/DartStore";
 
 export interface DPlayer {
   name: string;
@@ -10,8 +11,20 @@ export interface DartNight {
   at?: DPlayer;
   players: DPlayer[];
   state: TournamentState;
+  settings: DartNightSettings;
   games: DartGame[];
   tournaments: DartTournament[];
+  possibleDraws: DartPossibleDraw[];
+}
+
+export interface DartNightSettings {
+  money: RankMoney[];
+}
+
+export interface RankMoney {
+  rank: number;
+  money: number;
+  points?: number;
 }
 export interface DartTournament {
   id: number;
@@ -35,20 +48,27 @@ export interface DartTeam {
   players: DPlayer[];
 }
 
-export interface DartGame {
+export interface DartPossibleDraw {
+  dartTeams: DartTeam[];
+}
+
+export interface DartGameBase {
+  id: number;
   dartNightId?: number;
   dartTournamentId?: number;
   state: GameState;
   sequence?: number;
+  leg: number;
+  set: number;
 }
-export interface X01Game extends DartGame {
+export interface X01Game extends DartGameBase {
   type: "X01";
   settings: X01GameSettings;
   players: X01Player[];
   finishedPlayers: X01Player[];
   round: number;
 }
-export interface CricketGame extends DartGame {
+export interface CricketGame extends DartGameBase {
   type: "Cricket";
   settings: CricketSettings;
   players: CricketPlayer[];
@@ -56,7 +76,7 @@ export interface CricketGame extends DartGame {
   round: number;
 }
 
-export interface ATCGame extends DartGame {
+export interface ATCGame extends DartGameBase {
   type: "ATC";
   settings: ATCSettings;
   players: ATCPlayer[];
@@ -64,7 +84,7 @@ export interface ATCGame extends DartGame {
   round: number;
 }
 
-export interface ShooterGame extends DartGame {
+export interface ShooterGame extends DartGameBase {
   type: "Shooter";
   settings: ShooterSettings;
   players: ShooterPlayer[];
@@ -72,7 +92,7 @@ export interface ShooterGame extends DartGame {
   round: number;
 }
 
-export interface EliminationGame extends DartGame {
+export interface EliminationGame extends DartGameBase {
   type: "Elimination";
   settings: EliminationSettings;
   players: EliminationPlayer[];
@@ -90,9 +110,12 @@ export interface DartPlayer {
   team: DartTeam;
   active: boolean;
   finishRank: number;
+  legsWon: number;
+  setsWon: number;
 }
 export interface X01Player extends DartPlayer {
-  score: X01Score;
+  score: X01LegScore;
+  setScore?: X01SetScore;
 }
 export interface EliminationPlayer extends DartPlayer {
   score: EliminationScore;
@@ -107,13 +130,19 @@ export interface ATCPlayer extends DartPlayer {
 
 export interface ShooterPlayer extends DartPlayer {
   score: ShooterScore;
+  setsScore?: ShooterSetScore[];
   dartsThrown: number;
 }
 
-export interface X01Score {
+export interface X01SetScore {
+  legScores: X01LegScore[];
+  average: number;
+}
+export interface X01LegScore {
   remaining: number;
   average: number;
   tries: X01Try[];
+  legWon?: boolean;
 }
 
 export interface EliminationScore {
@@ -136,6 +165,9 @@ export interface ATCTry {
   currentNumber: number;
 }
 
+export interface ShooterSetScore {
+  legsScore: ShooterScore[];
+}
 export interface ShooterScore {
   points: number;
   tries: ShooterTry[];
@@ -157,6 +189,8 @@ export interface ShooterTry extends Try {}
 
 export interface GameSettings {
   choosenGame: DartGameMode;
+  teamMode: TeamMode;
+  teamSize: number;
   x01: X01GameSettings;
   cricket: CricketSettings;
   atc: ATCSettings;
@@ -164,24 +198,28 @@ export interface GameSettings {
   elimination: EliminationSettings;
 }
 
-export interface X01GameSettings {
+export interface BaseGameSettings {
+  legs: number;
+  sets: number;
+}
+export interface X01GameSettings extends BaseGameSettings {
   kind: X01Kind;
   startKind: X01StartKind;
   finishKind: X01FinishKind;
 }
 
-export interface EliminationSettings {
+export interface EliminationSettings extends BaseGameSettings {
   kind: X01Kind;
   finishKind: X01FinishKind;
 }
 
-export interface CricketSettings {
+export interface CricketSettings extends BaseGameSettings {
   mode: CricketMode;
   numbersMode: CricketNumbersMode;
   numbers: number[];
 }
 
-export interface ATCSettings {
+export interface ATCSettings extends BaseGameSettings {
   mode: ATCMode;
   hitMode: ATCHitMode;
   numberMode: ATCNumberMode;
@@ -195,7 +233,7 @@ export interface ShooterCountSettings {
   singleBull: number;
   bull: number;
 }
-export interface ShooterSettings {
+export interface ShooterSettings extends BaseGameSettings {
   rounds: number;
   numberMode: ShooterNumberMode;
   countSettings: ShooterCountSettings;

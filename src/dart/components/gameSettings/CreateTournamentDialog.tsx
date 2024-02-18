@@ -124,7 +124,9 @@ const CreateTournamentDialog: React.FC<Props> = ({
             }}
           >
             <ToggleButton value={"LEAGUE"}>LEAGUE MODE</ToggleButton>
-            <ToggleButton value={"KO"}>KO MODE</ToggleButton>
+            <ToggleButton disabled value={"KO"}>
+              KO MODE
+            </ToggleButton>
           </ToggleButtonGroup>
         </div>
       </DialogContent>

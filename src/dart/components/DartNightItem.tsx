@@ -1,12 +1,22 @@
+import { Delete } from "@material-ui/icons";
+import { IconButton } from "@mui/material";
+import { DeleteModal } from "dart/DartHome";
 import { DartNight } from "dart/Definitions";
 import React from "react";
+import { DartStoreProps, dartConnector } from "store/DartStore";
 
-interface Props {
+interface Props extends DartStoreProps {
   dn?: DartNight;
   dartNight: (DartNight | undefined)[];
   open: () => void;
 }
-const DartNightItem: React.FC<Props> = ({ dn, dartNight, open }) => {
+const DartNightItem: React.FC<Props> = ({
+  dn,
+  dartNight,
+  open,
+  removeDartNight,
+}) => {
+  const [deleteOpen, setDeleteOpen] = React.useState(false);
   return (
     <div
       style={{
@@ -18,9 +28,15 @@ const DartNightItem: React.FC<Props> = ({ dn, dartNight, open }) => {
         display: "flex",
         flexDirection: "column",
         fontSize: "2.8vh",
+        boxShadow: "3px 3px 5px gray",
       }}
       onClick={() => open()}
     >
+      <DeleteModal
+        open={deleteOpen}
+        close={() => setDeleteOpen(false)}
+        remove={() => removeDartNight(dn?.id)}
+      />
       <div
         id="TournamentHeader"
         style={{
@@ -49,18 +65,26 @@ const DartNightItem: React.FC<Props> = ({ dn, dartNight, open }) => {
                 : "blue",
           }}
         >{`${dn?.state}`}</div>
-        <div style={{ minWidth: "fit-content" }}>{`${dn?.mode}`}</div>
         <div style={{ minWidth: "fit-content" }}>
           {`# Players: ${dn?.players.length}`}
         </div>
+        <div style={{ flex: 1 }} />
         <div style={{ minWidth: "fit-content" }}>
           {`Created at: ${new Date(dn?.id ?? new Date()).toLocaleDateString(
             "de-DE"
           )}`}
         </div>
+        <IconButton
+          onClick={(e) => {
+            e.stopPropagation();
+            setDeleteOpen(true);
+          }}
+        >
+          <Delete />
+        </IconButton>
       </div>
     </div>
   );
 };
 
-export default DartNightItem;
+export default dartConnector(DartNightItem);

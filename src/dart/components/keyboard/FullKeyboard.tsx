@@ -8,12 +8,16 @@ interface Props {
   backClicked: () => void;
   numbers: number[];
   keySize?: GridSize;
+  allMissed?: () => void;
+  actTry?: number;
 }
 const FullKeyboard: React.FC<Props> = ({
   setScoredPoints,
   backClicked,
   numbers,
   keySize = 3,
+  allMissed,
+  actTry,
 }) => {
   const buttons = React.useMemo(() => {
     return [...numbers];
@@ -23,14 +27,9 @@ const FullKeyboard: React.FC<Props> = ({
   const [double, setDouble] = React.useState(false);
 
   return (
-    <Grid container spacing={1} style={{ height: "98%" }}>
+    <Grid container spacing={1} style={{ height: "100%" }}>
       {buttons.map((b) => (
-        <Grid
-          key={b}
-          item
-          xs={keySize}
-          style={{ height: "14%", display: "flex" }}
-        >
+        <Grid key={b} item xs={keySize} style={{ display: "flex" }}>
           <Key
             label={b}
             onClick={() => {
@@ -43,12 +42,7 @@ const FullKeyboard: React.FC<Props> = ({
           />
         </Grid>
       ))}
-      <Grid
-        key={"double"}
-        item
-        xs={keySize}
-        style={{ height: "14%", display: "flex" }}
-      >
+      <Grid key={"double"} item xs={keySize} style={{ display: "flex" }}>
         <Toggle
           label="Double"
           onClick={() => {
@@ -59,12 +53,7 @@ const FullKeyboard: React.FC<Props> = ({
           soundKind={"DOUBLE"}
         />
       </Grid>
-      <Grid
-        key={"triple"}
-        item
-        xs={keySize}
-        style={{ height: "14%", display: "flex" }}
-      >
+      <Grid key={"triple"} item xs={keySize} style={{ display: "flex" }}>
         <Toggle
           label="Triple"
           onClick={() => {
@@ -75,12 +64,7 @@ const FullKeyboard: React.FC<Props> = ({
           soundKind={"TRIPLE"}
         />
       </Grid>
-      <Grid
-        key={"miss"}
-        item
-        xs={keySize}
-        style={{ height: "14%", display: "flex" }}
-      >
+      <Grid key={"miss"} item xs={keySize} style={{ display: "flex" }}>
         <Key
           label="Miss"
           onClick={() => {
@@ -93,11 +77,24 @@ const FullKeyboard: React.FC<Props> = ({
         />
       </Grid>
       <Grid
-        key={"back-grid"}
+        key={"allmissed-grid"}
         item
         xs={keySize}
-        style={{ height: "14%", display: "flex" }}
+        style={{ display: "flex" }}
       >
+        <Key
+          label="3 MISS"
+          onClick={() => {
+            allMissed && allMissed();
+            setTriple(false);
+            setDouble(false);
+          }}
+          active={actTry === 1}
+          color="error"
+          soundKind="MISS"
+        />
+      </Grid>
+      <Grid key={"back-grid"} item xs={keySize} style={{ display: "flex" }}>
         <Key
           label="Zurück"
           onClick={() => {
@@ -143,12 +140,10 @@ export const Key: React.FC<{
       sx={{
         flex: 1,
         fontWeight: "bold",
-        fontSize: "2vw",
-        // backgroundColor: "skyblue",
-        // color: "black",
+        fontSize: "3.5vh",
+        lineHeight: "3.5vh",
         boxShadow: 3,
       }}
-      // TouchRippleProps={{ color: "pink" }}
     >
       {label}
     </Button>
@@ -174,16 +169,17 @@ export const Toggle: React.FC<{
         onClick();
       }}
       sx={{
-        height: "100%",
-        width: "100%",
+        flex: 1,
+        fontWeight: "bold",
+        fontSize: "3.5vh",
+        lineHeight: "3.5vh",
+        boxShadow: 3,
       }}
     >
       <ToggleButton
         value={label}
         sx={{
-          fontWeight: "bold",
-          fontSize: "2.0vw",
-          boxShadow: 3,
+          padding: 0,
         }}
       >
         {label}

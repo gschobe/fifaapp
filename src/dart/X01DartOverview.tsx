@@ -1,7 +1,7 @@
 /* eslint-disable no-debugger */
+import _ from "lodash";
 import React from "react";
-import FullKeyboard from "./components/keyboard/FullKeyboard";
-import PlayerScoreX01 from "./components/PlayerScoreX01";
+import { DartStoreProps, dartConnector } from "store/DartStore";
 import {
   DartTeam,
   X01Game,
@@ -9,14 +9,14 @@ import {
   X01Player,
   X01Try,
 } from "./Definitions";
+import { defaultDartBoardNumbers } from "./assets/numbers";
+import PlayerScoreX01 from "./components/PlayerScoreX01";
+import FullKeyboard from "./components/keyboard/FullKeyboard";
 import {
   calculateAverage,
   getCurrentRoundDarts,
   getNewX01Player,
 } from "./utils/DartUtil";
-import _ from "lodash";
-import { defaultDartBoardNumbers } from "./assets/numbers";
-import { DartStoreProps, dartConnector } from "store/DartStore";
 
 interface Props extends DartStoreProps {
   gameSettings: X01GameSettings;
@@ -35,8 +35,11 @@ const X01DartOverview: React.FC<Props> = ({
       dartGame
         ? { ...dartGame, players: [...dartGame.players] }
         : {
+            id: new Date().getTime(),
             type: "X01",
             settings: gameSettings,
+            leg: 1,
+            set: 1,
             round: 1,
             players:
               players?.map((p, idx) =>
@@ -47,7 +50,9 @@ const X01DartOverview: React.FC<Props> = ({
           },
     [dartGame, players, gameSettings]
   );
-  const [actTry, setActTry] = React.useState(1);
+  const [actTry, setActTry] = React.useState(
+    ((game?.players?.find((p) => p.active)?.score?.tries?.length ?? 0) % 3) + 1
+  );
 
   const setScoredPoints = (p: number, double: boolean, triple: boolean) => {
     const points = triple ? p * 3 : double ? p * 2 : p;
@@ -149,6 +154,33 @@ const X01DartOverview: React.FC<Props> = ({
     }
   };
 
+  const allMissed = () => {
+    const activePl = game.players.find((p) => p.active);
+    if (activePl) {
+      const activePlayer = {
+        ...activePl,
+        score: { ...activePl.score, tries: [...activePl.score.tries] },
+      };
+      const newGame = { ...game };
+      const activePlayerIndex = newGame.players.findIndex(
+        (p) => p.team.name === activePlayer.team.name
+      );
+      newGame.players[activePlayerIndex] = activePlayer;
+      const tries: X01Try[] = Array(3)
+        .fill(0)
+        .map(() => ({
+          number: 0,
+          multiplier: 1,
+          points: 0,
+          score: "MISS",
+        }));
+      activePlayer.score.tries.push(...tries);
+      activateNext(activePlayer, game, newGame);
+
+      setGame(newGame);
+    }
+  };
+
   const undo = () => {
     const active = game.players.find((p) => p.active);
     if (
@@ -220,7 +252,7 @@ const X01DartOverview: React.FC<Props> = ({
   return (
     <div
       style={{
-        height: "100%",
+        flex: 1,
         width: "100%",
         overflow: "hidden",
         display: "flex",
@@ -240,14 +272,13 @@ const X01DartOverview: React.FC<Props> = ({
         }}
       >
         {game.players.map((p) => (
-          <PlayerScoreX01 key={p.team.name} player={p} round={game.round} />
+          <PlayerScoreX01 key={p.team.name} player={p} game={game} />
         ))}
       </div>
       <div
         style={{
           flex: 1,
           minWidth: "220px",
-          marginBottom: "14pt",
           marginRight: "5pt",
         }}
       >
@@ -255,6 +286,8 @@ const X01DartOverview: React.FC<Props> = ({
           setScoredPoints={setScoredPoints}
           backClicked={undo}
           numbers={defaultDartBoardNumbers}
+          actTry={actTry}
+          allMissed={allMissed}
         />
       </div>
     </div>

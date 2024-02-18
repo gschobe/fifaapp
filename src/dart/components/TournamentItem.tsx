@@ -1,12 +1,26 @@
+import { DialogActions, DialogContent, DialogTitle } from "@material-ui/core";
+import { Delete } from "@material-ui/icons";
+import { Button, Dialog, IconButton } from "@mui/material";
 import { DartTournament } from "dart/Definitions";
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface Props {
   id: number;
-  dt?: DartTournament | undefined;
+  dt: DartTournament;
   setSelectedTournament: (dt: DartTournament | undefined) => void;
+  removeTournament: (dt: DartTournament) => void;
 }
-const TournamentItem: React.FC<Props> = ({ id, dt, setSelectedTournament }) => {
+const TournamentItem: React.FC<Props> = ({
+  id,
+  dt,
+  setSelectedTournament,
+  removeTournament,
+}) => {
+  const navigate = useNavigate();
+  const loc = useLocation();
+
+  const [deleteOpen, setDeleteOpen] = React.useState(false);
   return (
     <div
       style={{
@@ -18,9 +32,18 @@ const TournamentItem: React.FC<Props> = ({ id, dt, setSelectedTournament }) => {
         display: "flex",
         flexDirection: "column",
         fontSize: "2.8vh",
+        boxShadow: "3px 3px 5px gray",
       }}
-      onClick={() => setSelectedTournament(dt)}
+      onClick={() => {
+        setSelectedTournament(dt);
+        navigate(`${loc.pathname}/${dt?.id}`);
+      }}
     >
+      <DeleteModal
+        open={deleteOpen}
+        close={() => setDeleteOpen(false)}
+        remove={() => removeTournament(dt)}
+      />
       <div
         id="TournamentHeader"
         style={{
@@ -65,9 +88,48 @@ const TournamentItem: React.FC<Props> = ({ id, dt, setSelectedTournament }) => {
         <div style={{ minWidth: "fit-content" }}>
           {dt?.started ? `Started at: ${new Date(dt?.started)}` : ""}
         </div>
+        <IconButton
+          onClick={(e) => {
+            e.stopPropagation();
+            setDeleteOpen(true);
+          }}
+        >
+          <Delete />
+        </IconButton>
       </div>
     </div>
   );
 };
 
 export default TournamentItem;
+
+const DeleteModal: React.FC<{
+  open: boolean;
+  close: () => void;
+  remove: () => void;
+}> = ({ open, close, remove }) => {
+  return (
+    <Dialog open={open} onClose={close}>
+      <DialogTitle>Tournament löschen?</DialogTitle>
+      <DialogContent>Willst du das Tournament wirklich löschen?</DialogContent>
+      <DialogActions>
+        <Button
+          onClick={(e) => {
+            e.stopPropagation();
+            close();
+          }}
+        >
+          Abbrechen
+        </Button>
+        <Button
+          onClick={(e) => {
+            e.stopPropagation();
+            remove();
+          }}
+        >
+          Löschen
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
