@@ -33,6 +33,9 @@ const CricketDartOverview: React.FC<Props> = ({
     return dartGame
       ? { ...dartGame, players: [...dartGame.players] }
       : {
+          id: new Date().getTime(),
+          leg: 1,
+          set: 1,
           type: "Cricket",
           settings: gameSettings,
           round: 1,
@@ -127,8 +130,19 @@ const CricketDartOverview: React.FC<Props> = ({
               activePlayer.score.points =
                 activePlayer.score.points + additionalHits * p;
             } else if (game.settings.mode === "CUT THROAT") {
+              console.log(notClosedPlayers);
               notClosedPlayers.forEach((pl) => {
-                pl.score.points = pl.score.points + additionalHits * p;
+                const player = {
+                  ...pl,
+                  score: {
+                    ...pl.score,
+                    points: pl.score.points + additionalHits * p,
+                  },
+                };
+                const index = newGame.players.findIndex(
+                  (p) => p.team.name === player.team.name
+                );
+                newGame.players[index] = player;
                 acttry.cutThroat.push(pl.team.name);
               });
             }

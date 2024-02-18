@@ -31,6 +31,9 @@ const ShooterDartOverview: React.FC<Props> = ({
       dartGame
         ? { ...dartGame, players: [...dartGame.players] }
         : {
+            id: new Date().getTime(),
+            leg: 1,
+            set: 1,
             type: "Shooter",
             settings: gameSettings,
             round: 1,

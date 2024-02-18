@@ -197,10 +197,12 @@ export default function Sidebar(props) {
             keepMounted: true, // Better open performance on mobile.
           }}
         >
-          {brand}
-          <div className={classes.sidebarWrapper}>{links}</div>
-          {dartBrand}
-          <div className={classes.sidebarWrapper}>{dartLinks}</div>
+          <div className={classes.sidebarWrapper}>
+            {brand}
+            {links}
+            {dartBrand}
+            {dartLinks}
+          </div>
           {/* {user} */}
           {image !== undefined ? (
             <div
