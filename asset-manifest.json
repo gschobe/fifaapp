@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/fifaapp/static/css/main.e11c85db.chunk.css",
-    "main.js": "/fifaapp/static/js/main.c4b74787.chunk.js",
-    "main.js.map": "/fifaapp/static/js/main.c4b74787.chunk.js.map",
+    "main.js": "/fifaapp/static/js/main.e3007a5d.chunk.js",
+    "main.js.map": "/fifaapp/static/js/main.e3007a5d.chunk.js.map",
     "runtime-main.js": "/fifaapp/static/js/runtime-main.2976f66f.js",
     "runtime-main.js.map": "/fifaapp/static/js/runtime-main.2976f66f.js.map",
     "static/css/2.1881a404.chunk.css": "/fifaapp/static/css/2.1881a404.chunk.css",
-    "static/js/2.25d3a4a2.chunk.js": "/fifaapp/static/js/2.25d3a4a2.chunk.js",
-    "static/js/2.25d3a4a2.chunk.js.map": "/fifaapp/static/js/2.25d3a4a2.chunk.js.map",
+    "static/js/2.6abf978e.chunk.js": "/fifaapp/static/js/2.6abf978e.chunk.js",
+    "static/js/2.6abf978e.chunk.js.map": "/fifaapp/static/js/2.6abf978e.chunk.js.map",
     "static/js/3.990e3f8a.chunk.js": "/fifaapp/static/js/3.990e3f8a.chunk.js",
     "static/js/3.990e3f8a.chunk.js.map": "/fifaapp/static/js/3.990e3f8a.chunk.js.map",
     "index.html": "/fifaapp/index.html",
     "static/css/2.1881a404.chunk.css.map": "/fifaapp/static/css/2.1881a404.chunk.css.map",
     "static/css/main.e11c85db.chunk.css.map": "/fifaapp/static/css/main.e11c85db.chunk.css.map",
-    "static/js/2.25d3a4a2.chunk.js.LICENSE.txt": "/fifaapp/static/js/2.25d3a4a2.chunk.js.LICENSE.txt",
+    "static/js/2.6abf978e.chunk.js.LICENSE.txt": "/fifaapp/static/js/2.6abf978e.chunk.js.LICENSE.txt",
     "static/js/3.990e3f8a.chunk.js.LICENSE.txt": "/fifaapp/static/js/3.990e3f8a.chunk.js.LICENSE.txt",
-    "static/js/main.c4b74787.chunk.js.LICENSE.txt": "/fifaapp/static/js/main.c4b74787.chunk.js.LICENSE.txt",
+    "static/js/main.e3007a5d.chunk.js.LICENSE.txt": "/fifaapp/static/js/main.e3007a5d.chunk.js.LICENSE.txt",
     "static/media/EA_Sports.svg.1e14100c.png": "/fifaapp/static/media/EA_Sports.svg.1e14100c.png",
     "static/media/material-dashboard-react.css?v=1.10.0": "/fifaapp/static/media/Soccer_Field_Transparant.svg.2bc359a5.png",
     "static/media/boonzai.5554b735.mp3": "/fifaapp/static/media/boonzai.5554b735.mp3",
@@ -31,8 +31,8 @@
   "entrypoints": [
     "static/js/runtime-main.2976f66f.js",
     "static/css/2.1881a404.chunk.css",
-    "static/js/2.25d3a4a2.chunk.js",
+    "static/js/2.6abf978e.chunk.js",
     "static/css/main.e11c85db.chunk.css",
-    "static/js/main.c4b74787.chunk.js"
+    "static/js/main.e3007a5d.chunk.js"
   ]
 }
