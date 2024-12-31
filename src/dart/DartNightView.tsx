@@ -120,6 +120,7 @@ const DartNightView: React.FC<Props> = ({
         cancel={cancel}
         playerValue={dartNight?.players ?? []}
         createTournament={true}
+        teams={[]}
       />
       <GameDialog
         open={!!activeGame && gameOpen}
@@ -198,7 +199,13 @@ const DartNightView: React.FC<Props> = ({
             >
               {singleGames?.map((g, idx) => (
                 <Grid key={idx} item xs={12} style={{ marginRight: "10px" }}>
-                  <DartGameItem game={g} open={() => setGameOpen(true)} />
+                  <DartGameItem
+                    game={g}
+                    open={() => {
+                      setActiveGame(g);
+                      setGameOpen(true);
+                    }}
+                  />
                 </Grid>
               ))}
             </Grid>

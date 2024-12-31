@@ -1,5 +1,5 @@
 import { Grid, GridSize } from "@material-ui/core";
-import { Button, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Button } from "@mui/material";
 import { SoundKind, usePlaySound } from "dart/utils/SoundUtil";
 import React from "react";
 
@@ -155,35 +155,28 @@ export const Toggle: React.FC<{
   onClick: () => void;
   active?: boolean;
   soundKind?: SoundKind;
-}> = ({ label, onClick, active = true, soundKind = "CLICK" }) => {
+  color?: "inherit" | "info" | "primary" | "secondary" | "success" | "error";
+}> = ({ label, onClick, active = true, soundKind = "CLICK", color }) => {
   const [play] = usePlaySound(soundKind);
   return (
-    <ToggleButtonGroup
-      value={active ? label : undefined}
-      fullWidth
-      unselectable="on"
-      exclusive
-      color="secondary"
-      onChange={() => {
-        play();
+    <Button
+      variant={active ? "contained" : "outlined"}
+      // disabled={!active}
+      key={label}
+      color={color ?? "secondary"}
+      onClick={() => {
+        !active && play();
         onClick();
       }}
       sx={{
         flex: 1,
         fontWeight: "bold",
-        fontSize: "3.5vh",
-        lineHeight: "3.5vh",
+        fontSize: "3vh",
+        lineHeight: "3vh",
         boxShadow: 3,
       }}
     >
-      <ToggleButton
-        value={label}
-        sx={{
-          padding: 0,
-        }}
-      >
-        {label}
-      </ToggleButton>
-    </ToggleButtonGroup>
+      {label}
+    </Button>
   );
 };

@@ -10,7 +10,6 @@ import {
   MenuItem,
   Select,
   Stack,
-  TextField,
   ToggleButton,
   ToggleButtonGroup,
 } from "@mui/material";
@@ -41,6 +40,8 @@ interface Props extends DartStoreProps {
   createTournament: boolean;
   setTeams?: (teams: DartTeam[]) => void;
   teams: DartTeam[];
+  random?: boolean;
+  setRandom?: (random: boolean) => void;
 }
 
 const GameSelectDialog: React.FC<Props> = ({
@@ -55,6 +56,8 @@ const GameSelectDialog: React.FC<Props> = ({
   dPlayers,
   setTeams,
   teams,
+  random,
+  setRandom,
 }) => {
   const [legs, setLegs] = React.useState(1);
   const [sets, setSets] = React.useState(1);
@@ -86,13 +89,6 @@ const GameSelectDialog: React.FC<Props> = ({
     return options;
   }, [playerOptions]);
 
-  React.useEffect(() => {
-    if (playerValue.length < 4 && settings.teamMode === "TEAM") {
-      setSettings({ ...settings, teamMode: "SINGLE" });
-    }
-  }, [playerValue]);
-
-  console.log(teams);
   return (
     <Dialog fullWidth open={open} maxWidth={"md"}>
       <DialogTitle>
@@ -101,9 +97,11 @@ const GameSelectDialog: React.FC<Props> = ({
           <Select
             size="small"
             value={settings.teamMode}
-            onChange={(e) =>
-              setSettings({ ...settings, teamMode: e.target.value })
-            }
+            onChange={(e) => {
+              setSettings({ ...settings, teamMode: e.target.value });
+              setTeams && setTeams([]);
+              setPlayerValue && setPlayerValue([]);
+            }}
           >
             {ALL_TEAM_MODES.map((mode) => (
               <MenuItem
@@ -153,86 +151,161 @@ const GameSelectDialog: React.FC<Props> = ({
             rowGap: 6,
           }}
         >
-          {setPlayerValue && (
-            <Stack direction={"column"}>
-              {settings.teamMode === "SINGLE" && (
-                <Stack direction={"row"} alignItems={"center"} columnGap={1}>
-                  <PlayerSelect
-                    disabled={createTournament}
-                    playerOpen={playerOpen}
-                    setPlayerOpen={setPlayerOpen}
-                    playerValue={playerValue}
-                    setPlayerValue={playersChanged}
-                    playerOptions={playerOptions}
-                  />
-                </Stack>
-              )}
-              {settings.teamMode === "TEAM" && settings.teamSize && (
-                <Stack direction={"row"} columnGap={2}>
-                  {Array(settings.teamSize)
-                    .fill(0)
-                    .map((_v, idx) => (
-                      <Stack
-                        direction={"row"}
-                        key={idx}
-                        flex={1}
-                        alignItems={"center"}
-                      >
-                        <div style={{ width: "80px" }}>{`Team ${idx + 1}`}</div>
-                        <Select
-                          variant="standard"
-                          size="small"
-                          fullWidth
-                          multiple
-                          renderValue={(selected: any) => selected.join(", ")}
-                          value={teams[idx]?.players.map((p) => p.name) ?? []}
-                          onChange={(event) => {
-                            const toAdd = playerOptions.filter(
-                              (p) =>
-                                p !== undefined &&
-                                event.target.value.includes(p.name)
-                            );
-                            if (toAdd) {
-                              const teamsNew = [...teams];
-                              const newTeam: DartTeam = {
-                                name: toAdd.map((p) => p?.name ?? "").join("-"),
-                                players: toAdd.map((p) => ({ name: p?.name })),
-                              };
-                              console.log(newTeam);
-                              teamsNew[idx] = newTeam;
-                              setTeams && setTeams(teamsNew);
-                            }
-                          }}
+          <Stack direction={"row"} alignItems={"center"}>
+            {setPlayerValue && (
+              <Stack direction={"column"} flex={1}>
+                {settings.teamMode === "SINGLE" && (
+                  <Stack direction={"row"} alignItems={"center"} columnGap={1}>
+                    <PlayerSelect
+                      disabled={createTournament}
+                      playerOpen={playerOpen}
+                      setPlayerOpen={setPlayerOpen}
+                      playerValue={playerValue}
+                      setPlayerValue={playersChanged}
+                      playerOptions={playerOptions}
+                    />
+                  </Stack>
+                )}
+                {settings.teamMode === "TEAM" && settings.teamSize && (
+                  <Stack direction={"row"} columnGap={2}>
+                    {Array(settings.teamSize)
+                      .fill(0)
+                      .map((_v, idx) => (
+                        <Stack
+                          direction={"row"}
+                          key={idx}
+                          flex={1}
+                          alignItems={"center"}
                         >
-                          {playerOptions
-                            .filter(
-                              (po) =>
-                                !teams
-                                  .flatMap((t) => t.players.map((p) => p.name))
-                                  .includes(po.name)
-                            )
-                            .map((p) => {
-                              if (p) {
-                                return (
-                                  <MenuItem key={p.name} value={p.name}>
-                                    <Checkbox
-                                      checked={teams[idx]?.players.some(
-                                        (v) => v.name === p.name
-                                      )}
-                                      color="primary"
-                                    />
-                                    <ListItemText primary={p.name} />
-                                  </MenuItem>
-                                );
+                          <div style={{ width: "80px" }}>{`Team ${
+                            idx + 1
+                          }`}</div>
+                          <Select
+                            variant="standard"
+                            size="small"
+                            fullWidth
+                            multiple
+                            renderValue={(selected: any) => selected.join(", ")}
+                            value={teams[idx]?.players.map((p) => p.name) ?? []}
+                            onChange={(event) => {
+                              const toAdd = playerOptions.filter(
+                                (p) =>
+                                  p !== undefined &&
+                                  event.target.value.includes(p.name)
+                              );
+                              if (toAdd) {
+                                const teamsNew = [...teams];
+                                const newTeam: DartTeam = {
+                                  name: toAdd
+                                    .map((p) => p?.name ?? "")
+                                    .join("-"),
+                                  players: toAdd.map((p) => ({
+                                    name: p?.name,
+                                  })),
+                                };
+                                console.log(newTeam);
+                                teamsNew[idx] = newTeam;
+                                setTeams && setTeams(teamsNew);
                               }
-                            })}
-                        </Select>
-                      </Stack>
-                    ))}
-                </Stack>
-              )}
-            </Stack>
-          )}
+                            }}
+                          >
+                            {playerOptions
+                              .filter(
+                                (po) =>
+                                  !teams
+                                    .flatMap((t, ti) =>
+                                      ti === idx
+                                        ? []
+                                        : t.players.map((p) => p.name)
+                                    )
+                                    .includes(po.name)
+                              )
+                              .map((p) => {
+                                if (p) {
+                                  return (
+                                    <MenuItem key={p.name} value={p.name}>
+                                      <Checkbox
+                                        checked={teams[idx]?.players.some(
+                                          (v) => v.name === p.name
+                                        )}
+                                        color="primary"
+                                      />
+                                      <ListItemText primary={p.name} />
+                                    </MenuItem>
+                                  );
+                                }
+                              })}
+                          </Select>
+                        </Stack>
+                      ))}
+                  </Stack>
+                )}
+              </Stack>
+            )}
+            {setRandom && (
+              <Stack direction={"row"} alignItems={"center"}>
+                <Checkbox
+                  checked={random}
+                  onChange={(e) => setRandom && setRandom(e.target.checked)}
+                />
+                <div>random</div>
+              </Stack>
+            )}
+          </Stack>
+          {settings.choosenGame === "X01" &&
+            (teams?.length === 2 || playerValue.length === 2) && (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  flex: 1,
+                }}
+              >
+                <div style={{ width: "30%", textAlign: "center" }}>
+                  First to
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    flex: 1,
+                    alignItems: "center",
+                    height: "8vh",
+                  }}
+                >
+                  <NumberField
+                    value={sets}
+                    onChange={(value) => {
+                      setSets(value);
+                      setLegsSetsToChoosenGame(settings, legs, value);
+                    }}
+                  />
+                  <div style={{ width: "30%", textAlign: "center" }}>
+                    Set(s)
+                  </div>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    flex: 1,
+                    alignItems: "center",
+                  }}
+                >
+                  <NumberField
+                    value={legs}
+                    onChange={(value) => {
+                      setLegs(value);
+                      setLegsSetsToChoosenGame(settings, value, sets);
+                    }}
+                  />
+                  <div style={{ width: "30%", textAlign: "center" }}>
+                    Leg(s)
+                  </div>
+                </div>
+              </div>
+            )}
           <ToggleButtonGroup
             color="error"
             exclusive
@@ -249,75 +322,6 @@ const GameSelectDialog: React.FC<Props> = ({
               </ToggleButton>
             ))}
           </ToggleButtonGroup>
-          {playerValue.length === 2 && (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  flex: 1,
-                  alignItems: "center",
-                }}
-              >
-                <div style={{ width: "30%", textAlign: "center" }}># Sets:</div>
-                <TextField
-                  type="number"
-                  InputProps={{ inputProps: { min: 1, max: 20 } }}
-                  onChange={(event) => {
-                    const s = Number(event.target.value);
-                    setSets(s);
-                    setSettings(setLegsSetsToChoosenGame(settings, legs, s));
-                  }}
-                  sx={{
-                    flex: 1,
-                    "& .MuiInputBase-input": {
-                      textAlign: "center",
-                      fontSize: 20,
-                      paddingY: 1,
-                    },
-                  }}
-                  value={sets}
-                />
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  flex: 1,
-                  alignItems: "center",
-                }}
-              >
-                <div style={{ width: "30%", textAlign: "center" }}>
-                  First to
-                </div>
-                <TextField
-                  type="number"
-                  InputProps={{ inputProps: { min: 1, max: 20 } }}
-                  onChange={(event) => {
-                    const l = Number(event.target.value);
-                    setLegs(l);
-                    setSettings(setLegsSetsToChoosenGame(settings, l, sets));
-                  }}
-                  sx={{
-                    flex: 1,
-                    "& .MuiInputBase-input": {
-                      textAlign: "center",
-                      fontSize: 20,
-                      paddingY: 1,
-                    },
-                  }}
-                  value={legs}
-                />
-                <div style={{ width: "30%", textAlign: "center" }}>Leg(s)</div>
-              </div>
-            </div>
-          )}
           <Divider />
           {settings.choosenGame === "X01" ? (
             <X01SettingsPanel
@@ -441,7 +445,7 @@ const EliminationSettingsPanel: React.FC<{
   gameSettings: GameSettings;
   setSettings: (settings: GameSettings) => void;
 }> = ({ gameSettings, setSettings }) => {
-  const settings = gameSettings.x01;
+  const settings = gameSettings.elimination;
   return (
     <>
       <ToggleButtonGroup
@@ -534,3 +538,53 @@ function setLegsSetsToChoosenGame(
       };
   }
 }
+
+export const NumberField: React.FC<{
+  value: number;
+  onChange: (newValue: number) => void;
+  disabled?: boolean;
+}> = ({ value, onChange, disabled = false }) => {
+  return (
+    <Stack
+      marginX={1}
+      width={"60px"}
+      spacing={"5px"}
+      direction={"row"}
+      flex={1}
+    >
+      <div
+        style={{
+          height: "80%",
+          flex: 1,
+          textAlign: "center",
+          lineHeight: "7vh",
+          fontSize: "4vh",
+          borderRadius: "5%",
+          border: "1px solid lightgray",
+        }}
+      >
+        {value}
+      </div>
+      <Button
+        disabled={disabled || value <= 1}
+        variant="outlined"
+        sx={{ minWidth: "20px" }}
+        onClick={() => {
+          onChange(value - 1);
+        }}
+      >
+        -
+      </Button>
+      <Button
+        disabled={disabled}
+        variant="outlined"
+        sx={{ minWidth: "20px" }}
+        onClick={() => {
+          onChange(value + 1);
+        }}
+      >
+        +
+      </Button>
+    </Stack>
+  );
+};

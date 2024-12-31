@@ -17,6 +17,7 @@ import {
   getCurrentRoundDarts,
   getNewX01Player,
 } from "./utils/DartUtil";
+import { usePlaySound } from "./utils/SoundUtil";
 
 interface Props extends DartStoreProps {
   gameSettings: X01GameSettings;
@@ -30,6 +31,7 @@ const X01DartOverview: React.FC<Props> = ({
   dartGame,
   setGame,
 }) => {
+  const [playBust] = usePlaySound("BUST");
   const game = React.useMemo<X01Game>(
     () =>
       dartGame
@@ -50,6 +52,7 @@ const X01DartOverview: React.FC<Props> = ({
           },
     [dartGame, players, gameSettings]
   );
+  console.log(game);
   const [actTry, setActTry] = React.useState(
     ((game?.players?.find((p) => p.active)?.score?.tries?.length ?? 0) % 3) + 1
   );
@@ -68,6 +71,7 @@ const X01DartOverview: React.FC<Props> = ({
         (p) => p.team.name === activePlayer.team.name
       );
       newGame.players[activePlayerIndex] = activePlayer;
+
       const multiplier = triple ? 3 : double ? 2 : 1;
       activePlayer.score.tries.push({
         number: p,
@@ -75,6 +79,7 @@ const X01DartOverview: React.FC<Props> = ({
         points: p * multiplier,
         score: triple ? "TRIPLE" : double ? "DOUBLE" : "SINGLE",
       });
+
       if (
         points > score ||
         (game.settings.finishKind !== "SINGLE OUT" && score - points === 1) ||
@@ -86,71 +91,153 @@ const X01DartOverview: React.FC<Props> = ({
           !double &&
           !triple)
       ) {
-        // overthrown
-        // TODO reduce points to start of round
-        for (let i = actTry; i <= 3; i++) {
-          activePlayer?.score?.tries.push({
-            number: 0,
-            multiplier: multiplier,
-            points: 0,
-            score: triple ? "TRIPLE" : double ? "DOUBLE" : "SINGLE",
-          });
-        }
-
-        const currentRoundDarts: X01Try[] = getCurrentRoundDarts(
-          game.round,
-          activePlayer
-        );
-        const currentRoundPoints =
-          _.sumBy(currentRoundDarts, (crd) => crd.points) - points;
-
-        // set back the remaining points to start of round points
-        activePlayer.score.remaining =
-          activePlayer.score.remaining + currentRoundPoints;
-        activateNext(activePlayer, game, newGame);
-      } else {
-        if (
-          score !== game.settings.kind ||
-          game.settings.startKind === "SINGLE IN" ||
-          (game.settings.startKind === "DOUBLE IN" && double)
-        ) {
-          // regular throw
-          activePlayer.score.remaining =
-            (activePlayer?.score?.remaining ?? game.settings.kind) - points;
-        }
-
-        activePlayer.score.average = calculateAverage(
-          activePlayer,
-          game.settings.kind - activePlayer.score.remaining
-        );
-      }
-
-      if (activePlayer.score.remaining === 0) {
-        const finished = newGame.players.filter((p) => p.finishRank !== 0);
-        activePlayer.finishRank = finished.length + 1;
-        newGame.finishedPlayers = [...newGame.finishedPlayers, activePlayer];
-        activateNext(activePlayer, game, newGame);
-        const notFinished = newGame.players.filter((p) => p.finishRank === 0);
-        if (notFinished.length === 1) {
-          const last = {
-            ...notFinished[0],
-            finishRank: activePlayer.finishRank + 1,
-          };
-          const lastIndex = newGame.players.findIndex(
-            (p) => p.team.name === last.team.name
-          );
-          newGame.finishedPlayers.push(last);
-          newGame.players[lastIndex] = last;
-        }
+        handleOverthrown(activePlayer, multiplier, newGame);
         setActTry(1);
       } else {
-        if (actTry === 3) {
+        handleValidThrow(score, activePlayer);
+        // player finshed current leg
+        if (activePlayer.score.remaining === 0) {
+          // define and set rank in leg
+          const finished = newGame.players.filter((p) => p.score.finishRank);
+          activePlayer.score.finishRank = finished.length + 1;
+          if (newGame.players.length > 2) {
+            activePlayer.finishRank = finished.length + 1;
+          }
+          newGame.finishedPlayers = [...newGame.finishedPlayers, activePlayer];
+
           activateNext(activePlayer, game, newGame);
+          const notFinished = newGame.players.filter(
+            (p) => !p.score.finishRank || p.score.finishRank < 1
+          );
+          if (notFinished.length == 1) {
+            const last = {
+              ...notFinished[0],
+              score: {
+                ...notFinished[0].score,
+                finishRank: activePlayer.score.finishRank + 1,
+              },
+            };
+            const lastIndex = newGame.players.findIndex(
+              (p) => p.team.name === last.team.name
+            );
+            newGame.finishedPlayers.push(last);
+            newGame.players[lastIndex] = last;
+          }
+          if (newGame.finishedPlayers.length === newGame.players.length) {
+            handleSetsAndLegs(newGame);
+          }
+          setActTry(1);
+        } else {
+          if (actTry === 3) {
+            activateNext(activePlayer, game, newGame);
+          }
+          setActTry((value) => (value === 3 ? 1 : value + 1));
         }
-        setActTry((value) => (value === 3 ? 1 : value + 1));
       }
 
       setGame(newGame);
+    }
+
+    function handleSetsAndLegs(game: X01Game) {
+      if (
+        game.players.length === 2 &&
+        (game.settings.legs > 1 || game.settings.sets > 1)
+      ) {
+        const players = [...game.players];
+        let finished = false;
+        players.forEach((p) => {
+          if (p.legsWon + 1 === game.settings.legs) {
+            if (p.score.finishRank === 1) {
+              p.setsWon += 1;
+            }
+            if (p.setsWon === game.settings.sets) {
+              p.finishRank = p.score.finishRank ?? -1;
+              finished = true;
+            }
+            p.legsWon = 0;
+            game.leg = 1;
+            game.set += 1;
+          } else {
+            if (p.score.finishRank === 1) {
+              p.legsWon += 1;
+            }
+            game.leg += 1;
+          }
+        });
+
+        players.forEach((p, idx) => {
+          if (finished) {
+            p.finishRank = p.score.finishRank ?? -1;
+          } else {
+            p.score = {
+              remaining: game.settings.kind,
+              average: 0,
+              tries: [],
+            };
+          }
+          game.players[idx] = p;
+        });
+        game.finishedPlayers = [];
+        game.round = 1;
+      } else {
+        game.players.forEach(
+          (p, idx) =>
+            (game.players[idx] = { ...p, finishRank: p.score.finishRank ?? -1 })
+        );
+        console.error("SET mode for more than 2 players not supported");
+      }
+    }
+
+    function handleValidThrow(score: number, activePlayer: X01Player) {
+      if (
+        score !== game.settings.kind ||
+        game.settings.startKind === "SINGLE IN" ||
+        (game.settings.startKind === "DOUBLE IN" && double)
+      ) {
+        // regular throw
+        activePlayer.score.remaining =
+          (activePlayer?.score?.remaining ?? game.settings.kind) - points;
+      }
+
+      activePlayer.score.average = calculateAverage(
+        activePlayer,
+        game.settings.kind - activePlayer.score.remaining
+      );
+    }
+
+    function handleOverthrown(
+      activePlayer: X01Player,
+      multiplier: number,
+      newGame: X01Game
+    ) {
+      playBust();
+      const currentRoundDarts: X01Try[] = getCurrentRoundDarts(
+        game.round,
+        activePlayer
+      );
+      const currentRoundPoints =
+        _.sumBy(currentRoundDarts, (crd) => crd.points) - points;
+
+      for (let i = actTry; i > 0; i--) {
+        const totalTries = activePlayer.score.tries.length;
+        activePlayer.score.tries[totalTries - i] = {
+          ...activePlayer.score.tries[totalTries - i],
+          points: 0,
+        };
+      }
+      for (let i = actTry; i < 3; i++) {
+        activePlayer?.score?.tries.push({
+          number: 0,
+          multiplier: multiplier,
+          points: 0,
+          score: triple ? "TRIPLE" : double ? "DOUBLE" : "SINGLE",
+        });
+      }
+
+      // set back the remaining points to start of round points
+      activePlayer.score.remaining =
+        activePlayer.score.remaining + currentRoundPoints;
+      activateNext(activePlayer, game, newGame);
     }
   };
 
@@ -185,8 +272,7 @@ const X01DartOverview: React.FC<Props> = ({
     const active = game.players.find((p) => p.active);
     if (
       active &&
-      (active.score.remaining !== game.settings.kind ||
-        game.players.indexOf(active) > 0)
+      (active.score.tries.length > 0 || game.players.indexOf(active) > 0)
     ) {
       const activePlayer = {
         ...active,

@@ -54,6 +54,26 @@ const dartSlice = createSlice({
     removeFastGame: (state) => {
       delete state.fastGame;
     },
+    removeGame: (state, action: PayloadAction<DartGame>) => {
+      const game = action.payload;
+      if (game.dartNightId) {
+        const dartNight = state.dartNight[game.dartNightId];
+        if (dartNight) {
+          if (game.dartTournamentId) {
+            console.error("not implemented");
+          } else {
+            const gameIndex = dartNight.games.findIndex(
+              (g) => g.id === game.id
+            );
+            if (gameIndex >= 0) {
+              dartNight.games = [...dartNight.games].toSpliced(gameIndex, 1);
+            }
+          }
+        }
+      } else if (game.id === state.fastGame?.id) {
+        delete state.fastGame;
+      }
+    },
     addDartNight: (state, action: PayloadAction<DartNight>) => {
       state.dartNight[action.payload.id] = action.payload;
     },
@@ -117,7 +137,6 @@ const dartSlice = createSlice({
     },
     setGame: (state, action: PayloadAction<DartGame>) => {
       const game = action.payload;
-      console.log(game);
       if (game.players.every((p) => p.finishRank > 0)) {
         game.state = "FINISHED";
       }

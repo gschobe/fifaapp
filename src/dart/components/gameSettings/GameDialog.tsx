@@ -33,7 +33,7 @@ const GameDialog: React.FC<Props> = ({
         >
           <div
             style={{
-              height: "fit-content",
+              height: "6vh",
               width: "100%",
               display: "flex",
               flexDirection: "row",
@@ -50,6 +50,7 @@ const GameDialog: React.FC<Props> = ({
             </IconButton>
             <div>{`Game: ${game?.type}`}</div>
             {game && getChoosenGameSettings(game)}
+            <div>{`First to: ${game?.settings.sets} Set(s) / ${game?.settings.legs} Leg(s)`}</div>
           </div>
 
           {game?.type === "X01" ? (

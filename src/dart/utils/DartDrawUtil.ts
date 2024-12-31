@@ -286,8 +286,8 @@ export function getNewX01Game(
     id: new Date().getTime(),
     type: "X01",
     settings: gameSettings,
-    leg: gameSettings.legs,
-    set: gameSettings.sets,
+    leg: 1,
+    set: 1,
     round: 1,
     players: players.map((p, idx) =>
       getNewX01Player(gameSettings.kind, p, idx === 0)
@@ -305,8 +305,8 @@ function getNewCricketGame(
   return {
     id: new Date().getTime(),
     type: "Cricket",
-    leg: gameSettings.legs,
-    set: gameSettings.sets,
+    leg: 1,
+    set: 1,
     settings: gameSettings,
     round: 1,
     players: players.map((p, idx) =>
@@ -327,8 +327,8 @@ function getNewAtcGame(
     id: new Date().getTime(),
     type: "ATC",
     settings: gameSettings,
-    leg: gameSettings.legs,
-    set: gameSettings.sets,
+    leg: 1,
+    set: 1,
     round: 1,
     players: players.map((p, idx) =>
       getNewATCPlayer(p, gameSettings, idx === 0)
@@ -348,8 +348,8 @@ function getNewEliminationGame(
     id: new Date().getTime(),
     type: "Elimination",
     settings: gameSettings,
-    leg: gameSettings.legs,
-    set: gameSettings.sets,
+    leg: 1,
+    set: 1,
     round: 1,
     players: players.map((p, idx) =>
       getNewEliminationPlayer(p, gameSettings, idx === 0)

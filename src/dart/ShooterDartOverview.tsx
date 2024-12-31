@@ -170,7 +170,7 @@ const ShooterDartOverview: React.FC<Props> = ({
   return (
     <div
       style={{
-        height: "100%",
+        height: "93vh",
         width: "100%",
         overflow: "hidden",
         display: "flex",
@@ -180,7 +180,8 @@ const ShooterDartOverview: React.FC<Props> = ({
     >
       <div
         style={{
-          width: "80%",
+          width: "60%",
+          height: "100%",
           display: "flex",
           flexDirection: "column",
           rowGap: 5,
@@ -190,6 +191,99 @@ const ShooterDartOverview: React.FC<Props> = ({
         {game.players.map((p, idx) => (
           <PlayerScoreShooter key={idx} player={p} game={game} />
         ))}
+      </div>
+      <div
+        style={{
+          flex: 1,
+          height: "90vh",
+          display: "flex",
+          flexDirection: "column",
+          border: "solid 2px",
+          borderRadius: "5px",
+          justifyContent: "space-around",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            rowGap: 10,
+            height: "30vh",
+            padding: "0 10px",
+            textAlign: "center",
+          }}
+        >
+          <div
+            style={{
+              height: "6vh",
+              lineHeight: "6vh",
+              fontSize: "5vh",
+            }}
+          >
+            Aktuelle Zahl
+          </div>
+          <div
+            style={{
+              fontSize: "16vh",
+              lineHeight: "100%",
+              fontWeight: "bold",
+              flex: 1,
+              alignItems: "center",
+              display: "flex",
+            }}
+          >
+            <div>{game.settings.numbers[game.round - 1]}</div>
+          </div>
+        </div>
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            rowGap: 10,
+            height: "30vh",
+          }}
+        >
+          <div style={{ height: "6vh", lineHeight: "6vh", fontSize: "5vh" }}>
+            Runde
+          </div>
+          <div
+            style={{
+              fontSize: "16vh",
+              lineHeight: "100%",
+              fontWeight: "bold",
+              flex: 1,
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <div>{game.round}</div>
+            <div
+              style={{
+                fontSize: "10vh",
+                display: "flex",
+                flexDirection: "row",
+                fontWeight: "normal",
+              }}
+            >
+              /
+            </div>
+            <div
+              style={{
+                fontSize: "10vh",
+                display: "flex",
+                flexDirection: "row",
+                fontWeight: "normal",
+              }}
+            >
+              {game.settings.rounds}
+            </div>
+          </div>
+        </div>
       </div>
       <div
         style={{

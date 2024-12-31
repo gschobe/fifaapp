@@ -1,12 +1,8 @@
-import { TextField, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Button, Grid, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { GameSettings } from "dart/Definitions";
-import {
-  defaultDartBoardNumbers,
-  first7,
-  last7,
-  middle7,
-} from "dart/assets/numbers";
+import { defaultDartBoardNumbers } from "dart/assets/numbers";
 import React from "react";
+import { NumberField } from "./GameSelectDialog";
 
 const ShooterSettingsPanel: React.FC<{
   gameSettings: GameSettings;
@@ -25,27 +21,18 @@ const ShooterSettingsPanel: React.FC<{
         }}
       >
         <div style={{ width: "30%", textAlign: "center" }}># Runden:</div>
-        <TextField
-          type="number"
-          InputProps={{ inputProps: { min: 1, max: 20 } }}
-          onChange={(event) => {
+        <NumberField
+          value={settings.rounds}
+          onChange={(rounds) =>
             setSettings({
               ...gameSettings,
               shooter: {
                 ...settings,
-                rounds: Number(event.target.value),
+                rounds: rounds,
               },
-            });
-          }}
-          sx={{
-            flex: 1,
-            "& .MuiInputBase-input": {
-              textAlign: "center",
-              fontSize: 24,
-              paddingY: 1,
-            },
-          }}
-          value={settings.rounds}
+            })
+          }
+          disabled={settings.numberMode === "SELECTED"}
         />
       </div>
       <ToggleButtonGroup
@@ -72,65 +59,41 @@ const ShooterSettingsPanel: React.FC<{
         </ToggleButton>
       </ToggleButtonGroup>
       {settings.numberMode === "SELECTED" && (
-        <>
-          <ToggleButtonGroup
-            fullWidth
-            value={first7}
-            onChange={(_event, value) =>
-              setSettings({
-                ...gameSettings,
-                shooter: {
-                  ...settings,
-                  numbers: value.concat(middle7).concat(last7),
-                },
-              })
-            }
-          >
-            {defaultDartBoardNumbers.slice(0, 7).map((n) => (
-              <ToggleButton key={n} value={n}>
-                {n}
-              </ToggleButton>
-            ))}
-          </ToggleButtonGroup>
-          <ToggleButtonGroup
-            fullWidth
-            value={middle7}
-            onChange={(_event, value) =>
-              setSettings({
-                ...gameSettings,
-                shooter: {
-                  ...settings,
-                  numbers: first7.concat(value).concat(last7),
-                },
-              })
-            }
-          >
-            {defaultDartBoardNumbers.slice(7, 14).map((n) => (
-              <ToggleButton key={n} value={n}>
-                {n}
-              </ToggleButton>
-            ))}
-          </ToggleButtonGroup>
-          <ToggleButtonGroup
-            fullWidth
-            value={last7}
-            onChange={(_event, value) =>
-              setSettings({
-                ...gameSettings,
-                shooter: {
-                  ...settings,
-                  numbers: first7.concat(middle7).concat(value),
-                },
-              })
-            }
-          >
-            {defaultDartBoardNumbers.slice(14).map((n) => (
-              <ToggleButton key={n} value={n}>
-                {n}
-              </ToggleButton>
-            ))}
-          </ToggleButtonGroup>
-        </>
+        <Grid container columns={{ xs: 7 }} columnSpacing={1} rowSpacing={0.5}>
+          {defaultDartBoardNumbers.map((ddbn) => (
+            <Grid key={ddbn} item xs={1}>
+              <Button
+                fullWidth
+                color="info"
+                variant={
+                  settings.numbers.includes(ddbn) ? "contained" : "outlined"
+                }
+                onClick={() => {
+                  const numbers = settings.numbers.includes(ddbn)
+                    ? settings.numbers.filter((n) => n !== ddbn)
+                    : [...settings.numbers, ddbn];
+                  setSettings({
+                    ...gameSettings,
+                    shooter: {
+                      ...settings,
+                      numbers: numbers,
+                      rounds: numbers.length,
+                    },
+                  });
+                }}
+                sx={{
+                  flex: 1,
+                  fontWeight: "bold",
+                  fontSize: "3.5vh",
+                  lineHeight: "3.5vh",
+                  boxShadow: 1,
+                }}
+              >
+                {ddbn}
+              </Button>
+            </Grid>
+          ))}
+        </Grid>
       )}
     </>
   );

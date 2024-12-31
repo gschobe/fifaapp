@@ -13,6 +13,7 @@ import Card from "components/Card/Card";
 import CardBody from "components/Card/CardBody";
 import CardHeader from "components/Card/CardHeader";
 import { playerTableColumnsForDart } from "definitions/TableDefinitions";
+import _ from "lodash";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { DartStoreProps, dartConnector } from "store/DartStore";
@@ -43,6 +44,8 @@ const DartHome: React.FC<DartStoreProps> = ({
   const [location, setLocation] = React.useState<string>("");
   const [createTournament, setCreateTournament] = React.useState(false);
   const [addPlayerOpen, setAddPlayerOpen] = React.useState(false);
+  const [fastGameToShow, setFGTS] = React.useState(fastGame);
+  const [randomPlayers, setRandomPlayer] = React.useState(true);
 
   const players = React.useMemo(() => {
     return Object.values(dPlayers);
@@ -56,17 +59,19 @@ const DartHome: React.FC<DartStoreProps> = ({
 
   const start = () => {
     setOpen(false);
-    setFastGame(
-      getFastGame(
-        settings,
-        teams.length > 0
-          ? teams
-          : playerValue.map((p) => ({ name: p.name, players: [{ ...p }] }))
-      )
+    const dartTeams =
+      teams.length > 0
+        ? teams
+        : playerValue.map((p) => ({ name: p.name, players: [{ ...p }] }));
+    const game = getFastGame(
+      settings,
+      randomPlayers ? _.shuffle(dartTeams) : dartTeams
     );
+    setFastGame(game);
     setStartGame(true);
   };
 
+  React.useEffect(() => setFGTS(fastGame), [fastGame]);
   const createDartNight = () => {
     const now = new Date();
     const players = playerValue.filter((p) => p != undefined);
@@ -109,6 +114,8 @@ const DartHome: React.FC<DartStoreProps> = ({
         createTournament={createTournament}
         setTeams={setTeams}
         teams={teams}
+        random={randomPlayers}
+        setRandom={setRandomPlayer}
       />
       <GameDialog
         open={startGame}
@@ -117,7 +124,7 @@ const DartHome: React.FC<DartStoreProps> = ({
         players={playerValue.map((p) => {
           return { name: p.name, players: [p] };
         })}
-        game={fastGame}
+        game={fastGameToShow}
       />
       <CreateDartNightDialog
         open={tournamentOpen}
@@ -156,7 +163,13 @@ const DartHome: React.FC<DartStoreProps> = ({
             </CardHeader>
             <CardBody>
               {fastGame && (
-                <DartGameItem game={fastGame} open={() => setStartGame(true)} />
+                <DartGameItem
+                  game={fastGame}
+                  open={() => {
+                    setFGTS(fastGame);
+                    setStartGame(true);
+                  }}
+                />
               )}
               {[...fastGameHistory]
                 .sort((g1, g2) => g2.id - g1.id)
@@ -164,7 +177,10 @@ const DartHome: React.FC<DartStoreProps> = ({
                   <DartGameItem
                     key={fg.id}
                     game={fg}
-                    open={() => setStartGame(true)}
+                    open={() => {
+                      setFGTS(fg);
+                      setStartGame(true);
+                    }}
                   />
                 ))}
             </CardBody>

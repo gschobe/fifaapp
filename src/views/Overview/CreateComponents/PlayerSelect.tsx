@@ -25,7 +25,6 @@ const PlayerSelect: React.FC<Props> = ({
   setPlayerValue,
   disabled = false,
 }) => {
-  console.log(playerOptions);
   const selected = playerValue.map((p) => p.name);
   const handleSelectionChange: (event: any) => void = (event) => {
     const {
@@ -33,7 +32,6 @@ const PlayerSelect: React.FC<Props> = ({
     } = event;
     const players: string[] =
       typeof value === "string" ? value.split(",") : value;
-    console.log(value);
     setPlayerValue(
       players
         .filter((p) => !!p)

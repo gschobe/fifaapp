@@ -1,15 +1,19 @@
 import React from "react";
-import { ATCPlayer } from "dart/Definitions";
+import { ATCGame, ATCPlayer } from "dart/Definitions";
 
 interface Props {
   player: ATCPlayer;
+  game: ATCGame;
 }
 const PlayerScoreATC: React.FC<Props> = ({ player }) => {
+  console.log(player);
   return (
     <div
       id="ATCScoreBoard"
       style={{
         display: "flex",
+        flex: 1,
+        maxHeight: "30%",
         overflow: "hidden",
         flexDirection: "row",
         border: "solid 2px",
@@ -24,7 +28,7 @@ const PlayerScoreATC: React.FC<Props> = ({ player }) => {
           overflow: "auto",
           display: "flex",
           fontWeight: "bold",
-          fontSize: "4.5vh",
+          fontSize: `7vh`,
           width: "20%",
           height: "100%",
           backgroundColor:
@@ -39,6 +43,7 @@ const PlayerScoreATC: React.FC<Props> = ({ player }) => {
             display: "flex",
             height: "auto",
             lineHeight: "100%",
+            minWidth: "fit-content",
           }}
         >
           {player.team.name}
@@ -57,6 +62,7 @@ const PlayerScoreATC: React.FC<Props> = ({ player }) => {
           style={{
             display: "flex",
             flexDirection: "row",
+            height: "100%",
           }}
         >
           <div
@@ -68,15 +74,17 @@ const PlayerScoreATC: React.FC<Props> = ({ player }) => {
               verticalAlign: "middle",
               fontWeight: "bold",
               lineHeight: "7vh",
-              fontSize: "5vh",
+              fontSize: "8vh",
             }}
           >
             <div
               style={{
                 flex: 1,
-                textAlign: "center",
-                verticalAlign: "middle",
-                display: "table-cell",
+                justifyContent: "center",
+                alignItems: "center",
+                display: "flex",
+                height: "auto",
+                lineHeight: "100%",
               }}
             >
               {player.finishRank
@@ -89,7 +97,7 @@ const PlayerScoreATC: React.FC<Props> = ({ player }) => {
                       ? "rd"
                       : "th"
                   }`
-                : Array.from(player.score.hits.entries()).filter(
+                : Array.from(player.score.hits?.entries()).filter(
                     (e) => e[1] === undefined
                   )?.[0][0]}
             </div>
@@ -97,12 +105,12 @@ const PlayerScoreATC: React.FC<Props> = ({ player }) => {
           <div
             style={{
               flex: 1,
-              textAlign: "center",
-              verticalAlign: "middle",
-              // fontWeight: "bold",
-              display: "table-cell",
-              lineHeight: "7vh",
-              fontSize: "4vh",
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+              height: "auto",
+              fontSize: "6vh",
+              lineHeight: "100%",
             }}
           >
             {player.dartsThrown}

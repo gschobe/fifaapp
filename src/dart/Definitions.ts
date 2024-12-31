@@ -60,20 +60,19 @@ export interface DartGameBase {
   sequence?: number;
   leg: number;
   set: number;
+  round: number;
 }
 export interface X01Game extends DartGameBase {
   type: "X01";
   settings: X01GameSettings;
   players: X01Player[];
   finishedPlayers: X01Player[];
-  round: number;
 }
 export interface CricketGame extends DartGameBase {
   type: "Cricket";
   settings: CricketSettings;
   players: CricketPlayer[];
   finishedPlayers: CricketPlayer[];
-  round: number;
 }
 
 export interface ATCGame extends DartGameBase {
@@ -81,7 +80,6 @@ export interface ATCGame extends DartGameBase {
   settings: ATCSettings;
   players: ATCPlayer[];
   finishedPlayers: ATCPlayer[];
-  round: number;
 }
 
 export interface ShooterGame extends DartGameBase {
@@ -89,7 +87,6 @@ export interface ShooterGame extends DartGameBase {
   settings: ShooterSettings;
   players: ShooterPlayer[];
   finishedPlayers: ShooterPlayer[];
-  round: number;
 }
 
 export interface EliminationGame extends DartGameBase {
@@ -97,7 +94,6 @@ export interface EliminationGame extends DartGameBase {
   settings: EliminationSettings;
   players: EliminationPlayer[];
   finishedPlayers: EliminationPlayer[];
-  round: number;
 }
 
 export interface KeyboardEvent {
@@ -115,7 +111,7 @@ export interface DartPlayer {
 }
 export interface X01Player extends DartPlayer {
   score: X01LegScore;
-  setScore?: X01SetScore;
+  setScore?: Map<number, X01SetScore>;
 }
 export interface EliminationPlayer extends DartPlayer {
   score: EliminationScore;
@@ -137,12 +133,13 @@ export interface ShooterPlayer extends DartPlayer {
 export interface X01SetScore {
   legScores: X01LegScore[];
   average: number;
+  setWon: boolean;
 }
 export interface X01LegScore {
   remaining: number;
   average: number;
   tries: X01Try[];
-  legWon?: boolean;
+  finishRank?: number;
 }
 
 export interface EliminationScore {

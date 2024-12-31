@@ -1,11 +1,8 @@
-import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Button, Grid, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { CricketNumbersMode, GameSettings } from "dart/Definitions";
 import {
   defaultCricketNumbers,
   defaultDartBoardNumbers,
-  first7 as first,
-  last7 as last,
-  middle7 as middle,
 } from "dart/assets/numbers";
 import React from "react";
 
@@ -14,9 +11,9 @@ const CricketSettingsPanel: React.FC<{
   setSettings: (settings: GameSettings) => void;
 }> = ({ gameSettings, setSettings }) => {
   const settings = gameSettings.cricket;
-  const first7 = [...first];
-  const middle7 = [...middle];
-  const last7 = [...last];
+  // const [choosenNumbers, setCn] = React.useState<Map<number, boolean>>(
+  //   new Map(defaultDartBoardNumbers.map((ddbn) => [ddbn, false]))
+  // );
   return (
     <>
       <ToggleButtonGroup
@@ -61,65 +58,39 @@ const CricketSettingsPanel: React.FC<{
         </ToggleButton>
       </ToggleButtonGroup>
       {settings.numbersMode === "PICKIT" && (
-        <>
-          <ToggleButtonGroup
-            fullWidth
-            value={first7}
-            onChange={(_event, value) =>
-              setSettings({
-                ...gameSettings,
-                cricket: {
-                  ...settings,
-                  numbers: value.concat(middle7).concat(last7),
-                },
-              })
-            }
-          >
-            {defaultDartBoardNumbers.slice(0, 7).map((n) => (
-              <ToggleButton key={n} value={n}>
-                {n}
-              </ToggleButton>
-            ))}
-          </ToggleButtonGroup>
-          <ToggleButtonGroup
-            fullWidth
-            value={middle7}
-            onChange={(_event, value) =>
-              setSettings({
-                ...gameSettings,
-                cricket: {
-                  ...settings,
-                  numbers: first7.concat(value).concat(last7),
-                },
-              })
-            }
-          >
-            {defaultDartBoardNumbers.slice(7, 14).map((n) => (
-              <ToggleButton key={n} value={n}>
-                {n}
-              </ToggleButton>
-            ))}
-          </ToggleButtonGroup>
-          <ToggleButtonGroup
-            fullWidth
-            value={last7}
-            onChange={(_event, value) =>
-              setSettings({
-                ...gameSettings,
-                cricket: {
-                  ...settings,
-                  numbers: first7.concat(middle7).concat(value),
-                },
-              })
-            }
-          >
-            {defaultDartBoardNumbers.slice(14).map((n) => (
-              <ToggleButton key={n} value={n}>
-                {n}
-              </ToggleButton>
-            ))}
-          </ToggleButtonGroup>
-        </>
+        <Grid container columns={{ xs: 7 }} columnSpacing={1} rowSpacing={0.5}>
+          {defaultDartBoardNumbers.map((ddbn) => (
+            <Grid key={ddbn} item xs={1}>
+              <Button
+                fullWidth
+                color="info"
+                variant={
+                  settings.numbers.includes(ddbn) ? "contained" : "outlined"
+                }
+                onClick={() => {
+                  setSettings({
+                    ...gameSettings,
+                    cricket: {
+                      ...settings,
+                      numbers: settings.numbers.includes(ddbn)
+                        ? settings.numbers.filter((n) => n !== ddbn)
+                        : [...settings.numbers, ddbn],
+                    },
+                  });
+                }}
+                sx={{
+                  flex: 1,
+                  fontWeight: "bold",
+                  fontSize: "3.5vh",
+                  lineHeight: "3.5vh",
+                  boxShadow: 1,
+                }}
+              >
+                {ddbn}
+              </Button>
+            </Grid>
+          ))}
+        </Grid>
       )}
     </>
   );

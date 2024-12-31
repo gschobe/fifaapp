@@ -22,8 +22,9 @@ const PlayerScoreShooter: React.FC<Props> = ({ player, game }) => {
     <div
       id="ShooterScoreBoard"
       style={{
-        height: "10%",
+        maxHeight: "30%",
         display: "flex",
+        flex: 1,
         overflow: "hidden",
         flexDirection: "row",
         border: "solid 2px",
@@ -36,8 +37,8 @@ const PlayerScoreShooter: React.FC<Props> = ({ player, game }) => {
         style={{
           display: "flex",
           fontWeight: "bold",
-          fontSize: "4.5vh",
-          width: "20%",
+          fontSize: "6vh",
+          width: "30%",
           height: "100%",
           backgroundColor:
             player.finishRank === 0 && player.active ? "lightblue" : "inherit",
@@ -68,84 +69,85 @@ const PlayerScoreShooter: React.FC<Props> = ({ player, game }) => {
       >
         <div
           style={{
+            flex: 2,
             display: "flex",
-            height: "100%",
             flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
+            textAlign: "center",
+            verticalAlign: "middle",
+            fontWeight: "bold",
+            lineHeight: "7vh",
+            fontSize: "5vh",
+            width: "100%",
+            height: "100%",
           }}
         >
-          <div
-            style={{
-              flex: 2,
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              textAlign: "center",
-              verticalAlign: "middle",
-              fontWeight: "bold",
-              lineHeight: "7vh",
-              fontSize: "5vh",
-              width: "100%",
-              height: "100%",
-            }}
-          >
-            {settings.legs > 1 && (
-              <div
-                style={{
-                  height: "100%",
-                  lineHeight: "50%",
-                  padding: "10px",
-                  fontSize: "24px",
-                  borderStyle: "solid",
-                  borderWidth: "0px 2px 0px 0px",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "space-evenly",
-                }}
-              >
-                <div>{player.legsWon}</div>
-                <Divider />
-                <div>{player.setsWon}</div>
-              </div>
-            )}
+          {settings.legs > 1 && (
             <div
               style={{
-                width: "25%",
                 height: "100%",
-                display: "flex",
-                flexDirection: "row",
-                columnGap: 20,
-                textAlign: "center",
-                verticalAlign: "middle",
+                lineHeight: "50%",
+                padding: "10px",
+                fontSize: "24px",
                 borderStyle: "solid",
-                borderWidth: "0 2px 0 0",
-                justifyContent: "center",
+                borderWidth: "0px 2px 0px 0px",
+                display: "flex",
+                flexDirection: "column",
                 alignItems: "center",
+                justifyContent: "space-evenly",
               }}
             >
-              <div style={{ flex: 1, textAlign: "right" }}>{points}</div>
-              <div
-                style={{
-                  textAlign: "center",
-                  marginRight: 10,
-                  fontSize: "2vh",
-                  fontWeight: "normal",
-                }}
-              >
-                Punkte
-              </div>
+              <div>{player.legsWon}</div>
+              <Divider />
+              <div>{player.setsWon}</div>
             </div>
+          )}
+          <div
+            style={{
+              width: "40%",
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              borderStyle: "solid",
+              borderWidth: "0 2px 0 0",
+              alignItems: "center",
+              justifyContent: "space-evenly",
+            }}
+          >
+            <div
+              style={{
+                height: "4vh",
+                lineHeight: "4vh",
+                fontSize: "3.5vh",
+                fontWeight: "normal",
+              }}
+            >
+              Punkte
+            </div>
+            <div
+              style={{
+                height: "14vh",
+                textAlign: "right",
+                fontSize: "8vh",
+                lineHeight: "100%",
+                alignItems: "center",
+                display: "flex",
+              }}
+            >
+              <div>{points}</div>
+            </div>
+          </div>
 
-            <div style={{ display: "flex", flexDirection: "row", flex: 1 }}>
+          <div style={{ display: "flex", flexDirection: "row", flex: 1 }}>
+            {player.finishRank ? (
               <div
                 style={{
                   flex: 0.5,
                   textAlign: "center",
                   verticalAlign: "middle",
                   display: "table-cell",
+                  fontSize: "7vh",
                 }}
               >
                 {player.finishRank
@@ -160,6 +162,7 @@ const PlayerScoreShooter: React.FC<Props> = ({ player, game }) => {
                     }`
                   : player.score.openNumbers[0]}
               </div>
+            ) : (
               <div
                 style={{
                   flex: 1,
@@ -175,20 +178,7 @@ const PlayerScoreShooter: React.FC<Props> = ({ player, game }) => {
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
-          <div
-            style={{
-              flex: 0.5,
-              textAlign: "center",
-              verticalAlign: "middle",
-              // fontWeight: "bold",
-              display: "table-cell",
-              lineHeight: "7vh",
-              fontSize: "4vh",
-            }}
-          >
-            {player.dartsThrown}
+            )}
           </div>
         </div>
       </div>

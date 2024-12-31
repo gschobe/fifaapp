@@ -4,6 +4,7 @@ import {
   getCurrentRoundDarts,
   getNumDartsThrown,
   getPossibleOuts,
+  isFinish,
 } from "dart/utils/DartUtil";
 import _ from "lodash";
 import React from "react";
@@ -18,6 +19,12 @@ const PlayerScoreX01: React.FC<Props> = ({ player, game }) => {
   const displayRound =
     player.active || player.finishRank > 0 || round === 1 ? round : round - 1;
   const currentRoundDarts = getCurrentRoundDarts(displayRound, player);
+  const roundStartPoints =
+    player.score.remaining +
+    (player.score.tries.length % 3 === 0
+      ? 0
+      : _.sumBy(currentRoundDarts, "points"));
+  const finishAtStart = isFinish(roundStartPoints);
   const threeDartScore: (number | string)[] = currentRoundDarts.map(
     (t) => t.points
   );
@@ -25,12 +32,14 @@ const PlayerScoreX01: React.FC<Props> = ({ player, game }) => {
     threeDartScore.push("-");
   }
   const possibleOuts = getPossibleOuts(player.score.remaining);
-  const possible = possibleOuts ? possibleOuts[0] : "";
+  const possible = finishAtStart && possibleOuts ? possibleOuts[0] : "";
   return (
     <div
       id="X01ScoreBoard"
       style={{
         display: "flex",
+        flex: 1,
+        maxHeight: "30%",
         overflow: "hidden",
         flexDirection: "row",
         border: "solid 2px",
@@ -74,6 +83,7 @@ const PlayerScoreX01: React.FC<Props> = ({ player, game }) => {
           fontWeight: "bold",
           fontSize: "6vh",
           width: "15%",
+          minWidth: "fit-content",
           height: "100%",
           borderStyle: "solid",
           borderWidth: "0px 0px 0px 2px",
@@ -83,7 +93,7 @@ const PlayerScoreX01: React.FC<Props> = ({ player, game }) => {
           <div
             style={{
               height: "100%",
-              width: "20%",
+              // width: "20%",
               fontSize: "24px",
               borderStyle: "solid",
               borderWidth: "0px 2px 0px 0px",
@@ -91,11 +101,32 @@ const PlayerScoreX01: React.FC<Props> = ({ player, game }) => {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "space-evenly",
+              padding: "0 5px",
             }}
           >
-            <div>{player.legsWon}</div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                columnGap: 5,
+              }}
+            >
+              <div style={{ fontSize: 16 }}>{`L`}</div>
+              <div>{`${player.legsWon}`}</div>
+            </div>
             <Divider />
-            <div>{player.setsWon}</div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                columnGap: 5,
+              }}
+            >
+              <div style={{ fontSize: 16 }}>{`S`}</div>
+              <div>{`${player.setsWon}`}</div>
+            </div>
           </div>
         )}
         <div
@@ -105,7 +136,9 @@ const PlayerScoreX01: React.FC<Props> = ({ player, game }) => {
             alignItems: "center",
             display: "flex",
             height: "auto",
-            lineHeight: "100%",
+            lineHeight: "90%",
+            padding: "0 5px",
+            fontSize: "7vh",
           }}
         >
           {player.finishRank
@@ -133,7 +166,9 @@ const PlayerScoreX01: React.FC<Props> = ({ player, game }) => {
         <div
           style={{
             display: "flex",
+            flex: 1,
             flexDirection: "row",
+            fontSize: "5vh",
           }}
         >
           <div
@@ -149,35 +184,16 @@ const PlayerScoreX01: React.FC<Props> = ({ player, game }) => {
               fontSize: "5vh",
             }}
           >
-            {/* <div
-              style={{
-                flex: 1,
-                textAlign: "center",
-                verticalAlign: "middle",
-                display: "table-cell",
-              }}
-            >
-              {player.finishRank
-                ? `${player.finishRank}${
-                    player.finishRank === 1
-                      ? "st"
-                      : player.finishRank === 2
-                      ? "nd"
-                      : player.finishRank === 3
-                      ? "rd"
-                      : "th"
-                  }`
-                : player.score.remaining}
-            </div> */}
             <div
               style={{
                 flex: 1.5,
-                textAlign: "center",
-                verticalAlign: "middle",
-                display: "table-cell",
+                justifyContent: "center",
+                alignItems: "center",
+                display: "flex",
+                lineHeight: "100%",
+                padding: "0 5px",
                 fontWeight: "bold",
-                lineHeight: "7vh",
-                fontSize: "4vh",
+                verticalAlign: "middle",
               }}
             >
               {player.finishRank ? "" : possible}
@@ -185,13 +201,13 @@ const PlayerScoreX01: React.FC<Props> = ({ player, game }) => {
           </div>
           <div
             style={{
-              flex: 0.5,
-              textAlign: "center",
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+              lineHeight: "100%",
+              padding: "0 5px",
               verticalAlign: "middle",
-              // fontWeight: "bold",
-              display: "table-cell",
-              lineHeight: "7vh",
-              fontSize: "3.5vh",
             }}
           >
             {getNumDartsThrown(player)}
@@ -199,12 +215,13 @@ const PlayerScoreX01: React.FC<Props> = ({ player, game }) => {
           <div
             style={{
               flex: 1,
-              textAlign: "center",
-              verticalAlign: "middle",
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+              lineHeight: "100%",
+              padding: "0 5px",
               fontWeight: "bold",
-              display: "table-cell",
-              lineHeight: "7vh",
-              fontSize: "3.5vh",
+              verticalAlign: "middle",
             }}
           >
             {`Ø ${player.score.average}`}
@@ -214,8 +231,9 @@ const PlayerScoreX01: React.FC<Props> = ({ player, game }) => {
           style={{
             display: "flex",
             flexDirection: "row",
-            lineHeight: "5vh",
-            fontSize: "3.5vh",
+            // lineHeight: "5vh",
+            fontSize: "5vh",
+            flex: 1,
           }}
         >
           {threeDartScore.map((s, idx) => (
@@ -223,9 +241,14 @@ const PlayerScoreX01: React.FC<Props> = ({ player, game }) => {
               key={idx}
               style={{
                 flex: 1,
-                textAlign: "center",
+                justifyContent: "center",
+                alignItems: "center",
+                display: "flex",
+                height: "auto",
+                lineHeight: "100%",
+                padding: "0 5px",
+                // fontSize: "180%",
                 verticalAlign: "middle",
-                display: "table-cell",
                 borderStyle: "solid",
                 borderWidth: "2px 0px 0px 0px",
               }}
@@ -236,12 +259,15 @@ const PlayerScoreX01: React.FC<Props> = ({ player, game }) => {
           <div
             style={{
               flex: 1,
-              textAlign: "center",
-              verticalAlign: "middle",
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+              height: "auto",
+              lineHeight: "100%",
+              padding: "0 5px",
+              // fontSize: "200%",
               fontWeight: "bold",
-              display: "table-cell",
-              lineHeight: "5vh",
-              fontSize: "3.5vh",
+              verticalAlign: "middle",
               borderStyle: "solid",
               borderWidth: "2px 0px 0px 0px",
             }}

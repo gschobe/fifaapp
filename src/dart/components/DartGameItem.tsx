@@ -7,7 +7,7 @@ interface Props extends DartStoreProps {
   game: DartGame;
   open: () => void;
 }
-const DartGameItem: React.FC<Props> = ({ game, open, removeFastGame }) => {
+const DartGameItem: React.FC<Props> = ({ game, open, removeGame }) => {
   return (
     <div
       id="fastgame-infos"
@@ -109,7 +109,7 @@ const DartGameItem: React.FC<Props> = ({ game, open, removeFastGame }) => {
         }}
       >
         {game.state !== "FINISHED" && (
-          <IconButton onClick={() => removeFastGame()}>
+          <IconButton onClick={() => removeGame(game)}>
             <Delete />
           </IconButton>
         )}

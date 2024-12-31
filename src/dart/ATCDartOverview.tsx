@@ -24,10 +24,14 @@ const ATCDartOverview: React.FC<Props> = ({
   dartGame,
   setGame,
 }) => {
+  console.log(dartGame);
   const game = React.useMemo<ATCGame>(() => {
     return dartGame
       ? { ...dartGame, players: [...dartGame.players] }
       : {
+          id: new Date().getTime(),
+          leg: 1,
+          set: 1,
           type: "ATC",
           settings: gameSettings,
           round: 1,
@@ -72,7 +76,7 @@ const ATCDartOverview: React.FC<Props> = ({
             score: hit,
             currentNumber: open[0][0],
           });
-        } else if (open && open.length === 1) {
+        } else if (open && open.length <= hits) {
           activePlayer.finishRank = newGame.finishedPlayers.length + 1;
           activateNext(activePlayer, game, newGame);
           newGame.finishedPlayers = [...newGame.finishedPlayers, activePlayer];
@@ -170,6 +174,7 @@ const ATCDartOverview: React.FC<Props> = ({
       <div
         style={{
           width: "80%",
+          height: "100%",
           display: "flex",
           flexDirection: "column",
           rowGap: 10,
@@ -177,7 +182,7 @@ const ATCDartOverview: React.FC<Props> = ({
         }}
       >
         {game.finishedPlayers.concat(game.players).map((p, idx) => (
-          <PlayerScoreATC key={idx} player={p} />
+          <PlayerScoreATC key={idx} player={p} game={game} />
         ))}
       </div>
       <div

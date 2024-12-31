@@ -37,6 +37,8 @@ const PlayerScoreCricket: React.FC<Props> = ({ player, game }) => {
     <div
       id="CricketScoreBoard"
       style={{
+        flex: 1,
+        maxHeight: "30%",
         display: "flex",
         overflow: "hidden",
         flexDirection: "row",
@@ -52,7 +54,7 @@ const PlayerScoreCricket: React.FC<Props> = ({ player, game }) => {
           overflow: "auto",
           display: "flex",
           fontWeight: "bold",
-          fontSize: "4.5vh",
+          fontSize: "6vh",
           width: "20%",
           height: "100%",
           backgroundColor:
@@ -74,6 +76,42 @@ const PlayerScoreCricket: React.FC<Props> = ({ player, game }) => {
       </div>
       <div
         style={{
+          width: "15%",
+          display: "flex",
+          flexDirection: "row",
+          fontSize: "7vh",
+          fontWeight: "bold",
+          borderStyle: "solid",
+          borderWidth: "0px 0px 0px 2px",
+          backgroundColor:
+            player.finishRank === 0 && player.active ? "lightblue" : "inherit",
+        }}
+      >
+        <div
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            display: "flex",
+            height: "auto",
+            lineHeight: "100%",
+          }}
+        >
+          {player.finishRank
+            ? `${player.finishRank}${
+                player.finishRank === 1
+                  ? "st"
+                  : player.finishRank === 2
+                  ? "nd"
+                  : player.finishRank === 3
+                  ? "rd"
+                  : "th"
+              }`
+            : points}
+        </div>
+      </div>
+      <div
+        style={{
           flex: 1,
           display: "flex",
           flexDirection: "column",
@@ -83,55 +121,16 @@ const PlayerScoreCricket: React.FC<Props> = ({ player, game }) => {
       >
         <div
           style={{
+            flex: 0.5,
             display: "flex",
             flexDirection: "row",
+            fontSize: "4vh",
+            backgroundColor:
+              player.finishRank === 0 && player.active
+                ? "lightblue"
+                : "inherit",
           }}
         >
-          <div
-            style={{
-              flex: 1,
-              display: "flex",
-              flexDirection: "row",
-              textAlign: "center",
-              verticalAlign: "middle",
-              fontWeight: "bold",
-              lineHeight: "7vh",
-              fontSize: "5vh",
-            }}
-          >
-            <div
-              style={{
-                flex: 1,
-                textAlign: "center",
-                verticalAlign: "middle",
-                display: "table-cell",
-              }}
-            >
-              {player.finishRank
-                ? `${player.finishRank}${
-                    player.finishRank === 1
-                      ? "st"
-                      : player.finishRank === 2
-                      ? "nd"
-                      : player.finishRank === 3
-                      ? "rd"
-                      : "th"
-                  }`
-                : points}
-            </div>
-          </div>
-          <div
-            style={{
-              flex: 1,
-              textAlign: "center",
-              verticalAlign: "middle",
-              display: "table-cell",
-              lineHeight: "7vh",
-              fontSize: "4vh",
-            }}
-          >
-            {player.score.tries.length}
-          </div>
           {threeDartScore.map((s, idx) => (
             <div
               key={idx}
@@ -141,8 +140,6 @@ const PlayerScoreCricket: React.FC<Props> = ({ player, game }) => {
                 verticalAlign: "middle",
                 display: "table-cell",
                 lineHeight: "7vh",
-                fontSize: "2.5vh",
-                fontWeight: "bold",
                 // borderStyle: "solid",
                 // borderWidth: "2px 0px 0px 0px",
               }}
@@ -150,33 +147,48 @@ const PlayerScoreCricket: React.FC<Props> = ({ player, game }) => {
               {threeDartScore[idx]}
             </div>
           ))}
+          <div
+            style={{
+              width: "100px",
+              textAlign: "center",
+              verticalAlign: "middle",
+              display: "table-cell",
+              lineHeight: "7vh",
+              fontSize: "4vh",
+            }}
+          >
+            {player.score.tries.length}
+          </div>
         </div>
         <div
           style={{
+            flex: 1,
             display: "flex",
             flexDirection: "row",
-            lineHeight: "5vh",
-            fontSize: "3.5vh",
+            fontSize: "5vh",
+            lineHeight: "7vh",
           }}
         >
-          {Array.from(hits.keys()).map((s, idx) => (
+          {Array.from(hits.entries()).map((s, idx) => (
             <div
               key={idx}
               style={{
-                flex: 1,
+                flex: 0.75,
                 textAlign: "center",
                 verticalAlign: "middle",
                 display: "table-cell",
                 borderStyle: "solid",
-                borderWidth: "2px 0px 0px 0px",
+                borderWidth: "2px 1px 0px 0px",
+                backgroundColor: s[1] === 3 ? "lightgreen" : "inherit",
               }}
             >
-              {s}
+              {s[0]}
             </div>
           ))}
         </div>
         <div
           style={{
+            flex: 1,
             display: "flex",
             flexDirection: "row",
             lineHeight: "5vh",
@@ -190,12 +202,48 @@ const PlayerScoreCricket: React.FC<Props> = ({ player, game }) => {
                 flex: 1,
                 textAlign: "center",
                 verticalAlign: "middle",
-                display: "table-cell",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
                 borderStyle: "solid",
-                borderWidth: "2px 0px 0px 0px",
+                borderWidth: "2px 1px 0px 0px",
+                backgroundColor: s === 3 ? "lightgreen" : "inherit",
               }}
             >
-              {s === 0 ? "-" : s === 1 ? "/" : s === 2 ? "X" : "⦻"}
+              {s < 3 && (
+                <>
+                  <div style={{ flex: 0.5 }} />
+                  <div
+                    style={{
+                      borderRadius: "50%",
+                      width: "4.5vh",
+                      height: "4.5vh",
+                      backgroundColor: s > 0 ? "darkorange" : "inherit",
+                    }}
+                  />
+                  <div style={{ flex: 0.3 }} />
+                  <div
+                    style={{
+                      // margin: "10% 0",
+                      borderRadius: "50%",
+                      width: "4.5vh",
+                      height: "4.5vh",
+                      backgroundColor: s > 1 ? "darkorange" : "inherit",
+                    }}
+                  />
+                  <div style={{ flex: 0.3 }} />
+                  {/* <div
+                    style={{
+                      margin: "10% 0",
+                      borderRadius: "50%",
+                      flex: 1,
+                      backgroundColor: s > 2 ? "darkorange" : "inherit",
+                    }}
+                  />
+                  <div style={{ flex: 0.5 }} /> */}
+                </>
+              )}
+              {/* {s === 0 ? "-" : s === 1 ? "/" : s === 2 ? "X" : "⦻"} */}
             </div>
           ))}
         </div>

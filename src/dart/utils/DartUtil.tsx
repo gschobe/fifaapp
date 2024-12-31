@@ -3,6 +3,7 @@ import {
   defaultDartBoardNumbers,
 } from "dart/assets/numbers";
 import _ from "lodash";
+import { DartGame } from "store/DartStore";
 import {
   ATCPlayer,
   ATCSettings,
@@ -19,7 +20,6 @@ import {
   X01Player,
 } from "../Definitions";
 import { possibleOuts } from "../assets/data";
-import { DartGame } from "store/DartStore";
 import React from "react";
 
 export const defaultGameSettings: GameSettings = {
@@ -80,6 +80,10 @@ export function getNumDartsThrown(
   player: X01Player | EliminationPlayer
 ): number {
   return player.score.tries.length;
+}
+
+export function isFinish(points: number): boolean {
+  return Object.keys(possibleOuts).includes(points.toString());
 }
 
 export function getPossibleOuts(remainder: number): string[] | undefined {
@@ -184,9 +188,15 @@ export function getNewShooterPlayer(
 
 export function getCurrentRoundDarts(
   round: number,
-  player: X01Player | CricketPlayer | ShooterPlayer | EliminationPlayer
+  player: X01Player | CricketPlayer | ShooterPlayer | EliminationPlayer,
+  bust?: boolean
 ) {
-  const startIndex = (round - 1) * 3;
+  const currentRound = Math.trunc(player.score.tries.length / 3);
+  const lastRoundDart = player.score.tries.length % 3 === 0;
+  const startIndex =
+    (player.active && !lastRoundDart && !bust
+      ? currentRound
+      : currentRound - 1) * 3;
   const currentRoundDarts = player.score.tries.slice(
     startIndex,
     startIndex + 3
@@ -244,15 +254,6 @@ export function getChoosenGameSettings(game: DartGame) {
       return (
         <>
           <div>{`Mode: ${game.settings.numberMode}`}</div>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            {`Rounds:`}
-            <div style={{ fontWeight: "bold", margin: "0 10px" }}>
-              {game?.round}
-            </div>
-            {` / ${game.settings.rounds}`}
-          </div>
-          <div>{`Sets: ${game.settings.sets}`}</div>
-          <div>{`First to: ${game.settings.legs} Leg(s)`}</div>
         </>
       );
     case "Elimination":
@@ -264,3 +265,14 @@ export function getChoosenGameSettings(game: DartGame) {
       );
   }
 }
+
+// export function isGameFinished(game: X01Game) {
+//   const setsToWin = game.settings.sets;
+
+//   const winner = game.players.find(
+//     (p) =>
+//       p.setScore && p.setScore.filter((sc) => sc.setWon).length >= setsToWin
+//   );
+
+//   return !!winner;
+// }
