@@ -1,4 +1,5 @@
 import { Button, Grid } from "@material-ui/core";
+import { Settings } from "@material-ui/icons";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { IconButton, Stack } from "@mui/material";
 import React from "react";
@@ -10,15 +11,14 @@ import {
   GameSettings,
 } from "./Definitions";
 import DartGameItem from "./components/DartGameItem";
+import DartNightSingleGameChartNew from "./components/DartNightSingleGameChartNew";
 import TournamentItem from "./components/TournamentItem";
 import CreateTournamentDialog from "./components/gameSettings/CreateTournamentDialog";
+import DartNightSettingsDialog from "./components/gameSettings/DartNightSettingsDialog";
 import GameDialog from "./components/gameSettings/GameDialog";
 import GameSelectDialog from "./components/gameSettings/GameSelectDialog";
 import { getGameForDartNight } from "./utils/DartDrawUtil";
 import { defaultGameSettings } from "./utils/DartUtil";
-import { Settings } from "@material-ui/icons";
-import DartNightSettingsDialog from "./components/gameSettings/DartNightSettingsDialog";
-import DartNightSingleGameChart from "./components/DartNightSingleGameChart";
 
 interface Props extends DartStoreProps {
   id: number;
@@ -191,7 +191,7 @@ const DartNightView: React.FC<Props> = ({
             <div style={{ fontSize: 20, fontWeight: "bold", marginBottom: 5 }}>
               Einzelspiele
             </div>
-            <DartNightSingleGameChart dartNight={dartNight} />
+            <DartNightSingleGameChartNew dartNight={dartNight} />
             <Grid
               container
               spacing={1}

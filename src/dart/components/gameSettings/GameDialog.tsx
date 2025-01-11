@@ -1,5 +1,6 @@
-import { Dialog, DialogContent, IconButton } from "@material-ui/core";
-import MenuIcon from "@mui/icons-material/Menu";
+import { Dialog, DialogContent } from "@material-ui/core";
+import Close from "@mui/icons-material/Close";
+import { Button } from "@mui/material";
 import ATCDartOverview from "dart/ATCDartOverview";
 import CricketDartOverview from "dart/CricketDartOverview";
 import { DartTeam, GameSettings } from "dart/Definitions";
@@ -45,12 +46,16 @@ const GameDialog: React.FC<Props> = ({
               marginBottom: "5pt",
             }}
           >
-            <IconButton onClick={() => setOpen(false)}>
+            {/* <IconButton onClick={() => setOpen(false)}>
               <MenuIcon sx={{ padding: 0 }} fontSize="small" />
-            </IconButton>
+            </IconButton> */}
             <div>{`Game: ${game?.type}`}</div>
             {game && getChoosenGameSettings(game)}
             <div>{`First to: ${game?.settings.sets} Set(s) / ${game?.settings.legs} Leg(s)`}</div>
+            <div style={{ flex: 1 }} />
+            <Button onClick={() => setOpen(false)} variant="contained">
+              <Close sx={{ padding: 0 }} fontSize="small" />
+            </Button>
           </div>
 
           {game?.type === "X01" ? (

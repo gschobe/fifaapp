@@ -31,6 +31,7 @@ const DartNightSingleGameChart: React.FC<Props> = ({ dartNight }) => {
         boxShadow: "3px 3px 5px gray",
         border: "solid gray",
         borderWidth: "1px ",
+        overflowX: "auto",
       }}
     >
       <div
@@ -44,7 +45,7 @@ const DartNightSingleGameChart: React.FC<Props> = ({ dartNight }) => {
       >
         <div style={{ width: "140px", padding: "0 10px" }}>Spieler</div>
         <div style={{ border: "solid gray", borderWidth: "0 1px 0 0" }}></div>
-        <div style={{ padding: "0 10px", width: "40px" }}>€</div>
+        <div style={{ padding: "0 10px", width: "60px" }}>€</div>
         <div style={{ border: "solid gray", borderWidth: "0 1px 0 0" }}></div>
         <div style={{ padding: "0 10px", width: "40px" }}>P</div>
         <div style={{ border: "solid gray", borderWidth: "0 1px 0 0" }}></div>
@@ -52,7 +53,7 @@ const DartNightSingleGameChart: React.FC<Props> = ({ dartNight }) => {
           <>
             <div
               key={`${idx}-${g.type}`}
-              style={{ flex: 1, textAlign: "center" }}
+              style={{ flex: 1, textAlign: "center", minWidth: "60px" }}
             >
               {g.type.substring(0, 3).toUpperCase()}
             </div>
@@ -93,7 +94,7 @@ const DartNightSingleGameChart: React.FC<Props> = ({ dartNight }) => {
             <div
               style={{
                 padding: "0 10px",
-                width: "40px",
+                width: "60px",
                 color: money > 0 ? "green" : money < 0 ? "red" : "inherit",
               }}
             >
@@ -112,19 +113,20 @@ const DartNightSingleGameChart: React.FC<Props> = ({ dartNight }) => {
                   key={`${idx}-rank`}
                   style={{
                     flex: 1,
+                    minWidth: "60px",
                     fontWeight: "bold",
-                    color: "darkblue",
+                    color: "black",
                     textAlign: "center",
                     backgroundColor:
                       rank.rank === 1
-                        ? "green"
-                        : rank.rank === 2
-                        ? "lightgreen"
-                        : rank.rank > 2 &&
+                        ? "#14c70880"
+                        : rank.rank === 2 && dartNight.players.length > 3
+                        ? "#14c70840"
+                        : rank.rank > 1 &&
                           rank.rank === dartNight.players.length - 1
-                        ? "orange"
+                        ? "#f5a10580"
                         : rank.rank === dartNight.players.length
-                        ? "red"
+                        ? "#b5121d80"
                         : "inherit",
                   }}
                 >

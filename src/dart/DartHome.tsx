@@ -67,6 +67,7 @@ const DartHome: React.FC<DartStoreProps> = ({
       settings,
       randomPlayers ? _.shuffle(dartTeams) : dartTeams
     );
+    console.log(game, settings);
     setFastGame(game);
     setStartGame(true);
   };

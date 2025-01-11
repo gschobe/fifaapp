@@ -278,7 +278,9 @@ const GameSelectDialog: React.FC<Props> = ({
                     value={sets}
                     onChange={(value) => {
                       setSets(value);
-                      setLegsSetsToChoosenGame(settings, legs, value);
+                      setSettings(
+                        setLegsSetsToChoosenGame(settings, legs, value)
+                      );
                     }}
                   />
                   <div style={{ width: "30%", textAlign: "center" }}>
@@ -297,7 +299,9 @@ const GameSelectDialog: React.FC<Props> = ({
                     value={legs}
                     onChange={(value) => {
                       setLegs(value);
-                      setLegsSetsToChoosenGame(settings, value, sets);
+                      setSettings(
+                        setLegsSetsToChoosenGame(settings, value, sets)
+                      );
                     }}
                   />
                   <div style={{ width: "30%", textAlign: "center" }}>
@@ -312,8 +316,8 @@ const GameSelectDialog: React.FC<Props> = ({
             fullWidth
             value={settings.choosenGame}
             onChange={(_event, value) => {
-              setSettings({ ...settings, choosenGame: value });
-              setLegsSetsToChoosenGame(settings, legs, sets);
+              const newSettings = { ...settings, choosenGame: value };
+              setSettings(setLegsSetsToChoosenGame(newSettings, legs, sets));
             }}
           >
             {ALL_DART_GAME_MODES.map((mode) => (
