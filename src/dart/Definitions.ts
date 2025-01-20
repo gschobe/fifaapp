@@ -61,13 +61,38 @@ export interface DartGameBase {
   leg: number;
   set: number;
   round: number;
+  sets: X01Set[];
 }
 export interface X01Game extends DartGameBase {
   type: "X01";
   settings: X01GameSettings;
   players: X01Player[];
   finishedPlayers: X01Player[];
+  sets: X01Set[];
 }
+
+export interface X01Set {
+  setNum: number;
+  starter: string;
+  winner?: string;
+  legs: X01Leg[];
+  state: TournamentState;
+}
+
+export interface X01Leg {
+  legNum: number;
+  winner?: string;
+  starter: string;
+  tries: X01LegTry[];
+  state: TournamentState;
+}
+
+export interface X01LegTry {
+  tryNum: number;
+  player: string;
+  try: X01Try;
+}
+
 export interface CricketGame extends DartGameBase {
   type: "Cricket";
   settings: CricketSettings;
@@ -258,7 +283,7 @@ export type ShooterNumberMode = "RANDOM" | "SELECTED";
 export type ATCMode = "DEFAULT" | "QUICK";
 export type ATCHitMode = "SINGLE" | "DOUBLE" | "TRIPLE";
 export type ATCNumberMode = "SEQUENCIAL" | "CLOCKWISE" | "COUNTERCLOCKWISE";
-export type ATCHitScore = "SINGLE" | "DOUBLE" | "TRIPLE" | "MISS";
+export type ATCHitScore = "SINGLE" | "DOUBLE" | "TRIPLE" | "MISS" | "BUST";
 
 export type CricketMode = "DEFAULT" | "CUT THROAT";
 export type CricketNumbersMode = "DEFAULT" | "RANDOM" | "PICKIT";

@@ -6,7 +6,7 @@ import CricketDartOverview from "dart/CricketDartOverview";
 import { DartTeam, GameSettings } from "dart/Definitions";
 import EliminationDartOverview from "dart/EliminationDartOverview";
 import ShooterDartOverview from "dart/ShooterDartOverview";
-import X01DartOverview from "dart/X01DartOverview";
+import X01DartOverviewCopy from "dart/X01DartOverview copy";
 import { getChoosenGameSettings } from "dart/utils/DartUtil";
 import React from "react";
 import { DartGame } from "store/DartStore";
@@ -59,7 +59,7 @@ const GameDialog: React.FC<Props> = ({
           </div>
 
           {game?.type === "X01" ? (
-            <X01DartOverview
+            <X01DartOverviewCopy
               gameSettings={gameSettings.x01}
               dartGame={game}
               players={players}

@@ -10,6 +10,7 @@ import {
   CricketMode,
   CricketPlayer,
   CricketSettings,
+  DartPlayer,
   DartTeam,
   EliminationPlayer,
   EliminationSettings,
@@ -17,6 +18,7 @@ import {
   ShooterPlayer,
   ShooterSettings,
   X01Kind,
+  X01Leg,
   X01Player,
 } from "../Definitions";
 import { possibleOuts } from "../assets/data";
@@ -63,11 +65,24 @@ export const defaultGameSettings: GameSettings = {
     sets: 1,
   },
 };
+
 export function calculateAverage(
   player: X01Player | EliminationPlayer,
   thrownPoints: number
 ): number {
   const dartsThrown = getNumDartsThrown(player);
+  if (dartsThrown === 0) {
+    return 0;
+  }
+  const dartAvg = thrownPoints / dartsThrown;
+
+  return Number((dartAvg * 3).toFixed(2));
+}
+
+export function calculateLegAverage(player: DartPlayer, leg?: X01Leg): number {
+  const tries = leg?.tries.filter((l) => l.player === player.team.name);
+  const dartsThrown = tries?.length ?? 0;
+  const thrownPoints = _.sumBy(tries, (t) => t.try.points);
   if (dartsThrown === 0) {
     return 0;
   }
@@ -276,3 +291,26 @@ export function getChoosenGameSettings(game: DartGame) {
 
 //   return !!winner;
 // }
+
+export function getLatestLeg(game: DartGame) {
+  switch (game.type) {
+    case "X01": {
+      const set =
+        game.sets.find((s) => s.state === "RUNNING") ??
+        game.sets.findLast((s) => s.state === "FINISHED");
+      if (set) {
+        const leg =
+          set.legs.find((l) => l.state === "RUNNING") ??
+          set.legs.findLast((l) => l.state === "FINISHED");
+
+        return { set: set, leg: leg };
+      }
+      return { set: set };
+    }
+    case "Cricket":
+    case "ATC":
+    case "Shooter":
+    case "Elimination":
+      return {};
+  }
+}

@@ -1,8 +1,8 @@
 import { Divider } from "@mui/material";
 import { X01Game, X01Player } from "dart/Definitions";
 import {
-  getCurrentRoundDarts,
-  getNumDartsThrown,
+  calculateLegAverage,
+  getLatestLeg,
   getPossibleOuts,
   isFinish,
 } from "dart/utils/DartUtil";
@@ -14,13 +14,23 @@ interface Props {
   game: X01Game;
 }
 const PlayerScoreX01: React.FC<Props> = ({ player, game }) => {
-  const round = game.round;
+  const latest = getLatestLeg(game);
+  const tries = latest.leg?.tries.filter((t) => t.player === player.team.name);
+  const numDartThrown = tries?.length ?? 0;
+
+  const currentRoundDarts =
+    tries?.slice(numDartThrown - (numDartThrown % 3)).map((t) => t.try) ?? [];
+
+  const legAverage = calculateLegAverage(player, latest.leg);
+
+  const pointsThrown = _.sumBy(
+    tries?.filter((t) => !["MISS", "BUST"].includes(t.try.score)),
+    (t) => t.try.points
+  );
+  const remaining = game.settings.kind - pointsThrown;
   const settings = game.settings;
-  const displayRound =
-    player.active || player.finishRank > 0 || round === 1 ? round : round - 1;
-  const currentRoundDarts = getCurrentRoundDarts(displayRound, player);
   const roundStartPoints =
-    player.score.remaining +
+    remaining +
     (player.score.tries.length % 3 === 0
       ? 0
       : _.sumBy(currentRoundDarts, "points"));
@@ -31,7 +41,7 @@ const PlayerScoreX01: React.FC<Props> = ({ player, game }) => {
   while (threeDartScore.length < 3) {
     threeDartScore.push("-");
   }
-  const possibleOuts = getPossibleOuts(player.score.remaining);
+  const possibleOuts = getPossibleOuts(remaining);
   const possible = finishAtStart && possibleOuts ? possibleOuts[0] : "";
   return (
     <div
@@ -151,7 +161,7 @@ const PlayerScoreX01: React.FC<Props> = ({ player, game }) => {
                   ? "rd"
                   : "th"
               }`
-            : player.score.remaining}
+            : remaining}
         </div>
       </div>
       <div
@@ -210,7 +220,7 @@ const PlayerScoreX01: React.FC<Props> = ({ player, game }) => {
               verticalAlign: "middle",
             }}
           >
-            {getNumDartsThrown(player)}
+            {numDartThrown}
           </div>
           <div
             style={{
@@ -224,7 +234,7 @@ const PlayerScoreX01: React.FC<Props> = ({ player, game }) => {
               verticalAlign: "middle",
             }}
           >
-            {`Ø ${player.score.average}`}
+            {`Ø ${legAverage}`}
           </div>
         </div>
         <div

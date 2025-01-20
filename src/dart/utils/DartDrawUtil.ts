@@ -16,12 +16,16 @@ import {
   TeamMode,
   X01Game,
   X01GameSettings,
+  X01Player,
+  X01Set,
 } from "dart/Definitions";
 import { RoundRobin } from "tournament-pairings";
 // import { Match } from "tournament-pairings/dist/Match";
 // import { generatePossibleDraws } from "utils/DrawUtils";
 import { defaultDartBoardNumbers } from "dart/assets/numbers";
+import _ from "lodash";
 import { DartGame } from "store/DartStore";
+import { Match } from "tournament-pairings/dist/Match";
 import {
   getNewATCPlayer,
   getNewCricketPlayer,
@@ -29,8 +33,6 @@ import {
   getNewShooterPlayer,
   getNewX01Player,
 } from "./DartUtil";
-import { Match } from "tournament-pairings/dist/Match";
-import _ from "lodash";
 
 export default function determineTeamMates(
   dartNight: DartNight,
@@ -282,21 +284,45 @@ export function getNewX01Game(
   players: DartTeam[],
   sequence: number
 ): X01Game {
-  return {
+  const gamePlayers = players.map((p, idx) =>
+    getNewX01Player(gameSettings.kind, p, idx === 0)
+  );
+  const game: X01Game = {
     id: new Date().getTime(),
     type: "X01",
     settings: gameSettings,
     leg: 1,
     set: 1,
     round: 1,
-    players: players.map((p, idx) =>
-      getNewX01Player(gameSettings.kind, p, idx === 0)
-    ),
+    players: gamePlayers,
     finishedPlayers: [],
     state: "OPEN",
     sequence: sequence,
+    sets: addNewX01Set([], gamePlayers),
   };
+
+  return game;
 }
+
+export function addNewX01Set(sets: X01Set[], players: X01Player[]): X01Set[] {
+  const newSets: X01Set[] = [...sets];
+  const lastSet = _.maxBy(sets, "setNum");
+  const lastStarter = lastSet?.starter ?? "";
+  const lastStarterIndex = players.findIndex(
+    (gp) => gp.team.name === lastStarter
+  );
+  const starterIndex =
+    lastStarterIndex < players.length - 1 ? lastStarterIndex + 1 : 0;
+  const starter = players[starterIndex].team.name;
+  newSets.push({
+    setNum: lastSet ? lastSet.setNum + 1 : 1,
+    starter: starter,
+    legs: [{ legNum: 1, starter: starter, tries: [], state: "RUNNING" }],
+    state: "RUNNING",
+  });
+  return newSets;
+}
+
 function getNewCricketGame(
   gameSettings: CricketSettings,
   players: DartTeam[],
